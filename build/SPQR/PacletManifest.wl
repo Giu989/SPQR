@@ -1,0 +1,124 @@
+<|
+    "Files"
+    ->
+    {
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/build_system.m"
+            ]
+            ,
+            "Hash"
+            ->
+            "1128cf39d16a00b63ecd2cd28ac0e116f628949cfe763275f9d792debc1e2164"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/construct_cmat.m"
+            ]
+            ,
+            "Hash"
+            ->
+            "52b4eb4bfdc192b29566c172bcd05e5307d6dcd5ce5c2ce998f615881f22f756"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/construct_target_cmat.m"
+            ]
+            ,
+            "Hash"
+            ->
+            "f8b4c98a9ff28d01b4e3352d9c0a3d7c2c623369f8ccadb6957856a615ea3331"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/.DS_Store"
+            ]
+            ,
+            "Hash"
+            ->
+            "bc6e5a3727b320ff22479d8c8f7a2bf39bfefa032368d6cbfc00225dde4cd7f7"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/examples.m"
+            ]
+            ,
+            "Hash"
+            ->
+            "d8465944cc83830c76f44683b8a3085e6448bb5d104d2e492cda24167e4ccb53"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/SPQR.wl"
+            ]
+            ,
+            "Hash"
+            ->
+            "3b9fa2dba6d469e72b2b876d2b837be318f737ddd20c1507013d258a4846ddc3"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/various_functions.m"
+            ]
+            ,
+            "Hash"
+            ->
+            "7fdf1af7c1a6d1d9e8e24090fa492c46685b7eb7ed51ef38fc524ef37ab4285f"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/BuildPolynomialSystem.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "780c466e911c5d965fa9f91f248377fb03aaaab5918e9ec4e5ac4d50375d6420"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/solveSystem.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "11a609ae698f20ddb06cc8d89fd008395adbb8263e4444677128ba5837f9f3c6"
+                
+        |>
+    }
+|>

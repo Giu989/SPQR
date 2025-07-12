@@ -1,0 +1,317 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     12007,        307]
+NotebookOptionsPosition[      8549,        232]
+NotebookOutlinePosition[     10768,        287]
+CellTagsIndexPosition[     10683,        282]
+WindowTitle->BuildPolynomialSystem
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["S P Q R SYMBOL", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "8f1648d3-d0ab-4b25-af54-af329346da33"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "dee1e61a-ad47-4067-9fe5-3f362cd0acb3"],
+        Background->RGBColor[0.490196, 0.576471, 0.690196],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[Cell[BoxData[
+     TagBox[
+      ActionMenuBox[
+       FrameBox[Cell[TextData[{
+         "URL",
+         " ",
+         Cell[BoxData[
+          GraphicsBox[
+           {GrayLevel[0.66667], Thickness[0.13], 
+            LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+           AspectRatio->1,
+           ImageSize->20,
+           PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+          "6c48a074-5d88-44ec-9665-d05e1a502500"]
+        }],ExpressionUUID->"1d183d8f-1659-49f4-b0eb-3240acf697aa"],
+        StripOnInput->False],{
+       "\"SPQR/ref/BuildPolynomialSystem\"" :> None, 
+        "\"Copy Wolfram Documentation Center URL\"" :> 
+        CopyToClipboard["SPQR/ref/BuildPolynomialSystem"], Delimiter, 
+        "\"Copy web URL\"" :> 
+        Module[{DocumentationSearch`Private`nb$}, 
+          DocumentationSearch`Private`nb$ = 
+           NotebookPut[
+            Notebook[{
+              Cell[BoxData[
+                MakeBoxes[
+                 Hyperlink[
+                  "http://reference.wolfram.com/language/SPQR/ref/\
+BuildPolynomialSystem.html"], StandardForm]], "Input", TextClipboardType -> 
+                "PlainText"]}, Visible -> False]]; 
+          SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+          FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+          NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+        "\"Go to web URL\"" :> 
+        FrontEndExecute[{
+          NotebookLocate[{
+            URL[If[TrueQ[False], 
+                "http://reference.wolfram.com/system-modeler/", 
+                "http://reference.wolfram.com/language/"] <> 
+              "SPQR/ref/BuildPolynomialSystem" <> ".html"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"],
+      MouseAppearanceTag["LinkHand"]]],
+     LineSpacing->{1.4, 0},ExpressionUUID->
+     "23476e0f-783e-4264-86ca-66b295aa1934"]], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "2b8b679d-e554-4c53-af72-a5d4a177b202"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1,ExpressionUUID->"4d12b61d-eaff-47a9-8063-b2692c9f0156"],
+
+Cell["SPQR`", "ContextNameCell",ExpressionUUID->"236ca842-0a35-4285-82be-3b7196de8cc2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {Cell[TextData[{
+     Cell[
+     "BuildPolynomialSystem", "ObjectName",ExpressionUUID->
+      "0f449242-59d8-4760-9a50-a2ebf9a47192"],
+     Cell[BoxData[
+      TemplateBox[{8},
+       "Spacer1"]],ExpressionUUID->"5f6041c4-ca5a-4c44-86b6-0f87ebfa21e1"],
+     Cell[BoxData[
+     ""], "ObjectNameTranslation",ExpressionUUID->
+      "2969789c-c416-4172-a227-3098296e793d"]
+    }],ExpressionUUID->"1bbef3aa-724f-45f2-9873-48ae58683044"], 
+    "\[SpanFromLeft]"}
+  }]], "ObjectNameGrid",ExpressionUUID->"7da5ae33-a6e9-4db5-8b48-\
+8a62abb2690b"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell["\<\
+Builds a system of equations for a given Ideal and returns the irreducible \
+monomials\
+\>",ExpressionUUID->"d24462e4-7387-49cf-95b4-964f1a0791c0"]}
+  }]], "Usage",
+ CellID->1873361295,ExpressionUUID->"9181da2b-a50d-4626-9e77-cd68a525605c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    DynamicBox[ToBoxes[
+      If[
+       MatchQ[
+        CurrentValue[
+         EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, 
+         Closed], 
+        Alternatives[Open, True]], 
+       Style[
+        Graphics[{
+          Thickness[0.18], 
+          RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+          Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+         PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+        0.68 Inherited], 
+       Rotate[
+        Style[
+         Graphics[{
+           Thickness[0.18], 
+           RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+           Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+          PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+         0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+     ImageSizeCache->{
+      13.600000000000001`, {-0.1685058593749993, 13.768505859375}}]],
+    ExpressionUUID->"79974074-eef2-4d7f-a473-a9beff39e199"],
+   Cell[BoxData[
+    TemplateBox[{1},
+     "Spacer1"]],ExpressionUUID->"1863a80d-4a04-4a56-a77f-bbb757a9f539"],
+   "Details and Options"
+  }], "NotesFrameText",ExpressionUUID->"b6fd5cd5-bfc7-4a39-bab0-13271064f230"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"490cbc5c-33c6-403d-afe7-1127cc80b9ce"]], \
+"NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CacheGraphics->False,
+ CellID->599857741,ExpressionUUID->"1f3bc4ad-0d53-495a-bb7f-b920c20f5b37"],
+
+Cell["The following options can be given: ", "Notes",
+ CellID->1325536398,ExpressionUUID->"ff399863-4866-4b81-b890-3a935d0d2a6c"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {
+       TaggingRules, "Openers", "PrimaryExamplesSection"}, Open], 
+      Alternatives[True, Open]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{
+    13.600000000000001`, {4.251494140625001, 9.348505859375}}]],
+  ExpressionUUID->"6ae8c9ba-ecff-4702-9ebc-c96183e20285"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"d3fd44ed-611b-4ae4-bd8d-fab00c64bee5"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(0)", "ExampleCount",ExpressionUUID->
+  "6c013014-5eab-4a5f-9785-4000eb7d887f"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellTags->"PrimaryExamplesSection",
+ CellID->1520813969,ExpressionUUID->"65d8309e-e8fd-4ba7-b445-2e243aa96fb5"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<SPQR`\>\"", "]"}]], "Input", "ExampleInitialization",
+ CellLabel->"In[1]:=",
+ CellID->905003706,ExpressionUUID->"44cb4075-4488-4145-8468-d3dd4909ff13"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, 
+  Closed]]]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"81337194-4dc7-4d06-a499-c146f7d3d4a0"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900, 830},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"BuildPolynomialSystem",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}, 
+    "AllOptsTable" -> Closed, "NotesSection" -> Closed}, "NewStyles" -> True, 
+  "CitationPopupData" -> $Failed, "ShowCitation" -> False, "HasOptions" -> 
+  True, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
+  "Metadata" -> {
+   "built" -> "{2025, 7, 12, 13, 5, 48.584191}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "S P Q R Symbol", "language" -> "en", "paclet" -> "SPQR", 
+    "status" -> "None", "summary" -> 
+    "Builds a system of equations for a given Ideal and returns the \
+irreducible monomials", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
+    "BuildPolynomialSystem", "titlemodifier" -> "", "metadescription" -> "", 
+    "windowtitle" -> "BuildPolynomialSystem", "type" -> "Symbol", "uri" -> 
+    "SPQR/ref/BuildPolynomialSystem"}},
+CellContext->"Global`",
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "14.2 for Mac OS X ARM (64-bit) (March 16, 2025)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"ae3c5cdf-1227-4a5d-ac28-cf4d9a137cb0"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[6715, 182, 1438, 38, 34, "PrimaryExamplesSection",ExpressionUUID->"65d8309e-e8fd-4ba7-b445-2e243aa96fb5",
+   CellTags->"PrimaryExamplesSection",
+   CellID->1520813969]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 10483, 275}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[589, 21, 2951, 71, 50, "AnchorBarGrid",ExpressionUUID->"4d12b61d-eaff-47a9-8063-b2692c9f0156",
+ CellID->1],
+Cell[3543, 94, 87, 0, 22, "ContextNameCell",ExpressionUUID->"236ca842-0a35-4285-82be-3b7196de8cc2"],
+Cell[CellGroupData[{
+Cell[3655, 98, 564, 14, 57, "ObjectNameGrid",ExpressionUUID->"7da5ae33-a6e9-4db5-8b48-8a62abb2690b"],
+Cell[4222, 114, 281, 6, 86, "Usage",ExpressionUUID->"9181da2b-a50d-4626-9e77-cd68a525605c",
+ CellID->1873361295]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4540, 125, 1916, 48, 34, "NotesSection",ExpressionUUID->"1f3bc4ad-0d53-495a-bb7f-b920c20f5b37",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->599857741],
+Cell[6459, 175, 129, 1, 70, "Notes",ExpressionUUID->"ff399863-4866-4b81-b890-3a935d0d2a6c",
+ CellID->1325536398]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+Cell[CellGroupData[{
+Cell[6715, 182, 1438, 38, 34, "PrimaryExamplesSection",ExpressionUUID->"65d8309e-e8fd-4ba7-b445-2e243aa96fb5",
+ CellTags->"PrimaryExamplesSection",
+ CellID->1520813969],
+Cell[8156, 222, 193, 3, 29, "Input",ExpressionUUID->"44cb4075-4488-4145-8468-d3dd4909ff13",
+ CellID->905003706]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, Closed]]]],
+Cell[8467, 230, 78, 0, 40, "FooterCell",ExpressionUUID->"81337194-4dc7-4d06-a499-c146f7d3d4a0"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

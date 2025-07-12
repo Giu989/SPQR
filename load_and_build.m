@@ -4,6 +4,7 @@
 (*Loading and Building (development file)*)
 
 
+Needs["PacletTools`"];
 dir = If[$Notebooks,NotebookDirectory[],Directory[]]
 
 
@@ -11,7 +12,6 @@ dir = If[$Notebooks,NotebookDirectory[],Directory[]]
 (*Loading Package Without Needing to Install*)
 
 
-Needs["PacletTools`"];
 PacletDirectoryLoad[dir]
 
 
@@ -20,16 +20,28 @@ Get["SPQR`"]
 
 
 (* ::Section:: *)
-(*Building Documentation*)
+(*Building Documentation and Installing*)
 
 
-(*need to be run every time documentation is updated for changes to register in the package*)
-PacletDocumentationBuild[Directory[]]
+(*building documentation*)
+PacletDocumentationBuild[dir]
+
+
+builtPac = PacletBuild[dir]
+PacletDirectoryUnload[dir];
+
+
+installed = PacletInstall[builtPac["PacletArchive"],ForceVersionInstall -> True]
+
+
+Get["SPQR`"]
+
+
+?BuildPolynomialSystem
 
 
 (* ::Section:: *)
-(*Building and Installing (WIP)*)
+(*Uninstalling*)
 
 
-PacletBuild[Directory[]]
-PacletInstall[%]
+PacletUninstall["SPQR"]
