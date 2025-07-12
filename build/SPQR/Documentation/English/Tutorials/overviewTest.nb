@@ -1,0 +1,184 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      6604,        174]
+NotebookOptionsPosition[      4068,        112]
+NotebookOutlinePosition[      6255,        168]
+CellTagsIndexPosition[      6212,        165]
+WindowTitle->overviewTest
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["S P Q R OVERVIEW", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "e5658559-9208-4094-976f-b51a036bf53b"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "8f094564-d37d-433c-aa47-10d3c620b0e3"],
+        Background->RGBColor[
+         0.3843137254901961, 0.4627450980392157, 0.7019607843137254],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[Cell[BoxData[
+     TagBox[
+      ActionMenuBox[
+       FrameBox[Cell[TextData[{
+         "URL",
+         " ",
+         Cell[BoxData[
+          GraphicsBox[
+           {GrayLevel[0.66667], Thickness[0.13], 
+            LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+           AspectRatio->1,
+           ImageSize->20,
+           PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+          "995a5619-fe94-4c24-b441-427f599a47dc"]
+        }],ExpressionUUID->"84c40f33-a998-4e37-b258-b177f212b28f"],
+        StripOnInput->False],{
+       "\"SPQR/tutorial/overviewTest\"" :> None, 
+        "\"Copy Wolfram Documentation Center URL\"" :> 
+        CopyToClipboard["SPQR/tutorial/overviewTest"], Delimiter, 
+        "\"Copy web URL\"" :> 
+        Module[{DocumentationSearch`Private`nb$}, 
+          DocumentationSearch`Private`nb$ = 
+           NotebookPut[
+            Notebook[{
+              Cell[BoxData[
+                MakeBoxes[
+                 Hyperlink[
+                  "http://reference.wolfram.com/language/SPQR/tutorial/\
+overviewTest.html"], StandardForm]], "Input", TextClipboardType -> 
+                "PlainText"]}, Visible -> False]]; 
+          SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+          FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+          NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+        "\"Go to web URL\"" :> 
+        FrontEndExecute[{
+          NotebookLocate[{
+            URL[If[TrueQ[False], 
+                "http://reference.wolfram.com/system-modeler/", 
+                "http://reference.wolfram.com/language/"] <> 
+              "SPQR/tutorial/overviewTest" <> ".html"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"],
+      MouseAppearanceTag["LinkHand"]]],
+     LineSpacing->{1.4, 0},ExpressionUUID->
+     "e0d69984-ca71-460a-b717-12b043e83211"]], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "c54b58e0-2569-4989-9120-dbe20454adc7"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1,ExpressionUUID->"34e37aa1-fa48-4ffa-93a6-3e5e2056b2e0"],
+
+Cell[CellGroupData[{
+
+Cell["overviewTest", "TOCDocumentTitle",
+ CellID->1368192302,ExpressionUUID->"6cca3718-cd8a-43b3-bdad-9b3d544d6e12"],
+
+Cell[BoxData[
+ TemplateBox[{
+   Cell[
+    TextData["Introduction to SPQR"]], 
+   "paclet:SPQR/tutorial/IntroductiontoSPQR#1291165413"},
+  "OrangeLink",
+  BaseStyle->"TOCChapter"]], "TOCChapter",
+ CellID->2100611285,ExpressionUUID->"8933b060-a44b-4ce2-b5ea-a6c2051ee85e"]
+}, Closed]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"2c1ce1a5-16e4-45d2-9ffd-1dc3e1a16d74"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900, 830},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"overviewTest",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}}, 
+  "NewStyles" -> True, "CitationPopupData" -> {$Failed, ""}, "ShowCitation" -> 
+  False, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
+  "Metadata" -> {
+   "built" -> "{2025, 7, 12, 17, 53, 5.440333}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "S P Q R Overview", "language" -> "en", "paclet" -> "SPQR", 
+    "status" -> "None", "summary" -> "Introduction to SPQR", "synonyms" -> {},
+     "tabletags" -> {}, "title" -> "overviewTest", "titlemodifier" -> "", 
+    "metadescription" -> "", "windowtitle" -> "overviewTest", "type" -> 
+    "Overview", "uri" -> "SPQR/tutorial/overviewTest"}},
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> Notebook], 
+   Cell[
+    StyleData["Output"], CellContext -> Notebook], 
+   Cell[
+    StyleData["TOCSubsubsection"], 
+    CellGroupingRules -> {"SectionGrouping", 69}], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "14.2 for Mac OS X ARM (64-bit) (March 16, 2025)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"9dfe5859-cec7-446b-a945-adca2ecbcc83"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[580, 21, 2977, 72, 50, "AnchorBarGrid",ExpressionUUID->"34e37aa1-fa48-4ffa-93a6-3e5e2056b2e0",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3582, 97, 116, 1, 62, "TOCDocumentTitle",ExpressionUUID->"6cca3718-cd8a-43b3-bdad-9b3d544d6e12",
+ CellID->1368192302],
+Cell[3701, 100, 270, 7, 70, "TOCChapter",ExpressionUUID->"8933b060-a44b-4ce2-b5ea-a6c2051ee85e",
+ CellID->2100611285]
+}, Closed]],
+Cell[3986, 110, 78, 0, 24, "FooterCell",ExpressionUUID->"2c1ce1a5-16e4-45d2-9ffd-1dc3e1a16d74"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

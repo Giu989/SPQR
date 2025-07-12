@@ -1,0 +1,138 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      4368,        128]
+NotebookOptionsPosition[      2532,         83]
+NotebookOutlinePosition[      3044,        101]
+CellTagsIndexPosition[      3001,         98]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["overviewTest", "TOCDocumentTitle",
+ CellID->1368192302,ExpressionUUID->"6cca3718-cd8a-43b3-bdad-9b3d544d6e12"],
+
+Cell[TextData[ButtonBox["Introduction to SPQR",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SPQR/tutorial/IntroductiontoSPQR#1291165413"]], "TOCChapter",
+ CellID->2100611285,ExpressionUUID->"8933b060-a44b-4ce2-b5ea-a6c2051ee85e"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Metadata", "MetadataSection",
+ CellID->311882160,ExpressionUUID->"4b2383b7-5259-4207-a885-cd0383c6044e"],
+
+Cell[TextData[{
+ "New in: ",
+ Cell["XX", "HistoryData",
+  CellTags->"New",ExpressionUUID->"0df202d0-58cd-48ba-8506-773737b26882"],
+ " | Modified in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Modified",ExpressionUUID->"566d7532-1243-4c43-bc28-66eb45d2c7da"],
+ " | Obsolete in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Obsolete",ExpressionUUID->
+  "98a566d4-fe3c-4639-ae89-4d723db0b1cb"]
+}], "History",
+ CellID->341476719,ExpressionUUID->"9277ee00-ed9d-4202-828d-6f7bccedba8a"],
+
+Cell[CellGroupData[{
+
+Cell["Categorization", "CategorizationSection",
+ CellID->1122911449,ExpressionUUID->"81733e9f-d3eb-4aa2-8c55-bfeb5c3e2211"],
+
+Cell["Overview", "Categorization",
+ CellLabel->"Entity Type",
+ CellID->686433507,ExpressionUUID->"5bde8331-d0be-432e-8a1d-585b1e34b2f2"],
+
+Cell["SPQR", "Categorization",
+ CellLabel->"Paclet Name",
+ CellID->605800465,ExpressionUUID->"5da17106-af8b-4eb1-a786-413634b9991c"],
+
+Cell["SPQR`", "Categorization",
+ CellLabel->"Context",
+ CellID->468444828,ExpressionUUID->"29580d27-4cbd-45b2-b25d-944b43c02898"],
+
+Cell["SPQR/tutorial/overviewTest", "Categorization",
+ CellLabel->"URI",
+ CellID->257030657,ExpressionUUID->"fc542909-9490-45cc-bafa-7ea650169918"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Keywords", "KeywordsSection",
+ CellID->1427428552,ExpressionUUID->"c8b08db1-61b7-4822-a8b7-2c8cca304673"],
+
+Cell["XXXX", "Keywords",
+ CellID->1251852827,ExpressionUUID->"70b56030-e1e8-4279-ad2d-a289bfb71b15"]
+}, Closed]]
+}, Closed]]
+},
+WindowSize->{700, 770},
+WindowMargins->{{460, Automatic}, {Automatic, 50}},
+TaggingRules-><|"Paclet" -> "SPQR"|>,
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "OverviewPageStylesExt.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"638617c7-08de-4afb-989b-6a3988798789"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 116, 1, 176, "TOCDocumentTitle",ExpressionUUID->"6cca3718-cd8a-43b3-bdad-9b3d544d6e12",
+ CellID->1368192302],
+Cell[695, 25, 229, 4, 48, "TOCChapter",ExpressionUUID->"8933b060-a44b-4ce2-b5ea-a6c2051ee85e",
+ CellID->2100611285]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[961, 34, 110, 1, 71, "MetadataSection",ExpressionUUID->"4b2383b7-5259-4207-a885-cd0383c6044e",
+ CellID->311882160],
+Cell[1074, 37, 476, 12, 25, "History",ExpressionUUID->"9277ee00-ed9d-4202-828d-6f7bccedba8a",
+ CellID->341476719],
+Cell[CellGroupData[{
+Cell[1575, 53, 123, 1, 20, "CategorizationSection",ExpressionUUID->"81733e9f-d3eb-4aa2-8c55-bfeb5c3e2211",
+ CellID->1122911449],
+Cell[1701, 56, 136, 2, 70, "Categorization",ExpressionUUID->"5bde8331-d0be-432e-8a1d-585b1e34b2f2",
+ CellID->686433507],
+Cell[1840, 60, 132, 2, 70, "Categorization",ExpressionUUID->"5da17106-af8b-4eb1-a786-413634b9991c",
+ CellID->605800465],
+Cell[1975, 64, 129, 2, 70, "Categorization",ExpressionUUID->"29580d27-4cbd-45b2-b25d-944b43c02898",
+ CellID->468444828],
+Cell[2107, 68, 146, 2, 70, "Categorization",ExpressionUUID->"fc542909-9490-45cc-bafa-7ea650169918",
+ CellID->257030657]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[2290, 75, 111, 1, 20, "KeywordsSection",ExpressionUUID->"c8b08db1-61b7-4822-a8b7-2c8cca304673",
+ CellID->1427428552],
+Cell[2404, 78, 100, 1, 70, "Keywords",ExpressionUUID->"70b56030-e1e8-4279-ad2d-a289bfb71b15",
+ CellID->1251852827]
+}, Closed]]
+}, Closed]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

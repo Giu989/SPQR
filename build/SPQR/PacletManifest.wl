@@ -76,7 +76,7 @@
             ,
             "Hash"
             ->
-            "3b9fa2dba6d469e72b2b876d2b837be318f737ddd20c1507013d258a4846ddc3"
+            "13e9663ca33dc88d37a1d69b12149efaa5e99d29d1eec22b5bbd09e398321fda"
                 
         |>
         ,
@@ -97,13 +97,12 @@
             "File"
             ->
             File[
-                "Documentation/English/ReferencePages/Symbols/BuildPolynomialSystem.nb"
-                    
+                "Documentation/English/Guides/SPQR.nb"
             ]
             ,
             "Hash"
             ->
-            "780c466e911c5d965fa9f91f248377fb03aaaab5918e9ec4e5ac4d50375d6420"
+            "c1e027136204e83f51fc20d9fb528ecb518c71b7e392c9b2b515885249736d5a"
                 
         |>
         ,
@@ -111,13 +110,54 @@
             "File"
             ->
             File[
-                "Documentation/English/ReferencePages/Symbols/solveSystem.nb"
+                "Documentation/English/ReferencePages/Symbols/BuildPolynomialSystem.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "11a609ae698f20ddb06cc8d89fd008395adbb8263e4444677128ba5837f9f3c6"
+            "4b3ff386db062781184718bcdc31dbc13b3e3b41b323cd168df380e25fe76757"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/FindIrreducibleMonomials.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "62b6ec4af72ac8f91e9c6960a4884dbe9699b996c162fd68e3040165d91f739f"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/Tutorials/IntroductiontoSPQR.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "e192bb2ce908cd5d515f30ff93ef58df5c1ec067f86a60c537a2513de450be3a"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/Tutorials/overviewTest.nb"
+            ]
+            ,
+            "Hash"
+            ->
+            "4f607544d781629ea292c2d5b477e1d273b5c312223e85f01a16e9f6cc2bfd9c"
                 
         |>
     }

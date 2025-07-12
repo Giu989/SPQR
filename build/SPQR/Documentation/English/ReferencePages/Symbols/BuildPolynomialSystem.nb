@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     12007,        307]
-NotebookOptionsPosition[      8549,        232]
-NotebookOutlinePosition[     10768,        287]
-CellTagsIndexPosition[     10683,        282]
+NotebookDataLength[     13257,        338]
+NotebookOptionsPosition[      9696,        262]
+NotebookOutlinePosition[     12016,        318]
+CellTagsIndexPosition[     11931,        313]
 WindowTitle->BuildPolynomialSystem
 WindowFrame->Normal*)
 
@@ -27,11 +27,11 @@ Cell[BoxData[GridBox[{
           TemplateBox[{12},
            "Spacer1"], Cell["S P Q R SYMBOL", "PacletNameCell",
            TextAlignment->Center,ExpressionUUID->
-           "8f1648d3-d0ab-4b25-af54-af329346da33"], 
+           "6bf61bcc-8930-4e33-ab1e-c59672c6a37a"], 
           TemplateBox[{8},
            "Spacer1"]}]],
          TextAlignment->Center,ExpressionUUID->
-         "dee1e61a-ad47-4067-9fe5-3f362cd0acb3"],
+         "2a1928fb-7970-4e03-a4dc-5e81e06b2722"],
         Background->RGBColor[0.490196, 0.576471, 0.690196],
         ItemSize->Full], ""}
      },
@@ -50,8 +50,8 @@ Cell[BoxData[GridBox[{
            AspectRatio->1,
            ImageSize->20,
            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
-          "6c48a074-5d88-44ec-9665-d05e1a502500"]
-        }],ExpressionUUID->"1d183d8f-1659-49f4-b0eb-3240acf697aa"],
+          "d2d5d472-5bdf-44d2-bbad-740dc44e6057"]
+        }],ExpressionUUID->"64942fd0-6425-4a1f-a246-21ae00182e82"],
         StripOnInput->False],{
        "\"SPQR/ref/BuildPolynomialSystem\"" :> None, 
         "\"Copy Wolfram Documentation Center URL\"" :> 
@@ -82,17 +82,17 @@ BuildPolynomialSystem.html"], StandardForm]], "Input", TextClipboardType ->
        MenuStyle->"URLMenu"],
       MouseAppearanceTag["LinkHand"]]],
      LineSpacing->{1.4, 0},ExpressionUUID->
-     "23476e0f-783e-4264-86ca-66b295aa1934"]], "AnchorBar",
+     "7063bfc7-2cca-4314-b604-39106e2b50dd"]], "AnchorBar",
      CacheGraphics->False,ExpressionUUID->
-     "2b8b679d-e554-4c53-af72-a5d4a177b202"]}
+     "8143a5bd-32fa-47f3-8721-4efcdf104d35"]}
   }]], "AnchorBarGrid",
  GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
      Scaled[0.65], {
       Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
    "RowsIndexed" -> {}}},
- CellID->1,ExpressionUUID->"4d12b61d-eaff-47a9-8063-b2692c9f0156"],
+ CellID->1,ExpressionUUID->"1c14a155-eaf2-49ee-afa6-86e88e069d04"],
 
-Cell["SPQR`", "ContextNameCell",ExpressionUUID->"236ca842-0a35-4285-82be-3b7196de8cc2"],
+Cell["SPQR`", "ContextNameCell",ExpressionUUID->"a2b6c662-1525-48e7-b0fe-0cea150f0368"],
 
 Cell[CellGroupData[{
 
@@ -100,25 +100,55 @@ Cell[BoxData[GridBox[{
    {Cell[TextData[{
      Cell[
      "BuildPolynomialSystem", "ObjectName",ExpressionUUID->
-      "0f449242-59d8-4760-9a50-a2ebf9a47192"],
+      "881565d4-ee93-4b98-8d31-fb12012d6aba"],
      Cell[BoxData[
       TemplateBox[{8},
-       "Spacer1"]],ExpressionUUID->"5f6041c4-ca5a-4c44-86b6-0f87ebfa21e1"],
+       "Spacer1"]],ExpressionUUID->"cd930899-dac2-494d-8fc9-94f3c426f088"],
      Cell[BoxData[
      ""], "ObjectNameTranslation",ExpressionUUID->
-      "2969789c-c416-4172-a227-3098296e793d"]
-    }],ExpressionUUID->"1bbef3aa-724f-45f2-9873-48ae58683044"], 
+      "ceef6529-4b2d-4714-9433-92a150b5acba"]
+    }],ExpressionUUID->"f2998f8b-baf4-4503-81c9-e35fa2efdad7"], 
     "\[SpanFromLeft]"}
-  }]], "ObjectNameGrid",ExpressionUUID->"7da5ae33-a6e9-4db5-8b48-\
-8a62abb2690b"],
+  }]], "ObjectNameGrid",ExpressionUUID->"8b6a83b6-a5bc-40eb-b686-\
+134e118c3bb7"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell["\<\
-Builds a system of equations for a given Ideal and returns the irreducible \
-monomials\
-\>",ExpressionUUID->"d24462e4-7387-49cf-95b4-964f1a0791c0"]}
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       TemplateBox[{
+         Cell[
+          TextData["BuildPolynomialSystem"]], 
+         "paclet:SPQR/ref/BuildPolynomialSystem", "SPQR Package Symbol"},
+        "PackageLink",
+        BaseStyle->"InlineFormula"], "[", 
+       RowBox[{
+        StyleBox["targets", "TI"], ",", 
+        StyleBox["ideal", "TI"], ",", 
+        StyleBox["vars", "TI"], ",", 
+        StyleBox["w", "TI"]}], "]"}]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "75323605-6064-4533-b4f2-ab095e16edcf"],
+     "\[LineSeparator]Builds and loads a system of linear equations to weight \
+",
+     Cell[BoxData[
+      StyleBox["w", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "887d9758-f080-48f9-9113-d93e0128a70d"],
+     " into FiniteFlow to polynomially reduce the ",
+     Cell[BoxData[
+      StyleBox["targets", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "69b88b19-f4c6-410a-8643-0a0d83bdf68c"],
+     " with respect to the ",
+     Cell[BoxData[
+      StyleBox["ideal", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "12c5cb0f-14b9-4f16-a2a1-49d1ad75162c"],
+     " "
+    }],ExpressionUUID->"6dbed7b6-5fc4-407f-95e7-55a2f39a8f29"]}
   }]], "Usage",
- CellID->1873361295,ExpressionUUID->"9181da2b-a50d-4626-9e77-cd68a525605c"]
+ CellID->594747732,ExpressionUUID->"8b38aa67-1b3d-497f-b98c-d3d9461d91f1"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -150,12 +180,12 @@ Cell[TextData[Cell[BoxData[
          0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
      ImageSizeCache->{
       13.600000000000001`, {-0.1685058593749993, 13.768505859375}}]],
-    ExpressionUUID->"79974074-eef2-4d7f-a473-a9beff39e199"],
+    ExpressionUUID->"0ad1dabe-1336-4bc0-9f97-d6b3d12f1cba"],
    Cell[BoxData[
     TemplateBox[{1},
-     "Spacer1"]],ExpressionUUID->"1863a80d-4a04-4a56-a77f-bbb757a9f539"],
+     "Spacer1"]],ExpressionUUID->"4d3e980f-992c-418a-915e-a627e4f56b16"],
    "Details and Options"
-  }], "NotesFrameText",ExpressionUUID->"b6fd5cd5-bfc7-4a39-bab0-13271064f230"],
+  }], "NotesFrameText",ExpressionUUID->"70f6ee68-c3b4-4baf-8b4e-d76e85e769a1"],
   Appearance->{Automatic, None, "Normal", Automatic},
   BaseStyle->None,
   ButtonFunction:>(FrontEndExecute[{
@@ -166,15 +196,15 @@ Cell[TextData[Cell[BoxData[
       FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
   Evaluator->None,
   Method->
-   "Preemptive"]],ExpressionUUID->"490cbc5c-33c6-403d-afe7-1127cc80b9ce"]], \
+   "Preemptive"]],ExpressionUUID->"9c80d967-03b1-4b10-be09-b067df68133a"]], \
 "NotesSection",
  WholeCellGroupOpener->True,
  CellGroupingRules->{"SectionGrouping", 50},
  CacheGraphics->False,
- CellID->599857741,ExpressionUUID->"1f3bc4ad-0d53-495a-bb7f-b920c20f5b37"],
+ CellID->1838080724,ExpressionUUID->"21f14468-8f51-47b2-ac7b-bd92e2a7b5c0"],
 
 Cell["The following options can be given: ", "Notes",
- CellID->1325536398,ExpressionUUID->"ff399863-4866-4b81-b890-3a935d0d2a6c"]
+ CellID->1536238586,ExpressionUUID->"2da64231-d0ef-4214-b37e-1dc81671ad59"]
 }, Dynamic[CurrentValue[
  EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
 
@@ -205,30 +235,30 @@ Cell[TextData[{
         PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
        0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
    ImageSizeCache->{
-    13.600000000000001`, {4.251494140625001, 9.348505859375}}]],
-  ExpressionUUID->"6ae8c9ba-ecff-4702-9ebc-c96183e20285"],
+    13.600000000000001`, {4.8511425781250015`, 8.748857421875}}]],
+  ExpressionUUID->"cc7e62c9-e20d-4b4e-931b-ce21b0ecdabb"],
  Cell[BoxData[
   TemplateBox[{1},
-   "Spacer1"]],ExpressionUUID->"d3fd44ed-611b-4ae4-bd8d-fab00c64bee5"],
+   "Spacer1"]],ExpressionUUID->"f7f8ddc2-9eab-474e-bbd4-3a3d13e5d729"],
  "Examples",
  "\[NonBreakingSpace]\[NonBreakingSpace]",
  Cell["(0)", "ExampleCount",ExpressionUUID->
-  "6c013014-5eab-4a5f-9785-4000eb7d887f"]
+  "b2842a63-f282-4cf3-8e2b-91621a2c030c"]
 }], "PrimaryExamplesSection",
  WholeCellGroupOpener->True,
  CacheGraphics->False,
  CellTags->"PrimaryExamplesSection",
- CellID->1520813969,ExpressionUUID->"65d8309e-e8fd-4ba7-b445-2e243aa96fb5"],
+ CellID->1070466173,ExpressionUUID->"f47081e4-463c-49d5-8a76-3996672aca26"],
 
 Cell[BoxData[
  RowBox[{"Needs", "[", "\"\<SPQR`\>\"", "]"}]], "Input", "ExampleInitialization",
  CellLabel->"In[1]:=",
- CellID->905003706,ExpressionUUID->"44cb4075-4488-4145-8468-d3dd4909ff13"]
+ CellID->539199057,ExpressionUUID->"2f72c2a1-cc3f-4a7d-8b5c-b007547ca6c6"]
 }, Dynamic[CurrentValue[
  EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, 
   Closed]]]],
 
-Cell[" ", "FooterCell",ExpressionUUID->"81337194-4dc7-4d06-a499-c146f7d3d4a0"]
+Cell[" ", "FooterCell",ExpressionUUID->"a042b61d-c468-4c4f-a922-5f918f240751"]
 },
 Saveable->False,
 ScreenStyleEnvironment->"Working",
@@ -244,16 +274,17 @@ TaggingRules->{
   "CitationPopupData" -> $Failed, "ShowCitation" -> False, "HasOptions" -> 
   True, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
   "Metadata" -> {
-   "built" -> "{2025, 7, 12, 13, 5, 48.584191}", 
+   "built" -> "{2025, 7, 12, 15, 13, 44.060784}", 
     "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "S P Q R Symbol", "language" -> "en", "paclet" -> "SPQR", 
     "status" -> "None", "summary" -> 
-    "Builds a system of equations for a given Ideal and returns the \
-irreducible monomials", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
-    "BuildPolynomialSystem", "titlemodifier" -> "", "metadescription" -> "", 
-    "windowtitle" -> "BuildPolynomialSystem", "type" -> "Symbol", "uri" -> 
-    "SPQR/ref/BuildPolynomialSystem"}},
+    "BuildPolynomialSystem[targets, ideal, vars, w] Builds and loads a system \
+of linear equations to weight w into FiniteFlow to polynomially reduce the \
+targets with respect to the ideal ", "synonyms" -> {}, "tabletags" -> {}, 
+    "title" -> "BuildPolynomialSystem", "titlemodifier" -> "", 
+    "metadescription" -> "", "windowtitle" -> "BuildPolynomialSystem", "type" -> 
+    "Symbol", "uri" -> "SPQR/ref/BuildPolynomialSystem"}},
 CellContext->"Global`",
 FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
 StyleDefinitions->Notebook[{
@@ -266,7 +297,7 @@ StyleDefinitions->Notebook[{
     StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
   FrontEndVersion -> "14.2 for Mac OS X ARM (64-bit) (March 16, 2025)", 
   StyleDefinitions -> "PrivateStylesheetFormatting.nb"],
-ExpressionUUID->"ae3c5cdf-1227-4a5d-ac28-cf4d9a137cb0"
+ExpressionUUID->"f1b9c470-6603-4e1e-99e5-ff67182b0df9"
 ]
 (* End of Notebook Content *)
 
@@ -274,41 +305,41 @@ ExpressionUUID->"ae3c5cdf-1227-4a5d-ac28-cf4d9a137cb0"
 (*CellTagsOutline
 CellTagsIndex->{
  "PrimaryExamplesSection"->{
-  Cell[6715, 182, 1438, 38, 34, "PrimaryExamplesSection",ExpressionUUID->"65d8309e-e8fd-4ba7-b445-2e243aa96fb5",
+  Cell[7860, 212, 1440, 38, 70, "PrimaryExamplesSection",ExpressionUUID->"f47081e4-463c-49d5-8a76-3996672aca26",
    CellTags->"PrimaryExamplesSection",
-   CellID->1520813969]}
+   CellID->1070466173]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"PrimaryExamplesSection", 10483, 275}
+ {"PrimaryExamplesSection", 11731, 306}
  }
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[589, 21, 2951, 71, 50, "AnchorBarGrid",ExpressionUUID->"4d12b61d-eaff-47a9-8063-b2692c9f0156",
+Cell[589, 21, 2951, 71, 70, "AnchorBarGrid",ExpressionUUID->"1c14a155-eaf2-49ee-afa6-86e88e069d04",
  CellID->1],
-Cell[3543, 94, 87, 0, 22, "ContextNameCell",ExpressionUUID->"236ca842-0a35-4285-82be-3b7196de8cc2"],
+Cell[3543, 94, 87, 0, 70, "ContextNameCell",ExpressionUUID->"a2b6c662-1525-48e7-b0fe-0cea150f0368"],
 Cell[CellGroupData[{
-Cell[3655, 98, 564, 14, 57, "ObjectNameGrid",ExpressionUUID->"7da5ae33-a6e9-4db5-8b48-8a62abb2690b"],
-Cell[4222, 114, 281, 6, 86, "Usage",ExpressionUUID->"9181da2b-a50d-4626-9e77-cd68a525605c",
- CellID->1873361295]
+Cell[3655, 98, 564, 14, 70, "ObjectNameGrid",ExpressionUUID->"8b6a83b6-a5bc-40eb-b686-134e118c3bb7"],
+Cell[4222, 114, 1425, 36, 70, "Usage",ExpressionUUID->"8b38aa67-1b3d-497f-b98c-d3d9461d91f1",
+ CellID->594747732]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4540, 125, 1916, 48, 34, "NotesSection",ExpressionUUID->"1f3bc4ad-0d53-495a-bb7f-b920c20f5b37",
+Cell[5684, 155, 1917, 48, 70, "NotesSection",ExpressionUUID->"21f14468-8f51-47b2-ac7b-bd92e2a7b5c0",
  CellGroupingRules->{"SectionGrouping", 50},
- CellID->599857741],
-Cell[6459, 175, 129, 1, 70, "Notes",ExpressionUUID->"ff399863-4866-4b81-b890-3a935d0d2a6c",
- CellID->1325536398]
+ CellID->1838080724],
+Cell[7604, 205, 129, 1, 70, "Notes",ExpressionUUID->"2da64231-d0ef-4214-b37e-1dc81671ad59",
+ CellID->1536238586]
 }, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
 Cell[CellGroupData[{
-Cell[6715, 182, 1438, 38, 34, "PrimaryExamplesSection",ExpressionUUID->"65d8309e-e8fd-4ba7-b445-2e243aa96fb5",
+Cell[7860, 212, 1440, 38, 70, "PrimaryExamplesSection",ExpressionUUID->"f47081e4-463c-49d5-8a76-3996672aca26",
  CellTags->"PrimaryExamplesSection",
- CellID->1520813969],
-Cell[8156, 222, 193, 3, 29, "Input",ExpressionUUID->"44cb4075-4488-4145-8468-d3dd4909ff13",
- CellID->905003706]
+ CellID->1070466173],
+Cell[9303, 252, 193, 3, 70, "Input",ExpressionUUID->"2f72c2a1-cc3f-4a7d-8b5c-b007547ca6c6",
+ CellID->539199057]
 }, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, Closed]]]],
-Cell[8467, 230, 78, 0, 40, "FooterCell",ExpressionUUID->"81337194-4dc7-4d06-a499-c146f7d3d4a0"]
+Cell[9614, 260, 78, 0, 70, "FooterCell",ExpressionUUID->"a042b61d-c468-4c4f-a922-5f918f240751"]
 }
 ]
 *)

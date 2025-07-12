@@ -1,10 +1,18 @@
 (* ::Package:: *)
 
-BeginPackage["SPQR`",{"FiniteFlow`"}];
+BeginPackage["SPQR`",{"FiniteFlow`","GeneralUtilities`"}];
 
 
-FindIrreducibleMonomials::usage = " ";
-BuildPolynomialSystem::usage = "Builds a system of equations for a given Ideal and returns the irreducible monomials";
+(*SetUsage["FindIrreducibleMonomials[ideal$,vars$] finds the irreducible monomials of an ideal$ in the variables vars$ using a numerical Groebner Basis"]
+(*needs a better description*)
+SetUsage["BuildPolynomialSystem[targets$,ideal$,vars$,w$] builds and loads a system of linear equations to weight w$ into FiniteFlow to polynomially reduce the targets$ with respect to the ideal$"]*)
+
+
+(*SetUsage["FindIrreducibleMonomials[ideal$,vars$] finds the irreducible monomials of an ideal$ in the variables vars$ using a numerical Groebner Basis"]*)
+
+
+FindIrreducibleMonomials::usage = "FindIrreducibleMonomials[ideal,vars] Finds the irreducible monomials of an ideal in the variables vars using a numerical Groebner Basis.";
+BuildPolynomialSystem::usage = "BuildPolynomialSystem[targets,ideal,vars,w] Builds and loads a system of linear equations to weight w into FiniteFlow to polynomially reduce the targets with respect to the ideal ";
 ReconstructPolynomialRemainder::usage = " ";
 BuildCompanionMatrices::usage = " ";
 BuildTargetCompanionMatrix::usage = " ";
@@ -17,11 +25,10 @@ targ::usage = " ";
 Begin["`Private`"]
 
 
-Print["test print output"]
+Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R: loaded successfully"]
 
 
 Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
-Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_cmat.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_target_cmat.m"}]];
@@ -42,7 +49,7 @@ SetAttributes[
 	BuildCompanionMatrices,BuildTargetCompanionMatrix,ReconstructTargetCompanionMatrix,
 	j,extraparam,targ
 	}
-	, ReadProtected];
+	, {ReadProtected}];
 
 (*Protect[{}];*)
 

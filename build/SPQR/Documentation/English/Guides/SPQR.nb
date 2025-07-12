@@ -1,0 +1,160 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      5811,        150]
+NotebookOptionsPosition[      3894,        106]
+NotebookOutlinePosition[      5356,        143]
+CellTagsIndexPosition[      5313,        140]
+WindowTitle->SPQR
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["S P Q R GUIDE", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "18020b06-32f4-409b-ba25-0ee9258e5e9e"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "b9106089-2edf-4593-a73b-ca3e722fd0ef"],
+        Background->RGBColor[0.85098, 0.396078, 0],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[Cell[BoxData[
+     TagBox[
+      ActionMenuBox[
+       FrameBox[Cell[TextData[{
+         "URL",
+         " ",
+         Cell[BoxData[
+          GraphicsBox[
+           {GrayLevel[0.66667], Thickness[0.13], 
+            LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+           AspectRatio->1,
+           ImageSize->20,
+           PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+          "f3c6e460-df3d-4f80-8d44-d054c61d5968"]
+        }],ExpressionUUID->"d91f0acc-b58a-4834-9363-5c073c7c68b6"],
+        StripOnInput->False],{
+       "\"SPQR/guide/SPQR\"" :> None, 
+        "\"Copy Wolfram Documentation Center URL\"" :> 
+        CopyToClipboard["SPQR/guide/SPQR"], Delimiter, "\"Copy web URL\"" :> 
+        Module[{DocumentationSearch`Private`nb$}, 
+          DocumentationSearch`Private`nb$ = 
+           NotebookPut[
+            Notebook[{
+              Cell[BoxData[
+                MakeBoxes[
+                 Hyperlink[
+                  "http://reference.wolfram.com/language/SPQR/guide/SPQR.\
+html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
+              False]]; SelectionMove[
+           DocumentationSearch`Private`nb$, All, Notebook]; 
+          FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+          NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+        "\"Go to web URL\"" :> 
+        FrontEndExecute[{
+          NotebookLocate[{
+            URL[If[TrueQ[False], 
+                "http://reference.wolfram.com/system-modeler/", 
+                "http://reference.wolfram.com/language/"] <> 
+              "SPQR/guide/SPQR" <> ".html"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"],
+      MouseAppearanceTag["LinkHand"]]],
+     LineSpacing->{1.4, 0},ExpressionUUID->
+     "4d025938-e3b2-492c-b091-54b795df31b4"]], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "d4a96ea0-b25b-4522-8992-bccd31e63cdb"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1,ExpressionUUID->"d638beff-e883-4f76-b756-be03b8b414e1"],
+
+Cell[CellGroupData[{
+
+Cell["SPQR", "GuideTitle",
+ CellID->2036843978,ExpressionUUID->"10aa272d-32a6-415e-a8cb-6ff0ec602894"],
+
+Cell["Put small introduction here", "GuideAbstract",
+ CellID->199921419,ExpressionUUID->"9e2eacac-7d5d-4daa-8063-80951da3a92e"],
+
+Cell["\t", "GuideDelimiterSubsection",ExpressionUUID->"f9449513-ca7a-403f-8ba0-29224266f409"]
+}, Open  ]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"97f053e0-bb8f-4753-85e0-bd5e23900b28"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900, 830},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"SPQR",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}}, 
+  "NewStyles" -> True, "CitationPopupData" -> {$Failed, ""}, "ShowCitation" -> 
+  False, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
+  "Metadata" -> {
+   "built" -> "{2025, 7, 12, 17, 53, 3.839334}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "S P Q R Guide", "language" -> "en", "paclet" -> "SPQR", 
+    "status" -> "None", "summary" -> "Put small introduction here", 
+    "synonyms" -> {}, "tabletags" -> {}, "title" -> "SPQR", "titlemodifier" -> 
+    "", "metadescription" -> "", "windowtitle" -> "SPQR", "type" -> "Guide", 
+    "uri" -> "SPQR/guide/SPQR"}},
+CacheGraphics->False,
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"c48bdd0c-6810-40b5-9e4e-bdccee3f2e82"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[572, 21, 2872, 70, 50, "AnchorBarGrid",ExpressionUUID->"d638beff-e883-4f76-b756-be03b8b414e1",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3469, 95, 102, 1, 60, "GuideTitle",ExpressionUUID->"10aa272d-32a6-415e-a8cb-6ff0ec602894",
+ CellID->2036843978],
+Cell[3574, 98, 127, 1, 37, "GuideAbstract",ExpressionUUID->"9e2eacac-7d5d-4daa-8063-80951da3a92e",
+ CellID->199921419],
+Cell[3704, 101, 93, 0, 21, "GuideDelimiterSubsection",ExpressionUUID->"f9449513-ca7a-403f-8ba0-29224266f409"]
+}, Open  ]],
+Cell[3812, 104, 78, 0, 40, "FooterCell",ExpressionUUID->"97f053e0-bb8f-4753-85e0-bd5e23900b28"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
