@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* ::Title:: *)
-(*System Solver*)
+(*System Builder and Solver*)
 
 
 Condition[j[a___]*j[b___],Length[{a}] === Length[{b}]]^:=Apply[j,List[a]+List[b]];
@@ -24,7 +24,7 @@ generateWeightMatrix[variables_,ordering_] := Module[{},
 	If[ordering === DegreeReverseLexicographic,
 		Join[ConstantArray[1,variables // Length] // List,-IdentityMatrix[(variables // Length)-1] // Reverse] // PadLeft // Return;
 	];
-	(*implement failsafe here*)
+	(*failsafe*)
 	Print["Error: No valid ordering specified"];
 	Return[$Failed];
 ];
@@ -183,16 +183,15 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_,OptionsPattern[]]:= 
 ];
 
 
-Options[ReconstructPolynomialRemainder] = {"Vector" -> False};
+Options[ReconstructPolynomialRemainder] = {"Vector" -> False,"PrintDebugInfo"->1,"DeleteGraph"->True};
 ReconstructPolynomialRemainder[output_List,OptionsPattern[]]:=Module[{reconstructed,ans},
-	reconstructed = FFReconstructFunction[output[[1]],output[[2]],"PrintDebugInfo"->1,"MaxPrimes"->200,"MaxDegree"->1000];
-	(*ans = FFSparseSolverSol[reconstructed,output[[3]]] // ReplaceAll[j[x__]:>Times@@(variables^{x})] // Part[#,;;,2]& // Factor;*) (*bug where this doesn't seem to be working?*)
+	reconstructed = FFReconstructFunction[output[[1]],output[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"MaxPrimes"->200,"MaxDegree"->1000];
 	If[OptionValue["Vector"],
 		ans=ArrayReshape[reconstructed,{"DepVars","IndepVars"}//ReplaceAll[output[[3]]]//Map[Length]];
 	,
 		ans=ArrayReshape[reconstructed,{"DepVars","IndepVars"}//ReplaceAll[output[[3]]]//Map[Length]] // Dot[#,"IndepVars"//ReplaceAll[output[[3]]]]& // ReplaceAll[j[x__]:>Times@@(output[[4]]^{x})];
 	];
 	(*for some reason this graph deletion doesn't work*)
-	FFDeleteGraph[output[[1]]//Evaluate];
+	If[OptionValue["DeleteGraph"],FFDeleteGraph[output[[1]]//Evaluate]];
 	Return[ans];
 ];

@@ -25,6 +25,12 @@ Get["SPQR`"]
 ?BuildPolynomialSystem
 
 
+?ReconstructPolynomialRemainder
+
+
+?BuildCompanionMatrices
+
+
 (* ::Section:: *)
 (*Building Documentation and Installing*)
 

@@ -11,7 +11,7 @@
             ,
             "Hash"
             ->
-            "1128cf39d16a00b63ecd2cd28ac0e116f628949cfe763275f9d792debc1e2164"
+            "5f7dcbcb0564f8d7768951b131bd6c3ebd250ec196385aed1973c1c000f98acd"
                 
         |>
         ,
@@ -37,7 +37,7 @@
             ,
             "Hash"
             ->
-            "f8b4c98a9ff28d01b4e3352d9c0a3d7c2c623369f8ccadb6957856a615ea3331"
+            "f231adcf057cc208e881ba5b9d02205a5054e34580ba7cea72c87911af43b476"
                 
         |>
         ,
@@ -50,7 +50,7 @@
             ,
             "Hash"
             ->
-            "bc6e5a3727b320ff22479d8c8f7a2bf39bfefa032368d6cbfc00225dde4cd7f7"
+            "87b7b7752d7f74e599c6705f8fec7987f1885b1a436332ee9b4956d7cf72ed8b"
                 
         |>
         ,
@@ -63,7 +63,33 @@
             ,
             "Hash"
             ->
-            "d8465944cc83830c76f44683b8a3085e6448bb5d104d2e492cda24167e4ccb53"
+            "e3c2ea977c9026dce9b1b2bb8334b184458df8d80ed50c024228d992f68400cb"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/rough-work/.DS_Store"
+            ]
+            ,
+            "Hash"
+            ->
+            "833c25ee09568ad8578e397f37c1a2ecd5d051b6908d52ed129d9111ea6329a4"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/rough-work/sum_and_prod.nb"
+            ]
+            ,
+            "Hash"
+            ->
+            "a9983431aa0188d6d5cd9ae3babcb71c8cfb9ff0e068c23e5c4710566b43cb6f"
                 
         |>
         ,
@@ -76,7 +102,7 @@
             ,
             "Hash"
             ->
-            "13e9663ca33dc88d37a1d69b12149efaa5e99d29d1eec22b5bbd09e398321fda"
+            "672272b6a0fda8e0a2115b940c968bfdd63429ff73b9ece5af37ce1faaf643ce"
                 
         |>
         ,
@@ -102,7 +128,21 @@
             ,
             "Hash"
             ->
-            "c1e027136204e83f51fc20d9fb528ecb518c71b7e392c9b2b515885249736d5a"
+            "956112cd904df82f092fc3f7b9cbe9cb094b3cb8b81930123be68068cab7aa91"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/BuildCompanionMatrices.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "df7197b2e2c4aee115796f2268273c9f20f48096fcf105928e58a65b2d332099"
                 
         |>
         ,
@@ -116,7 +156,21 @@
             ,
             "Hash"
             ->
-            "4b3ff386db062781184718bcdc31dbc13b3e3b41b323cd168df380e25fe76757"
+            "c07c9141f329fc626fd64cdf6153b48c93f8c3c136c5c0a3a59d2a0ba5d25d51"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/BuildTargetCompanionMatrix.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "cd94ca17940457047f5c1ed23565c0fc5f42ce056b5e6da753721dafdfe54f3f"
                 
         |>
         ,
@@ -130,7 +184,35 @@
             ,
             "Hash"
             ->
-            "62b6ec4af72ac8f91e9c6960a4884dbe9699b996c162fd68e3040165d91f739f"
+            "3b33e07ab7189685fc32cb94c9b40446fbfe45e6ea1965b54b26620a1bdb1fdb"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/ReconstructPolynomialRemainder.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "a5b98dccceb5bed159f34e73af221dc2a8ab7a3ade7c2bbbfeb8f3fc7f98be5b"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/ReconstructTargetCompanionMatrix.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "1d733e84d52b44ebf4eb79a5483b68389fe97581e653071c2d1f39de7ebce678"
                 
         |>
         ,
@@ -144,7 +226,7 @@
             ,
             "Hash"
             ->
-            "e192bb2ce908cd5d515f30ff93ef58df5c1ec067f86a60c537a2513de450be3a"
+            "ea73032888b8a75af08a1bca05bd2cc8c56e19d8245998cc5eb9cf75bd0bc782"
                 
         |>
         ,

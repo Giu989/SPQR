@@ -1,0 +1,469 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     18035,        459]
+NotebookOptionsPosition[     14074,        378]
+NotebookOutlinePosition[     16448,        435]
+CellTagsIndexPosition[     16363,        430]
+WindowTitle->BuildCompanionMatrices
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["S P Q R SYMBOL", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "5e3a822a-587c-45cb-9a80-227b5344c7ba"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "72a8e3b5-43d4-463e-b454-7890c9628abf"],
+        Background->RGBColor[0.490196, 0.576471, 0.690196],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[{
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Related Guides",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "16c34180-bb7a-4677-ae74-d20dc1403d0c"]
+         }],ExpressionUUID->"c415bbf8-e95b-4b75-8773-c827d21a0699"],
+         StripOnInput->False],{
+        "\"SPQR\"" :> Documentation`HelpLookup["paclet:SPQR/guide/SPQR"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"MoreAbout"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "afe78a0f-b98d-40cc-b278-1972383a1c5f"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Tech Notes",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "ebc0b7cf-2ce2-48e3-bce0-a9e0004ae353"]
+         }],ExpressionUUID->"57663f22-a305-4ed4-bf92-c6d26fce691a"],
+         StripOnInput->False],{
+        "\"Introduction to SPQR\"" :> 
+         Documentation`HelpLookup["paclet:SPQR/tutorial/IntroductiontoSPQR"]},
+        
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"Tutorials"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "a672df87-b060-4503-9c8d-68a70c308534"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "URL",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "47bcdba8-4040-42fd-a5db-9767b3307e03"]
+         }],ExpressionUUID->"045a5589-dab5-4122-8e9e-bc36131baea0"],
+         StripOnInput->False],{
+        "\"SPQR/ref/BuildCompanionMatrices\"" :> None, 
+         "\"Copy Wolfram Documentation Center URL\"" :> 
+         CopyToClipboard["SPQR/ref/BuildCompanionMatrices"], Delimiter, 
+         "\"Copy web URL\"" :> 
+         Module[{DocumentationSearch`Private`nb$}, 
+           DocumentationSearch`Private`nb$ = 
+            NotebookPut[
+             Notebook[{
+               Cell[BoxData[
+                 MakeBoxes[
+                  Hyperlink[
+                   "http://reference.wolfram.com/language/SPQR/ref/\
+BuildCompanionMatrices.html"], StandardForm]], "Input", TextClipboardType -> 
+                 "PlainText"]}, Visible -> False]]; 
+           SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+           FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+           NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+         "\"Go to web URL\"" :> 
+         FrontEndExecute[{
+           NotebookLocate[{
+             URL[If[TrueQ[False], 
+                 "http://reference.wolfram.com/system-modeler/", 
+                 "http://reference.wolfram.com/language/"] <> 
+               "SPQR/ref/BuildCompanionMatrices" <> ".html"], None}]}]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"URLMenu"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "1fd130f8-5276-445f-96d1-78878b4a6209"]
+    }], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "f64dc55e-0c77-4c8c-bb58-9e3e7dc8a8f2"]}
+  }]], "AnchorBarGrid",
+ CellID->1,ExpressionUUID->"b395f33b-5ccf-4b48-b2a2-dfebad108ec5"],
+
+Cell["SPQR`", "ContextNameCell",ExpressionUUID->"49626ee2-3c86-4f41-b648-7403c2c57352"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {Cell[TextData[{
+     Cell[
+     "BuildCompanionMatrices", "ObjectName",ExpressionUUID->
+      "0430306e-3c9e-4504-8617-83a1fa9f04e5"],
+     Cell[BoxData[
+      TemplateBox[{8},
+       "Spacer1"]],ExpressionUUID->"4e3eb442-8024-490f-9022-d0f30cebe106"],
+     Cell[BoxData[
+     ""], "ObjectNameTranslation",ExpressionUUID->
+      "230d4527-8314-4966-9cde-ab1de9ca7c26"]
+    }],ExpressionUUID->"20c432b0-f256-4c01-bf87-fba2ba1b55af"], 
+    "\[SpanFromLeft]"}
+  }]], "ObjectNameGrid",ExpressionUUID->"f54b79a0-db6a-4d7f-99c1-\
+37daa6285211"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       TemplateBox[{
+         Cell[
+          TextData["BuildCompanionMatrices"]], 
+         "paclet:SPQR/ref/BuildCompanionMatrices", "SPQR Package Symbol"},
+        "PackageLink",
+        BaseStyle->"InlineFormula"], "[", 
+       RowBox[{
+        StyleBox["ideal", "TI"], ",", 
+        StyleBox["vars", "TI"], ",", 
+        StyleBox["w", "TI"], ",", 
+        StyleBox["irreds", "TI"]}], "]"}]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "48dc89c8-258a-46b2-bf27-a95a0385ce1c"],
+     "\[LineSeparator]Builds and loads a system of linear equations to weight \
+",
+     Cell[BoxData[
+      StyleBox["w", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "7692d04c-7c7d-4588-b1f9-35dc407af660"],
+     " using the irreducible monomials ",
+     Cell[BoxData[
+      StyleBox["irreds", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "364abb9a-babb-4154-94a5-7edca5c3b6bd"],
+     " into FiniteFlow to generate the companion matrices for each of the ",
+     Cell[BoxData[
+      StyleBox["vars", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "67b1b7ed-bb31-41ba-b8cf-a0b673264254"],
+     " in the ",
+     Cell[BoxData[
+      StyleBox["ideal", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "bacbc76a-968d-42ee-878a-30d3ff469392"],
+     " "
+    }],ExpressionUUID->"3ab188b1-ee22-4f39-826b-5168b8f91029"]}
+  }]], "Usage",
+ CellID->1839581545,ExpressionUUID->"d7e387e0-81ce-47fe-990b-59e1ed2efe53"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    DynamicBox[ToBoxes[
+      If[
+       MatchQ[
+        CurrentValue[
+         EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, 
+         Closed], 
+        Alternatives[Open, True]], 
+       Style[
+        Graphics[{
+          Thickness[0.18], 
+          RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+          Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+         PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+        0.68 Inherited], 
+       Rotate[
+        Style[
+         Graphics[{
+           Thickness[0.18], 
+           RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+           Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+          PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+         0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+     ImageSizeCache->{
+      13.600000000000001`, {-0.1685058593749993, 13.768505859375}}]],
+    ExpressionUUID->"2e01f6a7-bcc5-4c7d-87ff-ed335dde4bef"],
+   Cell[BoxData[
+    TemplateBox[{1},
+     "Spacer1"]],ExpressionUUID->"881bd96a-655c-4f20-8146-0cd7dd2a3c2c"],
+   "Details and Options"
+  }], "NotesFrameText",ExpressionUUID->"ea883815-6dc4-4ea8-9ab0-bebc9bc55784"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"faf3fe6d-b5e5-48a3-a2c8-1ec3c2c4bcf5"]], \
+"NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CacheGraphics->False,
+ CellID->1618756346,ExpressionUUID->"65fa2e94-e5a8-4917-9fbe-72cf7bb17c70"],
+
+Cell["The following options can be given: ", "Notes",
+ CellID->524960956,ExpressionUUID->"16324466-e73b-4f46-83b7-93cb5accc392"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "2e0c2390-9a1e-4990-9320-c48ab4bf8490"], "\"\<MonomialOrder\>\"", 
+    TemplateBox[{
+      Cell[
+       TextData["Lexicographic"]], "paclet:ref/Lexicographic"},
+     "RefLink",
+     BaseStyle->{"3ColumnTableMod"}], Cell[
+    "monomial order to use", "TableText",ExpressionUUID->
+     "b6a9d5dc-2dfa-46da-aac9-c822046f1b9e"]},
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "cbc9b797-5918-4046-81ab-ee3c9ffe1aeb"], "\"\<PrintDebugInfo\>\"", "0", 
+    RowBox[{"verbose", " ", "printing", " ", "with", " ", "timings"}]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {None, {None}}},
+ GridBoxDividers->{"Rows" -> {{True, True, True}}}},
+ CellID->1155965616,ExpressionUUID->"d96ce69f-52b0-41b7-a72d-ee9b92fa40a7"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {
+       TaggingRules, "Openers", "PrimaryExamplesSection"}, Open], 
+      Alternatives[True, Open]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{
+    13.600000000000001`, {4.251494140625001, 9.348505859375}}]],
+  ExpressionUUID->"d07160ed-87c1-4667-8ced-1eb27899faae"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"448bffdf-d0c6-4ac0-b0cf-08e35c635445"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(0)", "ExampleCount",ExpressionUUID->
+  "a97eb3f0-4918-4034-b642-69ad1b00a09a"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellTags->"PrimaryExamplesSection",
+ CellID->2115067026,ExpressionUUID->"e01440d6-afb9-40aa-8fb1-0012b0516629"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<SPQR`\>\"", "]"}]], "Input", "ExampleInitialization",
+ CellLabel->"In[1]:=",
+ CellID->487613441,ExpressionUUID->"1229a705-8a39-45ab-a2a9-80e6a605e68a"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, 
+  Closed]]]],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, 
+       "RelatedTechNote.png"]],
+     ImageSizeCache->{50., {26.47265625, 33.52734375}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Tech", " ", "Notes"}], "TechNotesSection"]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Introduction to SPQR"]], 
+           "paclet:SPQR/tutorial/IntroductiontoSPQR"},
+          "RefLinkPlain",
+          BaseStyle->{"Tutorials"}]], "Tutorials",ExpressionUUID->
+         "d7cc8de4-b372-446f-a200-21542a97f765"]}]}
+     }]}
+  }]], "TechNotesSection",ExpressionUUID->"fe2cabaf-d0c5-4ea8-b988-\
+8af79b073441"],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, "RelatedGuide.png"]],
+     ImageSizeCache->{50., {26.47265625, 33.52734375}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Related", " ", "Guides"}], "MoreAboutSection"]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["SPQR"]], "paclet:SPQR/guide/SPQR"},
+          "RefLinkPlain",
+          BaseStyle->{"MoreAbout"}]], "MoreAbout",ExpressionUUID->
+         "b7992491-5b83-4604-a60e-4ec20c9225b1"]}]}
+     }]}
+  }]], "MoreAboutSection",ExpressionUUID->"8abdcd02-e9e6-4102-bce0-\
+259a517cd899"],
+
+Cell[" ", "FooterCell",ExpressionUUID->"274cc970-5c7a-4ffd-89b4-e8eaea40f880"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900, 830},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"BuildCompanionMatrices",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}, 
+    "AllOptsTable" -> Closed, "NotesSection" -> Closed}, "NewStyles" -> True, 
+  "CitationPopupData" -> $Failed, "ShowCitation" -> False, "HasOptions" -> 
+  True, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
+  "Metadata" -> {
+   "built" -> "{2025, 7, 13, 18, 49, 48.714189}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "S P Q R Symbol", "language" -> "en", "paclet" -> "SPQR", 
+    "status" -> "None", "summary" -> 
+    "BuildCompanionMatrices[ideal, vars, w, irreds] Builds and loads a system \
+of linear equations to weight w using the irreducible monomials irreds into \
+FiniteFlow to generate the companion matrices for each of the vars in the \
+ideal ", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
+    "BuildCompanionMatrices", "titlemodifier" -> "", "metadescription" -> "", 
+    "windowtitle" -> "BuildCompanionMatrices", "type" -> "Symbol", "uri" -> 
+    "SPQR/ref/BuildCompanionMatrices"}},
+CellContext->"Global`",
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "14.2 for Mac OS X ARM (64-bit) (March 16, 2025)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"531f7715-e42c-46d7-89fa-c6759f9634af"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[10774, 286, 1438, 38, 34, "PrimaryExamplesSection",ExpressionUUID->"e01440d6-afb9-40aa-8fb1-0012b0516629",
+   CellTags->"PrimaryExamplesSection",
+   CellID->2115067026]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 16162, 423}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[590, 21, 4791, 121, 50, "AnchorBarGrid",ExpressionUUID->"b395f33b-5ccf-4b48-b2a2-dfebad108ec5",
+ CellID->1],
+Cell[5384, 144, 87, 0, 22, "ContextNameCell",ExpressionUUID->"49626ee2-3c86-4f41-b648-7403c2c57352"],
+Cell[CellGroupData[{
+Cell[5496, 148, 565, 14, 57, "ObjectNameGrid",ExpressionUUID->"f54b79a0-db6a-4d7f-99c1-37daa6285211"],
+Cell[6064, 164, 1646, 41, 127, "Usage",ExpressionUUID->"d7e387e0-81ce-47fe-990b-59e1ed2efe53",
+ CellID->1839581545]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7747, 210, 1917, 48, 34, "NotesSection",ExpressionUUID->"65fa2e94-e5a8-4917-9fbe-72cf7bb17c70",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1618756346],
+Cell[9667, 260, 128, 1, 70, "Notes",ExpressionUUID->"16324466-e73b-4f46-83b7-93cb5accc392",
+ CellID->524960956],
+Cell[9798, 263, 849, 17, 70, "3ColumnTableMod",ExpressionUUID->"d96ce69f-52b0-41b7-a72d-ee9b92fa40a7",
+ CellID->1155965616]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+Cell[CellGroupData[{
+Cell[10774, 286, 1438, 38, 34, "PrimaryExamplesSection",ExpressionUUID->"e01440d6-afb9-40aa-8fb1-0012b0516629",
+ CellTags->"PrimaryExamplesSection",
+ CellID->2115067026],
+Cell[12215, 326, 193, 3, 29, "Input",ExpressionUUID->"1229a705-8a39-45ab-a2a9-80e6a605e68a",
+ CellID->487613441]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, Closed]]]],
+Cell[12526, 334, 756, 20, 112, "TechNotesSection",ExpressionUUID->"fe2cabaf-d0c5-4ea8-b988-8af79b073441"],
+Cell[13285, 356, 704, 18, 112, "MoreAboutSection",ExpressionUUID->"8abdcd02-e9e6-4102-bce0-259a517cd899"],
+Cell[13992, 376, 78, 0, 24, "FooterCell",ExpressionUUID->"274cc970-5c7a-4ffd-89b4-e8eaea40f880"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

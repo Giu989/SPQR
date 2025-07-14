@@ -13,13 +13,14 @@ SetUsage["BuildPolynomialSystem[targets$,ideal$,vars$,w$] builds and loads a sys
 
 FindIrreducibleMonomials::usage = "FindIrreducibleMonomials[ideal,vars] Finds the irreducible monomials of an ideal in the variables vars using a numerical Groebner Basis.";
 BuildPolynomialSystem::usage = "BuildPolynomialSystem[targets,ideal,vars,w] Builds and loads a system of linear equations to weight w into FiniteFlow to polynomially reduce the targets with respect to the ideal ";
-ReconstructPolynomialRemainder::usage = " ";
-BuildCompanionMatrices::usage = " ";
-BuildTargetCompanionMatrix::usage = " ";
-ReconstructTargetCompanionMatrix::usage = " ";
+ReconstructPolynomialRemainder::usage = "ReconstructPolynomialRemainder[system] Reconstructs the remainder of a set of polynomials. system should be the output of BuildPolynomialSystem";
+BuildCompanionMatrices::usage = "BuildCompanionMatrices[ideal,vars,w,irreds] Builds and loads a system of linear equations to weight w using the irreducible monomials irreds into FiniteFlow to generate the companion matrices for each of the vars in the ideal ";
+BuildTargetCompanionMatrix::usage = "BuildTargetCompanionMatrix[target,cmatsystem] Builds a companion matrix for a given target polynomial. cmatsystem should be the output of BuildCompanionMatrices";
+ReconstructTargetCompanionMatrix::usage = "ReconstructTargetCompanionMatrix[targetcmatsystem] Reconstructs the remainder of a rational function. targetcmatsystem should be the output of BuildTargetCompanionMatrix";
 j::usage = " ";
 extraparam::usage = " ";
 targ::usage = " ";
+(*m::usage = " ";*)
 
 
 Begin["`Private`"]

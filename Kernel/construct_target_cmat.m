@@ -165,32 +165,34 @@ BuildTargetCompanionMatrix[target_,cmatOutput_]:=Module[
 	cmatNames = varsSub[[;;,2]];
 	outputNode = StringJoin["o","$",RandomInteger[10^3]//ToString];
 	ffPolyReduce[targetSub,params,placeHolders,placeHolderMatrices,cmatOutput[[4]],m[outputNode]];
-	Return[{graphName,params,m[outputNode],cmatSize}];
+	Return[{graphName,params,m[outputNode],(*cmatSize*)irredMons,vars}];
 ];
 
 
-Options[ReconstructTargetCompanionMatrix] = {"cmat"->False,"DeleteGraph"->True,"Vector"->False};
-ReconstructTargetCompanionMatrix[targetOutput_,irredMons_,OptionsPattern[]]:=Module[
-	{reconstructed,cmat,polyRed,takePattern}
+Options[ReconstructTargetCompanionMatrix] = {"cmat"->False,"DeleteGraph"->True,"Vector"->False,"PrintDebugInfo"->1};
+ReconstructTargetCompanionMatrix[targetOutput_,(*irredMons_,*)OptionsPattern[]]:=Module[
+	{reconstructed,cmat,polyRed,takePattern,cmatSize,irredMons}
 	,
+	irredMons = targetOutput[[4]];
+	cmatSize = irredMons // Length;
 	If[OptionValue["cmat"],
 			FFGraphOutput[targetOutput[[1]],targetOutput[[3]]];
-			reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->1];
+			reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
 			If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
-			cmat = Partition[reconstructed,targetOutput[[4]]];
+			cmat = Partition[reconstructed,cmatSize];
 			Return[cmat];
 		,
-			takePattern = Range[1+targetOutput[[4]]^2-targetOutput[[4]],targetOutput[[4]]^2] // {1,#}& // Thread;
+			takePattern = Range[1+cmatSize^2-cmatSize,cmatSize^2] // {1,#}& // Thread;
 			FFAlgTake[targetOutput[[1]],"takeCmatComponents",{targetOutput[[3]]},takePattern];
 			FFGraphOutput[targetOutput[[1]],"takeCmatComponents"];
-			reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->1];
+			reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
 			If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
 		
 			If[OptionValue["Vector"],
 				Return[reconstructed];
 			,
-				Return[reconstructed . irredMons];
+				Return[reconstructed . irredMons // ReplaceAll[j[x__]:>Times@@(targetOutput[[5]]^{x})]];
 			];
 		];
 	];
-ReconstructTargetCompanionMatrix[targetOutput_]:=ReconstructTargetCompanionMatrix[targetOutput,{},"cmat"->True];
+(*ReconstructTargetCompanionMatrix[targetOutput_]:=ReconstructTargetCompanionMatrix[targetOutput,{},"cmat"->True];*)

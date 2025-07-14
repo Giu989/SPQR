@@ -8,7 +8,7 @@
 Get["polydiv`"]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 1 \[LongDash] Overview of main functions*)
 
 
@@ -73,16 +73,16 @@ targetCmat // First // FFGraphDraw
 
 
 (*finally, we can reconstruct the output of the polynomial division with*)
-reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,irredMonomials,"DeleteGraph"->False]
+reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False]
 (*note currently the full cmat is reconstructed and then post processed in mathematica, which means potentially more sample points than necessary are used*)
 (*check agreement*)
 (ansGB // First) - reductionWithCmats // Factor // SameQ[#, 0]&
 
 
-ReconstructTargetCompanionMatrix[targetCmat,irredMonomials,"DeleteGraph"->False,"Vector"->True]
+ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False,"Vector"->True]
 
 
-ReconstructTargetCompanionMatrix[targetCmat,irredMonomials,"DeleteGraph"->False,"cmat"->True]
+ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False,"cmat"->True]
 
 
 (*we can also do more complicated rational expressions with the companion matrix reducer*)
@@ -92,7 +92,7 @@ expression = (x+y^2)^17 (3*a*x^2 y - (x-y)^3/(a-b-x-1/y))^-2
 targetCmat = BuildTargetCompanionMatrix[expression,cmats]
 (*targetCmat // First // FFGraphDraw*)
 targetCmat // First // FFGraphDraw // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First
-reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,irredMonomials,"DeleteGraph"->False]
+reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False]
 
 
 (*we can check against the GB approach by separating out the numerator and denominator, as Mathematica does not support the reduction of rational functions per se*)
@@ -143,7 +143,7 @@ gpolcmat = BuildTargetCompanionMatrix[target,cmats]
 gpolcmat // First // FFGraphDraw
 
 
-results2 = ReconstructTargetCompanionMatrix[gpolcmat,irredMonomials] // Collect[#,irredMonomials,Factor]&;
+results2 = ReconstructTargetCompanionMatrix[gpolcmat] // Collect[#,irredMonomials,Factor]&;
 results==results2
 
 
@@ -167,7 +167,7 @@ variableCmats = BuildCompanionMatrices[ideal,variables,6,irredMonomials];
 jinvCmat = BuildTargetCompanionMatrix[jinvariantRoots,variableCmats];
 
 
-jinvCoefficients = ReconstructTargetCompanionMatrix[jinvCmat,irredMonomials,"DeleteGraph"->False] // Factor
+jinvCoefficients = ReconstructTargetCompanionMatrix[jinvCmat,"DeleteGraph"->False] // Factor
 
 
 (* ::Subsection::Closed:: *)
@@ -197,7 +197,7 @@ resultantFF= c^cexp - reconstructed // Together // Numerator // Factor; // Absol
 resultantFF
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 5 \[LongDash] More complicated resultant computation with Elimination Order WIP*)
 
 
@@ -225,13 +225,7 @@ resultantFF= d^dexp - reconstructed // Together // Numerator // Factor; // Absol
 resultantFF
 
 
-(*companion matrix side*)
-
-
-irredMonomials = FindIrreducibleMonomials[pList,variables]
-
-
-out = BuildPolynomialSystem[{z},pList,variables,18,"MonomialOrder"->DegreeLexicographic,"EliminateVariables"->{{x,y,z},14},"IrreducibleMonomials"->irredMonomials,"PrintDebugInfo"->2]
+(*out = BuildPolynomialSystem[{z},pList,variables,18,"MonomialOrder"->DegreeLexicographic,"EliminateVariables"->{{x,y,z},14},"IrreducibleMonomials"->irredMonomials,"PrintDebugInfo"->2]*)
 
 
 (*ans = ReconstructPolynomialRemainder[out]; // AbsoluteTiming*)
@@ -255,14 +249,14 @@ gpol = x1 x2+m1sq x1^2 x2+m2sq x1 x2^2+x1 x3+m1sq x1^2 x3+x2 x3+m1sq x1 x2 x3+m2
 pList = {1-x0*gpol}~Join~D[gpol,{{x1,x2,x3,x4}}];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*x0 analysis*)
 
 
 target = x0^4;
 
 
-systemOutput = BuildPolynomialSystem[{target},pList,{x1,x2,x3,x4,x0},9,"MonomialOrder"->DegreeLexicographic,"EliminateVariables"->{{x1,x2,x3,x4},5},"PrintDebugInfo"->2]
+systemOutput = BuildPolynomialSystem[{target},pList,{x1,x2,x3,x4,x0},9,"MonomialOrder"->DegreeReverseLexicographic,"EliminateVariables"->{{x1,x2,x3,x4},5},"PrintDebugInfo"->2]
 
 
 reconstructed = ReconstructPolynomialRemainder[systemOutput,"Vector"->True] // First; // AbsoluteTiming
@@ -353,7 +347,7 @@ Complement[x4L2,x0L2]
 %/difficultLetter
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*Bringing it all together*)
 
 
@@ -363,5 +357,9 @@ totalLandau = (Join[x0L1,x0L2,x1L2,x2L2,x3L2,x4L2]^2//Factor // DeleteDuplicates
 sofiaSols = {m1sq, m2sq, p3sq, m1sq - m2sq, p1sq^2 - 2 p1sq p2sq + p2sq^2 - 2 p1sq p3sq - 2 p2sq p3sq + p3sq^2, m3sq^2 - 2 m3sq m4sq + m4sq^2 - 2 m3sq p3sq - 2 m4sq p3sq + p3sq^2, -m3sq m4sq p1sq + m4sq^2 p1sq + m4sq p1sq^2 + m3sq^2 p2sq - m3sq m4sq p2sq - m3sq p1sq p2sq - m4sq p1sq p2sq + m3sq p2sq^2 + m3sq m4sq p3sq - m4sq p1sq p3sq - m3sq p2sq p3sq + p1sq p2sq p3sq, m1sq^2 m3sq^2 p1sq^2 - 2 m1sq m2sq m3sq^2 p1sq^2 + m2sq^2 m3sq^2 p1sq^2 - 2 m1sq^2 m3sq m4sq p1sq^2 + 4 m1sq m2sq m3sq m4sq p1sq^2 - 2 m2sq^2 m3sq m4sq p1sq^2 - 2 m1sq m3sq^2 m4sq p1sq^2 - 2 m2sq m3sq^2 m4sq p1sq^2 + m1sq^2 m4sq^2 p1sq^2 - 2 m1sq m2sq m4sq^2 p1sq^2 + m2sq^2 m4sq^2 p1sq^2 + 4 m1sq m3sq m4sq^2 p1sq^2 + 4 m2sq m3sq m4sq^2 p1sq^2 + m3sq^2 m4sq^2 p1sq^2 - 2 m1sq m4sq^3 p1sq^2 - 2 m2sq m4sq^3 p1sq^2 - 2 m3sq m4sq^3 p1sq^2 + m4sq^4 p1sq^2 + 2 m1sq m3sq m4sq p1sq^3 + 2 m2sq m3sq m4sq p1sq^3 - 2 m1sq m4sq^2 p1sq^3 - 2 m2sq m4sq^2 p1sq^3 - 2 m3sq m4sq^2 p1sq^3 + 2 m4sq^3 p1sq^3 + m4sq^2 p1sq^4 - 2 m1sq^2 m3sq^2 p1sq p2sq + 4 m1sq m2sq m3sq^2 p1sq p2sq - 2 m2sq^2 m3sq^2 p1sq p2sq + 2 m1sq m3sq^3 p1sq p2sq + 2 m2sq m3sq^3 p1sq p2sq + 4 m1sq^2 m3sq m4sq p1sq p2sq - 8 m1sq m2sq m3sq m4sq p1sq p2sq + 4 m2sq^2 m3sq m4sq p1sq p2sq - 2 m1sq m3sq^2 m4sq p1sq p2sq - 2 m2sq m3sq^2 m4sq p1sq p2sq - 2 m3sq^3 m4sq p1sq p2sq - 2 m1sq^2 m4sq^2 p1sq p2sq + 4 m1sq m2sq m4sq^2 p1sq p2sq - 2 m2sq^2 m4sq^2 p1sq p2sq - 2 m1sq m3sq m4sq^2 p1sq p2sq - 2 m2sq m3sq m4sq^2 p1sq p2sq + 4 m3sq^2 m4sq^2 p1sq p2sq + 2 m1sq m4sq^3 p1sq p2sq + 2 m2sq m4sq^3 p1sq p2sq - 2 m3sq m4sq^3 p1sq p2sq - 2 m1sq m3sq^2 p1sq^2 p2sq - 2 m2sq m3sq^2 p1sq^2 p2sq - 2 m1sq m3sq m4sq p1sq^2 p2sq - 2 m2sq m3sq m4sq p1sq^2 p2sq + 4 m3sq^2 m4sq p1sq^2 p2sq + 4 m1sq m4sq^2 p1sq^2 p2sq + 4 m2sq m4sq^2 p1sq^2 p2sq - 2 m3sq m4sq^2 p1sq^2 p2sq - 2 m4sq^3 p1sq^2 p2sq - 2 m3sq m4sq p1sq^3 p2sq - 2 m4sq^2 p1sq^3 p2sq + m1sq^2 m3sq^2 p2sq^2 - 2 m1sq m2sq m3sq^2 p2sq^2 + m2sq^2 m3sq^2 p2sq^2 - 2 m1sq m3sq^3 p2sq^2 - 2 m2sq m3sq^3 p2sq^2 + m3sq^4 p2sq^2 - 2 m1sq^2 m3sq m4sq p2sq^2 + 4 m1sq m2sq m3sq m4sq p2sq^2 - 2 m2sq^2 m3sq m4sq p2sq^2 + 4 m1sq m3sq^2 m4sq p2sq^2 + 4 m2sq m3sq^2 m4sq p2sq^2 - 2 m3sq^3 m4sq p2sq^2 + m1sq^2 m4sq^2 p2sq^2 - 2 m1sq m2sq m4sq^2 p2sq^2 + m2sq^2 m4sq^2 p2sq^2 - 2 m1sq m3sq m4sq^2 p2sq^2 - 2 m2sq m3sq m4sq^2 p2sq^2 + m3sq^2 m4sq^2 p2sq^2 + 4 m1sq m3sq^2 p1sq p2sq^2 + 4 m2sq m3sq^2 p1sq p2sq^2 - 2 m3sq^3 p1sq p2sq^2 - 2 m1sq m3sq m4sq p1sq p2sq^2 - 2 m2sq m3sq m4sq p1sq p2sq^2 - 2 m3sq^2 m4sq p1sq p2sq^2 - 2 m1sq m4sq^2 p1sq p2sq^2 - 2 m2sq m4sq^2 p1sq p2sq^2 + 4 m3sq m4sq^2 p1sq p2sq^2 + m3sq^2 p1sq^2 p2sq^2 + 4 m3sq m4sq p1sq^2 p2sq^2 + m4sq^2 p1sq^2 p2sq^2 - 2 m1sq m3sq^2 p2sq^3 - 2 m2sq m3sq^2 p2sq^3 + 2 m3sq^3 p2sq^3 + 2 m1sq m3sq m4sq p2sq^3 + 2 m2sq m3sq m4sq p2sq^3 - 2 m3sq^2 m4sq p2sq^3 - 2 m3sq^2 p1sq p2sq^3 - 2 m3sq m4sq p1sq p2sq^3 + m3sq^2 p2sq^4 + 2 m1sq^3 m3sq p1sq p3sq - 2 m1sq^2 m2sq m3sq p1sq p3sq - 2 m1sq m2sq^2 m3sq p1sq p3sq + 2 m2sq^3 m3sq p1sq p3sq - 2 m1sq^2 m3sq^2 p1sq p3sq + 4 m1sq m2sq m3sq^2 p1sq p3sq - 2 m2sq^2 m3sq^2 p1sq p3sq - 2 m1sq^3 m4sq p1sq p3sq + 2 m1sq^2 m2sq m4sq p1sq p3sq + 2 m1sq m2sq^2 m4sq p1sq p3sq - 2 m2sq^3 m4sq p1sq p3sq - 2 m1sq^2 m3sq m4sq p1sq p3sq - 12 m1sq m2sq m3sq m4sq p1sq p3sq - 2 m2sq^2 m3sq m4sq p1sq p3sq + 4 m1sq m3sq^2 m4sq p1sq p3sq + 4 m2sq m3sq^2 m4sq p1sq p3sq + 4 m1sq^2 m4sq^2 p1sq p3sq + 8 m1sq m2sq m4sq^2 p1sq p3sq + 4 m2sq^2 m4sq^2 p1sq p3sq - 2 m1sq m3sq m4sq^2 p1sq p3sq - 2 m2sq m3sq m4sq^2 p1sq p3sq - 2 m3sq^2 m4sq^2 p1sq p3sq - 2 m1sq m4sq^3 p1sq p3sq - 2 m2sq m4sq^3 p1sq p3sq + 2 m3sq m4sq^3 p1sq p3sq - 2 m1sq^2 m3sq p1sq^2 p3sq + 4 m1sq m2sq m3sq p1sq^2 p3sq - 2 m2sq^2 m3sq p1sq^2 p3sq + 4 m1sq^2 m4sq p1sq^2 p3sq + 8 m1sq m2sq m4sq p1sq^2 p3sq + 4 m2sq^2 m4sq p1sq^2 p3sq - 2 m1sq m3sq m4sq p1sq^2 p3sq - 2 m2sq m3sq m4sq p1sq^2 p3sq - 2 m1sq m4sq^2 p1sq^2 p3sq - 2 m2sq m4sq^2 p1sq^2 p3sq + 4 m3sq m4sq^2 p1sq^2 p3sq - 2 m4sq^3 p1sq^2 p3sq - 2 m1sq m4sq p1sq^3 p3sq - 2 m2sq m4sq p1sq^3 p3sq - 2 m4sq^2 p1sq^3 p3sq - 2 m1sq^3 m3sq p2sq p3sq + 2 m1sq^2 m2sq m3sq p2sq p3sq + 2 m1sq m2sq^2 m3sq p2sq p3sq - 2 m2sq^3 m3sq p2sq p3sq + 4 m1sq^2 m3sq^2 p2sq p3sq + 8 m1sq m2sq m3sq^2 p2sq p3sq + 4 m2sq^2 m3sq^2 p2sq p3sq - 2 m1sq m3sq^3 p2sq p3sq - 2 m2sq m3sq^3 p2sq p3sq + 2 m1sq^3 m4sq p2sq p3sq - 2 m1sq^2 m2sq m4sq p2sq p3sq - 2 m1sq m2sq^2 m4sq p2sq p3sq + 2 m2sq^3 m4sq p2sq p3sq - 2 m1sq^2 m3sq m4sq p2sq p3sq - 12 m1sq m2sq m3sq m4sq p2sq p3sq - 2 m2sq^2 m3sq m4sq p2sq p3sq - 2 m1sq m3sq^2 m4sq p2sq p3sq - 2 m2sq m3sq^2 m4sq p2sq p3sq + 2 m3sq^3 m4sq p2sq p3sq - 2 m1sq^2 m4sq^2 p2sq p3sq + 4 m1sq m2sq m4sq^2 p2sq p3sq - 2 m2sq^2 m4sq^2 p2sq p3sq + 4 m1sq m3sq m4sq^2 p2sq p3sq + 4 m2sq m3sq m4sq^2 p2sq p3sq - 2 m3sq^2 m4sq^2 p2sq p3sq - 2 m1sq^2 m3sq p1sq p2sq p3sq - 12 m1sq m2sq m3sq p1sq p2sq p3sq - 2 m2sq^2 m3sq p1sq p2sq p3sq - 2 m1sq m3sq^2 p1sq p2sq p3sq - 2 m2sq m3sq^2 p1sq p2sq p3sq - 2 m1sq^2 m4sq p1sq p2sq p3sq - 12 m1sq m2sq m4sq p1sq p2sq p3sq - 2 m2sq^2 m4sq p1sq p2sq p3sq + 12 m1sq m3sq m4sq p1sq p2sq p3sq + 12 m2sq m3sq m4sq p1sq p2sq p3sq - 2 m3sq^2 m4sq p1sq p2sq p3sq - 2 m1sq m4sq^2 p1sq p2sq p3sq - 2 m2sq m4sq^2 p1sq p2sq p3sq - 2 m3sq m4sq^2 p1sq p2sq p3sq + 4 m1sq m3sq p1sq^2 p2sq p3sq + 4 m2sq m3sq p1sq^2 p2sq p3sq - 2 m1sq m4sq p1sq^2 p2sq p3sq - 2 m2sq m4sq p1sq^2 p2sq p3sq - 2 m3sq m4sq p1sq^2 p2sq p3sq + 4 m4sq^2 p1sq^2 p2sq p3sq + 2 m4sq p1sq^3 p2sq p3sq + 4 m1sq^2 m3sq p2sq^2 p3sq + 8 m1sq m2sq m3sq p2sq^2 p3sq + 4 m2sq^2 m3sq p2sq^2 p3sq - 2 m1sq m3sq^2 p2sq^2 p3sq - 2 m2sq m3sq^2 p2sq^2 p3sq - 2 m3sq^3 p2sq^2 p3sq - 2 m1sq^2 m4sq p2sq^2 p3sq + 4 m1sq m2sq m4sq p2sq^2 p3sq - 2 m2sq^2 m4sq p2sq^2 p3sq - 2 m1sq m3sq m4sq p2sq^2 p3sq - 2 m2sq m3sq m4sq p2sq^2 p3sq + 4 m3sq^2 m4sq p2sq^2 p3sq - 2 m1sq m3sq p1sq p2sq^2 p3sq - 2 m2sq m3sq p1sq p2sq^2 p3sq + 4 m3sq^2 p1sq p2sq^2 p3sq + 4 m1sq m4sq p1sq p2sq^2 p3sq + 4 m2sq m4sq p1sq p2sq^2 p3sq - 2 m3sq m4sq p1sq p2sq^2 p3sq - 2 m3sq p1sq^2 p2sq^2 p3sq - 2 m4sq p1sq^2 p2sq^2 p3sq - 2 m1sq m3sq p2sq^3 p3sq - 2 m2sq m3sq p2sq^3 p3sq - 2 m3sq^2 p2sq^3 p3sq + 2 m3sq p1sq p2sq^3 p3sq + m1sq^4 p3sq^2 - 4 m1sq^3 m2sq p3sq^2 + 6 m1sq^2 m2sq^2 p3sq^2 - 4 m1sq m2sq^3 p3sq^2 + m2sq^4 p3sq^2 - 2 m1sq^3 m3sq p3sq^2 + 2 m1sq^2 m2sq m3sq p3sq^2 + 2 m1sq m2sq^2 m3sq p3sq^2 - 2 m2sq^3 m3sq p3sq^2 + m1sq^2 m3sq^2 p3sq^2 - 2 m1sq m2sq m3sq^2 p3sq^2 + m2sq^2 m3sq^2 p3sq^2 - 2 m1sq^3 m4sq p3sq^2 + 2 m1sq^2 m2sq m4sq p3sq^2 + 2 m1sq m2sq^2 m4sq p3sq^2 - 2 m2sq^3 m4sq p3sq^2 + 4 m1sq^2 m3sq m4sq p3sq^2 + 8 m1sq m2sq m3sq m4sq p3sq^2 + 4 m2sq^2 m3sq m4sq p3sq^2 - 2 m1sq m3sq^2 m4sq p3sq^2 - 2 m2sq m3sq^2 m4sq p3sq^2 + m1sq^2 m4sq^2 p3sq^2 - 2 m1sq m2sq m4sq^2 p3sq^2 + m2sq^2 m4sq^2 p3sq^2 - 2 m1sq m3sq m4sq^2 p3sq^2 - 2 m2sq m3sq m4sq^2 p3sq^2 + m3sq^2 m4sq^2 p3sq^2 - 2 m1sq^3 p1sq p3sq^2 + 2 m1sq^2 m2sq p1sq p3sq^2 + 2 m1sq m2sq^2 p1sq p3sq^2 - 2 m2sq^3 p1sq p3sq^2 + 4 m1sq^2 m3sq p1sq p3sq^2 - 8 m1sq m2sq m3sq p1sq p3sq^2 + 4 m2sq^2 m3sq p1sq p3sq^2 - 2 m1sq^2 m4sq p1sq p3sq^2 - 12 m1sq m2sq m4sq p1sq p3sq^2 - 2 m2sq^2 m4sq p1sq p3sq^2 - 2 m1sq m3sq m4sq p1sq p3sq^2 - 2 m2sq m3sq m4sq p1sq p3sq^2 + 4 m1sq m4sq^2 p1sq p3sq^2 + 4 m2sq m4sq^2 p1sq p3sq^2 - 2 m3sq m4sq^2 p1sq p3sq^2 + m1sq^2 p1sq^2 p3sq^2 - 2 m1sq m2sq p1sq^2 p3sq^2 + m2sq^2 p1sq^2 p3sq^2 + 4 m1sq m4sq p1sq^2 p3sq^2 + 4 m2sq m4sq p1sq^2 p3sq^2 + m4sq^2 p1sq^2 p3sq^2 - 2 m1sq^3 p2sq p3sq^2 + 2 m1sq^2 m2sq p2sq p3sq^2 + 2 m1sq m2sq^2 p2sq p3sq^2 - 2 m2sq^3 p2sq p3sq^2 - 2 m1sq^2 m3sq p2sq p3sq^2 - 12 m1sq m2sq m3sq p2sq p3sq^2 - 2 m2sq^2 m3sq p2sq p3sq^2 + 4 m1sq m3sq^2 p2sq p3sq^2 + 4 m2sq m3sq^2 p2sq p3sq^2 + 4 m1sq^2 m4sq p2sq p3sq^2 - 8 m1sq m2sq m4sq p2sq p3sq^2 + 4 m2sq^2 m4sq p2sq p3sq^2 - 2 m1sq m3sq m4sq p2sq p3sq^2 - 2 m2sq m3sq m4sq p2sq p3sq^2 - 2 m3sq^2 m4sq p2sq p3sq^2 + 4 m1sq^2 p1sq p2sq p3sq^2 + 8 m1sq m2sq p1sq p2sq p3sq^2 + 4 m2sq^2 p1sq p2sq p3sq^2 - 2 m1sq m3sq p1sq p2sq p3sq^2 - 2 m2sq m3sq p1sq p2sq p3sq^2 - 2 m1sq m4sq p1sq p2sq p3sq^2 - 2 m2sq m4sq p1sq p2sq p3sq^2 + 4 m3sq m4sq p1sq p2sq p3sq^2 - 2 m1sq p1sq^2 p2sq p3sq^2 - 2 m2sq p1sq^2 p2sq p3sq^2 - 2 m4sq p1sq^2 p2sq p3sq^2 + m1sq^2 p2sq^2 p3sq^2 - 2 m1sq m2sq p2sq^2 p3sq^2 + m2sq^2 p2sq^2 p3sq^2 + 4 m1sq m3sq p2sq^2 p3sq^2 + 4 m2sq m3sq p2sq^2 p3sq^2 + m3sq^2 p2sq^2 p3sq^2 - 2 m1sq p1sq p2sq^2 p3sq^2 - 2 m2sq p1sq p2sq^2 p3sq^2 - 2 m3sq p1sq p2sq^2 p3sq^2 + p1sq^2 p2sq^2 p3sq^2 + 2 m1sq^3 p3sq^3 - 2 m1sq^2 m2sq p3sq^3 - 2 m1sq m2sq^2 p3sq^3 + 2 m2sq^3 p3sq^3 - 2 m1sq^2 m3sq p3sq^3 + 4 m1sq m2sq m3sq p3sq^3 - 2 m2sq^2 m3sq p3sq^3 - 2 m1sq^2 m4sq p3sq^3 + 4 m1sq m2sq m4sq p3sq^3 - 2 m2sq^2 m4sq p3sq^3 + 2 m1sq m3sq m4sq p3sq^3 + 2 m2sq m3sq m4sq p3sq^3 - 2 m1sq^2 p1sq p3sq^3 + 4 m1sq m2sq p1sq p3sq^3 - 2 m2sq^2 p1sq p3sq^3 - 2 m1sq m4sq p1sq p3sq^3 - 2 m2sq m4sq p1sq p3sq^3 - 2 m1sq^2 p2sq p3sq^3 + 4 m1sq m2sq p2sq p3sq^3 - 2 m2sq^2 p2sq p3sq^3 - 2 m1sq m3sq p2sq p3sq^3 - 2 m2sq m3sq p2sq p3sq^3 + 2 m1sq p1sq p2sq p3sq^3 + 2 m2sq p1sq p2sq p3sq^3 + m1sq^2 p3sq^4 - 2 m1sq m2sq p3sq^4 + m2sq^2 p3sq^4};
 
 
-(*spurious singularity*)
+(*spurious singularity from SOFIA*)
 Complement[sofiaSols,totalLandau]
+
+
+(*no spurious singularities from this method*)
+Complement[totalLandau,sofiaSols]

@@ -30,6 +30,21 @@
 		"BulkRetrievalOptimized" -> False
 	|>,
 	<|
+		"Name" -> "TableText",
+		"Type" -> "Text",
+		"Tokenized" -> True,
+		"Stored" -> False,
+		"Weight" -> 1,
+		"Searchable" -> True,
+		"Language" -> "English",
+		"IgnoreCase" -> True,
+		"StemmingMethod" -> Automatic,
+		"CamelCaseMatching" -> True,
+		"DeleteStopWords" -> True,
+		"StoreTermVectors" -> False,
+		"BulkRetrievalOptimized" -> False
+	|>,
+	<|
 		"Name" -> "ExactTitle",
 		"Type" -> "Text",
 		"Stored" -> True,
@@ -332,21 +347,6 @@
 		"BulkRetrievalOptimized" -> False
 	|>,
 	<|
-		"Name" -> "TableText",
-		"Type" -> "Text",
-		"Tokenized" -> True,
-		"Stored" -> False,
-		"Weight" -> 1,
-		"Searchable" -> True,
-		"Language" -> "English",
-		"IgnoreCase" -> True,
-		"StemmingMethod" -> Automatic,
-		"CamelCaseMatching" -> True,
-		"DeleteStopWords" -> True,
-		"StoreTermVectors" -> False,
-		"BulkRetrievalOptimized" -> False
-	|>,
-	<|
 		"Name" -> "SeeAlso",
 		"Type" -> "Text",
 		"LengthWeighted" -> False,
@@ -383,6 +383,21 @@
 		"Weight" -> 1.5,
 		"Tokenized" -> True,
 		"Stored" -> False,
+		"Searchable" -> True,
+		"Language" -> "English",
+		"IgnoreCase" -> True,
+		"StemmingMethod" -> Automatic,
+		"CamelCaseMatching" -> True,
+		"DeleteStopWords" -> True,
+		"StoreTermVectors" -> False,
+		"BulkRetrievalOptimized" -> False
+	|>,
+	<|
+		"Name" -> "LinkedSymbols",
+		"Type" -> "Text",
+		"Tokenized" -> True,
+		"Stored" -> False,
+		"Weight" -> 1,
 		"Searchable" -> True,
 		"Language" -> "English",
 		"IgnoreCase" -> True,
