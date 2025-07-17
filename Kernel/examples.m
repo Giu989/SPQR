@@ -197,7 +197,7 @@ resultantFF= c^cexp - reconstructed // Together // Numerator // Factor; // Absol
 resultantFF
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 5 \[LongDash] More complicated resultant computation with Elimination Order WIP*)
 
 
@@ -237,7 +237,7 @@ resultantFF
 (*GroebnerBasis[pList//ReplaceAll[{a->2,b->3,c->7}],{x,y,z,d}][[4]]*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Example 6 \[LongDash] Ice Cream Cone with Elimination Order*)
 
 
@@ -374,6 +374,4 @@ difficultLetter//List // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// Re
 
 Complement[totalLandau,{difficultLetter}] // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// ReplaceAll[{(*p1sq,*)p2sq,p3sq}->psq//Thread] // Factor // Map[FactorList]//Flatten//DeleteCases[#,x_/;IntegerQ[x]]&//DeleteDuplicates//Sort
 % // Length
-
-
 

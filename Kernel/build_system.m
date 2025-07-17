@@ -175,7 +175,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_,OptionsPattern[]]:= 
 		,
 		(*check failed*)
 		Print["Irreducible monomials do not match. Try increasing the system size"];
-		Print["Found monomials: ",irreducibleMonomials];
+		Print["Found ", irreducibleMonomials // Length," monomials: ",irreducibleMonomials];
 		Return[$Failed];
 		];
 	];
