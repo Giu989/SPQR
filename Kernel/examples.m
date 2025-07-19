@@ -201,11 +201,14 @@ resultantFF
 (*Example 5 \[LongDash] More complicated resultant computation with Elimination Order WIP*)
 
 
+<<spqr_load.m
+
+
 p1 = x^2*y^2 -1 + a+y^3+z;
 p2 = a*x+c* y - 2+x*y^2*c+z^2;
 p3 = a + b +b x*y^2+x^2y^2;
 p4 = x*y*z-c+1+d*x*z;
-pList = {p1,p2,p3,p4};
+pList = {p1,p2,p3,p4}(*/.a->2/.b->3*);
 pList // MatrixForm
 
 
@@ -213,7 +216,7 @@ dexp = GroebnerBasis[pList//ReplaceAll[{a->2,b->3,c->7}],{d},{x,y,z}] // First /
 
 
 variables = {x,y,z,d};
-rowReduction = BuildPolynomialSystem[{d^dexp},pList,variables,18,"MonomialOrder"->DegreeLexicographic,"EliminateVariables"->{{x,y,z},14},"PrintDebugInfo"->2]; // AbsoluteTiming
+rowReduction = BuildPolynomialSystem[{d^dexp},pList,variables,18,"MonomialOrder"->DegreeReverseLexicographic,"EliminateVariables"->{{x,y,z},14},"PrintDebugInfo"->2]; // AbsoluteTiming
 rowReduction
 
 
@@ -223,6 +226,29 @@ reconstructed // Short
 
 resultantFF= d^dexp - reconstructed // Together // Numerator // Factor; // AbsoluteTiming
 resultantFF
+
+
+irreds = FindIrreducibleMonomials[pList,variables,"MonomialOrder"->DegreeReverseLexicographic]
+% // Length
+
+
+cmats = BuildCompanionMatrices[pList,variables,7,irreds,"MonomialOrder"->DegreeReverseLexicographic,"PrintDebugInfo"->2];
+
+
+cmatd = BuildTargetCompanionMatrix[d,cmats]
+
+
+FFGraphEvaluate[cmatd//First,{3,4,3,54}]; // AbsoluteTiming
+
+
+(*takes longer because we are not directly reconstructing the det or loading in the det system*)
+(*time per sample point is more interesting to me*)
+cmatdRec = ReconstructTargetCompanionMatrix[cmatd,"cmat"->True]; // AbsoluteTiming
+
+
+(*slow: needs to be done in FF for it to be good*)
+(*resultantFF2 = cmatdRec - d*IdentityMatrix[cmatdRec//Length] // Det // Factor // Numerator;
+resultantFF2/resultantFF // Factor*)
 
 
 (*out = BuildPolynomialSystem[{z},pList,variables,18,"MonomialOrder"->DegreeLexicographic,"EliminateVariables"->{{x,y,z},14},"IrreducibleMonomials"->irredMonomials,"PrintDebugInfo"->2]*)
