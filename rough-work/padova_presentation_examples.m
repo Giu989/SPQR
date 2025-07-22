@@ -36,6 +36,9 @@ irredMonomials=FindIrreducibleMonomials[ideal,variables,"MonomialOrder"->DegreeR
 variableCmats = BuildCompanionMatrices[ideal,variables,6,irredMonomials,"MonomialOrder"->DegreeReverseLexicographic];
 
 
+irredMonomials
+
+
 jinvCmat = BuildTargetCompanionMatrix[jinvariantRoots,variableCmats];
 
 
