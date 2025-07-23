@@ -150,7 +150,7 @@ ffPolyReduce[expression_, parameters_, matricesSymbolic_, matricesSubstituted_,e
 ];
 
 
-BuildTargetCompanionMatrix[target_,cmatOutput_]:=Module[
+BuildTargetCompanionMatrix[target_List,cmatOutput_]:=Module[
 	{vars,varsSub,targetSub,params,placeHolders,irredMons,cmatSize,placeHolderMatrices,cmatNames,outputNode}
 	,
 	vars = cmatOutput[[5]];
@@ -159,39 +159,43 @@ BuildTargetCompanionMatrix[target_,cmatOutput_]:=Module[
 	graphName = cmatOutput[[1]]; (*this should really be an option for all the functions in the parser*)
 	params = cmatOutput[[2]];
 	placeHolders = vars // Length // Range // Map[placeHolder];
-	irredMons = "IndepVars"//ReplaceAll[cmatOutput[[3]]];
+	irredMons = (*"IndepVars"//ReplaceAll[cmatOutput[[3]]]*)cmatOutput[[3]];
 	cmatSize = irredMons // Length;
 	placeHolderMatrices = Table[ConstantArray[0,{cmatSize,cmatSize}],{i,1,vars // Length}];
 	cmatNames = varsSub[[;;,2]];
-	outputNode = StringJoin["o","$",RandomInteger[10^3]//ToString];
-	ffPolyReduce[targetSub,params,placeHolders,placeHolderMatrices,cmatOutput[[4]],m[outputNode]];
-	Return[{graphName,params,m[outputNode],(*cmatSize*)irredMons,vars}];
+	outputNode = Table[StringJoin["o",Unique[]//ToString],{i,1,target//Length}];
+	Table[ffPolyReduce[targetSub[[i]],params,placeHolders,placeHolderMatrices,cmatOutput[[4]],m[outputNode[[i]]]],{i,1,target//Length}];
+	Return[{graphName,params,irredMons,Table[m[outputNode[[i]]],{i,1,target//Length}](*cmatSize*),vars}];
 ];
 
 
 Options[ReconstructTargetCompanionMatrix] = {"cmat"->False,"DeleteGraph"->True,"Vector"->False,"PrintDebugInfo"->1};
 ReconstructTargetCompanionMatrix[targetOutput_,(*irredMons_,*)OptionsPattern[]]:=Module[
-	{reconstructed,cmat,polyRed,takePattern,cmatSize,irredMons}
+	{reconstructed,cmat,polyRed,takePattern,cmatSize,irredMons,ncmats}
 	,
-	irredMons = targetOutput[[4]];
+	irredMons = targetOutput[[3]];
 	cmatSize = irredMons // Length;
+	ncmats = targetOutput[[4]] // Length;
+	
 	If[OptionValue["cmat"],
-			FFGraphOutput[targetOutput[[1]],targetOutput[[3]]];
+			(*chainName = StringJoin["chain",Unique[]//ToString];*)
+			FFAlgChain[targetOutput[[1]],"chainCmats",targetOutput[[4]]];
+			FFGraphOutput[targetOutput[[1]],"chainCmats"];
 			reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
 			If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
-			cmat = Partition[reconstructed,cmatSize];
+			cmat = reconstructed // Partition[#,{cmatSize^2}]& // Map[Partition[#,{cmatSize}]&];
 			Return[cmat];
 		,
-			takePattern = Range[1+cmatSize^2-cmatSize,cmatSize^2] // {1,#}& // Thread;
-			FFAlgTake[targetOutput[[1]],"takeCmatComponents",{targetOutput[[3]]},takePattern];
+			takePattern = Range[1+cmatSize^2-cmatSize,cmatSize^2] // {Range[ncmats],#}& // Tuples;
+			FFAlgTake[targetOutput[[1]],"takeCmatComponents",targetOutput[[4]],takePattern];
 			FFGraphOutput[targetOutput[[1]],"takeCmatComponents"];
 			reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
 			If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
 		
 			If[OptionValue["Vector"],
-				Return[reconstructed];
+				Return[reconstructed // Partition[#,{cmatSize}]&];
 			,
-				Return[reconstructed . irredMons // ReplaceAll[j[x__]:>Times@@(targetOutput[[5]]^{x})]];
+				Return[(reconstructed // Partition[#,{cmatSize}]&) . irredMons // ReplaceAll[j[x__]:>Times@@(targetOutput[[5]]^{x})]];
 			];
 		];
 	];

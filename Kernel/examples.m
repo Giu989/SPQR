@@ -8,7 +8,10 @@
 Get["polydiv`"]*)
 
 
-(* ::Subsection::Closed:: *)
+<<spqr_load.m
+
+
+(* ::Subsection:: *)
 (*Example 1 \[LongDash] Overview of main functions*)
 
 
@@ -22,7 +25,7 @@ BuildCompanionMatrices//Options
 (*we also have a list of target integrals to reduce*)
 variables = {x,y};
 ideal = {a*y^2*x^2-2x+3,y^2-3y+b};
-targetList = {a*x^5*y^5*y^2+3+x*y^2+b^2,x*y+s+3,x^3};
+targetList = {a*x^5*y^5*y^2+3+x*y^2+b^2,x*y+b+3,x^3};
 
 
 (*we first find the irreducible monomials via a numerical GB*)
@@ -60,12 +63,12 @@ cmats = BuildCompanionMatrices[ideal,variables,3,irredMonomials]
 
 
 (*the command BuildTargetCompanionMatrix[] will take the companion matrices and a target, and will construct the new target c matrix. Let us take the first polynomial from the list as an example*)
-targetList // First
+targetList
 
 
 (*NOTE: Currently there is a bug where the ideal must contain all the parameters that end up in the polynomial to reduce, or else the system will fail to solve*)
 (*to do: only reconstruct necessary part of companion matrix?*)
-targetCmat = BuildTargetCompanionMatrix[targetList // First,cmats]
+targetCmat = BuildTargetCompanionMatrix[targetList,cmats]
 
 
 (*we can see the final recursively built graph with*)
@@ -76,23 +79,27 @@ targetCmat // First // FFGraphDraw
 reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False]
 (*note currently the full cmat is reconstructed and then post processed in mathematica, which means potentially more sample points than necessary are used*)
 (*check agreement*)
-(ansGB // First) - reductionWithCmats // Factor // SameQ[#, 0]&
+ansGB - reductionWithCmats // Factor // ContainsOnly[#,{0}]&
+
+
+ReconstructTargetCompanionMatrix[cmats,"DeleteGraph"->False,"cmat"->True] // Map[MatrixForm]
 
 
 ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False,"Vector"->True]
 
 
-ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False,"cmat"->True]
+ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False,"cmat"->True];
+% // Factor // Map[MatrixForm]
 
 
 (*we can also do more complicated rational expressions with the companion matrix reducer*)
 expression = (x+y^2)^17 (3*a*x^2 y - (x-y)^3/(a-b-x-1/y))^-2
 
 
-targetCmat = BuildTargetCompanionMatrix[expression,cmats]
+targetCmat = BuildTargetCompanionMatrix[{expression},cmats]
 (*targetCmat // First // FFGraphDraw*)
 targetCmat // First // FFGraphDraw // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First
-reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False]
+reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False] // First
 
 
 (*we can check against the GB approach by separating out the numerator and denominator, as Mathematica does not support the reduction of rational functions per se*)
@@ -101,7 +108,7 @@ reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->
 PolynomialReduce[reductionWithCmats*(expression//Together//Denominator),gb,variables][[2]]//Factor;
 PolynomialReduce[(expression//Together//Numerator),gb,variables][[2]]//Factor;
 (* Please avoid percent symbols. Give variables names. Don't be lazy *)
-%==%%//Factor
+%==%%//Factor//TrueQ
 
 
 (*a few final things to note: the current recursive parser is very janky. as such, so is the piece of code that interfaces to it, namely BuildTargetCompanionMatrix[]*)
@@ -147,7 +154,7 @@ results2 = ReconstructTargetCompanionMatrix[gpolcmat] // Collect[#,irredMonomial
 results==results2
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 3 \[LongDash] j-invariant: from roots to coefficients*)
 
 
@@ -164,13 +171,13 @@ irredMonomials=FindIrreducibleMonomials[ideal,variables]
 variableCmats = BuildCompanionMatrices[ideal,variables,6,irredMonomials];
 
 
-jinvCmat = BuildTargetCompanionMatrix[jinvariantRoots,variableCmats];
+jinvCmat = BuildTargetCompanionMatrix[{jinvariantRoots},variableCmats];
 
 
-jinvCoefficients = ReconstructTargetCompanionMatrix[jinvCmat,"DeleteGraph"->False] // Factor
+jinvCoefficients = ReconstructTargetCompanionMatrix[jinvCmat,"DeleteGraph"->False] // First // Factor
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 4 \[LongDash] Resultant computation with Elimination Order*)
 
 
@@ -199,9 +206,6 @@ resultantFF
 
 (* ::Subsection:: *)
 (*Example 5 \[LongDash] More complicated resultant computation with Elimination Order WIP*)
-
-
-<<spqr_load.m
 
 
 p1 = x^2*y^2 -1 + a+y^3+z;
@@ -235,7 +239,10 @@ irreds = FindIrreducibleMonomials[pList,variables,"MonomialOrder"->DegreeReverse
 cmats = BuildCompanionMatrices[pList,variables,7,irreds,"MonomialOrder"->DegreeReverseLexicographic,"PrintDebugInfo"->2];
 
 
-cmatd = BuildTargetCompanionMatrix[d,cmats]
+cmats
+
+
+cmatd = BuildTargetCompanionMatrix[{d},cmats]
 
 
 FFGraphEvaluate[cmatd//First,{3,4,3,54}]; // AbsoluteTiming
@@ -263,7 +270,7 @@ resultantFF2/resultantFF // Factor*)
 (*GroebnerBasis[pList//ReplaceAll[{a->2,b->3,c->7}],{x,y,z,d}][[4]]*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 6 \[LongDash] Ice Cream Cone with Elimination Order*)
 
 
@@ -275,7 +282,7 @@ gpol = x1 x2+m1sq x1^2 x2+m2sq x1 x2^2+x1 x3+m1sq x1^2 x3+x2 x3+m1sq x1 x2 x3+m2
 pList = {1-x0*gpol}~Join~D[gpol,{{x1,x2,x3,x4}}];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*x0 analysis*)
 
 
@@ -391,13 +398,12 @@ Complement[sofiaSols,totalLandau]
 Complement[totalLandau,sofiaSols]
 
 
-totalLandau // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// ReplaceAll[{(*p1sq,*)p2sq,p3sq}->psq//Thread] // Factor // Map[FactorList]//Flatten//DeleteCases[#,x_/;IntegerQ[x]]&//DeleteDuplicates//Sort
-% // Length
+(*totalLandau // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// ReplaceAll[{(*p1sq,*)p2sq,p3sq}->psq//Thread] // Factor // Map[FactorList]//Flatten//DeleteCases[#,x_/;IntegerQ[x]]&//DeleteDuplicates//Sort
+% // Length*)
 
 
-difficultLetter//List // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// ReplaceAll[{(*p1sq,*)p2sq,p3sq}->psq//Thread] // Factor // Map[FactorList]//Flatten//DeleteCases[#,x_/;IntegerQ[x]]&//DeleteDuplicates//Sort
+(*difficultLetter//List // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// ReplaceAll[{(*p1sq,*)p2sq,p3sq}->psq//Thread] // Factor // Map[FactorList]//Flatten//DeleteCases[#,x_/;IntegerQ[x]]&//DeleteDuplicates//Sort*)
 
 
-Complement[totalLandau,{difficultLetter}] // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// ReplaceAll[{(*p1sq,*)p2sq,p3sq}->psq//Thread] // Factor // Map[FactorList]//Flatten//DeleteCases[#,x_/;IntegerQ[x]]&//DeleteDuplicates//Sort
-% // Length
-
+(*Complement[totalLandau,{difficultLetter}] // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// ReplaceAll[{(*p1sq,*)p2sq,p3sq}->psq//Thread] // Factor // Map[FactorList]//Flatten//DeleteCases[#,x_/;IntegerQ[x]]&//DeleteDuplicates//Sort
+% // Length*)
