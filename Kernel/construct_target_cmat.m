@@ -150,7 +150,7 @@ ffPolyReduce[expression_, parameters_, matricesSymbolic_, matricesSubstituted_,e
 ];
 
 
-BuildTargetCompanionMatrix[target_List,cmatOutput_]:=Module[
+BuildTargetCompanionMatrices[target_List,cmatOutput_]:=Module[
 	{vars,varsSub,targetSub,params,placeHolders,irredMons,cmatSize,placeHolderMatrices,cmatNames,outputNode}
 	,
 	vars = cmatOutput[[5]];
@@ -169,8 +169,8 @@ BuildTargetCompanionMatrix[target_List,cmatOutput_]:=Module[
 ];
 
 
-Options[ReconstructTargetCompanionMatrix] = {"cmat"->False,"DeleteGraph"->True,"Vector"->False,"PrintDebugInfo"->1};
-ReconstructTargetCompanionMatrix[targetOutput_,(*irredMons_,*)OptionsPattern[]]:=Module[
+Options[ReconstructTargetCompanionMatrices] = {"cmat"->False,"DeleteGraph"->True,"Vector"->False,"PrintDebugInfo"->1};
+ReconstructTargetCompanionMatrices[targetOutput_,(*irredMons_,*)OptionsPattern[]]:=Module[
 	{reconstructed,cmat,polyRed,takePattern,cmatSize,irredMons,ncmats}
 	,
 	irredMons = targetOutput[[3]];
@@ -199,4 +199,3 @@ ReconstructTargetCompanionMatrix[targetOutput_,(*irredMons_,*)OptionsPattern[]]:
 			];
 		];
 	];
-(*ReconstructTargetCompanionMatrix[targetOutput_]:=ReconstructTargetCompanionMatrix[targetOutput,{},"cmat"->True];*)

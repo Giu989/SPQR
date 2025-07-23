@@ -62,13 +62,13 @@ BuildCompanionMatrices[ideal,variables,2,irredMonomials]
 cmats = BuildCompanionMatrices[ideal,variables,3,irredMonomials]
 
 
-(*the command BuildTargetCompanionMatrix[] will take the companion matrices and a target, and will construct the new target c matrix. Let us take the first polynomial from the list as an example*)
+(*the command BuildTargetCompanionMatrices[] will take the companion matrices and a target, and will construct the new target c matrix. Let us take the first polynomial from the list as an example*)
 targetList
 
 
 (*NOTE: Currently there is a bug where the ideal must contain all the parameters that end up in the polynomial to reduce, or else the system will fail to solve*)
 (*to do: only reconstruct necessary part of companion matrix?*)
-targetCmat = BuildTargetCompanionMatrix[targetList,cmats]
+targetCmat = BuildTargetCompanionMatrices[targetList,cmats]
 
 
 (*we can see the final recursively built graph with*)
@@ -76,19 +76,19 @@ targetCmat // First // FFGraphDraw
 
 
 (*finally, we can reconstruct the output of the polynomial division with*)
-reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False]
+reductionWithCmats = ReconstructTargetCompanionMatrices[targetCmat,"DeleteGraph"->False]
 (*note currently the full cmat is reconstructed and then post processed in mathematica, which means potentially more sample points than necessary are used*)
 (*check agreement*)
 ansGB - reductionWithCmats // Factor // ContainsOnly[#,{0}]&
 
 
-ReconstructTargetCompanionMatrix[cmats,"DeleteGraph"->False,"cmat"->True] // Map[MatrixForm]
+ReconstructTargetCompanionMatrices[cmats,"DeleteGraph"->False,"cmat"->True] // Map[MatrixForm]
 
 
-ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False,"Vector"->True]
+ReconstructTargetCompanionMatrices[targetCmat,"DeleteGraph"->False,"Vector"->True]
 
 
-ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False,"cmat"->True];
+ReconstructTargetCompanionMatrices[targetCmat,"DeleteGraph"->False,"cmat"->True];
 % // Factor // Map[MatrixForm]
 
 
@@ -96,10 +96,10 @@ ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False,"cmat"->True];
 expression = (x+y^2)^17 (3*a*x^2 y - (x-y)^3/(a-b-x-1/y))^-2
 
 
-targetCmat = BuildTargetCompanionMatrix[{expression},cmats]
+targetCmat = BuildTargetCompanionMatrices[{expression},cmats]
 (*targetCmat // First // FFGraphDraw*)
 targetCmat // First // FFGraphDraw // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First
-reductionWithCmats = ReconstructTargetCompanionMatrix[targetCmat,"DeleteGraph"->False] // First
+reductionWithCmats = ReconstructTargetCompanionMatrices[targetCmat,"DeleteGraph"->False] // First
 
 
 (*we can check against the GB approach by separating out the numerator and denominator, as Mathematica does not support the reduction of rational functions per se*)
@@ -111,12 +111,12 @@ PolynomialReduce[(expression//Together//Numerator),gb,variables][[2]]//Factor;
 %==%%//Factor//TrueQ
 
 
-(*a few final things to note: the current recursive parser is very janky. as such, so is the piece of code that interfaces to it, namely BuildTargetCompanionMatrix[]*)
+(*a few final things to note: the current recursive parser is very janky. as such, so is the piece of code that interfaces to it, namely BuildTargetCompanionMatrices[]*)
 (*essentially everything in ff_cmat_mult.m will probably need to be completely rewritten*)
 (*the rest will also have to be heavily modified also, but personally I am quite happy with the input and outputs of each function*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 2 \[LongDash]\[NonBreakingSpace]Two Loop Triangle Landau*)
 
 
@@ -146,11 +146,11 @@ letters = %~Join~%%
 cmats = BuildCompanionMatrices[pList,variables,6,irredMonomials]
 
 
-gpolcmat = BuildTargetCompanionMatrix[target,cmats]
+gpolcmat = BuildTargetCompanionMatrices[{target},cmats]
 gpolcmat // First // FFGraphDraw
 
 
-results2 = ReconstructTargetCompanionMatrix[gpolcmat] // Collect[#,irredMonomials,Factor]&;
+results2 = ReconstructTargetCompanionMatrices[gpolcmat] // Collect[#,irredMonomials,Factor]& // First;
 results==results2
 
 
@@ -171,10 +171,10 @@ irredMonomials=FindIrreducibleMonomials[ideal,variables]
 variableCmats = BuildCompanionMatrices[ideal,variables,6,irredMonomials];
 
 
-jinvCmat = BuildTargetCompanionMatrix[{jinvariantRoots},variableCmats];
+jinvCmat = BuildTargetCompanionMatrices[{jinvariantRoots},variableCmats];
 
 
-jinvCoefficients = ReconstructTargetCompanionMatrix[jinvCmat,"DeleteGraph"->False] // First // Factor
+jinvCoefficients = ReconstructTargetCompanionMatrices[jinvCmat,"DeleteGraph"->False] // First // Factor
 
 
 (* ::Subsection:: *)
@@ -242,7 +242,7 @@ cmats = BuildCompanionMatrices[pList,variables,7,irreds,"MonomialOrder"->DegreeR
 cmats
 
 
-cmatd = BuildTargetCompanionMatrix[{d},cmats]
+cmatd = BuildTargetCompanionMatrices[{d},cmats]
 
 
 FFGraphEvaluate[cmatd//First,{3,4,3,54}]; // AbsoluteTiming
@@ -250,7 +250,7 @@ FFGraphEvaluate[cmatd//First,{3,4,3,54}]; // AbsoluteTiming
 
 (*takes longer because we are not directly reconstructing the det or loading in the det system*)
 (*time per sample point is more interesting to me*)
-cmatdRec = ReconstructTargetCompanionMatrix[cmatd,"cmat"->True]; // AbsoluteTiming
+cmatdRec = ReconstructTargetCompanionMatrices[cmatd,"cmat"->True]; // AbsoluteTiming
 
 
 (*slow: needs to be done in FF for it to be good*)
@@ -264,7 +264,7 @@ resultantFF2/resultantFF // Factor*)
 (*ans = ReconstructPolynomialRemainder[out]; // AbsoluteTiming*)
 (*ans*)
 (*variableCmats = BuildCompanionMatrices[pList,variables,18,irredMonomials,"PrintDebugInfo"->2];*)
-(*targ = BuildTargetCompanionMatrix[d^dexp,variableCmats]*)
+(*targ = BuildTargetCompanionMatrices[d^dexp,variableCmats]*)
 
 
 (*GroebnerBasis[pList//ReplaceAll[{a->2,b->3,c->7}],{x,y,z,d}][[4]]*)
