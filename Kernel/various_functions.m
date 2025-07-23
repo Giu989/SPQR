@@ -6,7 +6,7 @@ FindIrreducibleMonomials[polySystem_,vars_,OptionsPattern[]]:=Module[{gb,leading
 
 	(*numerical substitution of the parameters*)
 	params = Complement[polySystem // Variables,vars];
-	paramsNsub =params->1+10^-1 (RandomSample[Range[1,10^3+(params//Length)],params//Length]//Map[Prime])/(RandomSample[Range[1,10+(params//Length)],params//Length]//Map[Prime])//Thread;
+	paramsNsub =params->1+10^-1 (RandomSample[Range[1,10^3+(params//Length)],params//Length]//Map[Prime])(*/(RandomSample[Range[1,10+(params//Length)],params//Length]//Map[Prime])*)//Thread;
 	
 	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions];
 	leadingexps = MonomialList[gb, vars, OptionValue["MonomialOrder"]][[;;, 1]] // Map[Exponent[#, vars]&];
