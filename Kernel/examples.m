@@ -11,7 +11,7 @@ Get["polydiv`"]*)
 <<spqr_load.m
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Example 1 \[LongDash] Overview of main functions*)
 
 
@@ -71,6 +71,9 @@ targetList
 targetCmat = BuildTargetCompanionMatrices[targetList,cmats]
 
 
+targetCmat // InputForm
+
+
 (*we can see the final recursively built graph with*)
 targetCmat // First // FFGraphDraw
 
@@ -88,8 +91,26 @@ ReconstructTargetCompanionMatrices[cmats,"DeleteGraph"->False,"cmat"->True] // M
 ReconstructTargetCompanionMatrices[targetCmat,"DeleteGraph"->False,"Vector"->True]
 
 
-ReconstructTargetCompanionMatrices[targetCmat,"DeleteGraph"->False,"cmat"->True];
+recTest=ReconstructTargetCompanionMatrices[targetCmat,"DeleteGraph"->False,"cmat"->True];
 % // Factor // Map[MatrixForm]
+
+
+chargraph=BuildCharacteristicPolynomial[targetCmat,3]
+FFReconstructFunction[chargraph//First,chargraph[[2]],"PrintDebugInfo"->1] // Factor
+CharacteristicPolynomial[recTest[[3]],\[Lambda]] // CoefficientList[#,\[Lambda]]& // Factor;
+%==%% // TrueQ
+
+
+chargraph//First // FFGraphDraw(* // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First*)
+
+
+chargraph=BuildCharacteristicPolynomial[targetCmat,1]
+FFReconstructFunction[chargraph//First,chargraph[[2]],"PrintDebugInfo"->1] // Factor
+CharacteristicPolynomial[recTest[[1]],\[Lambda]] // CoefficientList[#,\[Lambda]]& // Factor;
+%==%% // TrueQ
+
+
+chargraph // First // FFGraphDraw // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First
 
 
 (*we can also do more complicated rational expressions with the companion matrix reducer*)
@@ -116,7 +137,7 @@ PolynomialReduce[(expression//Together//Numerator),gb,variables][[2]]//Factor;
 (*the rest will also have to be heavily modified also, but personally I am quite happy with the input and outputs of each function*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Example 2 \[LongDash]\[NonBreakingSpace]Two Loop Triangle Landau*)
 
 
@@ -154,7 +175,24 @@ results2 = ReconstructTargetCompanionMatrices[gpolcmat] // Collect[#,irredMonomi
 results==results2
 
 
-(* ::Subsection:: *)
+(*now using elimination polynomials*)
+
+
+irredMonomials=FindIrreducibleMonomials[pList,variables,"MonomialOrder"->DegreeReverseLexicographic]
+
+
+cmats = BuildCompanionMatrices[pList,variables,6,irredMonomials,"MonomialOrder"->DegreeReverseLexicographic]
+
+
+charx0 = BuildCharacteristicPolynomial[cmats,5]
+
+
+charx0R = FFReconstructFunction[charx0[[1]],charx0[[2]],"PrintDebugInfo"->1] // Factor
+-(%[[2;;3]]/%[[1]])//Factor//Reverse
+(*NOTE: because target is gpol things are inverted above*)
+
+
+(* ::Subsection::Closed:: *)
 (*Example 3 \[LongDash] j-invariant: from roots to coefficients*)
 
 
@@ -177,7 +215,7 @@ jinvCmat = BuildTargetCompanionMatrices[{jinvariantRoots},variableCmats];
 jinvCoefficients = ReconstructTargetCompanionMatrices[jinvCmat,"DeleteGraph"->False] // First // Factor
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Example 4 \[LongDash] Resultant computation with Elimination Order*)
 
 
@@ -205,7 +243,7 @@ resultantFF
 
 
 (* ::Subsection:: *)
-(*Example 5 \[LongDash] More complicated resultant computation with Elimination Order WIP*)
+(*Example 5 \[LongDash] More complicated resultant computation with Elimination and Characteristic Polynomials*)
 
 
 p1 = x^2*y^2 -1 + a+y^3+z;
@@ -239,35 +277,17 @@ irreds = FindIrreducibleMonomials[pList,variables,"MonomialOrder"->DegreeReverse
 cmats = BuildCompanionMatrices[pList,variables,7,irreds,"MonomialOrder"->DegreeReverseLexicographic,"PrintDebugInfo"->2];
 
 
-cmats
+chard = BuildCharacteristicPolynomial[cmats,4]
 
 
-cmatd = BuildTargetCompanionMatrices[{d},cmats]
+res = FFReconstructFunction[chard[[1]],chard[[2]],"PrintDebugInfo"->1]; // AbsoluteTiming
+resultantFF2=Power[d,Range[(irreds//Length)+1]-1] . res // Factor // Numerator; // AbsoluteTiming
 
 
-FFGraphEvaluate[cmatd//First,{3,4,3,54}]; // AbsoluteTiming
+resultantFF/resultantFF2//Factor
 
 
-(*takes longer because we are not directly reconstructing the det or loading in the det system*)
-(*time per sample point is more interesting to me*)
-cmatdRec = ReconstructTargetCompanionMatrices[cmatd,"cmat"->True]; // AbsoluteTiming
-
-
-(*slow: needs to be done in FF for it to be good*)
-(*resultantFF2 = cmatdRec - d*IdentityMatrix[cmatdRec//Length] // Det // Factor // Numerator;
-resultantFF2/resultantFF // Factor*)
-
-
-(*out = BuildPolynomialSystem[{z},pList,variables,18,"MonomialOrder"->DegreeLexicographic,"EliminateVariables"->{{x,y,z},14},"IrreducibleMonomials"->irredMonomials,"PrintDebugInfo"->2]*)
-
-
-(*ans = ReconstructPolynomialRemainder[out]; // AbsoluteTiming*)
-(*ans*)
-(*variableCmats = BuildCompanionMatrices[pList,variables,18,irredMonomials,"PrintDebugInfo"->2];*)
-(*targ = BuildTargetCompanionMatrices[d^dexp,variableCmats]*)
-
-
-(*GroebnerBasis[pList//ReplaceAll[{a->2,b->3,c->7}],{x,y,z,d}][[4]]*)
+chard // First // FFGraphDraw // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First
 
 
 (* ::Subsection:: *)

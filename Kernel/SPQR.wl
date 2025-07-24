@@ -17,6 +17,7 @@ ReconstructPolynomialRemainder::usage = "ReconstructPolynomialRemainder[system] 
 BuildCompanionMatrices::usage = "BuildCompanionMatrices[ideal,vars,w,irreds] Builds and loads a system of linear equations to weight w using the irreducible monomials irreds into FiniteFlow to generate the companion matrices for each of the vars in the ideal ";
 BuildTargetCompanionMatrices::usage = "BuildTargetCompanionMatrices[targets,cmatsystem] Builds companion matrices for given target polynomials. cmatsystem should be the output of BuildCompanionMatrices";
 ReconstructTargetCompanionMatrices::usage = "ReconstructTargetCompanionMatrices[targetcmatsystem] Reconstructs the remainder of rational functions encoded in the companion matrices. targetcmatsystem should be the output of BuildTargetCompanionMatrices or BuildCompanionMatrices";
+BuildCharacteristicPolynomial::usage = " ";
 j::usage = " ";
 extraparam::usage = " ";
 targ::usage = " ";
@@ -33,6 +34,7 @@ Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_cmat.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_target_cmat.m"}]];
+Get[FileNameJoin[{DirectoryName[$InputFileName], "characteristic_polynomials.m"}]];
 
 
 (*Get["various_functions.m"];
@@ -48,10 +50,10 @@ SetAttributes[
 	{
 	FindIrreducibleMonomials,BuildPolynomialSystem,ReconstructPolynomialRemainder,
 	BuildCompanionMatrices,BuildTargetCompanionMatrices,ReconstructTargetCompanionMatrices,
-	j,extraparam,targ
+	j,extraparam,targ,BuildCharacteristicPolynomial
 	}
-	, {ReadProtected}];
-
+	, {ReadProtected}
+];
 (*Protect[{}];*)
 
 
