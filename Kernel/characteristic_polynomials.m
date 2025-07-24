@@ -1,9 +1,10 @@
 (* ::Package:: *)
 
 BuildCharacteristicPolynomial[cmatData_,index_]:=Module[
-	
-	{params,n,traceTakePattern,diagMat,sumPatternVars,sumPattern,dvar,dvars,c,J,AM,M,cptsAM,trAM,numprefactor,sgnchar,char}
-	,
+	{
+	params,n,traceTakePattern,diagMat,sumPatternVars,sumPattern,
+	dvar,dvars,c,J,AM,M,cptsAM,trAM,numprefactor,sgnchar,char
+	},
 	
 	params = cmatData[[2]];
 	n = cmatData[[3]] // Length;

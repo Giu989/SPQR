@@ -242,7 +242,7 @@ resultantFF= c^cexp - reconstructed // Together // Numerator // Factor; // Absol
 resultantFF
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Example 5 \[LongDash] More complicated resultant computation with Elimination and Characteristic Polynomials*)
 
 
@@ -277,10 +277,12 @@ irreds = FindIrreducibleMonomials[pList,variables,"MonomialOrder"->DegreeReverse
 cmats = BuildCompanionMatrices[pList,variables,7,irreds,"MonomialOrder"->DegreeReverseLexicographic,"PrintDebugInfo"->2];
 
 
-chard = BuildCharacteristicPolynomial[cmats,4]
+chard = BuildCharacteristicPolynomial[cmats,4]; // AbsoluteTiming
+chard
 
 
 res = FFReconstructFunction[chard[[1]],chard[[2]],"PrintDebugInfo"->1]; // AbsoluteTiming
+res // Short
 resultantFF2=Power[d,Range[(irreds//Length)+1]-1] . res // Factor // Numerator; // AbsoluteTiming
 
 
@@ -302,7 +304,7 @@ gpol = x1 x2+m1sq x1^2 x2+m2sq x1 x2^2+x1 x3+m1sq x1^2 x3+x2 x3+m1sq x1 x2 x3+m2
 pList = {1-x0*gpol}~Join~D[gpol,{{x1,x2,x3,x4}}];
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*x0 analysis*)
 
 
@@ -400,7 +402,7 @@ Complement[x4L2,x0L2]
 %/difficultLetter
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*Bringing it all together*)
 
 
