@@ -17,7 +17,8 @@ ReconstructPolynomialRemainder::usage = "ReconstructPolynomialRemainder[system] 
 BuildCompanionMatrices::usage = "BuildCompanionMatrices[ideal,vars,w,irreds] Builds and loads a system of linear equations to weight w using the irreducible monomials irreds into FiniteFlow to generate the companion matrices for each of the vars in the ideal ";
 BuildTargetCompanionMatrices::usage = "BuildTargetCompanionMatrices[targets,cmatsystem] Builds companion matrices for given target polynomials. cmatsystem should be the output of BuildCompanionMatrices";
 ReconstructTargetCompanionMatrices::usage = "ReconstructTargetCompanionMatrices[targetcmatsystem] Reconstructs the remainder of rational functions encoded in the companion matrices. targetcmatsystem should be the output of BuildTargetCompanionMatrices or BuildCompanionMatrices";
-BuildCharacteristicPolynomial::usage = " ";
+BuildCharacteristicPolynomials::usage = " ";
+ReconstructCharacteristicPolynomials::usage = " ";
 j::usage = " ";
 extraparam::usage = " ";
 targ::usage = " ";
@@ -50,7 +51,7 @@ SetAttributes[
 	{
 	FindIrreducibleMonomials,BuildPolynomialSystem,ReconstructPolynomialRemainder,
 	BuildCompanionMatrices,BuildTargetCompanionMatrices,ReconstructTargetCompanionMatrices,
-	j,extraparam,targ,BuildCharacteristicPolynomial
+	j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials
 	}
 	, {ReadProtected}
 ];

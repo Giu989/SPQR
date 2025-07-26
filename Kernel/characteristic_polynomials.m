@@ -7,6 +7,7 @@ BuildCharacteristicPolynomial[cmatData_,index_]:=Module[
 	},
 	
 	params = cmatData[[2]];
+	(*nxn cmatrix*)
 	n = cmatData[[3]] // Length;
 	
 	traceTakePattern = Table[1+i*n+i,{i,0,n-1}] // {{1},#}& // Tuples;
@@ -34,12 +35,50 @@ BuildCharacteristicPolynomial[cmatData_,index_]:=Module[
 		,
 		{k,n}
 	];
+	
 	(*collect outputs*)
 	FFAlgTake[cmatData[[1]],sgnchar[cmatData[[4]][[index]][[1]]]//ToString,Array[c,n+1,0]//Map[ToString],Range[n+1]//{#,{1}}&//Tuples];
 	
-	(*flip sign on odd dimensional matrices*)
+	(*flip sign for odd dimensional matrices*)
 	FFAlgRatExprEval[cmatData[[1]],char[cmatData[[4]][[index]][[1]]]//ToString,{sgnchar[cmatData[[4]][[index]][[1]]]//ToString},Array[dvars,n+1],(-1)^n Array[dvars,n+1]];
 	
 	FFGraphOutput[cmatData[[1]],char[cmatData[[4]][[index]][[1]]]//ToString];
-	Return[{cmatData[[1]],params,char[cmatData[[4]][[index]][[1]]]//ToString}];
+	Return[{cmatData[[1]],params,cmatData[[3]],char[cmatData[[4]][[index]][[1]]]//ToString}];
 ];
+
+
+BuildCharacteristicPolynomials[cmatData_,inputList_List]:=Module[
+	{outputs},
+	outputs = Table[BuildCharacteristicPolynomial[cmatData,index],{index,inputList}];
+	Return[outputs[[1,1;;3]]~Join~{outputs[[;;,4]]}];
+];
+BuildCharacteristicPolynomials[cmatData_]:=BuildCharacteristicPolynomials[cmatData,cmatData[[4]]//Length//Range];
+BuildCharacteristicPolynomials[cmatData_,input_Integer]:=BuildCharacteristicPolynomials[cmatData,{input}];
+
+
+Options[ReconstructCharacteristicPolynomials] = {"PrintDebugInfo"->1,"DeleteGraph"->True,"Mod"->False,"FFPrimeNo"->0};
+ReconstructCharacteristicPolynomials[characteristicPolynomialData_,elements_List,opts : OptionsPattern[]]:=Module[
+	{chain,reconstructed,nmats,n,takePattern},
+	nmats = characteristicPolynomialData // Last // Length;
+	n = characteristicPolynomialData[[3]] // Length;
+	takePattern = {nmats//Range,elements} // Tuples;
+	
+	FFAlgTake[characteristicPolynomialData[[1]],chain//ToString,characteristicPolynomialData[[4]],takePattern];
+	FFGraphOutput[characteristicPolynomialData[[1]],chain//ToString];
+	
+	If[OptionValue["Mod"],
+		reconstructed = FFReconstructFunctionMod[
+			characteristicPolynomialData[[1]],characteristicPolynomialData[[2]],
+			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"StartingPrimeNo"->OptionValue["FFPrimeNo"]
+		];
+	,
+		If[OptionValue["FFPrimeNo"]!=0,Print["Note: FFPrimeNo value will be ignored"]];
+		reconstructed = FFReconstructFunction[
+			characteristicPolynomialData[[1]],characteristicPolynomialData[[2]],
+			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]
+		];
+	];
+	If[OptionValue["DeleteGraph"],FFDeleteGraph[characteristicPolynomialData[[1]]//Evaluate]];
+	Return[reconstructed // ArrayReshape[#,{nmats,elements//Length}]&];
+];
+ReconstructCharacteristicPolynomials[characteristicPolynomialData_,opts : OptionsPattern[]]:=ReconstructCharacteristicPolynomials[characteristicPolynomialData,1+(characteristicPolynomialData[[3]]//Length)//Range,opts];

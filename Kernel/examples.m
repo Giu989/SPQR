@@ -242,7 +242,7 @@ resultantFF= c^cexp - reconstructed // Together // Numerator // Factor; // Absol
 resultantFF
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 5 \[LongDash] More complicated resultant computation with Elimination and Characteristic Polynomials*)
 
 
@@ -274,14 +274,15 @@ irreds = FindIrreducibleMonomials[pList,variables,"MonomialOrder"->DegreeReverse
 % // Length
 
 
-cmats = BuildCompanionMatrices[pList,variables,7,irreds,"MonomialOrder"->DegreeReverseLexicographic,"PrintDebugInfo"->2];
+cmats = BuildCompanionMatrices[pList,variables,7,irreds,"MonomialOrder"->DegreeReverseLexicographic,"PrintDebugInfo"->2]
 
 
-chard = BuildCharacteristicPolynomial[cmats,4]; // AbsoluteTiming
+chard = BuildCharacteristicPolynomials[cmats,{4}]; // AbsoluteTiming
 chard
 
 
-res = FFReconstructFunction[chard[[1]],chard[[2]],"PrintDebugInfo"->1]; // AbsoluteTiming
+chard // First // FFGraphDraw // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First
+res = ReconstructCharacteristicPolynomials[chard] // First; // AbsoluteTiming
 res // Short
 resultantFF2=Power[d,Range[(irreds//Length)+1]-1] . res // Factor // Numerator; // AbsoluteTiming
 
@@ -289,7 +290,14 @@ resultantFF2=Power[d,Range[(irreds//Length)+1]-1] . res // Factor // Numerator; 
 resultantFF/resultantFF2//Factor
 
 
-chard // First // FFGraphDraw // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First
+(*charPD=BuildCharacteristicPolynomials[cmats,{3,4}]
+charPD // First // FFGraphDraw // FullForm // ReplaceAll[Text[___]:>Text[""]] // Normal // First*)
+
+
+resultantFF//Short
+
+
+?Short
 
 
 (* ::Subsection:: *)
@@ -304,7 +312,7 @@ gpol = x1 x2+m1sq x1^2 x2+m2sq x1 x2^2+x1 x3+m1sq x1^2 x3+x2 x3+m1sq x1 x2 x3+m2
 pList = {1-x0*gpol}~Join~D[gpol,{{x1,x2,x3,x4}}];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*x0 analysis*)
 
 
@@ -429,3 +437,78 @@ Complement[totalLandau,sofiaSols]
 
 (*Complement[totalLandau,{difficultLetter}] // ReplaceAll[{(*m1sq,*)m2sq,m3sq,m4sq}->msq//Thread]// ReplaceAll[{(*p1sq,*)p2sq,p3sq}->psq//Thread] // Factor // Map[FactorList]//Flatten//DeleteCases[#,x_/;IntegerQ[x]]&//DeleteDuplicates//Sort
 % // Length*)
+
+
+(* ::Subsection:: *)
+(*Example 7 \[LongDash] Ice Cream Cone with Companion Matrices*)
+
+
+sofiaSols = {m1sq, m2sq, p3sq, m1sq - m2sq, p1sq^2 - 2 p1sq p2sq + p2sq^2 - 2 p1sq p3sq - 2 p2sq p3sq + p3sq^2, m3sq^2 - 2 m3sq m4sq + m4sq^2 - 2 m3sq p3sq - 2 m4sq p3sq + p3sq^2, -m3sq m4sq p1sq + m4sq^2 p1sq + m4sq p1sq^2 + m3sq^2 p2sq - m3sq m4sq p2sq - m3sq p1sq p2sq - m4sq p1sq p2sq + m3sq p2sq^2 + m3sq m4sq p3sq - m4sq p1sq p3sq - m3sq p2sq p3sq + p1sq p2sq p3sq, m1sq^2 m3sq^2 p1sq^2 - 2 m1sq m2sq m3sq^2 p1sq^2 + m2sq^2 m3sq^2 p1sq^2 - 2 m1sq^2 m3sq m4sq p1sq^2 + 4 m1sq m2sq m3sq m4sq p1sq^2 - 2 m2sq^2 m3sq m4sq p1sq^2 - 2 m1sq m3sq^2 m4sq p1sq^2 - 2 m2sq m3sq^2 m4sq p1sq^2 + m1sq^2 m4sq^2 p1sq^2 - 2 m1sq m2sq m4sq^2 p1sq^2 + m2sq^2 m4sq^2 p1sq^2 + 4 m1sq m3sq m4sq^2 p1sq^2 + 4 m2sq m3sq m4sq^2 p1sq^2 + m3sq^2 m4sq^2 p1sq^2 - 2 m1sq m4sq^3 p1sq^2 - 2 m2sq m4sq^3 p1sq^2 - 2 m3sq m4sq^3 p1sq^2 + m4sq^4 p1sq^2 + 2 m1sq m3sq m4sq p1sq^3 + 2 m2sq m3sq m4sq p1sq^3 - 2 m1sq m4sq^2 p1sq^3 - 2 m2sq m4sq^2 p1sq^3 - 2 m3sq m4sq^2 p1sq^3 + 2 m4sq^3 p1sq^3 + m4sq^2 p1sq^4 - 2 m1sq^2 m3sq^2 p1sq p2sq + 4 m1sq m2sq m3sq^2 p1sq p2sq - 2 m2sq^2 m3sq^2 p1sq p2sq + 2 m1sq m3sq^3 p1sq p2sq + 2 m2sq m3sq^3 p1sq p2sq + 4 m1sq^2 m3sq m4sq p1sq p2sq - 8 m1sq m2sq m3sq m4sq p1sq p2sq + 4 m2sq^2 m3sq m4sq p1sq p2sq - 2 m1sq m3sq^2 m4sq p1sq p2sq - 2 m2sq m3sq^2 m4sq p1sq p2sq - 2 m3sq^3 m4sq p1sq p2sq - 2 m1sq^2 m4sq^2 p1sq p2sq + 4 m1sq m2sq m4sq^2 p1sq p2sq - 2 m2sq^2 m4sq^2 p1sq p2sq - 2 m1sq m3sq m4sq^2 p1sq p2sq - 2 m2sq m3sq m4sq^2 p1sq p2sq + 4 m3sq^2 m4sq^2 p1sq p2sq + 2 m1sq m4sq^3 p1sq p2sq + 2 m2sq m4sq^3 p1sq p2sq - 2 m3sq m4sq^3 p1sq p2sq - 2 m1sq m3sq^2 p1sq^2 p2sq - 2 m2sq m3sq^2 p1sq^2 p2sq - 2 m1sq m3sq m4sq p1sq^2 p2sq - 2 m2sq m3sq m4sq p1sq^2 p2sq + 4 m3sq^2 m4sq p1sq^2 p2sq + 4 m1sq m4sq^2 p1sq^2 p2sq + 4 m2sq m4sq^2 p1sq^2 p2sq - 2 m3sq m4sq^2 p1sq^2 p2sq - 2 m4sq^3 p1sq^2 p2sq - 2 m3sq m4sq p1sq^3 p2sq - 2 m4sq^2 p1sq^3 p2sq + m1sq^2 m3sq^2 p2sq^2 - 2 m1sq m2sq m3sq^2 p2sq^2 + m2sq^2 m3sq^2 p2sq^2 - 2 m1sq m3sq^3 p2sq^2 - 2 m2sq m3sq^3 p2sq^2 + m3sq^4 p2sq^2 - 2 m1sq^2 m3sq m4sq p2sq^2 + 4 m1sq m2sq m3sq m4sq p2sq^2 - 2 m2sq^2 m3sq m4sq p2sq^2 + 4 m1sq m3sq^2 m4sq p2sq^2 + 4 m2sq m3sq^2 m4sq p2sq^2 - 2 m3sq^3 m4sq p2sq^2 + m1sq^2 m4sq^2 p2sq^2 - 2 m1sq m2sq m4sq^2 p2sq^2 + m2sq^2 m4sq^2 p2sq^2 - 2 m1sq m3sq m4sq^2 p2sq^2 - 2 m2sq m3sq m4sq^2 p2sq^2 + m3sq^2 m4sq^2 p2sq^2 + 4 m1sq m3sq^2 p1sq p2sq^2 + 4 m2sq m3sq^2 p1sq p2sq^2 - 2 m3sq^3 p1sq p2sq^2 - 2 m1sq m3sq m4sq p1sq p2sq^2 - 2 m2sq m3sq m4sq p1sq p2sq^2 - 2 m3sq^2 m4sq p1sq p2sq^2 - 2 m1sq m4sq^2 p1sq p2sq^2 - 2 m2sq m4sq^2 p1sq p2sq^2 + 4 m3sq m4sq^2 p1sq p2sq^2 + m3sq^2 p1sq^2 p2sq^2 + 4 m3sq m4sq p1sq^2 p2sq^2 + m4sq^2 p1sq^2 p2sq^2 - 2 m1sq m3sq^2 p2sq^3 - 2 m2sq m3sq^2 p2sq^3 + 2 m3sq^3 p2sq^3 + 2 m1sq m3sq m4sq p2sq^3 + 2 m2sq m3sq m4sq p2sq^3 - 2 m3sq^2 m4sq p2sq^3 - 2 m3sq^2 p1sq p2sq^3 - 2 m3sq m4sq p1sq p2sq^3 + m3sq^2 p2sq^4 + 2 m1sq^3 m3sq p1sq p3sq - 2 m1sq^2 m2sq m3sq p1sq p3sq - 2 m1sq m2sq^2 m3sq p1sq p3sq + 2 m2sq^3 m3sq p1sq p3sq - 2 m1sq^2 m3sq^2 p1sq p3sq + 4 m1sq m2sq m3sq^2 p1sq p3sq - 2 m2sq^2 m3sq^2 p1sq p3sq - 2 m1sq^3 m4sq p1sq p3sq + 2 m1sq^2 m2sq m4sq p1sq p3sq + 2 m1sq m2sq^2 m4sq p1sq p3sq - 2 m2sq^3 m4sq p1sq p3sq - 2 m1sq^2 m3sq m4sq p1sq p3sq - 12 m1sq m2sq m3sq m4sq p1sq p3sq - 2 m2sq^2 m3sq m4sq p1sq p3sq + 4 m1sq m3sq^2 m4sq p1sq p3sq + 4 m2sq m3sq^2 m4sq p1sq p3sq + 4 m1sq^2 m4sq^2 p1sq p3sq + 8 m1sq m2sq m4sq^2 p1sq p3sq + 4 m2sq^2 m4sq^2 p1sq p3sq - 2 m1sq m3sq m4sq^2 p1sq p3sq - 2 m2sq m3sq m4sq^2 p1sq p3sq - 2 m3sq^2 m4sq^2 p1sq p3sq - 2 m1sq m4sq^3 p1sq p3sq - 2 m2sq m4sq^3 p1sq p3sq + 2 m3sq m4sq^3 p1sq p3sq - 2 m1sq^2 m3sq p1sq^2 p3sq + 4 m1sq m2sq m3sq p1sq^2 p3sq - 2 m2sq^2 m3sq p1sq^2 p3sq + 4 m1sq^2 m4sq p1sq^2 p3sq + 8 m1sq m2sq m4sq p1sq^2 p3sq + 4 m2sq^2 m4sq p1sq^2 p3sq - 2 m1sq m3sq m4sq p1sq^2 p3sq - 2 m2sq m3sq m4sq p1sq^2 p3sq - 2 m1sq m4sq^2 p1sq^2 p3sq - 2 m2sq m4sq^2 p1sq^2 p3sq + 4 m3sq m4sq^2 p1sq^2 p3sq - 2 m4sq^3 p1sq^2 p3sq - 2 m1sq m4sq p1sq^3 p3sq - 2 m2sq m4sq p1sq^3 p3sq - 2 m4sq^2 p1sq^3 p3sq - 2 m1sq^3 m3sq p2sq p3sq + 2 m1sq^2 m2sq m3sq p2sq p3sq + 2 m1sq m2sq^2 m3sq p2sq p3sq - 2 m2sq^3 m3sq p2sq p3sq + 4 m1sq^2 m3sq^2 p2sq p3sq + 8 m1sq m2sq m3sq^2 p2sq p3sq + 4 m2sq^2 m3sq^2 p2sq p3sq - 2 m1sq m3sq^3 p2sq p3sq - 2 m2sq m3sq^3 p2sq p3sq + 2 m1sq^3 m4sq p2sq p3sq - 2 m1sq^2 m2sq m4sq p2sq p3sq - 2 m1sq m2sq^2 m4sq p2sq p3sq + 2 m2sq^3 m4sq p2sq p3sq - 2 m1sq^2 m3sq m4sq p2sq p3sq - 12 m1sq m2sq m3sq m4sq p2sq p3sq - 2 m2sq^2 m3sq m4sq p2sq p3sq - 2 m1sq m3sq^2 m4sq p2sq p3sq - 2 m2sq m3sq^2 m4sq p2sq p3sq + 2 m3sq^3 m4sq p2sq p3sq - 2 m1sq^2 m4sq^2 p2sq p3sq + 4 m1sq m2sq m4sq^2 p2sq p3sq - 2 m2sq^2 m4sq^2 p2sq p3sq + 4 m1sq m3sq m4sq^2 p2sq p3sq + 4 m2sq m3sq m4sq^2 p2sq p3sq - 2 m3sq^2 m4sq^2 p2sq p3sq - 2 m1sq^2 m3sq p1sq p2sq p3sq - 12 m1sq m2sq m3sq p1sq p2sq p3sq - 2 m2sq^2 m3sq p1sq p2sq p3sq - 2 m1sq m3sq^2 p1sq p2sq p3sq - 2 m2sq m3sq^2 p1sq p2sq p3sq - 2 m1sq^2 m4sq p1sq p2sq p3sq - 12 m1sq m2sq m4sq p1sq p2sq p3sq - 2 m2sq^2 m4sq p1sq p2sq p3sq + 12 m1sq m3sq m4sq p1sq p2sq p3sq + 12 m2sq m3sq m4sq p1sq p2sq p3sq - 2 m3sq^2 m4sq p1sq p2sq p3sq - 2 m1sq m4sq^2 p1sq p2sq p3sq - 2 m2sq m4sq^2 p1sq p2sq p3sq - 2 m3sq m4sq^2 p1sq p2sq p3sq + 4 m1sq m3sq p1sq^2 p2sq p3sq + 4 m2sq m3sq p1sq^2 p2sq p3sq - 2 m1sq m4sq p1sq^2 p2sq p3sq - 2 m2sq m4sq p1sq^2 p2sq p3sq - 2 m3sq m4sq p1sq^2 p2sq p3sq + 4 m4sq^2 p1sq^2 p2sq p3sq + 2 m4sq p1sq^3 p2sq p3sq + 4 m1sq^2 m3sq p2sq^2 p3sq + 8 m1sq m2sq m3sq p2sq^2 p3sq + 4 m2sq^2 m3sq p2sq^2 p3sq - 2 m1sq m3sq^2 p2sq^2 p3sq - 2 m2sq m3sq^2 p2sq^2 p3sq - 2 m3sq^3 p2sq^2 p3sq - 2 m1sq^2 m4sq p2sq^2 p3sq + 4 m1sq m2sq m4sq p2sq^2 p3sq - 2 m2sq^2 m4sq p2sq^2 p3sq - 2 m1sq m3sq m4sq p2sq^2 p3sq - 2 m2sq m3sq m4sq p2sq^2 p3sq + 4 m3sq^2 m4sq p2sq^2 p3sq - 2 m1sq m3sq p1sq p2sq^2 p3sq - 2 m2sq m3sq p1sq p2sq^2 p3sq + 4 m3sq^2 p1sq p2sq^2 p3sq + 4 m1sq m4sq p1sq p2sq^2 p3sq + 4 m2sq m4sq p1sq p2sq^2 p3sq - 2 m3sq m4sq p1sq p2sq^2 p3sq - 2 m3sq p1sq^2 p2sq^2 p3sq - 2 m4sq p1sq^2 p2sq^2 p3sq - 2 m1sq m3sq p2sq^3 p3sq - 2 m2sq m3sq p2sq^3 p3sq - 2 m3sq^2 p2sq^3 p3sq + 2 m3sq p1sq p2sq^3 p3sq + m1sq^4 p3sq^2 - 4 m1sq^3 m2sq p3sq^2 + 6 m1sq^2 m2sq^2 p3sq^2 - 4 m1sq m2sq^3 p3sq^2 + m2sq^4 p3sq^2 - 2 m1sq^3 m3sq p3sq^2 + 2 m1sq^2 m2sq m3sq p3sq^2 + 2 m1sq m2sq^2 m3sq p3sq^2 - 2 m2sq^3 m3sq p3sq^2 + m1sq^2 m3sq^2 p3sq^2 - 2 m1sq m2sq m3sq^2 p3sq^2 + m2sq^2 m3sq^2 p3sq^2 - 2 m1sq^3 m4sq p3sq^2 + 2 m1sq^2 m2sq m4sq p3sq^2 + 2 m1sq m2sq^2 m4sq p3sq^2 - 2 m2sq^3 m4sq p3sq^2 + 4 m1sq^2 m3sq m4sq p3sq^2 + 8 m1sq m2sq m3sq m4sq p3sq^2 + 4 m2sq^2 m3sq m4sq p3sq^2 - 2 m1sq m3sq^2 m4sq p3sq^2 - 2 m2sq m3sq^2 m4sq p3sq^2 + m1sq^2 m4sq^2 p3sq^2 - 2 m1sq m2sq m4sq^2 p3sq^2 + m2sq^2 m4sq^2 p3sq^2 - 2 m1sq m3sq m4sq^2 p3sq^2 - 2 m2sq m3sq m4sq^2 p3sq^2 + m3sq^2 m4sq^2 p3sq^2 - 2 m1sq^3 p1sq p3sq^2 + 2 m1sq^2 m2sq p1sq p3sq^2 + 2 m1sq m2sq^2 p1sq p3sq^2 - 2 m2sq^3 p1sq p3sq^2 + 4 m1sq^2 m3sq p1sq p3sq^2 - 8 m1sq m2sq m3sq p1sq p3sq^2 + 4 m2sq^2 m3sq p1sq p3sq^2 - 2 m1sq^2 m4sq p1sq p3sq^2 - 12 m1sq m2sq m4sq p1sq p3sq^2 - 2 m2sq^2 m4sq p1sq p3sq^2 - 2 m1sq m3sq m4sq p1sq p3sq^2 - 2 m2sq m3sq m4sq p1sq p3sq^2 + 4 m1sq m4sq^2 p1sq p3sq^2 + 4 m2sq m4sq^2 p1sq p3sq^2 - 2 m3sq m4sq^2 p1sq p3sq^2 + m1sq^2 p1sq^2 p3sq^2 - 2 m1sq m2sq p1sq^2 p3sq^2 + m2sq^2 p1sq^2 p3sq^2 + 4 m1sq m4sq p1sq^2 p3sq^2 + 4 m2sq m4sq p1sq^2 p3sq^2 + m4sq^2 p1sq^2 p3sq^2 - 2 m1sq^3 p2sq p3sq^2 + 2 m1sq^2 m2sq p2sq p3sq^2 + 2 m1sq m2sq^2 p2sq p3sq^2 - 2 m2sq^3 p2sq p3sq^2 - 2 m1sq^2 m3sq p2sq p3sq^2 - 12 m1sq m2sq m3sq p2sq p3sq^2 - 2 m2sq^2 m3sq p2sq p3sq^2 + 4 m1sq m3sq^2 p2sq p3sq^2 + 4 m2sq m3sq^2 p2sq p3sq^2 + 4 m1sq^2 m4sq p2sq p3sq^2 - 8 m1sq m2sq m4sq p2sq p3sq^2 + 4 m2sq^2 m4sq p2sq p3sq^2 - 2 m1sq m3sq m4sq p2sq p3sq^2 - 2 m2sq m3sq m4sq p2sq p3sq^2 - 2 m3sq^2 m4sq p2sq p3sq^2 + 4 m1sq^2 p1sq p2sq p3sq^2 + 8 m1sq m2sq p1sq p2sq p3sq^2 + 4 m2sq^2 p1sq p2sq p3sq^2 - 2 m1sq m3sq p1sq p2sq p3sq^2 - 2 m2sq m3sq p1sq p2sq p3sq^2 - 2 m1sq m4sq p1sq p2sq p3sq^2 - 2 m2sq m4sq p1sq p2sq p3sq^2 + 4 m3sq m4sq p1sq p2sq p3sq^2 - 2 m1sq p1sq^2 p2sq p3sq^2 - 2 m2sq p1sq^2 p2sq p3sq^2 - 2 m4sq p1sq^2 p2sq p3sq^2 + m1sq^2 p2sq^2 p3sq^2 - 2 m1sq m2sq p2sq^2 p3sq^2 + m2sq^2 p2sq^2 p3sq^2 + 4 m1sq m3sq p2sq^2 p3sq^2 + 4 m2sq m3sq p2sq^2 p3sq^2 + m3sq^2 p2sq^2 p3sq^2 - 2 m1sq p1sq p2sq^2 p3sq^2 - 2 m2sq p1sq p2sq^2 p3sq^2 - 2 m3sq p1sq p2sq^2 p3sq^2 + p1sq^2 p2sq^2 p3sq^2 + 2 m1sq^3 p3sq^3 - 2 m1sq^2 m2sq p3sq^3 - 2 m1sq m2sq^2 p3sq^3 + 2 m2sq^3 p3sq^3 - 2 m1sq^2 m3sq p3sq^3 + 4 m1sq m2sq m3sq p3sq^3 - 2 m2sq^2 m3sq p3sq^3 - 2 m1sq^2 m4sq p3sq^3 + 4 m1sq m2sq m4sq p3sq^3 - 2 m2sq^2 m4sq p3sq^3 + 2 m1sq m3sq m4sq p3sq^3 + 2 m2sq m3sq m4sq p3sq^3 - 2 m1sq^2 p1sq p3sq^3 + 4 m1sq m2sq p1sq p3sq^3 - 2 m2sq^2 p1sq p3sq^3 - 2 m1sq m4sq p1sq p3sq^3 - 2 m2sq m4sq p1sq p3sq^3 - 2 m1sq^2 p2sq p3sq^3 + 4 m1sq m2sq p2sq p3sq^3 - 2 m2sq^2 p2sq p3sq^3 - 2 m1sq m3sq p2sq p3sq^3 - 2 m2sq m3sq p2sq p3sq^3 + 2 m1sq p1sq p2sq p3sq^3 + 2 m2sq p1sq p2sq p3sq^3 + m1sq^2 p3sq^4 - 2 m1sq m2sq p3sq^4 + m2sq^2 p3sq^4};
+
+
+difficultLetter = p3sq(m4sq-p2sq)(m3sq-p1sq)+(m3sq-m4sq-p1sq+p2sq)(m3sq*p2sq-m4sq*p1sq) // Factor;
+difficultLetter
+
+
+gpol = x1 x2+m1sq x1^2 x2+m2sq x1 x2^2+x1 x3+m1sq x1^2 x3+x2 x3+m1sq x1 x2 x3+m2sq x1 x2 x3+m3sq x1 x2 x3-p1sq x1 x2 x3+m2sq x2^2 x3+m3sq x1 x3^2+m3sq x2 x3^2+x1 x4+m1sq x1^2 x4+x2 x4+m1sq x1 x2 x4+m2sq x1 x2 x4+m4sq x1 x2 x4-p2sq x1 x2 x4+m2sq x2^2 x4+m3sq x1 x3 x4+m4sq x1 x3 x4-p3sq x1 x3 x4+m3sq x2 x3 x4+m4sq x2 x3 x4-p3sq x2 x3 x4+m4sq x1 x4^2+m4sq x2 x4^2;
+pList = {1-x0*gpol}~Join~D[gpol,{{x1,x2,x3,x4}}];
+
+
+irreds = FindIrreducibleMonomials[pList,{x1,x2,x3,x4,x0},"MonomialOrder"->DegreeReverseLexicographic]
+
+
+cmats = BuildCompanionMatrices[pList,{x1,x2,x3,x4,x0},7,irreds,"MonomialOrder"->DegreeReverseLexicographic,"PrintDebugInfo"->2]
+
+
+charps = BuildCharacteristicPolynomials[cmats,{1,2,3,4,5}]
+
+
+rec = ReconstructCharacteristicPolynomials[charps,{3,4},"DeleteGraph"->False]; // AbsoluteTiming
+
+
+landau = rec // Denominator // Factor // Flatten // Map[FactorList] // Flatten // DeleteCases[x_/;IntegerQ[x]] // DeleteDuplicates;
+% // Length
+
+
+Complement[sofiaSols,landau] // DeleteCases[m1sq-m2sq]
+
+
+type2 = {p3sq,p1sq^2-2 p1sq p2sq+p2sq^2-2 p1sq p3sq-2 p2sq p3sq+p3sq^2};
+
+
+(*it appears that if we do not include the x0 terms we miss the type 2 singularities as expected*)
+(*is there any other way to recover them?*)
+
+
+(*interestingly, we do not need to reconstruct the det term, but can get away with the 3rd term only? probably a coincidence right?*)
+(*could the type one singularities cancel in the trace, meaning we miss some singularities?*)
+
+
+(*somehow the denominator of the trace of x0 is exactly the terms we are missing?*)
+(*this could allow us to not reconstruct the det term for x0 which is always the hardest?*)
+rec[[5,2]] // Denominator // Factor
+
+
+p1sq^2-2 p1sq p2sq+p2sq^2-2 p1sq p3sq-2 p2sq p3sq+p3sq^2// ReplaceAll[{m1sq->2,m2sq->3,m3sq->5,m4sq->7,p1sq->11,p2sq->13}]
+Solve[%==0]
+
+
+pList // ReplaceAll[{m1sq->2,m2sq->3,m3sq->5,m4sq->7,p1sq->11,p2sq->13,p3sq->1/10^10}] // Solve[#==0,{x0,x1,x2,x3,x4}]& // N[#,20]& // MatrixForm
+
+
+pList // ReplaceAll[{m1sq->2,m2sq->3,m3sq->5,m4sq->7,p1sq->11,p2sq->13,p3sq->2/(12+Sqrt[143])+1/10^20}] // Solve[#==0,{x0,x1,x2,x3,x4}]& // N[#,20]& // MatrixForm
+
+
+x0-(x0//ReplaceAll[pList // ReplaceAll[{m1sq->2,m2sq->3,m3sq->5,m4sq->7,p1sq->11,p2sq->13,p3sq->2/(12+Sqrt[143])+1/10^3}] // Solve[#==0,{x0,x1,x2,x3,x4}]&] //N[#,40]&)//Apply[Times]//ExpandAll//Chop//N
+
+
+(x-r1)(x-r2)(x-r3)(*(x-r4)(x-r5)*)//Collect[#,x]&
+
+
+(x-r1)(x-r2)(x-r3)//Discriminant[#,x]&
+
+
+(r1 r2+r1 r3+r2 r3)/.r1->r2+r3/.r2->-(1/2) (3+Sqrt[5]) r3 // Factor
+
+
+(x-r1)(x-r2)(x-r3)/.r1->r2+r3/.r2->-(1/2) (3+Sqrt[5]) r3 + 1/.r3->1/a//Collect[#,x,Factor]&
