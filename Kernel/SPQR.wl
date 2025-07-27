@@ -17,8 +17,9 @@ ReconstructPolynomialRemainder::usage = "ReconstructPolynomialRemainder[system] 
 BuildCompanionMatrices::usage = "BuildCompanionMatrices[ideal,vars,w,irreds] Builds and loads a system of linear equations to weight w using the irreducible monomials irreds into FiniteFlow to generate the companion matrices for each of the vars in the ideal ";
 BuildTargetCompanionMatrices::usage = "BuildTargetCompanionMatrices[targets,cmatsystem] Builds companion matrices for given target polynomials. cmatsystem should be the output of BuildCompanionMatrices";
 ReconstructTargetCompanionMatrices::usage = "ReconstructTargetCompanionMatrices[targetcmatsystem] Reconstructs the remainder of rational functions encoded in the companion matrices. targetcmatsystem should be the output of BuildTargetCompanionMatrices or BuildCompanionMatrices";
-BuildCharacteristicPolynomials::usage = " ";
-ReconstructCharacteristicPolynomials::usage = " ";
+BuildCharacteristicPolynomials::usage = "BuildCharacteristicPolynomials[targetcmatsystem] Builds the characteristic polynomials for each companion matrix in targetcmatsystem\n" <> "BuildCharacteristicPolynomials[targetcmatsystem,indexlist] builds the characteristic polynomials of the matrices indexed in indexlist";
+ReconstructCharacteristicPolynomials::usage = "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem] reconstructs each coefficient of the characteristic polynomials produced by BuildCharacteristicPolynomials\n" <> "ReconstructCharacteristicPolynomials[targetcmatsystem,coefficientlist] reconstructs only the terms given in coefficientlist";
+FFDet::usage = "FFDet[matrix] computes the determinant of a matrix using the Faddeev\[Dash]LeVerrier algorithm";
 j::usage = " ";
 extraparam::usage = " ";
 targ::usage = " ";
@@ -38,12 +39,6 @@ Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_target_cmat.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "characteristic_polynomials.m"}]];
 
 
-(*Get["various_functions.m"];
-Get["build_system.m"];
-Get["construct_cmat.m"];
-Get["construct_target_cmat.m"];*)
-
-
 End[]
 
 
@@ -51,7 +46,7 @@ SetAttributes[
 	{
 	FindIrreducibleMonomials,BuildPolynomialSystem,ReconstructPolynomialRemainder,
 	BuildCompanionMatrices,BuildTargetCompanionMatrices,ReconstructTargetCompanionMatrices,
-	j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials
+	j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials,FFDet
 	}
 	, {ReadProtected}
 ];

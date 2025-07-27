@@ -82,3 +82,26 @@ ReconstructCharacteristicPolynomials[characteristicPolynomialData_,elements_List
 	Return[reconstructed // ArrayReshape[#,{nmats,elements//Length}]&];
 ];
 ReconstructCharacteristicPolynomials[characteristicPolynomialData_,opts : OptionsPattern[]]:=ReconstructCharacteristicPolynomials[characteristicPolynomialData,1+(characteristicPolynomialData[[3]]//Length)//Range,opts];
+
+
+(*high level determinant calculator using FiniteFlow*)
+Options[FFDet] = {"PrintDebugInfo"->1,"Mod"->False,"FFPrimeNo"->0};
+FFDet[matrix_,opts : OptionsPattern[]]:=Module[
+	{graphname,matname,params,irredsPlaceholder,data,output,rec},
+	
+	If[!SquareMatrixQ[matrix],Print["not a square matrix"];Return[$Failed]];
+	
+	params = matrix // Variables;
+	If[params=={},params={extraparam}];
+	
+	FFNewGraph[graphname//ToString,"in",params];
+	FFAlgRatExprEval[graphname//ToString,m[matname//ToString],{"in"},params,matrix//Flatten];
+	
+	irredsPlaceholder = matrix // Length // Range;
+	data = {graphname//ToString,params,irredsPlaceholder,{m[matname//ToString]},{}};
+	
+	output = BuildCharacteristicPolynomials[data,1];
+	rec = ReconstructCharacteristicPolynomials[output,{1},opts] // First // First;
+	
+	Return[rec];
+];
