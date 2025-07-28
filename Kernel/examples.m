@@ -463,7 +463,7 @@ cmats = BuildCompanionMatrices[pList,{x1,x2,x3,x4,x0},7,irreds,"MonomialOrder"->
 charps = BuildCharacteristicPolynomials[cmats,{1,2,3,4,5}]
 
 
-rec = ReconstructCharacteristicPolynomials[charps,{3,4},"DeleteGraph"->False]; // AbsoluteTiming
+rec = ReconstructCharacteristicPolynomials[charps,{1,4},"DeleteGraph"->False]; // AbsoluteTiming
 
 
 landau = rec // Denominator // Factor // Flatten // Map[FactorList] // Flatten // DeleteCases[x_/;IntegerQ[x]] // DeleteDuplicates;
