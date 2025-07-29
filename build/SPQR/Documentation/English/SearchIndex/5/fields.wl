@@ -15,36 +15,6 @@
 		"BulkRetrievalOptimized" -> False
 	|>,
 	<|
-		"Name" -> "Text",
-		"Type" -> "Text",
-		"Tokenized" -> True,
-		"Stored" -> False,
-		"Weight" -> 1,
-		"Searchable" -> True,
-		"Language" -> "English",
-		"IgnoreCase" -> True,
-		"StemmingMethod" -> Automatic,
-		"CamelCaseMatching" -> True,
-		"DeleteStopWords" -> True,
-		"StoreTermVectors" -> False,
-		"BulkRetrievalOptimized" -> False
-	|>,
-	<|
-		"Name" -> "TableText",
-		"Type" -> "Text",
-		"Tokenized" -> True,
-		"Stored" -> False,
-		"Weight" -> 1,
-		"Searchable" -> True,
-		"Language" -> "English",
-		"IgnoreCase" -> True,
-		"StemmingMethod" -> Automatic,
-		"CamelCaseMatching" -> True,
-		"DeleteStopWords" -> True,
-		"StoreTermVectors" -> False,
-		"BulkRetrievalOptimized" -> False
-	|>,
-	<|
 		"Name" -> "ExactTitle",
 		"Type" -> "Text",
 		"Stored" -> True,
@@ -347,9 +317,23 @@
 		"BulkRetrievalOptimized" -> False
 	|>,
 	<|
-		"Name" -> "SeeAlso",
+		"Name" -> "Text",
 		"Type" -> "Text",
-		"LengthWeighted" -> False,
+		"Tokenized" -> True,
+		"Stored" -> False,
+		"Weight" -> 1,
+		"Searchable" -> True,
+		"Language" -> "English",
+		"IgnoreCase" -> True,
+		"StemmingMethod" -> Automatic,
+		"CamelCaseMatching" -> True,
+		"DeleteStopWords" -> True,
+		"StoreTermVectors" -> False,
+		"BulkRetrievalOptimized" -> False
+	|>,
+	<|
+		"Name" -> "TableText",
+		"Type" -> "Text",
 		"Tokenized" -> True,
 		"Stored" -> False,
 		"Weight" -> 1,
@@ -378,6 +362,22 @@
 		"BulkRetrievalOptimized" -> False
 	|>,
 	<|
+		"Name" -> "SeeAlso",
+		"Type" -> "Text",
+		"LengthWeighted" -> False,
+		"Tokenized" -> True,
+		"Stored" -> False,
+		"Weight" -> 1,
+		"Searchable" -> True,
+		"Language" -> "English",
+		"IgnoreCase" -> True,
+		"StemmingMethod" -> Automatic,
+		"CamelCaseMatching" -> True,
+		"DeleteStopWords" -> True,
+		"StoreTermVectors" -> False,
+		"BulkRetrievalOptimized" -> False
+	|>,
+	<|
 		"Name" -> "Abstract",
 		"Type" -> "Text",
 		"Weight" -> 1.5,
@@ -394,21 +394,6 @@
 	|>,
 	<|
 		"Name" -> "LinkedSymbols",
-		"Type" -> "Text",
-		"Tokenized" -> True,
-		"Stored" -> False,
-		"Weight" -> 1,
-		"Searchable" -> True,
-		"Language" -> "English",
-		"IgnoreCase" -> True,
-		"StemmingMethod" -> Automatic,
-		"CamelCaseMatching" -> True,
-		"DeleteStopWords" -> True,
-		"StoreTermVectors" -> False,
-		"BulkRetrievalOptimized" -> False
-	|>,
-	<|
-		"Name" -> "Caption",
 		"Type" -> "Text",
 		"Tokenized" -> True,
 		"Stored" -> False,

@@ -12,11 +12,14 @@ SetUsage["BuildPolynomialSystem[targets$,ideal$,vars$,w$] builds and loads a sys
 
 
 FindIrreducibleMonomials::usage = "FindIrreducibleMonomials[ideal,vars] Finds the irreducible monomials of an ideal in the variables vars using a numerical Groebner Basis.";
-BuildPolynomialSystem::usage = "BuildPolynomialSystem[targets,ideal,vars,w] Builds and loads a system of linear equations to weight w into FiniteFlow to polynomially reduce the targets with respect to the ideal ";
+BuildPolynomialSystem::usage = "BuildPolynomialSystem[targets,ideal,vars,w] Builds and loads a system of linear equations to weight w into FiniteFlow to polynomially reduce the targets with respect to the ideal\n" <> "BuildPolynomialSystem[targets,ideal,vars,{wmin,wmax}] Increases the seed iteratively from wmin until the system closes or wmax is reached";
 ReconstructPolynomialRemainder::usage = "ReconstructPolynomialRemainder[system] Reconstructs the remainder of a set of polynomials. system should be the output of BuildPolynomialSystem";
-BuildCompanionMatrices::usage = "BuildCompanionMatrices[ideal,vars,w,irreds] Builds and loads a system of linear equations to weight w using the irreducible monomials irreds into FiniteFlow to generate the companion matrices for each of the vars in the ideal ";
-BuildTargetCompanionMatrix::usage = "BuildTargetCompanionMatrix[target,cmatsystem] Builds a companion matrix for a given target polynomial. cmatsystem should be the output of BuildCompanionMatrices";
-ReconstructTargetCompanionMatrix::usage = "ReconstructTargetCompanionMatrix[targetcmatsystem] Reconstructs the remainder of a rational function. targetcmatsystem should be the output of BuildTargetCompanionMatrix";
+BuildCompanionMatrices::usage = "BuildCompanionMatrices[ideal,vars,w,irreds] Builds and loads a system of linear equations to weight w using the irreducible monomials irreds into FiniteFlow to generate the companion matrices for each of the vars in the ideal\n" <> "BuildCompanionMatrices[ideal,vars,{wmin,wmax},irreds] Increases the seed iteratively from wmin until the system closes or wmax is reached";
+BuildTargetCompanionMatrices::usage = "BuildTargetCompanionMatrices[targets,cmatsystem] Builds companion matrices for given target polynomials. cmatsystem should be the output of BuildCompanionMatrices";
+ReconstructTargetCompanionMatrices::usage = "ReconstructTargetCompanionMatrices[targetcmatsystem] Reconstructs the remainder of rational functions encoded in the companion matrices. targetcmatsystem should be the output of BuildTargetCompanionMatrices or BuildCompanionMatrices";
+BuildCharacteristicPolynomials::usage = "BuildCharacteristicPolynomials[targetcmatsystem] Builds the characteristic polynomials for each companion matrix in targetcmatsystem\n" <> "BuildCharacteristicPolynomials[targetcmatsystem,indexlist] builds the characteristic polynomials of the matrices indexed in indexlist";
+ReconstructCharacteristicPolynomials::usage = "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem] reconstructs each coefficient of the characteristic polynomials produced by BuildCharacteristicPolynomials\n" <> "ReconstructCharacteristicPolynomials[targetcmatsystem,coefficientlist] reconstructs only the terms given in coefficientlist";
+FFDet::usage = "FFDet[matrix] computes the determinant of a matrix using the Faddeev\[Dash]LeVerrier algorithm";
 j::usage = " ";
 extraparam::usage = " ";
 targ::usage = " ";
@@ -33,12 +36,7 @@ Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_cmat.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_target_cmat.m"}]];
-
-
-(*Get["various_functions.m"];
-Get["build_system.m"];
-Get["construct_cmat.m"];
-Get["construct_target_cmat.m"];*)
+Get[FileNameJoin[{DirectoryName[$InputFileName], "characteristic_polynomials.m"}]];
 
 
 End[]
@@ -47,11 +45,11 @@ End[]
 SetAttributes[
 	{
 	FindIrreducibleMonomials,BuildPolynomialSystem,ReconstructPolynomialRemainder,
-	BuildCompanionMatrices,BuildTargetCompanionMatrix,ReconstructTargetCompanionMatrix,
-	j,extraparam,targ
+	BuildCompanionMatrices,BuildTargetCompanionMatrices,ReconstructTargetCompanionMatrices,
+	j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials,FFDet
 	}
-	, {ReadProtected}];
-
+	, {ReadProtected}
+];
 (*Protect[{}];*)
 
 

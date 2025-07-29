@@ -11,7 +11,20 @@
             ,
             "Hash"
             ->
-            "5f7dcbcb0564f8d7768951b131bd6c3ebd250ec196385aed1973c1c000f98acd"
+            "42d506b0ab4fac2f17fa35d5fbf711c713773eedff8683f5a517f5800e8102d6"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/characteristic_polynomials.m"
+            ]
+            ,
+            "Hash"
+            ->
+            "b669b98166a4cafd088c66d386607badf9c5a4ee331e231f79c7f2f5027486fa"
                 
         |>
         ,
@@ -24,7 +37,7 @@
             ,
             "Hash"
             ->
-            "52b4eb4bfdc192b29566c172bcd05e5307d6dcd5ce5c2ce998f615881f22f756"
+            "77b7bce2dc09c5cf3b510f691dc56e7ec206ec8f577c40be8e9e248ceac3e068"
                 
         |>
         ,
@@ -37,7 +50,7 @@
             ,
             "Hash"
             ->
-            "f231adcf057cc208e881ba5b9d02205a5054e34580ba7cea72c87911af43b476"
+            "b8751cd45d7e757b1753b1295a385e983c8a78b1c8f31805bc41aa07bfa1caf4"
                 
         |>
         ,
@@ -50,7 +63,7 @@
             ,
             "Hash"
             ->
-            "87b7b7752d7f74e599c6705f8fec7987f1885b1a436332ee9b4956d7cf72ed8b"
+            "83c4ce042ce90d6ef3152dc7df8cfb73f1b7e6a98b337b080c25ca5062ed263c"
                 
         |>
         ,
@@ -63,7 +76,7 @@
             ,
             "Hash"
             ->
-            "e3c2ea977c9026dce9b1b2bb8334b184458df8d80ed50c024228d992f68400cb"
+            "54c3a9642c25f131049beab9561e45f61d06a501d65c509b0ad28e0141ec9da7"
                 
         |>
         ,
@@ -71,25 +84,12 @@
             "File"
             ->
             File[
-                "Kernel/rough-work/.DS_Store"
+                "Kernel/rough-work/new-irred-mons.nb"
             ]
             ,
             "Hash"
             ->
-            "833c25ee09568ad8578e397f37c1a2ecd5d051b6908d52ed129d9111ea6329a4"
-                
-        |>
-        ,
-        <|
-            "File"
-            ->
-            File[
-                "Kernel/rough-work/sum_and_prod.nb"
-            ]
-            ,
-            "Hash"
-            ->
-            "a9983431aa0188d6d5cd9ae3babcb71c8cfb9ff0e068c23e5c4710566b43cb6f"
+            "e5e2ed668cb231604c489268e99a0548a99964ced09a07696266cddfb291b65c"
                 
         |>
         ,
@@ -102,7 +102,7 @@
             ,
             "Hash"
             ->
-            "672272b6a0fda8e0a2115b940c968bfdd63429ff73b9ece5af37ce1faaf643ce"
+            "d3a314f337fdba551c190ab912c548762707cc64b14efa6da410f85c8562b67e"
                 
         |>
         ,
@@ -115,7 +115,7 @@
             ,
             "Hash"
             ->
-            "7fdf1af7c1a6d1d9e8e24090fa492c46685b7eb7ed51ef38fc524ef37ab4285f"
+            "9afafe2df798b3e18a342cd1b06bdae6141abe6210118303095281caac9b41b8"
                 
         |>
         ,
@@ -136,13 +136,27 @@
             "File"
             ->
             File[
+                "Documentation/English/ReferencePages/Symbols/BuildCharacteristicPolynomials.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "124d99abd2296c41e42c0dd6bbad8d096a37157f24e766002eb3c5c185d8662f"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
                 "Documentation/English/ReferencePages/Symbols/BuildCompanionMatrices.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "df7197b2e2c4aee115796f2268273c9f20f48096fcf105928e58a65b2d332099"
+            "5c1332fa1a7a855ff6dad9a24466d1bb2ecc25450b1ccb34db3dfee6c8f3a4a5"
                 
         |>
         ,
@@ -156,7 +170,7 @@
             ,
             "Hash"
             ->
-            "c07c9141f329fc626fd64cdf6153b48c93f8c3c136c5c0a3a59d2a0ba5d25d51"
+            "5cc5eb71ab86069b2902b32509ad40676d5c342cee11127290218aae99f00028"
                 
         |>
         ,
@@ -164,13 +178,27 @@
             "File"
             ->
             File[
-                "Documentation/English/ReferencePages/Symbols/BuildTargetCompanionMatrix.nb"
+                "Documentation/English/ReferencePages/Symbols/BuildTargetCompanionMatrices.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "cd94ca17940457047f5c1ed23565c0fc5f42ce056b5e6da753721dafdfe54f3f"
+            "4409117aeab1cb48046d6f47a3bfd869d2eea0334e1f1bc77aa48b596bb66762"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/FFDet.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "b171eb25c2fece5e00c2d93bc011933d34cf6df9506cd4fea7d62ae027dcaac2"
                 
         |>
         ,
@@ -184,7 +212,21 @@
             ,
             "Hash"
             ->
-            "3b33e07ab7189685fc32cb94c9b40446fbfe45e6ea1965b54b26620a1bdb1fdb"
+            "508d7a20b8e4d04706643cb3a3fb2ca5600d5f9ebbf8f1875d2a0b6349285c0e"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/ReconstructCharacteristicPolynomials.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "e1a88597736684c277b4be52a54e73fabd2ae6a70151d412a5279b44f73829e7"
                 
         |>
         ,
@@ -198,7 +240,7 @@
             ,
             "Hash"
             ->
-            "a5b98dccceb5bed159f34e73af221dc2a8ab7a3ade7c2bbbfeb8f3fc7f98be5b"
+            "ebd9ad6cb97d19879ff19ffae2f95f7688fc01759e5b8864d3e3f814d2731936"
                 
         |>
         ,
@@ -206,13 +248,13 @@
             "File"
             ->
             File[
-                "Documentation/English/ReferencePages/Symbols/ReconstructTargetCompanionMatrix.nb"
+                "Documentation/English/ReferencePages/Symbols/ReconstructTargetCompanionMatrices.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "1d733e84d52b44ebf4eb79a5483b68389fe97581e653071c2d1f39de7ebce678"
+            "f86d641ab51d8e7754fdb8a01f238d9afab832ecb54dbc51bce9af31f4aeb6b5"
                 
         |>
         ,
@@ -226,7 +268,7 @@
             ,
             "Hash"
             ->
-            "ea73032888b8a75af08a1bca05bd2cc8c56e19d8245998cc5eb9cf75bd0bc782"
+            "378b7d0ecfebe87fcaa3eb1bf4b63bbbbde6810263e652949ced238f3580fd83"
                 
         |>
         ,

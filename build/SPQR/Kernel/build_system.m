@@ -37,7 +37,7 @@ createAllSeeds[length_,maxweight_]:=createSeeds[length,#]&/@Range[0,maxweight]//
 
 Options[BuildPolynomialSystem] = {"MonomialOrder" -> Lexicographic, "IrreducibleMonomials"->{},"EliminateVariables"->{{},0},"PrintDebugInfo"->0};
 (**)
-BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_,OptionsPattern[]]:= Module[
+BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : OptionsPattern[]]:= Module[
 	{
 	idealj,targetsj,jseeds,equations,sortedMonomials,sortedMonomialsj,monomials,systemSparse,
 	params,nonzeromat,adjlists,graphName,learn,newEqnNumb,irreducibleMonomials,(*targ,*)(*extraparam,*)
@@ -175,11 +175,53 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_,OptionsPattern[]]:= 
 		,
 		(*check failed*)
 		Print["Irreducible monomials do not match. Try increasing the system size"];
-		Print["Found monomials: ",irreducibleMonomials];
-		Return[$Failed];
+		Print["Found ", irreducibleMonomials // Length," monomials: ",irreducibleMonomials];
+		Return[$Failed[irreducibleMonomials // Length // Evaluate]];
 		];
 	];
+	
+	(*If[$Notebooks && (*(Head[output] === $Failed) &&*) (opts//Association)["PrintDebugInfo"]>0,
+		outs=Cells[EvaluationNotebook[],CellStyle->"Print"];
+		NotebookDelete[outs[[-1;;]]];
+	];*)
+	
 	Return[{graphName,params,learn,variables}];
+];
+BuildPolynomialSystem[targets_,ideal_,variables_,minMaxWeight_List,opts : OptionsPattern[]]:=Module[
+	{index,output,outs},
+	index = minMaxWeight[[1]];
+	output = {"0"};
+	Monitor[
+		Until[
+			Or[(Head[output] =!= $Failed),index > minMaxWeight[[2]]]
+		,
+			If[index=!=minMaxWeight[[1]],printDebug["\n\n",(opts//Association)["PrintDebugInfo"],1]];
+			(*printDebug["\n\n",(opts//Association)["PrintDebugInfo"],1];*)
+			(*printDebug[StringJoin["trying weight: ",ToString[index], ", found ", ToString[output[[1]]], " monomials at weight: ",ToString[index-1]],(opts//Association)["PrintDebugInfo"],1];
+			printDebug["\n\n",(opts//Association)["PrintDebugInfo"],1];*)
+			If[index === minMaxWeight[[2]],
+				output = BuildPolynomialSystem[targets,ideal,variables,index,opts];
+			,
+				output = Block[{Print=Nothing},BuildPolynomialSystem[targets,ideal,variables,index,opts]];
+			];
+			index++;
+		];
+		,
+		StringJoin["trying weight: ",ToString[index], ", found ", ToString[output[[1]]], " monomials at weight: ",ToString[index-1]]
+	];
+	
+	If[$Notebooks && (opts//Association)["PrintDebugInfo"]>0,
+		outs=Cells[EvaluationNotebook[],CellStyle->"Print"];
+		NotebookDelete[outs[[-1;;]]];
+	];
+	
+	If[Head[output] =!= $Failed, 
+		Print["system closed at weight: ", index-1];
+		Return[output];
+	,
+		(*Return[Head[output]];*)
+		Return[output];
+	];
 ];
 
 
@@ -191,7 +233,6 @@ ReconstructPolynomialRemainder[output_List,OptionsPattern[]]:=Module[{reconstruc
 	,
 		ans=ArrayReshape[reconstructed,{"DepVars","IndepVars"}//ReplaceAll[output[[3]]]//Map[Length]] // Dot[#,"IndepVars"//ReplaceAll[output[[3]]]]& // ReplaceAll[j[x__]:>Times@@(output[[4]]^{x})];
 	];
-	(*for some reason this graph deletion doesn't work*)
 	If[OptionValue["DeleteGraph"],FFDeleteGraph[output[[1]]//Evaluate]];
 	Return[ans];
 ];

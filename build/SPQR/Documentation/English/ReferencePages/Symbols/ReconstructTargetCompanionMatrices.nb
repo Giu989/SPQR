@@ -1,0 +1,354 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     13603,        344]
+NotebookOptionsPosition[      9933,        266]
+NotebookOutlinePosition[     12361,        324]
+CellTagsIndexPosition[     12276,        319]
+WindowTitle->ReconstructTargetCompanionMatrices
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["S P Q R SYMBOL", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "fca9f8c6-41dd-4d92-9e7d-61741a3e6b31"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "f1636af1-d3b2-4504-b538-9712c41bcacb"],
+        Background->RGBColor[0.490196, 0.576471, 0.690196],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[Cell[BoxData[
+     TagBox[
+      ActionMenuBox[
+       FrameBox[Cell[TextData[{
+         "URL",
+         " ",
+         Cell[BoxData[
+          GraphicsBox[
+           {GrayLevel[0.66667], Thickness[0.13], 
+            LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+           AspectRatio->1,
+           ImageSize->20,
+           PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+          "fcf60621-a2f6-4232-8cf8-af08edaabc30"]
+        }],ExpressionUUID->"92f383de-1f44-43e5-886a-9c431d19f043"],
+        StripOnInput->False],{
+       "\"SPQR/ref/ReconstructTargetCompanionMatrices\"" :> None, 
+        "\"Copy Wolfram Documentation Center URL\"" :> 
+        CopyToClipboard["SPQR/ref/ReconstructTargetCompanionMatrices"], 
+        Delimiter, "\"Copy web URL\"" :> 
+        Module[{DocumentationSearch`Private`nb$}, 
+          DocumentationSearch`Private`nb$ = 
+           NotebookPut[
+            Notebook[{
+              Cell[BoxData[
+                MakeBoxes[
+                 Hyperlink[
+                  "http://reference.wolfram.com/language/SPQR/ref/\
+ReconstructTargetCompanionMatrices.html"], StandardForm]], "Input", 
+                TextClipboardType -> "PlainText"]}, Visible -> False]]; 
+          SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+          FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+          NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+        "\"Go to web URL\"" :> 
+        FrontEndExecute[{
+          NotebookLocate[{
+            URL[If[TrueQ[False], 
+                "http://reference.wolfram.com/system-modeler/", 
+                "http://reference.wolfram.com/language/"] <> 
+              "SPQR/ref/ReconstructTargetCompanionMatrices" <> ".html"], 
+             None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"URLMenu"],
+      MouseAppearanceTag["LinkHand"]]],
+     LineSpacing->{1.4, 0},ExpressionUUID->
+     "b4b21cb6-94d1-4020-acf5-506898e29d27"]], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "c0763acc-5d7d-4309-81bc-93fcc366b16d"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1,ExpressionUUID->"d5d59971-2557-4cb0-9710-d9f4a7953f12"],
+
+Cell["SPQR`", "ContextNameCell",ExpressionUUID->"0e4b97c8-8e60-4b1a-84c7-4a8c017065af"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {Cell[TextData[{
+     Cell[
+     "ReconstructTargetCompanionMatrices", "ObjectName",ExpressionUUID->
+      "c4022dbb-b42c-45d8-88bc-42845215c7a1"],
+     Cell[BoxData[
+      TemplateBox[{8},
+       "Spacer1"]],ExpressionUUID->"e8419ec5-0fc3-49c1-92a6-fa35e9de6ff6"],
+     Cell[BoxData[
+     ""], "ObjectNameTranslation",ExpressionUUID->
+      "97b37bb9-f95a-49c4-81b1-6aa1dbff7d4c"]
+    }],ExpressionUUID->"7060e6cc-b40c-4446-aee9-42bb77dde2d1"], 
+    "\[SpanFromLeft]"}
+  }]], "ObjectNameGrid",ExpressionUUID->"2061218d-3693-4b28-acfa-\
+0b8599ee0d3d"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       TemplateBox[{
+         Cell[
+          TextData["ReconstructTargetCompanionMatrices"]], 
+         "paclet:SPQR/ref/ReconstructTargetCompanionMatrices", 
+         "SPQR Package Symbol"},
+        "PackageLink",
+        BaseStyle->"InlineFormula"], "[", 
+       StyleBox["targetcmatsystem", "TI"], "]"}]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "5b425644-8368-4e14-b666-2c0bc12fb11c"],
+     "\[LineSeparator]Reconstructs the remainder of rational functions \
+encoded in the companion matrices. ",
+     StyleBox["targetcmatsystem", "TI"],
+     " should be the output of ",
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["BuildTargetCompanionMatrices"]], 
+        "paclet:SPQR/ref/BuildTargetCompanionMatrices", "SPQR Package Symbol"},
+       "PackageLink",
+       BaseStyle->"InlineFormula"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "f1c33036-3664-449f-b473-0987d38aa8d6"],
+     " or ",
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["BuildCompanionMatrices"]], 
+        "paclet:SPQR/ref/BuildCompanionMatrices", "SPQR Package Symbol"},
+       "PackageLink",
+       BaseStyle->"InlineFormula"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "413b93c0-5220-43d1-a301-7ab14d1b1a4d"]
+    }],ExpressionUUID->"69402ddf-3eb4-4946-8b7e-35c68f04df55"]}
+  }]], "Usage",
+ CellID->1963090690,ExpressionUUID->"b758f7df-dc51-4e85-b46b-7c96c0782bc4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    DynamicBox[ToBoxes[
+      If[
+       MatchQ[
+        CurrentValue[
+         EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, 
+         Closed], 
+        Alternatives[Open, True]], 
+       Style[
+        Graphics[{
+          Thickness[0.18], 
+          RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+          Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+         PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+        0.68 Inherited], 
+       Rotate[
+        Style[
+         Graphics[{
+           Thickness[0.18], 
+           RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+           Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+          PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+         0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+     ImageSizeCache->{
+      13.600000000000001`, {-0.1685058593749993, 13.768505859375}}]],
+    ExpressionUUID->"9ac5bb91-0cbc-42d0-bcde-c193238accdd"],
+   Cell[BoxData[
+    TemplateBox[{1},
+     "Spacer1"]],ExpressionUUID->"df10df9b-e27c-4a87-9626-0bb5801dd836"],
+   "Details and Options"
+  }], "NotesFrameText",ExpressionUUID->"95c6c7c5-462b-446f-9b7a-edef0055686d"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"961691e8-8db5-4399-835f-eafcdc14147b"]], \
+"NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CacheGraphics->False,
+ CellID->169653584,ExpressionUUID->"07c5c058-f80d-4354-ada2-855d36a68844"],
+
+Cell["The following options can be given: ", "Notes",
+ CellID->1873957969,ExpressionUUID->"c46c23a5-2a60-41c9-8393-f313a6ca9ca6"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {
+       TaggingRules, "Openers", "PrimaryExamplesSection"}, Open], 
+      Alternatives[True, Open]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{
+    13.600000000000001`, {4.251494140625001, 9.348505859375}}]],
+  ExpressionUUID->"6b9d1fd1-349c-4956-95bf-bd40e02ce635"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"76ee5bdf-a414-445c-ae8c-a6621bc94173"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(0)", "ExampleCount",ExpressionUUID->
+  "41d1fed2-82f2-411f-b91e-78cc94eee655"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellTags->"PrimaryExamplesSection",
+ CellID->1656986719,ExpressionUUID->"9f690aa5-7636-4e87-8683-c3c21a6fe8a3"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<SPQR`\>\"", "]"}]], "Input", "ExampleInitialization",
+ CellLabel->"In[1]:=",
+ CellID->515777582,ExpressionUUID->"a092e994-0032-412c-9bf5-eb500cdd9431"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, 
+  Closed]]]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"b5555df4-b552-444f-bda9-3f0dc6360d87"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900, 830},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReconstructTargetCompanionMatrices",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}, 
+    "AllOptsTable" -> Closed, "NotesSection" -> Closed}, "NewStyles" -> True, 
+  "CitationPopupData" -> $Failed, "ShowCitation" -> False, "HasOptions" -> 
+  True, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
+  "Metadata" -> {
+   "built" -> "{2025, 7, 29, 23, 1, 35.857794}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "S P Q R Symbol", "language" -> "en", "paclet" -> "SPQR", 
+    "status" -> "None", "summary" -> 
+    "ReconstructTargetCompanionMatrices[targetcmatsystem] Reconstructs the \
+remainder of rational functions encoded in the companion matrices. \
+targetcmatsystem should be the output of BuildTargetCompanionMatrices or \
+BuildCompanionMatrices", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
+    "ReconstructTargetCompanionMatrices", "titlemodifier" -> "", 
+    "metadescription" -> "", "windowtitle" -> 
+    "ReconstructTargetCompanionMatrices", "type" -> "Symbol", "uri" -> 
+    "SPQR/ref/ReconstructTargetCompanionMatrices"}},
+CellContext->"Global`",
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "14.2 for Mac OS X ARM (64-bit) (March 16, 2025)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"706c1a4f-5f31-43e1-b7b9-e8966dfb3fea"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[8099, 216, 1438, 38, 34, "PrimaryExamplesSection",ExpressionUUID->"9f690aa5-7636-4e87-8683-c3c21a6fe8a3",
+   CellTags->"PrimaryExamplesSection",
+   CellID->1656986719]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 12076, 312}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[602, 21, 3017, 72, 50, "AnchorBarGrid",ExpressionUUID->"d5d59971-2557-4cb0-9710-d9f4a7953f12",
+ CellID->1],
+Cell[3622, 95, 87, 0, 22, "ContextNameCell",ExpressionUUID->"0e4b97c8-8e60-4b1a-84c7-4a8c017065af"],
+Cell[CellGroupData[{
+Cell[3734, 99, 577, 14, 57, "ObjectNameGrid",ExpressionUUID->"2061218d-3693-4b28-acfa-0b8599ee0d3d"],
+Cell[4314, 115, 1573, 39, 127, "Usage",ExpressionUUID->"b758f7df-dc51-4e85-b46b-7c96c0782bc4",
+ CellID->1963090690]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5924, 159, 1916, 48, 34, "NotesSection",ExpressionUUID->"07c5c058-f80d-4354-ada2-855d36a68844",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->169653584],
+Cell[7843, 209, 129, 1, 70, "Notes",ExpressionUUID->"c46c23a5-2a60-41c9-8393-f313a6ca9ca6",
+ CellID->1873957969]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+Cell[CellGroupData[{
+Cell[8099, 216, 1438, 38, 34, "PrimaryExamplesSection",ExpressionUUID->"9f690aa5-7636-4e87-8683-c3c21a6fe8a3",
+ CellTags->"PrimaryExamplesSection",
+ CellID->1656986719],
+Cell[9540, 256, 193, 3, 29, "Input",ExpressionUUID->"a092e994-0032-412c-9bf5-eb500cdd9431",
+ CellID->515777582]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, Closed]]]],
+Cell[9851, 264, 78, 0, 40, "FooterCell",ExpressionUUID->"b5555df4-b552-444f-bda9-3f0dc6360d87"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

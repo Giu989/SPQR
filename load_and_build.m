@@ -47,6 +47,9 @@ builtPac = PacletBuild[dir] // Quiet
 PacletDirectoryUnload[dir];
 
 
+builtPac["PacletArchive"]
+
+
 installed = PacletInstall[builtPac["PacletArchive"],ForceVersionInstall -> True]
 
 
