@@ -11,7 +11,7 @@ Get["polydiv`"]*)
 <<spqr_load.m
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Example 1 \[LongDash] Overview of main functions*)
 
 
@@ -37,6 +37,9 @@ BuildPolynomialSystem[targetList,ideal,variables,7,"IrreducibleMonomials"->irred
 
 
 output = BuildPolynomialSystem[targetList,ideal,variables,8,"IrreducibleMonomials"->irredMonomials]
+
+
+BuildPolynomialSystem[targetList,ideal,variables,{7,10},"IrreducibleMonomials"->irredMonomials,"PrintDebugInfo"->2]
 
 
 (*if the irreducible monomials option is not specified, the system will assume whatever irreducible monomials it finds are correct*)

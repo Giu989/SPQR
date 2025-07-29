@@ -8,7 +8,7 @@ BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,Option
 	,
 	cmatsMonomials = Outer[#*irreducibleMonomials&,variables]//Flatten;
 	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
-	If[solverOutput===$Failed,Return[$Failed]];
+	If[Head[solverOutput]===$Failed,Return[$Failed]];
 	
 	(*take companion matrices using FFAlgTake and then return them as outputs to the graph with FFGraphOutput*)
 	cpmatrixNames = variables // Map[ToString] // Map[StringJoin[#,Unique[]//ToString]&] // Map[ToExpression] // Map[m];
