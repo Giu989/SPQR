@@ -26,8 +26,10 @@ FindIrreducibleMonomials[polySystem_,vars_,OptionsPattern[]]:=Module[{gb,leading
 FindIrreducibleMonomials[polySystem_,OptionsPattern[]]:=FindIrreducibleMonomials[polySystem,polySystem//Variables,OptionsPattern[]];*)
 
 
+primeList = Range[201]-1//Map[FFPrimeNo];
+
 (*leading exponent vector of each basis element*)
-leadingExps[gb_,vars_,ord_]:=Exponent[First@MonomialList[#,vars,ord],vars]&/@gb;
+(*leadingExps[gb_,vars_,ord_]:=Exponent[First@MonomialList[#,vars,ord],vars]&/@gb;*)
 
 (*coordinate-wise divisibility test for exponent vectors*)
 dividesQ[e_,m_]:=And@@Thread[m>=e];
@@ -41,19 +43,19 @@ FindIrreducibleMonomials[polySystem_,vars_,OptionsPattern[]]:=Module[{ord,params
 	(*numerical substitution of the parameters*)
 	params = Complement[polySystem // Variables,vars];
 	(*paramsNsub =params->1+10^-1 (RandomSample[Range[1,10^3+(params//Length)],params//Length]//Map[Prime])(*/(RandomSample[Range[1,10+(params//Length)],params//Length]//Map[Prime])*)//Thread;*)
-	paramsNsub =params->RandomInteger[{1,10^20+(params//Length)},params//Length]//Thread;
+	paramsNsub = Thread[params->(RandomInteger[{1,10^8+(params//Length)},params//Length]//Map[Prime])];
 	
-	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->FFPrimeNo[RandomInteger[{0,200}]]];
+	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->RandomSample[primeList,1][[1]]];
 	PrintTemporary["gb finished"];
 	
-	lt=leadingExps[gb,vars,ord];
-	n=Length[vars];
+	lt = MonomialList[gb, vars, ord][[;;, 1]] // Map[Exponent[#, vars]&];
+	n = Length[vars];
 	
 	pure=Table[Select[lt,#[[i]]>0&&Total[Drop[#,{i}]]==0&],{i,n}];
-	If[MemberQ[pure,{}],Return[\[Infinity]]];
 	
 	(*check if non zero dimensional ideal*)
-	If[MemberQ[pure,{}],Return[\[Infinity]]];
+	(*If[MemberQ[pure,{}],Return[\[Infinity]]];*) (*<--- edge case for gb = {1} this check seems to fail. next line does not*)
+	If[Select[lt,(Length[DeleteCases[#,0]]==1)&] // Apply[Plus] // MemberQ[#,0]&, Return[\[Infinity]]];
 	
 	(*coordinate bounds on dimensions: minimal pure powers + 1*)
 	bounds=(Min/@MapThread[#1[[All,#2]]&,{pure,Range[n]}])-1;
@@ -77,7 +79,7 @@ FindIrreducibleMonomials[polySystem_,vars_,OptionsPattern[]]:=Module[{ord,params
 			];
 		];
 	];
-	Return[MonomialList[Plus@@res,vars,ord]];
+	Return[MonomialList[Plus@@res,vars,ord]//DeleteCases[0]];
 ];
 
 
