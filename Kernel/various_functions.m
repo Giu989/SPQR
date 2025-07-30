@@ -35,17 +35,28 @@ primeList = Range[201]-1//Map[FFPrimeNo];
 dividesQ[e_,m_]:=And@@Thread[m>=e];
 
 (*finding irreducible monomials for a system of equations*)
-Options[FindIrreducibleMonomials] = {"MonomialOrder" -> Lexicographic};
-FindIrreducibleMonomials[polySystem_,vars_,OptionsPattern[]]:=Module[{ord,params,paramsNsub,gb,leadingexps,lt,n,pure,bounds,todo,seen=<||>,res={},v,vv,i},
+Options[FindIrreducibleMonomials] = {"MonomialOrder" -> Lexicographic,"Sort"->False};
+FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
+	{
+	ord,params,paramsNsub,gb,leadingexps,lt,n,pure,bounds,todo,seen=<||>,res={},v,vv,i,prime,vars
+	},
 
 	ord = OptionValue["MonomialOrder"];
+	prime = RandomSample[primeList,1][[1]];
 	
 	(*numerical substitution of the parameters*)
-	params = Complement[polySystem // Variables,vars];
+	params = Complement[polySystem // Variables,vars1];
 	(*paramsNsub =params->1+10^-1 (RandomSample[Range[1,10^3+(params//Length)],params//Length]//Map[Prime])(*/(RandomSample[Range[1,10+(params//Length)],params//Length]//Map[Prime])*)//Thread;*)
 	paramsNsub = Thread[params->(RandomInteger[{1,10^8+(params//Length)},params//Length]//Map[Prime])];
 	
-	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->RandomSample[primeList,1][[1]]];
+	If[OptionValue["Sort"],
+		Print["Warning: sorting monomials. Please use the new ordering provided as the second output of this function"];
+		vars = GroebnerBasis`DistributedTermsList[polySystem // ReplaceAll[paramsNsub],vars1,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->prime,Sort->True]//Last;
+		,
+		vars = vars1;
+	];
+	
+	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->prime];
 	PrintTemporary["gb finished"];
 	
 	lt = MonomialList[gb, vars, ord][[;;, 1]] // Map[Exponent[#, vars]&];
@@ -62,7 +73,7 @@ FindIrreducibleMonomials[polySystem_,vars_,OptionsPattern[]]:=Module[{ord,params
 	
 	todo={ConstantArray[0,n]};
 	
-	(*breadth first walk inside staircase*)
+	(*breadth first staircase walk*)
 	While[todo=!={},
 		v=First@todo;
 		todo=Rest@todo;
@@ -79,7 +90,11 @@ FindIrreducibleMonomials[polySystem_,vars_,OptionsPattern[]]:=Module[{ord,params
 			];
 		];
 	];
-	Return[MonomialList[Plus@@res,vars,ord]//DeleteCases[0]];
+	If[OptionValue["Sort"],
+		Return[{MonomialList[Plus@@res,vars,ord]//DeleteCases[0],vars}];
+	,
+		Return[MonomialList[Plus@@res,vars,ord]//DeleteCases[0]];
+	];
 ];
 
 
