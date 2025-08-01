@@ -24,6 +24,7 @@ SortVariables::usage = "SortVariables[ideal,vars] Sorts variables in the list to
 j::usage = " ";
 extraparam::usage = " ";
 targ::usage = " ";
+SPQRGraph::usage = " ";
 (*m::usage = " ";*)
 
 

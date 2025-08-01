@@ -131,7 +131,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	(*generating the FiniteFLow graph and loading in the unique non zero values*)
 	printDebug1["building FiniteFlow Graph...",1];
 	tm = AbsoluteTiming[
-		graphName = StringJoin["ffGraph","$",RandomInteger[10^15]//ToString];
+		graphName = Unique[SPQRGraph]//ToString;
 		FFDeleteGraph[graphName];
 		FFNewGraph[graphName,"in",params];
 		FFAlgRatFunEval[graphName, "uniqueNonZeroes", {"in"}, params, valuesUnique];
