@@ -31,7 +31,21 @@ SPQRGraph::usage = " ";
 Begin["`Private`"]
 
 
-Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R: loaded successfully"]
+(*welcome message*)
+If[TrueQ@$Notebooks,
+	Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R: loaded successfully"]
+,
+	Print["SPQR: loaded successfully"]
+];
+
+
+(*documentation button*)
+If[TrueQ@$Notebooks,
+  Print @ Button["Open documentation",
+    Documentation`HelpLookup["paclet:SPQR/guide/SPQR"],
+    Method -> "Queued"
+  ];
+];
 
 
 Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
