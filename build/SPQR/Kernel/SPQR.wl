@@ -18,18 +18,34 @@ BuildCompanionMatrices::usage = "BuildCompanionMatrices[ideal,vars,w,irreds] Bui
 BuildTargetCompanionMatrices::usage = "BuildTargetCompanionMatrices[targets,cmatsystem] Builds companion matrices for given target polynomials. cmatsystem should be the output of BuildCompanionMatrices";
 ReconstructTargetCompanionMatrices::usage = "ReconstructTargetCompanionMatrices[targetcmatsystem] Reconstructs the remainder of rational functions encoded in the companion matrices. targetcmatsystem should be the output of BuildTargetCompanionMatrices or BuildCompanionMatrices";
 BuildCharacteristicPolynomials::usage = "BuildCharacteristicPolynomials[targetcmatsystem] Builds the characteristic polynomials for each companion matrix in targetcmatsystem\n" <> "BuildCharacteristicPolynomials[targetcmatsystem,indexlist] builds the characteristic polynomials of the matrices indexed in indexlist";
-ReconstructCharacteristicPolynomials::usage = "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem] reconstructs each coefficient of the characteristic polynomials produced by BuildCharacteristicPolynomials\n" <> "ReconstructCharacteristicPolynomials[targetcmatsystem,coefficientlist] reconstructs only the terms given in coefficientlist";
+ReconstructCharacteristicPolynomials::usage = "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem] reconstructs each coefficient of the characteristic polynomials produced by BuildCharacteristicPolynomials\n" <> "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem,coefficientlist] reconstructs only the terms given in coefficientlist";
 FFDet::usage = "FFDet[matrix] computes the determinant of a matrix using the Faddeev\[Dash]LeVerrier algorithm";
+SortVariables::usage = "SortVariables[ideal,vars] Sorts variables in the list to try make Groebner Basis computations faster";
 j::usage = " ";
 extraparam::usage = " ";
 targ::usage = " ";
+SPQRGraph::usage = " ";
 (*m::usage = " ";*)
 
 
 Begin["`Private`"]
 
 
-Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R: loaded successfully"]
+(*welcome message*)
+If[TrueQ@$Notebooks,
+	Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R: loaded successfully"]
+,
+	Print["SPQR: loaded successfully"]
+];
+
+
+(*documentation button*)
+If[TrueQ@$Notebooks,
+  Print @ Button["Open documentation",
+    Documentation`HelpLookup["paclet:SPQR/guide/SPQR"],
+    Method -> "Queued"
+  ];
+];
 
 
 Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
@@ -46,7 +62,9 @@ SetAttributes[
 	{
 	FindIrreducibleMonomials,BuildPolynomialSystem,ReconstructPolynomialRemainder,
 	BuildCompanionMatrices,BuildTargetCompanionMatrices,ReconstructTargetCompanionMatrices,
-	j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials,FFDet
+	j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials,FFDet,
+	SortVariables,
+	Nothing
 	}
 	, {ReadProtected}
 ];

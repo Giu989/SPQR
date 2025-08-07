@@ -113,7 +113,8 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	
 	(*parameters of system*)
-	params = Complement[Join[ideal // Variables, targets // Variables],variables]~Join~{extraparam};
+	params = Complement[Join[ideal // Variables, targets // Variables],variables];
+	If[params==={},params={extraparam}];
 	
 	(*generating adjacency lists and take patterns for FiniteFlow loading*)
 	printDebug1["generating system...",1];
@@ -130,7 +131,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	(*generating the FiniteFLow graph and loading in the unique non zero values*)
 	printDebug1["building FiniteFlow Graph...",1];
 	tm = AbsoluteTiming[
-		graphName = StringJoin["ffGraph","$",RandomInteger[10^15]//ToString];
+		graphName = Unique[SPQRGraph]//ToString;
 		FFDeleteGraph[graphName];
 		FFNewGraph[graphName,"in",params];
 		FFAlgRatFunEval[graphName, "uniqueNonZeroes", {"in"}, params, valuesUnique];
