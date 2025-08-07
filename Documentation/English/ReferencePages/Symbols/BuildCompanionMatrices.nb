@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     55037,       1438]
-NotebookOptionsPosition[     43603,       1196]
-NotebookOutlinePosition[     44371,       1222]
-CellTagsIndexPosition[     44291,       1217]
+NotebookDataLength[     55105,       1440]
+NotebookOptionsPosition[     43673,       1198]
+NotebookOutlinePosition[     44439,       1224]
+CellTagsIndexPosition[     44359,       1219]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -244,10 +244,10 @@ Cell[TextData[{
     "d6628f8a-99c3-4d5a-a661-79197fd54900"], 
    DynamicModuleBox[{$CellContext`nbobj$$ = NotebookObject[
     "26248c1b-2356-471d-8fa6-8b4ba758c7af", 
-     "66493af8-cc71-46cd-9bf7-0312a8a8325f"], $CellContext`cellobj$$ = 
+     "d19d3e96-e968-4d53-a3a0-782cc0016adb"], $CellContext`cellobj$$ = 
     CellObject[
     "6dd61bc1-30db-4f15-aed1-2efcbe04642c", 
-     "4c8e99b7-0523-422a-8dc0-4e52b4ccc124"]}, 
+     "0a6006c9-6826-4d07-aa61-c83147cbce26"]}, 
     TemplateBox[{
       GraphicsBox[{{
          Thickness[0.06], 
@@ -1165,9 +1165,11 @@ Cell["Keywords", "KeywordsSection",
  CellID->946105961,ExpressionUUID->"5e0bdc22-8f21-4d0a-9a35-14908336daa7"],
 
 Cell["\<\
-Polynomial Ideal Reduction Remainder Quotient Groebner Basis Division Equation\
+Polynomial Ideal Reduction Remainder Quotient Groebner Basis Division \
+Equation Companion Matrix\
 \>", "Keywords",
- CellChangeTimes->{3.9627191129395733`*^9},
+ CellChangeTimes->{
+  3.9627191129395733`*^9, {3.963575266799203*^9, 3.9635752669941483`*^9}},
  CellID->1233964139,ExpressionUUID->"5bc84f31-e0de-4a7a-b9b6-89c57446fd72"]
 }, Open  ]],
 
@@ -1198,7 +1200,7 @@ WindowSize->{842, 876},
 WindowMargins->{{32, Automatic}, {Automatic, 12}},
 TaggingRules-><|"Paclet" -> "SPQR"|>,
 CellContext->"Global`",
-FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (March 16, 2025)",
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "FunctionPageStylesExt.nb", 
   CharacterEncoding -> "UTF-8"],
 ExpressionUUID->"26248c1b-2356-471d-8fa6-8b4ba758c7af"
@@ -1216,7 +1218,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"ExtendedExamples", 44096, 1210}
+ {"ExtendedExamples", 44164, 1212}
  }
 *)
 (*NotebookFileOutline
@@ -1319,7 +1321,7 @@ Cell[22085, 600, 484, 6, 26, "Notes",ExpressionUUID->"de03eca9-0824-4ef7-9624-d5
 Cell[CellGroupData[{
 Cell[22594, 610, 312, 6, 26, "Input",ExpressionUUID->"9d035ce9-ead7-4bdf-b6b3-4566c59e3732",
  CellID->534846806],
-Cell[22909, 618, 1964, 37, 475, "Output",ExpressionUUID->"0d684fc8-8322-40e6-98d0-34e621cae8e0",
+Cell[22909, 618, 1964, 37, 473, "Output",ExpressionUUID->"0d684fc8-8322-40e6-98d0-34e621cae8e0",
  CellID->2122906985]
 }, Open  ]]
 }, Open  ]],
@@ -1424,19 +1426,19 @@ Cell[42320, 1156, 152, 2, 34, "Categorization",ExpressionUUID->"a9e630f1-51c4-47
 Cell[CellGroupData[{
 Cell[42509, 1163, 110, 1, 20, "KeywordsSection",ExpressionUUID->"5e0bdc22-8f21-4d0a-9a35-14908336daa7",
  CellID->946105961],
-Cell[42622, 1166, 226, 4, 20, "Keywords",ExpressionUUID->"5bc84f31-e0de-4a7a-b9b6-89c57446fd72",
+Cell[42622, 1166, 296, 6, 37, "Keywords",ExpressionUUID->"5bc84f31-e0de-4a7a-b9b6-89c57446fd72",
  CellID->1233964139]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[42885, 1175, 119, 1, 30, "TemplatesSection",ExpressionUUID->"37603ae2-860e-4800-b331-05c569ed0c5d",
+Cell[42955, 1177, 119, 1, 30, "TemplatesSection",ExpressionUUID->"37603ae2-860e-4800-b331-05c569ed0c5d",
  CellID->985705094],
-Cell[43007, 1178, 149, 2, 70, "Template",ExpressionUUID->"ec2d2cda-f509-4f4d-a932-787a60c771a9",
+Cell[43077, 1180, 149, 2, 70, "Template",ExpressionUUID->"ec2d2cda-f509-4f4d-a932-787a60c771a9",
  CellID->1056661900],
-Cell[43159, 1182, 138, 2, 70, "Template",ExpressionUUID->"1fb500d5-201a-43cc-a536-aef839320982",
+Cell[43229, 1184, 138, 2, 70, "Template",ExpressionUUID->"1fb500d5-201a-43cc-a536-aef839320982",
  CellID->1774276257],
-Cell[43300, 1186, 135, 2, 70, "Template",ExpressionUUID->"a646ee64-149b-4f25-a5a9-090a6f92d9d6",
+Cell[43370, 1188, 135, 2, 70, "Template",ExpressionUUID->"a646ee64-149b-4f25-a5a9-090a6f92d9d6",
  CellID->303129157],
-Cell[43438, 1190, 137, 2, 70, "Template",ExpressionUUID->"fb7daa51-b159-43cc-986b-323da3e0fa1d",
+Cell[43508, 1192, 137, 2, 70, "Template",ExpressionUUID->"fb7daa51-b159-43cc-986b-323da3e0fa1d",
  CellID->860531015]
 }, Closed]]
 }, Open  ]]
