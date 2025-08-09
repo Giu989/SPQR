@@ -37,8 +37,6 @@ If[TrueQ@$Notebooks,
 ,
 	Print["SPQR: loaded successfully"]
 ];
-
-
 (*documentation button*)
 If[TrueQ@$Notebooks,
   Print @ Button["Open documentation",
@@ -48,6 +46,7 @@ If[TrueQ@$Notebooks,
 ];
 
 
+(*load in source code*)
 Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_cmat.m"}]];

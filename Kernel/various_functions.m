@@ -56,7 +56,7 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	];
 	
 	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->prime];
-	PrintTemporary["gb finished"];
+	(*PrintTemporary["gb finished"];*)
 	
 	lt = MonomialList[gb, vars, ord][[;;, 1]] // Map[Exponent[#, vars]&];
 	n = Length[vars];

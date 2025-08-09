@@ -216,7 +216,13 @@ BuildPolynomialSystem[targets_,ideal_,variables_,minMaxWeight_List,opts : Option
 	];
 	
 	If[Head[output] =!= $Failed, 
-		Print["system closed at weight: ", index-1];
+		(*fix no GUI line spacing*)
+		If[TrueQ[$Notebooks],
+			Print["system closed at weight: ", index-1];
+		,
+			Print[" "];
+			Print["system closed at weight: ", index-1];
+		];
 		Return[output];
 	,
 		(*Return[Head[output]];*)
