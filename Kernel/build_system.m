@@ -200,12 +200,14 @@ BuildPolynomialSystem[targets_,ideal_,variables_,minMaxWeight_List,opts : Option
 			(*printDebug["\n\n",(opts//Association)["PrintDebugInfo"],1];*)
 			(*printDebug[StringJoin["trying weight: ",ToString[index], ", found ", ToString[output[[1]]], " monomials at weight: ",ToString[index-1]],(opts//Association)["PrintDebugInfo"],1];
 			printDebug["\n\n",(opts//Association)["PrintDebugInfo"],1];*)
+			If[!TrueQ[$Notebooks],Print[StringJoin["trying weight: ",ToString[index], ", found ", ToString[output[[1]]], " monomials at weight: ",ToString[index-1]]];];
 			If[index === minMaxWeight[[2]],
 				output = BuildPolynomialSystem[targets,ideal,variables,index,opts];
 			,
 				output = Block[{Print=Nothing},BuildPolynomialSystem[targets,ideal,variables,index,opts]];
 			];
 			index++;
+			(*if no GUI*)
 		];
 		,
 		StringJoin["trying weight: ",ToString[index], ", found ", ToString[output[[1]]], " monomials at weight: ",ToString[index-1]]
