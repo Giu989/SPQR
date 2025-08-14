@@ -114,7 +114,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	
 	(*parameters of system*)
 	params = Complement[Join[ideal // Variables, targets // Variables],variables];
-	If[params==={},params={extraparam}];
+	If[Length[params]<2,params=params~Join~{extraparam}];
 	
 	(*generating adjacency lists and take patterns for FiniteFlow loading*)
 	printDebug1["generating system...",1];

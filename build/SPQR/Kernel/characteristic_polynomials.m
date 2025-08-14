@@ -92,7 +92,7 @@ FFDet[matrix_,opts : OptionsPattern[]]:=Module[
 	If[!SquareMatrixQ[matrix],Print["not a square matrix"];Return[$Failed]];
 	
 	params = matrix // Variables;
-	If[params=={},params={extraparam}];
+	If[Length[params]<2,params=params~Join~{extraparam}];
 	
 	FFNewGraph[graphname//ToString,"in",params];
 	FFAlgRatExprEval[graphname//ToString,m[matname//ToString],{"in"},params,matrix//Flatten];
