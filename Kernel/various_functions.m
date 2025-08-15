@@ -67,7 +67,7 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	(*If[MemberQ[pure,{}],Return[\[Infinity]]];*) (*<--- edge case for gb = {1} this check seems to fail. next line does not*)
 	If[Select[lt,(Length[DeleteCases[#,0]]==1)&] // Apply[Plus] // MemberQ[#,0]&, Return[\[Infinity]]];
 	
-	(*coordinate bounds on dimensions: minimal pure powers + 1*)
+	(*coordinate bounds on dimensions: minimal pure powers - 1*)
 	bounds=(Min/@MapThread[#1[[All,#2]]&,{pure,Range[n]}])-1;
 	
 	todo={ConstantArray[0,n]};
