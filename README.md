@@ -9,7 +9,7 @@ To install, open a Mathematica window and run the command
 ```
 ResourceFunction["GitHubInstall"]["giu989","SPQR"]
 ```
-The package should now be loadable with `<<SPQR\` `
+The package should now be loadable with ```<<SPQR` ```
 ### Documentation
 Upon loading the package, documentation can be accessed via the "Open documentation" button (if running via a GUI). Documentation will also be provided with the accompanying manuscript upon release.
 ### Uninstallation
