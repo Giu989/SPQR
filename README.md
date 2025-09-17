@@ -17,7 +17,7 @@ The package should now be loadable with
 ```wolfram
 <<SPQR`
 ```
-The installation directory can be found with
+If required, the installation directory can be found with
 ```wolfram
 "Location" /. PacletFind["SPQR"][[1]][[1]]
 ```
@@ -30,11 +30,7 @@ where ``x-x-x`` is changed to the desired version. The install location director
 ### Updating
 To update to the latest version, simply rerun the automatic install command above. The package should now be updated to the latest available version.
 ### Documentation
-Upon loading the package, extensive documentation can be accessed via the "Open documentation" button (if running via a GUI). Furthermore, all publicly available functions have documentation pages that can be accessed directly with
-```wolfram
-? FunctionName
-```
-in an identical manner to standard built in functions. Documentation will also be provided in the accompanying manuscript upon release.
+Upon loading the package, extensive documentation can be accessed via the "Open documentation" button (if running via a GUI). Furthermore, all publicly available functions have documentation pages that can be accessed in an identical manner to standard built in functions. Documentation will also be provided in the accompanying manuscript upon release.
 ### Uninstallation
 To uninstall, open a Mathematica window and run the command
 ```wolfram
