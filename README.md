@@ -17,12 +17,16 @@ The package should now be loadable with
 ```wolfram
 <<SPQR`
 ```
+The installation directory can be found with
+```wolfram
+"Location" /. PacletFind["SPQR"][[1]][[1]]
+```
 ### Installation from source
 To install from source, clone the git repository to your directory of choice. Then open a Mathematica window and run the command
 ```wolfram
 PacletInstall["/path-to-spqr/build/SPQR-x.x.x.paclet"];
 ``` 
-where ``x-x-x`` is changed to the desired version.
+where ``x-x-x`` is changed to the desired version. The install location directory can be found as above.
 ### Updating
 To update to the latest version, simply rerun the automatic install command above. The package should now be updated to the latest available version.
 ### Documentation
