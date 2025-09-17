@@ -26,15 +26,14 @@ FindIrreducibleMonomials[polySystem_,vars_,OptionsPattern[]]:=Module[{gb,leading
 FindIrreducibleMonomials[polySystem_,OptionsPattern[]]:=FindIrreducibleMonomials[polySystem,polySystem//Variables,OptionsPattern[]];*)
 
 
+(*finding irreducible monomials for a system of equations*)
+(*adapted from "Genealogical Constraints from Master Integral Counting" by G. Crisanti, L. Lippstreu, A. J. McLeod and M. Polackova, to appear soon*)
+
 primeList = Range[201]-1//Map[FFPrimeNo];
 
-(*leading exponent vector of each basis element*)
-(*leadingExps[gb_,vars_,ord_]:=Exponent[First@MonomialList[#,vars,ord],vars]&/@gb;*)
-
-(*coordinate-wise divisibility test for exponent vectors*)
+(*coordinate wise divisibility test for exponent vectors*)
 dividesQ[e_,m_]:=And@@Thread[m>=e];
 
-(*finding irreducible monomials for a system of equations*)
 Options[FindIrreducibleMonomials] = {"MonomialOrder" -> Lexicographic,"Sort"->False};
 FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	{
@@ -67,7 +66,7 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	(*If[MemberQ[pure,{}],Return[\[Infinity]]];*) (*<--- edge case for gb = {1} this check seems to fail. next line does not*)
 	If[Select[lt,(Length[DeleteCases[#,0]]==1)&] // Apply[Plus] // MemberQ[#,0]&, Return[\[Infinity]]];
 	
-	(*coordinate bounds on dimensions: minimal pure powers + 1*)
+	(*coordinate bounds on dimensions: minimal pure powers - 1*)
 	bounds=(Min/@MapThread[#1[[All,#2]]&,{pure,Range[n]}])-1;
 	
 	todo={ConstantArray[0,n]};
