@@ -34,7 +34,7 @@ Begin["`Private`"]
 (*identify version*)
 With[{pac = PacletFind["SPQR"]},
   If[Length[pac] > 0,
-    version = ("Version" //ReplaceAll[First[pac]]);
+    version = ("Version" //ReplaceAll[pac[[1]][[1]]]);
   ];
 ];
 
