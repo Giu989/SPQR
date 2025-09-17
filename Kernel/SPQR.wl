@@ -31,11 +31,19 @@ SPQRGraph::usage = " ";
 Begin["`Private`"]
 
 
+(*identify version*)
+With[{pac = PacletFind["SPQR"]},
+  If[Length[pac] > 0,
+    version = ("Version" //ReplaceAll[First[pac]]);
+  ];
+];
+
+
 (*welcome message*)
 If[TrueQ@$Notebooks,
-	Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R: loaded successfully"]
+	Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R v" <> version <> ": Vsevolod Chestnov and Giulio Crisanti (2025)"]
 ,
-	Print["SPQR: loaded successfully"]
+	Print["SPQR v" <> version <> ": Vsevolod Chestnov and Giulio Crisanti (2025)"]
 ];
 (*documentation button*)
 If[TrueQ@$Notebooks,
