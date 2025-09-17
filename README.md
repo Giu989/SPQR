@@ -22,11 +22,11 @@ To install from source, clone the git repository to your directory of choice. Th
 ```wolfram
 PacletInstall["/path-to-spqr/build/SPQR-x.x.x.paclet"];
 ``` 
-where ``x-x-x`` is changed to the desired version
+where ``x-x-x`` is changed to the desired version.
 ### Updating
-To update to the latest version, simply rerun the install command above. The package should now be updated to the latest available version.
+To update to the latest version, simply rerun the automatic install command above. The package should now be updated to the latest available version.
 ### Documentation
-Upon loading the package, extensive documentation can be accessed via the "Open documentation" button (if running via a GUI). Please note that all publicly available functions have documentation pages that can be accessed directly with
+Upon loading the package, extensive documentation can be accessed via the "Open documentation" button (if running via a GUI). Furthermore, all publicly available functions have documentation pages that can be accessed directly with
 ```wolfram
 ? FunctionName
 ```
