@@ -8,25 +8,31 @@ Please note currently this is an early release/beta.
 ### Dependencies
 SPQR depends on _FiniteFlow_, which can be found [here](https://github.com/peraro/finiteflow).
 Mathematica 13.1+ is required for SPQR to function correctly.
-### Installation
+### Automatic Installation
 To install, open a Mathematica window and run the command
 ```wolfram
-ResourceFunction["GitHubInstall"]["giu989","SPQR"]
+ResourceFunction["GitHubInstall"]["giu989","SPQR"];
 ```
 The package should now be loadable with
 ```wolfram
 <<SPQR`
 ```
-or
+### Installation from source
+To install from source, clone the git repository to your directory of choice. Then open a Mathematica window and run the command
 ```wolfram
-Get["SPQR`"]
-```
+PacletInstall["/path-to-spqr/build/SPQR-x.x.x.paclet"];
+``` 
+where ``x-x-x`` is changed to the desired version
 ### Updating
 To update to the latest version, simply rerun the install command above. The package should now be updated to the latest available version.
 ### Documentation
-Upon loading the package, extensive documentation can be accessed via the "Open documentation" button (if running via a GUI). Documentation will also be provided with the accompanying manuscript upon release.
+Upon loading the package, extensive documentation can be accessed via the "Open documentation" button (if running via a GUI). Please note that all publicly available functions have documentation pages that can be accessed directly with
+```wolfram
+? FunctionName
+```
+in an identical manner to standard built in functions. Documentation will also be provided in the accompanying manuscript upon release.
 ### Uninstallation
 To uninstall, open a Mathematica window and run the command
 ```wolfram
-PacletUninstall["SPQR"]
+PacletUninstall["SPQR"];
 ```
