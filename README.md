@@ -6,7 +6,7 @@ A package for polynomial reduction and elimination theory over finite fields. It
 Please note currently this is an early release/beta.
 ## Setting up SPQR
 ### Dependencies
-SPQR depends on _FiniteFlow_, which can be found [here](https://github.com/peraro/finiteflow).
+SPQR depends on ``FiniteFlow``, which can be found [here](https://github.com/peraro/finiteflow).
 Mathematica 13.1+ is required for SPQR to function correctly.
 ### Automatic Installation
 To install, open a Mathematica window and run the command
