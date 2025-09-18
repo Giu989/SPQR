@@ -1,12 +1,12 @@
-# SPQR
+# SP$\mathbb{Q}$R
 A package for polynomial reduction and elimination theory over finite fields. It is based on the upcoming publication
 - Vsevolod Chestnov and Giulio Crisanti, *SPQR: A Package for Multivariate Polynomial Reduction and Elimination over Finite Fields*,
   _to appear soon_
 
 Please note currently this is an early release/beta.
-## Setting up SPQR
+## Setting up SP$\mathbb{Q}$R
 ### Dependencies
-SPQR depends on ``FiniteFlow``, which can be found [here](https://github.com/peraro/finiteflow).
+SP$\mathbb{Q}$R depends on ``FiniteFlow``, which can be found [here](https://github.com/peraro/finiteflow).
 Mathematica 13.1+ is required for SPQR to function correctly.
 ### Automatic Installation
 To install, open a Mathematica window and run the command
