@@ -4,7 +4,7 @@ A package for polynomial reduction and elimination theory over finite fields. It
   _to appear soon_
 
 Please note currently this is an early release/beta.
-## Setting up SP$\mathbb{Q}$R
+## Setting up SP$`\mathbb{Q}`$R
 ### Dependencies
 SP$\mathbb{Q}$R depends on ``FiniteFlow``, which can be found [here](https://github.com/peraro/finiteflow).
 Mathematica 13.1+ is required for SPQR to function correctly.
