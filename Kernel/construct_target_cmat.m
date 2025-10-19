@@ -78,9 +78,14 @@ ffinvMatrix[input_,matrixList_,position_]:=Module[{},
 		FFSolverOnlyHomogeneous[graphName,onnF[is@@invName]];
 		learn = FFSparseSolverLearn[graphName, Range[2*matSize]];
 		
+		(*invalid permutation <-> the system cannot be inverted*)
+		If[Range[Length[("DepVars"/.learn)]]=!=Sort["DepVars"/.learn],
+			Print["ERROR: a (sub)expression of the target companion matrices could not be inverted. Probable cause is zero determinant.\nCheck if you are trying to invert a term which is inside the ideal."];
+			Abort[];
+		];
+		
 		shuffleIndex = (Table[{1,i},{i,1,matSize^2}]//Partition[#,matSize]&)[[InversePermutation["DepVars"/.learn]]]//Flatten[#,1]&;
 		FFAlgTake[graphName,invName,{onnF[is@@invName]},shuffleIndex];
-		
 		
 		Return[invName];
 ];
@@ -88,16 +93,12 @@ ffinvEval[input___]:=Module[{},
 		position = {input}//Map[Position[matrixList,#,{1}]&]//Flatten;
 		mathematicaOutput = (*i[input]*)onnF[(matrixList//Length)+1];
 		(*finite flow graph construction*)
-		If[(*!((FFGraphDraw[graphName]//Cases[#,_i,\[Infinity]]&)//ContainsAny[{i[input]}])*)True,
-		(*If[!(matrixList//ContainsAny[{i[input]}]),*)
+		If[True,
 			matrixList=matrixList~Join~{ffinvMatrix[input,matrixList,position]} // DeleteDuplicates;
 			,
-			(*still need to append matrix list with this. matrixList should ideally start loaded with everything already present in the graph*)
-			(*i this i can do this by extracting information from the graph, but surely there is a better way?*)
 			matrixList=matrixList~Join~{onnF[(matrixList//Length)+1]};
 		];
-		(**)
-		(*matrixList = matrixList~Join~{mathematicaOutput} //DeleteDuplicates;*)
+		
 		Return[mathematicaOutput];
 ];
 
