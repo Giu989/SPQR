@@ -35,7 +35,7 @@ createSeeds[length_,weight_]:=Join @@ Permutations /@ IntegerPartitions[weight, 
 createAllSeeds[length_,maxweight_]:=createSeeds[length,#]&/@Range[0,maxweight]//Flatten[#,1]&;
 
 
-Options[BuildPolynomialSystem] = {"MonomialOrder" -> Lexicographic, "IrreducibleMonomials"->{},"EliminateVariables"->{{},0},"PrintDebugInfo"->0};
+Options[BuildPolynomialSystem] = {"MonomialOrder" -> Lexicographic, "IrreducibleMonomials"->{},"EliminateVariables"->{{},0},"PrintDebugInfo"->0,"ExtraParams"->{}};
 (**)
 BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : OptionsPattern[]]:= Module[
 	{
@@ -97,7 +97,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	(*preprocessing lists for system construction*)
 	printDebug1[StringJoin["preparing to generate system of size ",numberOfRows//ToString," x ",numberOfCols//ToString,"..."],1];
 	tm = AbsoluteTiming[
-		tmp1=idealCoefficientMatrix -> ((jseedMonomialsOuter)//ReplaceAll[PositionIndex[monomials]])//ReplaceAll[{x_}/;IntegerQ[x]->x] // Map[Thread] // Thread;
+		tmp1 = idealCoefficientMatrix -> ((jseedMonomialsOuter) // ReplaceAll[PositionIndex[monomials]]) // ReplaceAll[{x_} /; IntegerQ[x]->x] // Map[Thread] // Thread;
 		tmp2 = Table[tmp1[[All,1,i]] -> tmp1[[All,2]] // Thread // DeleteCases[#,x_/;(x//First)==0]&,{i,1,idealj // Length}];
 		tmp3 = Table[tmp2 // Map[Cases[#,x_/;(x//First)==i]&] // Part[#,All,All,2]&, {i,coefficients}];
 	
@@ -108,23 +108,23 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 		valuesUniqueToPositions = Merge[{targetAssociation,systemAssociation},Join//Apply];
 		valuesUnique = valuesUniqueToPositions // Keys;
 		indexUniqueToPosition = valuesUniqueToPositions // KeyMap[Position[valuesUnique, #, {1}]& /* (Part[#, 1, 1]&)];
-	]//First;
+	] // First;
 	
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	
 	(*parameters of system*)
-	params = Complement[Join[ideal // Variables, targets // Variables],variables];
+	params = Join[Complement[Join[ideal // Variables, targets // Variables],variables],OptionValue["ExtraParams"]];
 	If[Length[params]<2,params=params~Join~{extraparam}];
 	
 	(*generating adjacency lists and take patterns for FiniteFlow loading*)
 	printDebug1["generating system...",1];
 	tm = AbsoluteTiming[
-		triples=Flatten[KeyValueMap[Function[{k,lst},Prepend[k]/@lst],indexUniqueToPosition],1];
-		byI=GroupBy[triples,#[[2]]&];
-		pivots=Sort@Keys[byI];
-		adjLists=Map[Sort@DeleteDuplicates@#[[All,3]]&,byI/@pivots];
-		reverseIndex=Association@Flatten@KeyValueMap[Thread[#2->#1]&,indexUniqueToPosition];
-		takePattern=MapIndexed[Thread[{#2[[1]],#1}]&,adjLists]// Map[Lookup[reverseIndex,#]&]//Flatten // Thread[{1, #}]&;
+		triples = Flatten[KeyValueMap[Function[{k,lst},Prepend[k]/@lst],indexUniqueToPosition],1];
+		byI = GroupBy[triples,#[[2]]&];
+		pivots = Sort@Keys[byI];
+		adjLists = Map[Sort@DeleteDuplicates@#[[All,3]]&,byI/@pivots];
+		reverseIndex = Association@Flatten@KeyValueMap[Thread[#2->#1]&,indexUniqueToPosition];
+		takePattern = MapIndexed[Thread[{#2[[1]],#1}]&,adjLists]// Map[Lookup[reverseIndex,#]&] //Flatten // Thread[{1, #}]&;
 	]//First;
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	
@@ -151,7 +151,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 			monomials,
 			"NeededVars"->(Range[1,targetsj//Length]//Map[targ]//Reverse)
 		];
-	]//First;
+	] // First;
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	
 	(*learning the graph*)
@@ -160,24 +160,24 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	FFGraphOutput[graphName, "solvedSystem"];
 	FFSolverOnlyHomogeneous[graphName, "solvedSystem"];
 	learn = FFSparseSolverLearn[graphName, monomials];
-	]//First;
+	] // First;
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	newEqnNumb=FFSparseSolverMarkAndSweepEqs[graphName, "solvedSystem"];
 	irreducibleMonomials = "IndepVars"//ReplaceAll[learn] // ReplaceAll[j[x__]:>Times@@(variables^{x})];
 	
-	printDebug1[StringJoin["final number of equations needed: ",newEqnNumb//ToString],2];
+	printDebug1[StringJoin["final number of equations needed: ", newEqnNumb // ToString], 2];
 	
 	(*checking if the graph has been learned correctly*)
-	If[(OptionValue["IrreducibleMonomials"]//Length)=!=0,
+	If[(OptionValue["IrreducibleMonomials"] // Length)=!=0,
 		(*check here if we match the expected monomials*)
-		If[SubsetQ[OptionValue["IrreducibleMonomials"],irreducibleMonomials],
-		(*check passed*)
-		Nothing;
+		If[SubsetQ[OptionValue["IrreducibleMonomials"], irreducibleMonomials],
+			(*check passed*)
+			Nothing;
 		,
-		(*check failed*)
-		Print["Irreducible monomials do not match. Try increasing the system size"];
-		Print["Found ", irreducibleMonomials // Length," monomials: ",irreducibleMonomials];
-		Return[$Failed[irreducibleMonomials // Length // Evaluate]];
+			(*check failed*)
+			Print["Irreducible monomials do not match. Try increasing the system size"];
+			Print["Found ", irreducibleMonomials // Length," monomials: ",irreducibleMonomials];
+			Return[$Failed[irreducibleMonomials // Length // Evaluate]];
 		];
 	];
 	
@@ -189,7 +189,10 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	Return[{graphName,params,learn,variables}];
 ];
 BuildPolynomialSystem[targets_,ideal_,variables_,minMaxWeight_List,opts : OptionsPattern[]]:=Module[
-	{index,output,outs},
+	{
+		index,output,outs
+	},
+	
 	index = minMaxWeight[[1]];
 	output = {"0"};
 	Monitor[

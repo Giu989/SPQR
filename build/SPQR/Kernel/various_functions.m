@@ -11,7 +11,7 @@ dividesQ[e_,m_]:=And@@Thread[m>=e];
 Options[FindIrreducibleMonomials] = {"MonomialOrder" -> Lexicographic,"Sort"->False};
 FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	{
-	ord,params,paramsNsub,gb,leadingexps,lt,n,pure,bounds,todo,seen=<||>,res={},v,vv,i,prime,vars
+		ord,params,paramsNsub,gb,leadingexps,lt,n,pure,bounds,todo,seen=<||>,res={},v,vv,i,prime,vars
 	},
 
 	ord = OptionValue["MonomialOrder"];
@@ -29,7 +29,6 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	];
 	
 	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->prime];
-	(*PrintTemporary["gb finished"];*)
 	
 	lt = MonomialList[gb, vars, ord][[;;, 1]] // Map[Exponent[#, vars]&];
 	n = Length[vars];
@@ -37,7 +36,6 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	pure=Table[Select[lt,#[[i]]>0&&Total[Drop[#,{i}]]==0&],{i,n}];
 	
 	(*check if non zero dimensional ideal*)
-	(*If[MemberQ[pure,{}],Return[\[Infinity]]];*) (*<--- edge case for gb = {1} this check seems to fail. next line does not*)
 	If[Select[lt,(Length[DeleteCases[#,0]]==1)&] // Apply[Plus] // MemberQ[#,0]&, Return[\[Infinity]]];
 	
 	(*coordinate bounds on dimensions: minimal pure powers - 1*)

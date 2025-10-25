@@ -1,13 +1,13 @@
 (* ::Package:: *)
 
-Options[BuildCompanionMatrices] = {"MonomialOrder" -> Lexicographic,"PrintDebugInfo"->0};
+Options[BuildCompanionMatrices] = {"MonomialOrder" -> Lexicographic,"PrintDebugInfo"->0, "ExtraParams"->{}};
 BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,OptionsPattern[]]:=Module[
 	{
 	cmatsMonomials,solverOutput,cpmatrixNames,takePatternLists
 	}
 	,
 	cmatsMonomials = Outer[#*irreducibleMonomials&,variables]//Flatten;
-	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
+	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"ExtraParams"->OptionValue["ExtraParams"]];
 	If[Head[solverOutput]===$Failed,Return[$Failed]];
 	
 	(*take companion matrices using FFAlgTake and then return them as outputs to the graph with FFGraphOutput*)

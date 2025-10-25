@@ -78,9 +78,14 @@ ffinvMatrix[input_,matrixList_,position_]:=Module[{},
 		FFSolverOnlyHomogeneous[graphName,onnF[is@@invName]];
 		learn = FFSparseSolverLearn[graphName, Range[2*matSize]];
 		
+		(*invalid permutation <-> the system cannot be inverted*)
+		If[Range[Length[("DepVars"/.learn)]]=!=Sort["DepVars"/.learn],
+			Print["ERROR: a (sub)expression of the target companion matrices could not be inverted. Probable cause is zero determinant.\nCheck if you are trying to invert a term which is inside the ideal."];
+			Abort[];
+		];
+		
 		shuffleIndex = (Table[{1,i},{i,1,matSize^2}]//Partition[#,matSize]&)[[InversePermutation["DepVars"/.learn]]]//Flatten[#,1]&;
 		FFAlgTake[graphName,invName,{onnF[is@@invName]},shuffleIndex];
-		
 		
 		Return[invName];
 ];
@@ -88,16 +93,12 @@ ffinvEval[input___]:=Module[{},
 		position = {input}//Map[Position[matrixList,#,{1}]&]//Flatten;
 		mathematicaOutput = (*i[input]*)onnF[(matrixList//Length)+1];
 		(*finite flow graph construction*)
-		If[(*!((FFGraphDraw[graphName]//Cases[#,_i,\[Infinity]]&)//ContainsAny[{i[input]}])*)True,
-		(*If[!(matrixList//ContainsAny[{i[input]}]),*)
+		If[True,
 			matrixList=matrixList~Join~{ffinvMatrix[input,matrixList,position]} // DeleteDuplicates;
 			,
-			(*still need to append matrix list with this. matrixList should ideally start loaded with everything already present in the graph*)
-			(*i this i can do this by extracting information from the graph, but surely there is a better way?*)
 			matrixList=matrixList~Join~{onnF[(matrixList//Length)+1]};
 		];
-		(**)
-		(*matrixList = matrixList~Join~{mathematicaOutput} //DeleteDuplicates;*)
+		
 		Return[mathematicaOutput];
 ];
 
@@ -114,7 +115,7 @@ ffPolyReduce[expression_, parameters_, matricesSymbolic_, matricesSubstituted_,e
 	(*find all numbers and variables appearing in the expression*)
 	(*horrendous spaghetti code to fix at some point...*)
 	variablesList=(((If[rationalFunctionSub//NumberQ,{rationalFunctionSub},{}])~Join~(rationalFunctionSub//Cases[#,dot[x___]:>{x},{0,\[Infinity]}]&)~Join~(rationalFunctionSub//Cases[#,plus[x___]:>{x},{0,\[Infinity]}]&)~Join~(rationalFunctionSub//Cases[#,inv[x___]:>{x},{0,\[Infinity]}]&)~Join~parameters~Join~matricesSymbolic)//Flatten//DeleteDuplicates//DeleteCases[#,_inv,\[Infinity]]&//DeleteCases[#,_dot,\[Infinity]]&)/.Plus->List/.plus->List//Flatten//DeleteDuplicates // Complement[#,extraNodes]&;
-	constants = Complement[variablesList,matricesSymbolic]~Join~{-1} // DeleteDuplicates // Complement[#,extraNodes]&; (*// DeleteCases[#,-1]&; (*-1 is added manually later*)*)
+	constants = Complement[variablesList,matricesSymbolic]~Join~{-1} // DeleteDuplicates // Complement[#,extraNodes]&;
 	
 	constantsMatricesSub = ((constants//Map[IdentityMatrix[matSize]*#&]))~Join~{0*IdentityMatrix[matSize]} // DeleteDuplicates;
 	
@@ -137,9 +138,9 @@ ffPolyReduce[expression_, parameters_, matricesSymbolic_, matricesSubstituted_,e
 	output = rationalFunctionSub2 /.{plus->ffplusEval,dot->ffdotEval,inv->ffinvEval};
 	If[SubsetQ[(m/@matricesSymbolic)~Join~constantsMatricesNames~Join~extraNodes,{output}]
 	,
-	FFAlgTake[graphName,outputNodeName,{output},Table[{1,j},{j,1,matSize^2}]];
+		FFAlgTake[graphName,outputNodeName,{output},Table[{1,j},{j,1,matSize^2}]];
 	,
-	FFAlgTake[graphName,outputNodeName,{(*n[output/.n[x_]:>x-1]*)matrixList// Cases[#,_onnF]& // Sort // Last},Table[{1,j},{j,1,matSize^2}]];
+		FFAlgTake[graphName,outputNodeName,{(*n[output/.n[x_]:>x-1]*)matrixList// Cases[#,_onnF]& // Sort // Last},Table[{1,j},{j,1,matSize^2}]];
 	];
 	
 	FFGraphOutput[graphName,outputNodeName];
@@ -151,13 +152,27 @@ ffPolyReduce[expression_, parameters_, matricesSymbolic_, matricesSubstituted_,e
 
 
 BuildTargetCompanionMatrices[target_List,cmatOutput_]:=Module[
-	{vars,varsSub,targetSub,params,placeHolders,irredMons,cmatSize,placeHolderMatrices,cmatNames,outputNode}
+	{
+		vars,varsSub,targetSub,params,placeHolders,irredMons,cmatSize,placeHolderMatrices,cmatNames,outputNode,extraVars,
+		Nothing
+	}
 	,
+	
 	vars = cmatOutput[[5]];
 	varsSub = vars -> cmatOutput[[4]] // Thread;
 	targetSub = target // ReplaceAll[varsSub];
 	graphName = cmatOutput[[1]]; (*this should really be an option for all the functions in the parser*)
 	params = cmatOutput[[2]];
+	
+	(*check and process if the target functions introduce any new parameters*)
+	extraVars = Complement[target // Variables, Join[vars,params]];
+	If[{} =!= extraVars,
+		Print["WARNING: Extra parameters ", extraVars ," found in targets not present in the ideal"];
+		Print["To fix this pass the following option to BuildCompanionMatrices"];
+		Print[Rule["ExtraParams", extraVars]];
+		Return[$Failed];
+	];
+	
 	placeHolders = vars // Length // Range // Map[placeHolder];
 	irredMons = (*"IndepVars"//ReplaceAll[cmatOutput[[3]]]*)cmatOutput[[3]];
 	cmatSize = irredMons // Length;
@@ -178,24 +193,23 @@ ReconstructTargetCompanionMatrices[targetOutput_,(*irredMons_,*)OptionsPattern[]
 	ncmats = targetOutput[[4]] // Length;
 	
 	If[OptionValue["cmat"],
-			(*chainName = StringJoin["chain",Unique[]//ToString];*)
-			FFAlgChain[targetOutput[[1]],"chainCmats",targetOutput[[4]]];
-			FFGraphOutput[targetOutput[[1]],"chainCmats"];
-			reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
-			If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
-			cmat = reconstructed // Partition[#,{cmatSize^2}]& // Map[Partition[#,{cmatSize}]&];
-			Return[cmat];
-		,
-			takePattern = Range[1+cmatSize^2-cmatSize,cmatSize^2] // {Range[ncmats],#}& // Tuples;
-			FFAlgTake[targetOutput[[1]],"takeCmatComponents",targetOutput[[4]],takePattern];
-			FFGraphOutput[targetOutput[[1]],"takeCmatComponents"];
-			reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
-			If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
+		FFAlgChain[targetOutput[[1]],"chainCmats",targetOutput[[4]]];
+		FFGraphOutput[targetOutput[[1]],"chainCmats"];
+		reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
+		If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
+		cmat = reconstructed // Partition[#,{cmatSize^2}]& // Map[Partition[#,{cmatSize}]&];
+		Return[cmat];
+	,
+		takePattern = Range[1+cmatSize^2-cmatSize,cmatSize^2] // {Range[ncmats],#}& // Tuples;
+		FFAlgTake[targetOutput[[1]],"takeCmatComponents",targetOutput[[4]],takePattern];
+		FFGraphOutput[targetOutput[[1]],"takeCmatComponents"];
+		reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
+		If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
 		
-			If[OptionValue["Vector"],
-				Return[reconstructed // Partition[#,{cmatSize}]&];
-			,
-				Return[(reconstructed // Partition[#,{cmatSize}]&) . irredMons // ReplaceAll[j[x__]:>Times@@(targetOutput[[5]]^{x})]];
-			];
+		If[OptionValue["Vector"],
+			Return[reconstructed // Partition[#,{cmatSize}]&];
+		,
+			Return[(reconstructed // Partition[#,{cmatSize}]&) . irredMons // ReplaceAll[j[x__]:>Times@@(targetOutput[[5]]^{x})]];
 		];
 	];
+];
