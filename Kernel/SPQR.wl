@@ -21,6 +21,8 @@ BuildCharacteristicPolynomials::usage = "BuildCharacteristicPolynomials[targetcm
 ReconstructCharacteristicPolynomials::usage = "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem] reconstructs each coefficient of the characteristic polynomials produced by BuildCharacteristicPolynomials\n" <> "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem,coefficientlist] reconstructs only the terms given in coefficientlist";
 FFDet::usage = "FFDet[matrix] computes the determinant of a matrix using the Faddeev\[Dash]LeVerrier algorithm";
 SortVariables::usage = "SortVariables[ideal,vars] Sorts variables in the list to try make Groebner Basis computations faster";
+BuildEliminationSystems::usage = " ";
+ReconstructEliminationSystems::usage = " ";
 j::usage = " ";
 extraparam::usage = " ";
 targ::usage = " ";
@@ -31,7 +33,6 @@ SPQRGraph::usage = " ";
 Begin["`Private`"]
 
 
-(*identify version*)
 With[{pac = PacletFind["SPQR"]},
   If[Length[pac] > 0,
     version = ("Version" //ReplaceAll[pac[[1]][[1]]]);
@@ -59,7 +60,7 @@ Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_cmat.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_target_cmat.m"}]];
-Get[FileNameJoin[{DirectoryName[$InputFileName], "characteristic_polynomials.m"}]];
+Get[FileNameJoin[{DirectoryName[$InputFileName], "eliminate_variables.m"}]];
 
 
 End[]
@@ -70,8 +71,8 @@ SetAttributes[
 	FindIrreducibleMonomials,BuildPolynomialSystem,ReconstructPolynomialRemainder,
 	BuildCompanionMatrices,BuildTargetCompanionMatrices,ReconstructTargetCompanionMatrices,
 	j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials,FFDet,
-	SortVariables,
-	Nothing
+	SortVariables,BuildEliminationSystems,ReconstructEliminationSystems
+	,Nothing
 	}
 	, {ReadProtected}
 ];

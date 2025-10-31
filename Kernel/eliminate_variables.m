@@ -87,7 +87,9 @@ ReconstructCharacteristicPolynomials[characteristicPolynomialData_,opts : Option
 (*high level determinant calculator using FiniteFlow*)
 Options[FFDet] = {"PrintDebugInfo"->1,"Mod"->False,"FFPrimeNo"->0};
 FFDet[matrix_,opts : OptionsPattern[]]:=Module[
-	{graphname,matname,params,irredsPlaceholder,data,output,rec},
+	{
+		graphname,matname,params,irredsPlaceholder,data,output,rec
+	},
 	
 	If[!SquareMatrixQ[matrix],Print["not a square matrix"];Return[$Failed]];
 	
@@ -104,4 +106,79 @@ FFDet[matrix_,opts : OptionsPattern[]]:=Module[
 	rec = ReconstructCharacteristicPolynomials[output,{1},opts] // First // First;
 	
 	Return[rec];
+];
+
+
+BuildEliminationSystem[cmatData_,monomialList_] := Module[
+	{
+		cmatSize,cmats,processedMonomials,monomialCmats,takePattern,transposePattern,
+		intermediatenode1,intermediatenode2,vars,outputNode,f,learn,survivingVarsIndex
+		,
+		Nothing
+	},
+	
+	cmatSize = cmatData[[3]] // Length;
+	processedMonomials = monomialList // Reverse // Times[#,Join[ConstantArray[-1,(Length[#]-1)],{1}]]&;
+	
+	monomialCmats = BuildTargetCompanionMatrices[processedMonomials,cmatData];
+	takePattern = Range[1+cmatSize^2-cmatSize,cmatSize^2] // {Range[processedMonomials//Length],#}& // Tuples;
+	transposePattern = Range[1,cmatSize*(processedMonomials // Length)] // ArrayReshape[#,{processedMonomials // Length,cmatSize}]& // Transpose // Flatten // {{1},#}& // Tuples;
+	
+	intermediatenode1 = "cmatRemainders$" // Unique // ToString;
+	FFAlgTake[monomialCmats[[1]],intermediatenode1,monomialCmats[[4]],takePattern];
+	
+	intermediatenode2 = "cmatRemaindersTransposed$" // Unique // ToString;
+	FFAlgTake[monomialCmats[[1]],intermediatenode2,{intermediatenode1},transposePattern];
+	
+	vars = Array[f,(processedMonomials // Length)-1];
+	outputNode = "coefficients$" // Unique // ToString;
+	FFAlgNodeDenseSolver[monomialCmats[[1]],outputNode,{intermediatenode2},cmatSize,vars];
+	If[learn==$Failed,Print["WARNING: Failed to fit ansatz. Are the given monomials corret?"]; Abort[];];
+	
+	FFGraphOutput[monomialCmats[[1]],outputNode];
+	learn = FFDenseSolverLearn[monomialCmats[[1]],vars];
+	(*Print[learn];*)
+	If[(Length["IndepVars"//ReplaceAll[learn]])>0,Print["Warning: Ansatz could not be fixed correctly, too many monomials."]; Abort[];];
+	survivingVarsIndex = "DepVars" // ReplaceAll[learn] // MapApply[Identity];
+	
+	Return[{cmatData[[1]],cmatData[[2]],(*cmatData[[3]]*)survivingVarsIndex,outputNode}];
+];
+
+
+BuildEliminationSystems[cmatData_,monomialLists_] := Module[
+	{
+		data
+	},
+	
+	data = Table[BuildEliminationSystem[cmatData,monomiaList],{monomiaList,monomialLists}];
+	Return[Join[data[[1]][[1;;2]],{data[[;;,3]]},{data[[;;,4]]},{monomialLists}]];
+];
+
+
+Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False};
+ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
+	{
+		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars,Nothing
+	},
+	(*cmatSize = elimData[[3]] // Length;*)
+	(*takePattern = Range[1,cmatSize] // {Range[elimData[[4]]//Length],#}& // Tuples;*)
+	(*takePattern = (elimData[[5]]//Map[Length])-1// Map[Range]//Table[{i,#[[i]]}//Thread,{i,1,#//Length}]&//Flatten[#,1]&;*)
+	takePattern = elimData[[3]]//Map[Length]// Map[Range]//Table[{i,#[[i]]}//Thread,{i,1,#//Length}]&//Flatten[#,1]&;
+	
+	nodeName = "elimOutput$" // Unique // ToString;
+	Print[FFAlgTake[elimData[[1]],nodeName,elimData[[4]],takePattern]];
+	FFGraphOutput[elimData[[1]],nodeName];
+	
+	reconstructed = FFReconstructFunction[elimData[[1]],elimData[[2]],"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
+	(*reconstructedProcessed = reconstructed // ArrayReshape[#,{elimData[[4]]//Length,cmatSize}]& // Map[Reverse] // Map[Join[{1},#]&];*)
+	(*reconstructedProcessed = reconstructed // TakeList[#,(elimData[[5]]//Map[Length])-1]& // Map[Reverse] // Map[Join[{1},#]&];*)
+	reconstructedProcessed = reconstructed // TakeList[#,elimData[[3]]//Map[Length]]& // Map[Reverse] // Map[Join[{1},#]&];
+	
+	If[OptionValue["DeleteGraph"],FFDeleteGraph[elimData[[1]]//Evaluate]];
+	If[OptionValue["Vector"],
+		Return[reconstructedProcessed];
+	,
+		nonZeroVars = Table[Join[elimData[[5]][[i]][[elimData[[3]][[i]]]],{1}],{i,1,elimData[[3]]//Length}];
+		Return[nonZeroVars*reconstructedProcessed // MapApply[Plus]];
+	];
 ];
