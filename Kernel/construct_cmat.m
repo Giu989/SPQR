@@ -3,9 +3,10 @@
 Options[BuildCompanionMatrices] = {"MonomialOrder" -> Lexicographic,"PrintDebugInfo"->0, "ExtraParams"->{}};
 BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,OptionsPattern[]]:=Module[
 	{
-	cmatsMonomials,solverOutput,cpmatrixNames,takePatternLists
-	}
-	,
+		cmatsMonomials,solverOutput,cpmatrixNames,takePatternLists,
+		Nothing
+	},
+	
 	cmatsMonomials = Outer[#*irreducibleMonomials&,variables]//Flatten;
 	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"ExtraParams"->OptionValue["ExtraParams"]];
 	If[Head[solverOutput]===$Failed,Return[$Failed]];

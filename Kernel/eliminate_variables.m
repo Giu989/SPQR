@@ -155,23 +155,30 @@ BuildEliminationSystems[cmatData_,monomialLists_] := Module[
 ];
 
 
-Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False};
+Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0};
 ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	{
 		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars,Nothing
 	},
-	(*cmatSize = elimData[[3]] // Length;*)
-	(*takePattern = Range[1,cmatSize] // {Range[elimData[[4]]//Length],#}& // Tuples;*)
-	(*takePattern = (elimData[[5]]//Map[Length])-1// Map[Range]//Table[{i,#[[i]]}//Thread,{i,1,#//Length}]&//Flatten[#,1]&;*)
+	
 	takePattern = elimData[[3]]//Map[Length]// Map[Range]//Table[{i,#[[i]]}//Thread,{i,1,#//Length}]&//Flatten[#,1]&;
 	
 	nodeName = "elimOutput$" // Unique // ToString;
-	Print[FFAlgTake[elimData[[1]],nodeName,elimData[[4]],takePattern]];
+	FFAlgTake[elimData[[1]],nodeName,elimData[[4]],takePattern];
 	FFGraphOutput[elimData[[1]],nodeName];
 	
-	reconstructed = FFReconstructFunction[elimData[[1]],elimData[[2]],"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
-	(*reconstructedProcessed = reconstructed // ArrayReshape[#,{elimData[[4]]//Length,cmatSize}]& // Map[Reverse] // Map[Join[{1},#]&];*)
-	(*reconstructedProcessed = reconstructed // TakeList[#,(elimData[[5]]//Map[Length])-1]& // Map[Reverse] // Map[Join[{1},#]&];*)
+	If[OptionValue["Mod"],
+		reconstructed = FFReconstructFunctionMod[
+			elimData[[1]],elimData[[2]],
+			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"StartingPrimeNo"->OptionValue["FFPrimeNo"]
+		];
+	,
+		If[OptionValue["FFPrimeNo"]!=0,Print["Note: FFPrimeNo value will be ignored"]];
+		reconstructed = FFReconstructFunction[
+			elimData[[1]],elimData[[2]],"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]
+		];
+	];
+	
 	reconstructedProcessed = reconstructed // TakeList[#,elimData[[3]]//Map[Length]]& // Map[Reverse] // Map[Join[{1},#]&];
 	
 	If[OptionValue["DeleteGraph"],FFDeleteGraph[elimData[[1]]//Evaluate]];

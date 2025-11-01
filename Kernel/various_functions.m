@@ -68,10 +68,33 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 ];
 
 
+(*finds the monomials appearing inside each polynomial of an eliminated Groebner Basis*)
+FindEliminationMonomials[polySystem_,varsToElim_,varsToKeep_] := Module[
+	{
+		prime,params,paramsNsub,gb,monomialCoordinates,monomials,
+		Nothing
+	},
+
+	prime = RandomSample[primeList,1][[1]];
+
+	(*numerical substitution of the parameters*)
+	params = Complement[polySystem // Variables,Union[varsToElim,varsToKeep]];
+	paramsNsub = Thread[params->(RandomInteger[{1,10^8+(params//Length)},params//Length]//Map[Prime])];
+
+	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],varsToKeep,varsToElim,CoefficientDomain->RationalFunctions,Modulus->prime];
+	If[Length[gb]==0,Return[{}]];
+
+	monomialCoordinates = gb // MonomialList[#,varsToKeep]& // CoefficientRules[#,varsToKeep]& // Part[#,All,All,All,1]& // Flatten[#,{{1},{2,3}}]&;
+	monomials=monomialCoordinates // Map[Power[varsToKeep,#]&,#,{2}]& // Map[Apply[Times],#,{2}]&;
+
+	Return[monomials];
+];
+
+
 Options[SortVariables] = {"MonomialOrder" -> Lexicographic};
 SortVariables[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	{
-	ord,prime,params,paramsNsub,vars
+		ord,prime,params,paramsNsub,vars
 	},
 
 	ord = OptionValue["MonomialOrder"];
