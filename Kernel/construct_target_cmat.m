@@ -184,7 +184,7 @@ BuildTargetCompanionMatrices[target_List,cmatOutput_]:=Module[
 ];
 
 
-Options[ReconstructTargetCompanionMatrices] = {"cmat"->False,"DeleteGraph"->True,"Vector"->False,"PrintDebugInfo"->1};
+Options[ReconstructTargetCompanionMatrices] = {"cmat"->False,"DeleteGraph"->True,"Vector"->False,"PrintDebugInfo"->1,"MaxPrimes"->200,"MaxDegree"->1000};
 ReconstructTargetCompanionMatrices[targetOutput_,(*irredMons_,*)OptionsPattern[]]:=Module[
 	{reconstructed,cmat,polyRed,takePattern,cmatSize,irredMons,ncmats}
 	,
@@ -195,7 +195,7 @@ ReconstructTargetCompanionMatrices[targetOutput_,(*irredMons_,*)OptionsPattern[]
 	If[OptionValue["cmat"],
 		FFAlgChain[targetOutput[[1]],"chainCmats",targetOutput[[4]]];
 		FFGraphOutput[targetOutput[[1]],"chainCmats"];
-		reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
+		reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"MaxDegree"->OptionValue["MaxDegree"],"MaxPrimes"->OptionValue["MaxPrimes"],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
 		If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
 		cmat = reconstructed // Partition[#,{cmatSize^2}]& // Map[Partition[#,{cmatSize}]&];
 		Return[cmat];
@@ -203,7 +203,7 @@ ReconstructTargetCompanionMatrices[targetOutput_,(*irredMons_,*)OptionsPattern[]
 		takePattern = Range[1+cmatSize^2-cmatSize,cmatSize^2] // {Range[ncmats],#}& // Tuples;
 		FFAlgTake[targetOutput[[1]],"takeCmatComponents",targetOutput[[4]],takePattern];
 		FFGraphOutput[targetOutput[[1]],"takeCmatComponents"];
-		reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
+		reconstructed = FFReconstructFunction[targetOutput[[1]],targetOutput[[2]],"MaxDegree"->OptionValue["MaxDegree"],"MaxPrimes"->OptionValue["MaxPrimes"],"PrintDebugInfo"->OptionValue["PrintDebugInfo"]];
 		If[OptionValue["DeleteGraph"],FFDeleteGraph[targetOutput[[1]]//Evaluate]];
 		
 		If[OptionValue["Vector"],
