@@ -19,25 +19,12 @@
             "File"
             ->
             File[
-                "Kernel/characteristic_polynomials.m"
-            ]
-            ,
-            "Hash"
-            ->
-            "370af9939fafa7c8a0ec1b365a6f28b9d33f9ab2ee23e4d931c3e84ad7a15c9e"
-                
-        |>
-        ,
-        <|
-            "File"
-            ->
-            File[
                 "Kernel/construct_cmat.m"
             ]
             ,
             "Hash"
             ->
-            "a5e495979f35bcf4099aa754b40eb9f70cca82c88eaf4f1134c132ac7fc1ecc2"
+            "362724349658d890932b9bf0717d3f2fd3860f433510721a75735ad215eee5ee"
                 
         |>
         ,
@@ -50,7 +37,7 @@
             ,
             "Hash"
             ->
-            "490ceddf0280adb28a7118901b805555c9d90dac9ea90b34c6c1604f6373984f"
+            "db08629ab4cc794ec0df016f20d55a1ae44e44b8f0e305a0d1b3831d0a8ecbbf"
                 
         |>
         ,
@@ -63,7 +50,20 @@
             ,
             "Hash"
             ->
-            "859282c033966a36beb85c3c9acf634fe04cf089a59790b35b5575468c235b2c"
+            "bfb6ca0a48ec06a4c7f9de6952f20c4fbe18c03685f541370cc17b812d4d6413"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Kernel/eliminate_variables.m"
+            ]
+            ,
+            "Hash"
+            ->
+            "d8b3da1945b3e9b07a8770949deff1ca1739da6c0ed9144561f787d56b551ecb"
                 
         |>
         ,
@@ -76,7 +76,7 @@
             ,
             "Hash"
             ->
-            "8fbbcbdc99b355555af04aa5fda04e313edd6ccdeeeaf26e8ef627fe26041459"
+            "30a3d5daf74fc6f6cc0087ece488817e3faeb18a9777569ec381dcd22567087e"
                 
         |>
         ,
@@ -89,7 +89,7 @@
             ,
             "Hash"
             ->
-            "35385fc17eca9c3dde1c6d595a053070b87798debc91d0173cea160bf6c67467"
+            "3cd7c5258a3672f9b33f56d2b7d6f7a81ea3b32603c23ed387c4fad4fc8085c6"
                 
         |>
         ,
@@ -102,7 +102,7 @@
             ,
             "Hash"
             ->
-            "f035b73b3e83224daa503b1674749361c69d0a9c9cf514d23633b31383fdd029"
+            "6371cec403e8e5f608325d4f48bd1b53a5d5dea508cf5b9705dd32e3bac43fce"
                 
         |>
         ,
@@ -138,6 +138,20 @@
             "File"
             ->
             File[
+                "Documentation/English/ReferencePages/Symbols/BuildEliminationSystems.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "ca5f0daf28d20d46cc82b20bb4eaa17d9caf932a4bb7821382a7ca1bbc334ff7"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
                 "Documentation/English/ReferencePages/Symbols/BuildPolynomialSystem.nb"
                     
             ]
@@ -158,7 +172,7 @@
             ,
             "Hash"
             ->
-            "395daaf321bdf352a8358e215e755922444af67b4e7752837b3b5324cac7c1ed"
+            "b932ae25a9cbcbed7fb02ae8a49103085df11de46a5f67369168d98210fcb959"
                 
         |>
         ,
@@ -180,13 +194,27 @@
             "File"
             ->
             File[
+                "Documentation/English/ReferencePages/Symbols/FindEliminationMonomials.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "3def0c215c911dcd906cbeccfe6690bc3731416657de0b4e8f2373a2644462f8"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
                 "Documentation/English/ReferencePages/Symbols/FindIrreducibleMonomials.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "d87e6d2067af70b7e1464cfc443cfba4e84bc72c521351b43568471b949694f2"
+            "52f3a875d036446c9941ae083048348911017dc93b0d3940c7d12b7c411b5ff5"
                 
         |>
         ,
@@ -201,6 +229,20 @@
             "Hash"
             ->
             "54f550ff4e2cd011653ffbd64db8f5d5a1f98e99af147f43252b4bfa570c4e7c"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/ReconstructEliminationSystems.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "84d1d37c5cfbc31243114f98fede4e3d668cbe32cf762dd62f3663b272f0ff0c"
                 
         |>
         ,

@@ -1,0 +1,819 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     30530,        810]
+NotebookOptionsPosition[     25031,        700]
+NotebookOutlinePosition[     27372,        757]
+CellTagsIndexPosition[     27287,        752]
+WindowTitle->FindEliminationMonomials
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["S P Q R SYMBOL", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "db3a7974-92a2-4e6d-b373-260ac3cf43cd"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "43d6c616-9dac-4dde-b34e-1b90e2169a52"],
+        Background->LightDarkSwitched[
+          RGBColor[0.490196, 0.576471, 0.690196]],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[{
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "See Also",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "ca7ca6b0-02c7-44d7-a2cf-973f9ead4b5c"]
+         }],ExpressionUUID->"5117fa1b-691b-438d-968d-b67a39fca230"],
+         StripOnInput->False],{
+        StyleBox[
+          "\"GroebnerBasis\"", "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:ref/GroebnerBasis"], 
+         StyleBox["\"Eliminate\"", "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:ref/Eliminate"], Delimiter, 
+         StyleBox[
+          "\"Functions\"", "SeeAlsoSection", FontSize -> 14, FontSlant -> 
+           "Italic", StripOnInput -> False] :> 
+         NotebookFind[EvaluationNotebook[], "SeeAlsoSection", All, CellStyle],
+          StyleBox[
+          StyleBox[
+           "\"FindIrreducibleMonomials\"", "SeeAlsoRelated", StripOnInput -> 
+            False], "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:SPQR/ref/FindIrreducibleMonomials"],
+          StyleBox[
+          StyleBox[
+           "\"BuildEliminationSystem\"", "SeeAlsoRelated", StripOnInput -> 
+            False], "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:SPQR/ref/BuildEliminationSystem"], 
+         StyleBox[
+          StyleBox[
+           "\"BuildCharacteristicPolynomials\"", "SeeAlsoRelated", 
+            StripOnInput -> False], "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup[
+          "paclet:SPQR/ref/BuildCharacteristicPolynomials"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"SeeAlso"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "8542a055-c55f-4ee9-8262-5afae9271d19"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Related Guides",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "e0700cc6-1097-42c8-abb0-9db9a735f658"]
+         }],ExpressionUUID->"ae3d373d-6c65-4e57-8540-c609505e7eca"],
+         StripOnInput->False],{
+        "\"SPQR\"" :> Documentation`HelpLookup["paclet:SPQR/guide/SPQR"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"MoreAbout"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "adca2dcc-f339-4d2b-aefd-6bd729e856cf"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Tech Notes",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "afe2e06f-edc6-4577-8d1f-b2479d7b50ef"]
+         }],ExpressionUUID->"40477d22-1e5f-4acc-ac4e-a6fef40c3c03"],
+         StripOnInput->False],{
+        "\"Introduction to SPQR\"" :> 
+         Documentation`HelpLookup["paclet:SPQR/tutorial/IntroductiontoSPQR"]},
+        
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"Tutorials"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "8dcdf43e-f141-471c-a591-571682aa3779"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "URL",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "9877973f-33dd-4b60-bbf3-b02aca6bf5e1"]
+         }],ExpressionUUID->"dd1ad097-161b-414a-b9da-7a558eb83e2f"],
+         StripOnInput->False],{
+        "\"SPQR/ref/FindEliminationMonomials\"" :> None, 
+         "\"Copy Wolfram Documentation Center URL\"" :> 
+         CopyToClipboard["SPQR/ref/FindEliminationMonomials"], Delimiter, 
+         "\"Copy web URL\"" :> 
+         Module[{DocumentationSearch`Private`nb$}, 
+           DocumentationSearch`Private`nb$ = 
+            NotebookPut[
+             Notebook[{
+               Cell[BoxData[
+                 MakeBoxes[
+                  Hyperlink[
+                   "http://reference.wolfram.com/language/SPQR/ref/\
+FindEliminationMonomials.html"], StandardForm]], "Input", TextClipboardType -> 
+                 "PlainText"]}, Visible -> False]]; 
+           SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+           FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+           NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+         "\"Go to web URL\"" :> 
+         FrontEndExecute[{
+           NotebookLocate[{
+             URL[(If[TrueQ[False], 
+                  "http://reference.wolfram.com/system-modeler/", 
+                  "http://reference.wolfram.com/language/"] <> 
+                "SPQR/ref/FindEliminationMonomials") <> ".html"], None}]}]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"URLMenu"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "5f5fdce0-a14e-4fac-ac45-c1dbcb144e26"]
+    }], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "ec9df5e8-d40d-418c-9f76-ce22dbe3cc27"]}
+  }]], "AnchorBarGrid",
+ CellID->1,ExpressionUUID->"55491c41-9c9a-4aea-bbac-476805d4d6c6"],
+
+Cell["SPQR`", "ContextNameCell",ExpressionUUID->"5449297e-09e4-41c4-84fe-24e192f1ea5a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {Cell[TextData[{
+     Cell[
+     "FindEliminationMonomials", "ObjectName",ExpressionUUID->
+      "e0d9035f-14ae-4601-a999-8e9ef7aea57d"],
+     Cell[BoxData[
+      TemplateBox[{8},
+       "Spacer1"]],ExpressionUUID->"0a7b6332-a956-4ab6-a393-5e6c7885ae11"],
+     Cell[BoxData[
+     ""], "ObjectNameTranslation",ExpressionUUID->
+      "a4eb3982-38c0-4936-b612-15e17842dd11"]
+    }],ExpressionUUID->"ef024f59-7b1f-4626-bb5e-30a328807de1"], 
+    "\[SpanFromLeft]"}
+  }]], "ObjectNameGrid",ExpressionUUID->"a5e04132-3a42-4308-9afb-\
+49aad2c5b87d"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       TemplateBox[{
+         Cell[
+          TextData["FindEliminationMonomials"]], 
+         "paclet:SPQR/ref/FindEliminationMonomials", "SPQR Package Symbol"},
+        "PackageLink",
+        BaseStyle->"InlineFormula"], "[", 
+       RowBox[{
+        StyleBox["ideal", "TI"], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox[
+           StyleBox["x", "TI"], 
+           StyleBox["1", "TR"]], ",", 
+          SubscriptBox[
+           StyleBox["x", "TI"], 
+           StyleBox["2", "TR"]], ",", " ", 
+          StyleBox["\[Ellipsis]", "TR"]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox[
+           StyleBox["y", "TI"], 
+           StyleBox["1", "TR"]], ",", 
+          SubscriptBox[
+           StyleBox["y", "TI"], 
+           StyleBox["2", "TR"]], ",", " ", 
+          StyleBox["\[Ellipsis]", "TR"]}], "}"}]}], "]"}]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "815370f3-1ed6-4a56-9448-38b4c15b2ea1"],
+     "\[LineSeparator]computes the monomials appearing in the ",
+     Cell[BoxData[
+      StyleBox["ideal", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "81e509d6-ac3e-4de4-a78a-ea3a7406b3f4"],
+     " where ",
+     Cell[BoxData[
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox[
+         StyleBox["x", "TI"], 
+         StyleBox["1", "TR"]], ",", 
+        RowBox[{
+         SubscriptBox[
+          StyleBox["x", "TI"], 
+          StyleBox["2", "TR"]], 
+         StyleBox["\[Ellipsis]", "TR"]}]}], "}"}]],ExpressionUUID->
+      "010151ef-70d4-499e-b472-f899f821166b"],
+     " have been eliminated using a numerical Groebner Basis."
+    }],ExpressionUUID->"adb88539-72a9-46aa-ba8a-084f8946e2b8"]}
+  }]], "Usage",
+ CellID->1113744214,ExpressionUUID->"cb15a692-1fd6-4142-8356-e8af7b18a0c6"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    DynamicBox[ToBoxes[
+      If[CurrentValue[
+         EvaluationCell[], "CellGroupOpen"] =!= Closed, 
+       Style[
+        Graphics[{
+          Thickness[0.18], 
+          RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+          Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+         PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+        0.68 Inherited], 
+       Rotate[
+        Style[
+         Graphics[{
+           Thickness[0.18], 
+           RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+           Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+          PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+         0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+     ImageSizeCache->{
+      13.600000000000001`, {-0.1685058593749993, 13.768505859375}}]],
+    ExpressionUUID->"75d71409-cabf-49b8-b416-5c177fd371f9"],
+   Cell[BoxData[
+    TemplateBox[{1},
+     "Spacer1"]],ExpressionUUID->"5302aed3-e9d1-4f33-acba-a3ca65c1ed8f"],
+   "Details and Options"
+  }], "NotesFrameText",ExpressionUUID->"74553429-495e-4601-91c9-dd6e1b736647"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"47d64e6e-1dda-43bb-94d5-db73587ae71d"]], \
+"NotesSection",
+ ShowGroupOpener->"Thumbnail",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CacheGraphics->False,
+ CellID->1992907963,ExpressionUUID->"d7738a86-270f-419c-a355-96fb4945940f"],
+
+Cell[TextData[{
+ "FindEliminationMonomials finds the monomials appearing in the ideal where \
+the variables ",
+ Cell[BoxData[
+  RowBox[{"{", 
+   RowBox[{
+    SubscriptBox[
+     StyleBox["x", "TI"], 
+     StyleBox["1", "TR"]], ",", 
+    RowBox[{
+     SubscriptBox[
+      StyleBox["x", "TI"], 
+      StyleBox["2", "TR"]], 
+     StyleBox["\[Ellipsis]", "TR"]}]}], "}"}]],ExpressionUUID->
+  "31d607a9-ad0f-47aa-a789-6911c8ed7c76"],
+ " have been eliminated."
+}], "Notes",
+ CellID->1231537446,ExpressionUUID->"c5c610d2-fc60-4fad-bf21-8d9a2a4cf87a"],
+
+Cell["\<\
+The monomials are calculated by computing a Groebner Basis on a numerical \
+slice (by substituting any parameters for large random numerical values).\
+\>", "Notes",
+ CellID->363931139,ExpressionUUID->"dabdf787-8722-4e91-b01d-6bf1eae23c94"],
+
+Cell[TextData[{
+ "This information is necessary for the command ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["BuildEliminationSystems"]], 
+    "paclet:SPQR/ref/BuildEliminationSystems", "SPQR Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "1913123e-518f-4227-a793-800e0e686e14"],
+ " to build and fit the required ansatz correctly."
+}], "Notes",
+ CellID->162574497,ExpressionUUID->"7cb81e8e-506e-4299-bd66-bac76d4c9cf3"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {
+       TaggingRules, "Openers", "PrimaryExamplesSection"}, Open], 
+      Alternatives[True, Open]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{
+    13.600000000000001`, {4.251494140625001, 9.348505859375}}]],
+  ExpressionUUID->"08076958-1a55-4b1d-92c8-85e045ccef7c"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"be85fa57-6e08-4a72-8110-7e06bc1899ce"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "3b2a413e-2707-467c-b55b-4db9a8af8bc5"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellTags->"PrimaryExamplesSection",
+ CellID->501691882,ExpressionUUID->"8fa2aae4-9e31-487a-a889-32cd2de9f2b1"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<SPQR`\>\"", "]"}]], "Input", "ExampleInitialization",
+ CellLabel->"In[1]:=",
+ CellID->1849650467,ExpressionUUID->"ae020906-3c0e-476c-8a63-c889ea9ecf85"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"},
+        Closed], 
+      Alternatives[Open, True]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{
+    13.600000000000001`, {4.551318359375001, 9.048681640625}}]],
+  ExpressionUUID->"4845f7f2-8b87-42dd-b6f9-1ddfa21419d2"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"20207742-62d0-428e-b55e-01221ceebf09"],
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "ea722e62-419d-4d2f-a3df-4f0df2cca616"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellID->914662652,ExpressionUUID->"8696e9f3-d99c-4fef-8c69-1e462548bd1a"],
+
+Cell["An ideal in variables {x,y,z} and a parameter {a}", "Notes",
+ CellID->1502869575,ExpressionUUID->"af73a971-e940-4c59-b551-de6fab0c0145"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vars", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y", ",", "z"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ideal", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "+", "y", "+", "z", "-", 
+      RowBox[{"3", "a"}]}], ",", 
+     RowBox[{
+      RowBox[{"3", "*", 
+       RowBox[{"x", "^", "2"}], "*", "z", "*", "y"}], "-", "5"}], ",", 
+     RowBox[{
+      RowBox[{"x", "*", "y", "*", "z"}], "-", 
+      RowBox[{"3", "z"}], "+", "3"}]}], "}"}]}], ";"}]}], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[1]:=",
+ CellID->1346582604,ExpressionUUID->"c00a101a-14de-453c-9811-9a0391372847"],
+
+Cell["Computing the monomials of the ideal with {z} eliminated", "Notes",
+ CellID->1991196569,ExpressionUUID->"e8cc85f6-59d2-4b62-a999-687505590c67"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"elimMonomials", " ", "=", " ", 
+  RowBox[{"FindEliminationMonomials", "[", 
+   RowBox[{"ideal", ",", 
+    RowBox[{"{", "z", "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}]], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[2]:=",
+ CellID->1304415839,ExpressionUUID->"740f750f-870d-4243-a424-1df268eafb5b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     SuperscriptBox["y", "3"], ",", 
+     SuperscriptBox["y", "2"], ",", "y", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     SuperscriptBox["y", "2"], ",", "y", ",", "1"}], "}"}]}], "}"}]], "Output",\
+
+ CellLabel->"Out[2]=",
+ CellID->2125449943,ExpressionUUID->"419435b7-bc5f-41e5-b1bb-1bb69b3d6791"]
+}, Open  ]],
+
+Cell["\<\
+Checking against the full computation of the eliminated ideal\
+\>", "Notes",
+ CellID->837438172,ExpressionUUID->"f6677925-ab38-418b-9867-ac8792bdf0cf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"elimIdeal", "=", 
+  RowBox[{"GroebnerBasis", "[", 
+   RowBox[{"ideal", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}], ",", 
+    RowBox[{"{", "z", "}"}], ",", 
+    RowBox[{"CoefficientDomain", "->", "RationalFunctions"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"elimIdeal", " ", "//", 
+  RowBox[{
+   RowBox[{"Collect", "[", 
+    RowBox[{"#", ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "y"}], "}"}], ",", 
+     RowBox[{"1", "&"}]}], "]"}], "&"}]}]}], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[3]:=",
+ CellID->1710653305,ExpressionUUID->"328ef71d-447a-40b7-8078-1bb7e39a7781"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"405", "+", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"162", "+", 
+       RowBox[{"1053", " ", "a"}], "-", 
+       RowBox[{"2187", " ", 
+        SuperscriptBox["a", "2"]}]}], ")"}], " ", "y"}], "+", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "326"}], "+", 
+       RowBox[{"1593", " ", "a"}]}], ")"}], " ", 
+     SuperscriptBox["y", "2"]}], "-", 
+    RowBox[{"288", " ", 
+     SuperscriptBox["y", "3"]}]}], ",", 
+   RowBox[{
+    RowBox[{"-", "756"}], "+", 
+    RowBox[{"1134", " ", "a"}], "+", 
+    RowBox[{"2187", " ", 
+     SuperscriptBox["a", "2"]}], "+", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "621"}], "-", 
+       RowBox[{"729", " ", "a"}]}], ")"}], " ", "x"}], "+", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "538"}], "-", 
+       RowBox[{"1593", " ", "a"}]}], ")"}], " ", "y"}], "+", 
+    RowBox[{"288", " ", 
+     SuperscriptBox["y", "2"]}]}]}], "}"}]], "Output",
+ CellLabel->"Out[3]=",
+ CellID->1043599438,ExpressionUUID->"4c546cf4-75ef-4a24-a917-3d6609928f1b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "+", "y", "+", 
+    SuperscriptBox["y", "2"], "+", 
+    SuperscriptBox["y", "3"]}], ",", 
+   RowBox[{"1", "+", "x", "+", "y", "+", 
+    SuperscriptBox["y", "2"]}]}], "}"}]], "Output",
+ CellLabel->"Out[3]=",
+ CellID->1276809417,ExpressionUUID->"da32b085-c629-43e4-8339-46c7a1540f31"]
+}, Open  ]]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"}, 
+  Closed]]]]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, 
+  Closed]]]],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, 
+       "RelatedFunction.png"]],
+     ImageSizeCache->{50., {26.47265625, 33.52734375}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"See", " ", "Also"}], "SeeAlsoSection"]},
+      {Cell[TextData[{
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["FindIrreducibleMonomials"]], 
+           "paclet:SPQR/ref/FindIrreducibleMonomials", "SPQR Package Symbol"},
+          
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "279f8d49-b8dd-4f87-bc26-6158f7306e32"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["BuildCharacteristicPolynomials"]], 
+           "paclet:SPQR/ref/BuildCharacteristicPolynomials", 
+           "SPQR Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",
+         CellTags->"11c56112-cbaa-4861-afa5-82fd3f23f851",ExpressionUUID->
+         "0851f740-4586-45d5-a8a0-8a5c6e54666f"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["GroebnerBasis"]], "paclet:ref/GroebnerBasis"},
+          "RefLink",
+          BaseStyle->{"InlineFormula"}]], "InlineFormula",
+         FontFamily->"Source Sans Pro",
+         CellTags->"2c42549f-79e8-4cac-b869-11c04fcd8589",ExpressionUUID->
+         "d2c7e954-d5d5-492d-a5ae-292bde05a040"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Eliminate"]], "paclet:ref/Eliminate"},
+          "RefLink",
+          BaseStyle->{"InlineFormula"}]], "InlineFormula",
+         FontFamily->"Source Sans Pro",
+         CellTags->"995d361e-d959-4863-a786-0c3d8e51fb79",ExpressionUUID->
+         "a28017e1-2d14-4525-9509-2169576d1004"]
+       }], "SeeAlso",ExpressionUUID->"a3d91aef-34c7-4b82-8c0e-f4f824ed0957"]}
+     }]}
+  }]], "SeeAlsoSection",ExpressionUUID->"d0dda05b-8436-4c9e-ad00-\
+c099835257c3"],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, 
+       "RelatedTechNote.png"]],
+     ImageSizeCache->{50., {26.47265625, 33.52734375}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Tech", " ", "Notes"}], "TechNotesSection"]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Introduction to SPQR"]], 
+           "paclet:SPQR/tutorial/IntroductiontoSPQR"},
+          "RefLinkPlain",
+          BaseStyle->{"Tutorials"}]], "Tutorials",ExpressionUUID->
+         "1270008f-e050-4041-b19f-26aa1b18c4df"]}]}
+     }]}
+  }]], "TechNotesSection",ExpressionUUID->"7d864d6c-f08e-4371-9053-\
+1767fe02e249"],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, "RelatedGuide.png"]],
+     ImageSizeCache->{50., {26.47265625, 33.52734375}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Related", " ", "Guides"}], "MoreAboutSection"]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["SPQR"]], "paclet:SPQR/guide/SPQR"},
+          "RefLinkPlain",
+          BaseStyle->{"MoreAbout"}]], "MoreAbout",ExpressionUUID->
+         "575570f7-215b-41dc-a1d1-4f55cd4033a6"]}]}
+     }]}
+  }]], "MoreAboutSection",ExpressionUUID->"35f21345-3e85-4a27-987d-\
+55fbf28c8b87"],
+
+Cell[" ", "FooterCell",ExpressionUUID->"304d6d29-eb57-473e-9795-b59a26e3fe73"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900, 830},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"FindEliminationMonomials",
+Visible->True,
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}, 
+    "AllOptsTable" -> Closed, "NotesSection" -> Closed}, "NewStyles" -> True, 
+  "CitationPopupData" -> $Failed, "ShowCitation" -> False, "HasOptions" -> 
+  True, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
+  "Metadata" -> {
+   "built" -> "{2025, 11, 7, 15, 7, 53.939309}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "S P Q R Symbol", "language" -> "en", "paclet" -> "SPQR", 
+    "status" -> "None", "summary" -> 
+    "FindEliminationMonomials[ideal, {x1, x2, ...}, {y1, y2, ...}] computes \
+the monomials appearing in the ideal where {x1, x2 ...} have been eliminated \
+using a numerical Groebner Basis.", "synonyms" -> {}, "tabletags" -> {}, 
+    "title" -> "FindEliminationMonomials", "titlemodifier" -> "", 
+    "metadescription" -> "", "windowtitle" -> "FindEliminationMonomials", 
+    "type" -> "Symbol", "uri" -> "SPQR/ref/FindEliminationMonomials"}},
+CellContext->"Global`",
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "14.3 for Mac OS X ARM (64-bit) (July 8, 2025)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"81d50c65-5acd-4a5e-99e8-d4fba44c10aa"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[13552, 363, 1437, 38, 70, "PrimaryExamplesSection",ExpressionUUID->"8fa2aae4-9e31-487a-a889-32cd2de9f2b1",
+   CellTags->"PrimaryExamplesSection",
+   CellID->501691882]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 27087, 745}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[592, 21, 7034, 171, 70, "AnchorBarGrid",ExpressionUUID->"55491c41-9c9a-4aea-bbac-476805d4d6c6",
+ CellID->1],
+Cell[7629, 194, 87, 0, 70, "ContextNameCell",ExpressionUUID->"5449297e-09e4-41c4-84fe-24e192f1ea5a"],
+Cell[CellGroupData[{
+Cell[7741, 198, 567, 14, 70, "ObjectNameGrid",ExpressionUUID->"a5e04132-3a42-4308-9afb-49aad2c5b87d"],
+Cell[8311, 214, 1904, 53, 70, "Usage",ExpressionUUID->"cb15a692-1fd6-4142-8356-e8af7b18a0c6",
+ CellID->1113744214]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10252, 272, 1851, 45, 70, "NotesSection",ExpressionUUID->"d7738a86-270f-419c-a355-96fb4945940f",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1992907963],
+Cell[12106, 319, 542, 17, 70, "Notes",ExpressionUUID->"c5c610d2-fc60-4fad-bf21-8d9a2a4cf87a",
+ CellID->1231537446],
+Cell[12651, 338, 249, 4, 70, "Notes",ExpressionUUID->"dabdf787-8722-4e91-b01d-6bf1eae23c94",
+ CellID->363931139],
+Cell[12903, 344, 522, 13, 70, "Notes",ExpressionUUID->"7cb81e8e-506e-4299-bd66-bac76d4c9cf3",
+ CellID->162574497]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+Cell[CellGroupData[{
+Cell[13552, 363, 1437, 38, 70, "PrimaryExamplesSection",ExpressionUUID->"8fa2aae4-9e31-487a-a889-32cd2de9f2b1",
+ CellTags->"PrimaryExamplesSection",
+ CellID->501691882],
+Cell[14992, 403, 194, 3, 70, "Input",ExpressionUUID->"ae020906-3c0e-476c-8a63-c889ea9ecf85",
+ CellID->1849650467],
+Cell[CellGroupData[{
+Cell[15211, 410, 1415, 37, 70, "ExampleSection",ExpressionUUID->"8696e9f3-d99c-4fef-8c69-1e462548bd1a",
+ CellID->914662652],
+Cell[16629, 449, 142, 1, 70, "Notes",ExpressionUUID->"af73a971-e940-4c59-b551-de6fab0c0145",
+ CellID->1502869575],
+Cell[16774, 452, 677, 20, 70, "Input",ExpressionUUID->"c00a101a-14de-453c-9811-9a0391372847",
+ CellID->1346582604],
+Cell[17454, 474, 149, 1, 70, "Notes",ExpressionUUID->"e8cc85f6-59d2-4b62-a999-687505590c67",
+ CellID->1991196569],
+Cell[CellGroupData[{
+Cell[17628, 479, 364, 9, 70, "Input",ExpressionUUID->"740f750f-870d-4243-a424-1df268eafb5b",
+ CellID->1304415839],
+Cell[17995, 490, 393, 12, 70, "Output",ExpressionUUID->"419435b7-bc5f-41e5-b1bb-1bb69b3d6791",
+ CellID->2125449943]
+}, Open  ]],
+Cell[18403, 505, 161, 3, 70, "Notes",ExpressionUUID->"f6677925-ab38-418b-9867-ac8792bdf0cf",
+ CellID->837438172],
+Cell[CellGroupData[{
+Cell[18589, 512, 635, 17, 70, "Input",ExpressionUUID->"328ef71d-447a-40b7-8078-1bb7e39a7781",
+ CellID->1710653305],
+Cell[19227, 531, 1105, 36, 70, "Output",ExpressionUUID->"4c546cf4-75ef-4a24-a917-3d6609928f1b",
+ CellID->1043599438],
+Cell[20335, 569, 338, 9, 70, "Output",ExpressionUUID->"da32b085-c629-43e4-8339-46c7a1540f31",
+ CellID->1276809417]
+}, Open  ]]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"}, Closed]]]]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, Closed]]]],
+Cell[20915, 587, 2565, 67, 70, "SeeAlsoSection",ExpressionUUID->"d0dda05b-8436-4c9e-ad00-c099835257c3"],
+Cell[23483, 656, 756, 20, 70, "TechNotesSection",ExpressionUUID->"7d864d6c-f08e-4371-9053-1767fe02e249"],
+Cell[24242, 678, 704, 18, 70, "MoreAboutSection",ExpressionUUID->"35f21345-3e85-4a27-987d-55fbf28c8b87"],
+Cell[24949, 698, 78, 0, 70, "FooterCell",ExpressionUUID->"304d6d29-eb57-473e-9795-b59a26e3fe73"]
+}
+]
+*)
+
+(* End of internal cache information *)

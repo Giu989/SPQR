@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     18850,        475]
-NotebookOptionsPosition[     15255,        400]
-NotebookOutlinePosition[     17151,        443]
-CellTagsIndexPosition[     17108,        440]
+NotebookDataLength[     20869,        523]
+NotebookOptionsPosition[     17273,        448]
+NotebookOutlinePosition[     19168,        491]
+CellTagsIndexPosition[     19125,        488]
 WindowTitle->SPQR Documentation
 WindowFrame->Normal*)
 
@@ -27,11 +27,11 @@ Cell[BoxData[GridBox[{
           TemplateBox[{12},
            "Spacer1"], Cell["S P Q R GUIDE", "PacletNameCell",
            TextAlignment->Center,ExpressionUUID->
-           "302f6856-c8ed-4804-912a-07f2152670c6"], 
+           "475e4c38-c2ed-4ecc-b82b-9da7c9978700"], 
           TemplateBox[{8},
            "Spacer1"]}]],
          TextAlignment->Center,ExpressionUUID->
-         "3d91ca2e-74c8-4eee-ab84-72ad000e0511"],
+         "fa8f2191-e863-4d02-996c-41c4ae8da513"],
         Background->LightDarkSwitched[
           RGBColor[0.85098, 0.396078, 0]],
         ItemSize->Full], ""}
@@ -52,8 +52,8 @@ Cell[BoxData[GridBox[{
             AspectRatio->1,
             ImageSize->20,
             PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
-           "ebe70246-7416-407b-921f-4af949544437"]
-         }],ExpressionUUID->"4c487fdf-0404-4692-bb66-23cd3ac97b21"],
+           "aae3a283-e041-47ec-b459-07811c634564"]
+         }],ExpressionUUID->"3800514b-3fbe-4ce5-a0d2-7d37c0619614"],
          StripOnInput->False],{
         StyleBox[
           "\"BuildCharacteristicPolynomials\"", "SeeAlsoRelated", 
@@ -65,6 +65,10 @@ Cell[BoxData[GridBox[{
            False] :> Documentation`HelpLookup[
           "paclet:SPQR/ref/BuildCompanionMatrices"], 
          StyleBox[
+          "\"BuildEliminationSystems\"", "SeeAlsoRelated", StripOnInput -> 
+           False] :> Documentation`HelpLookup[
+          "paclet:SPQR/ref/BuildEliminationSystems"], 
+         StyleBox[
           "\"BuildPolynomialSystem\"", "SeeAlsoRelated", StripOnInput -> 
            False] :> Documentation`HelpLookup[
           "paclet:SPQR/ref/BuildPolynomialSystem"], 
@@ -75,6 +79,10 @@ Cell[BoxData[GridBox[{
          StyleBox["\"FFDet\"", "SeeAlsoRelated", StripOnInput -> False] :> 
          Documentation`HelpLookup["paclet:SPQR/ref/FFDet"], 
          StyleBox[
+          "\"FindEliminationMonomials\"", "SeeAlsoRelated", StripOnInput -> 
+           False] :> Documentation`HelpLookup[
+          "paclet:SPQR/ref/FindEliminationMonomials"], 
+         StyleBox[
           "\"FindIrreducibleMonomials\"", "SeeAlsoRelated", StripOnInput -> 
            False] :> Documentation`HelpLookup[
           "paclet:SPQR/ref/FindIrreducibleMonomials"], 
@@ -83,6 +91,10 @@ Cell[BoxData[GridBox[{
            StripOnInput -> False] :> 
          Documentation`HelpLookup[
           "paclet:SPQR/ref/ReconstructCharacteristicPolynomials"], 
+         StyleBox[
+          "\"ReconstructEliminationSystems\"", "SeeAlsoRelated", StripOnInput -> 
+           False] :> Documentation`HelpLookup[
+          "paclet:SPQR/ref/ReconstructEliminationSystems"], 
          StyleBox[
           "\"ReconstructPolynomialRemainder\"", "SeeAlsoRelated", 
            StripOnInput -> False] :> 
@@ -101,7 +113,7 @@ Cell[BoxData[GridBox[{
         MenuStyle->"GuideFunction"],
        MouseAppearanceTag["LinkHand"]]],
       LineSpacing->{1.4, 0},ExpressionUUID->
-      "ad46ea56-7c22-4a3d-a63d-31c4996124d2"],
+      "d9da3871-9e3e-4b68-940e-2ec945bd4c0e"],
      "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
 \[ThickSpace]",
      Cell[BoxData[
@@ -117,8 +129,8 @@ Cell[BoxData[GridBox[{
             AspectRatio->1,
             ImageSize->20,
             PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
-           "f30b79c9-15a1-411b-9a58-8be655cd72de"]
-         }],ExpressionUUID->"ee1fda13-7afb-44e1-9e90-d71381a7f2d6"],
+           "d7d993fc-fbf1-473e-a7cf-fbd1a27663a3"]
+         }],ExpressionUUID->"f9d0edf2-041c-4eae-a77d-1418b8a32389"],
          StripOnInput->False],{
         "\"Introduction to SPQR\"" :> 
          Documentation`HelpLookup["paclet:SPQR/tutorial/IntroductiontoSPQR"]},
@@ -128,7 +140,7 @@ Cell[BoxData[GridBox[{
         MenuStyle->"GuideTutorial"],
        MouseAppearanceTag["LinkHand"]]],
       LineSpacing->{1.4, 0},ExpressionUUID->
-      "e4e59348-1a9d-481c-b461-f1575e67c97c"],
+      "1c6d9ac5-dc08-41e2-a294-2d369765eb61"],
      "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
 \[ThickSpace]",
      Cell[BoxData[
@@ -144,8 +156,8 @@ Cell[BoxData[GridBox[{
             AspectRatio->1,
             ImageSize->20,
             PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
-           "1d142bb3-4e87-47ce-8e4f-d28b26e041fd"]
-         }],ExpressionUUID->"dcd2fb35-81c3-461b-923c-b3050bb38889"],
+           "a2a38cce-ca41-4902-94f0-eceacc680f05"]
+         }],ExpressionUUID->"e2e21f73-83c7-418b-a130-b2fe020ca687"],
          StripOnInput->False],{
         "\"SPQR/guide/SPQR\"" :> None, 
          "\"Copy Wolfram Documentation Center URL\"" :> 
@@ -175,17 +187,17 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
         MenuStyle->"URLMenu"],
        MouseAppearanceTag["LinkHand"]]],
       LineSpacing->{1.4, 0},ExpressionUUID->
-      "39158a05-cd0a-4993-8d0e-31a18eb08187"]
+      "9282aa87-61db-4348-a950-aad55d8eb1a8"]
     }], "AnchorBar",
      CacheGraphics->False,ExpressionUUID->
-     "7b3ad6b4-2fb9-4bfe-91c7-56853407a686"]}
+     "a2474946-21fc-4f20-ad62-9883b73cde0f"]}
   }]], "AnchorBarGrid",
- CellID->1,ExpressionUUID->"3b936250-6755-4c9a-a1ca-2f3fd2ffdc68"],
+ CellID->1,ExpressionUUID->"e7d193c8-f833-4c2c-a5ab-2f893aeb066b"],
 
 Cell[CellGroupData[{
 
 Cell["SPQR Documentation", "GuideTitle",
- CellID->2036843978,ExpressionUUID->"d0e89e96-31b3-4e08-9a9c-b481f36f160a"],
+ CellID->2036843978,ExpressionUUID->"1f5b0515-90c1-4c25-a6cc-9877b323325d"],
 
 Cell[TextData[{
  "Welcome to the SPQR documentation page! Here you will find the tutorial \
@@ -197,9 +209,9 @@ accessed with ",
 pass through this page.\nPlease let us know if you find any errors/think \
 anything is not explained clearly."
 }], "GuideAbstract",
- CellID->199921419,ExpressionUUID->"d41013ca-2736-4908-adef-8db132855d07"],
+ CellID->199921419,ExpressionUUID->"a5598d3d-2a92-4e9f-a323-6c19b48e4c22"],
 
-Cell["\t", "GuideDelimiterSubsection",ExpressionUUID->"5eb2d852-8f74-49ad-8104-8dbd06751dcd"]
+Cell["\t", "GuideDelimiterSubsection",ExpressionUUID->"204a3b7a-aefa-4f3c-9650-319eba89d90a"]
 }, Open  ]],
 
 Cell[BoxData[GridBox[{
@@ -221,21 +233,21 @@ Cell[BoxData[GridBox[{
            "RefLinkPlain",
            BaseStyle->{"GuideTutorial"}]], "InlineFunctionSans",
           CellTags->"c40ac8e4-27e1-4161-a8df-4d4f38357a23",ExpressionUUID->
-          "f060772e-54f1-47ae-acc1-5fe7891c766a"], "\n", 
+          "67dc1f9d-f988-4c78-babe-bdd2c93c09c7"], "\n", 
          RowBox[{" ", 
           RowBox[{"\[LongDash]", " ", 
            RowBox[{
            "Tutorial", " ", "with", " ", "many", " ", "examples", " ", "and", 
             " ", "applications"}]}]}]}], "GuideTutorial",ExpressionUUID->
-         "aa26d73c-aa92-40af-8cf4-07d6fceaba65"]}]}
+         "dd944f8c-c39f-49ba-995b-5dac7c712fcc"]}]}
      }]}
-  }]], "GuideTutorialsSection",ExpressionUUID->"8651f624-ecc4-4d8d-a7de-\
-9b9fe6dd8a16"],
+  }]], "GuideTutorialsSection",ExpressionUUID->"2d5ba5e1-809b-47c3-899e-\
+d3118d7fffa2"],
 
 Cell[CellGroupData[{
 
 Cell["Numerical Groebner Basis Functions", "GuideFunctionsSection",
- CellID->14192995,ExpressionUUID->"c4d954e3-ca29-4d99-ac5b-bc045362e54d"],
+ CellID->14192995,ExpressionUUID->"2a858ce5-e895-4a76-8b85-14c40ff2cbf1"],
 
 Cell[TextData[{
  Cell[BoxData[
@@ -246,7 +258,7 @@ Cell[TextData[{
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c40ac8e4-27e1-4161-a8df-4d4f38357a23",ExpressionUUID->
-  "f52d0985-8889-4548-92af-eabf725e3998"],
+  "e85f913a-e92f-4b3f-afe9-f5b81561c490"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Finds the irreducible monomials of an ideal\n",
@@ -258,18 +270,30 @@ Cell[TextData[{
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c40ac8e4-27e1-4161-a8df-4d4f38357a23",ExpressionUUID->
-  "2876cf81-64bc-447e-a63e-cbe286b78a4a"],
+  "b6118e15-e48c-4030-a6b2-0936a34cdb76"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
- " Sorts variables in a Groebner basis"
+ " Sorts variables in a Groebner basis\n",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["FindEliminationMonomials"]], 
+    "paclet:SPQR/ref/FindEliminationMonomials", "SPQR Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
+  CellTags->"c40ac8e4-27e1-4161-a8df-4d4f38357a23",ExpressionUUID->
+  "6ab8ec9e-5040-4b17-9618-473491a165e2"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " Finds the monomials appearing in an ideal after elimination"
 }], "GuideText",
- CellID->170982148,ExpressionUUID->"399f64f0-7f30-4b27-bbfa-13752d9dce35"]
+ CellID->170982148,ExpressionUUID->"b04cbca6-a542-4761-b35c-79b7f3144fcc"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Direct Polynomial Remainder Functions", "GuideFunctionsSection",
- CellID->1414865225,ExpressionUUID->"627ca3aa-fd56-4361-901a-e4c7bf9a2fec"],
+ CellID->1414865225,ExpressionUUID->"47bf5a7c-d17f-4d9e-845f-aba3aef324a2"],
 
 Cell[TextData[{
  Cell[BoxData[
@@ -280,7 +304,7 @@ Cell[TextData[{
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
-  "7c49355b-1dc0-465a-b7ce-bec47f121f8b"],
+  "4aa1eaac-f86d-476e-a282-26ca473ba351"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Builds and finds the irreducible monomials generated by a Macaulay system\n\
@@ -293,18 +317,18 @@ Cell[TextData[{
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
-  "4b30244f-25f8-4b8a-b2fd-c9c39b543d18"],
+  "581fdc91-b57a-40e2-ad97-a3be1a49b801"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Reconstructs the polynomial division remainder from the Macaulay system"
 }], "GuideText",
- CellID->466397451,ExpressionUUID->"edf3e82a-3838-42cd-b35d-6c0ac6f7a764"]
+ CellID->466397451,ExpressionUUID->"f4a054b9-60ef-477f-8975-e66bf6485c1a"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Companion Matrix Functions", "GuideFunctionsSection",
- CellID->270331537,ExpressionUUID->"9cee1897-ef0e-41ca-ad64-c07f5f110358"],
+ CellID->270331537,ExpressionUUID->"ef78e14c-056d-45f0-b334-5596bb951638"],
 
 Cell[TextData[{
  Cell[BoxData[
@@ -315,7 +339,7 @@ Cell[TextData[{
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
-  "19e52c0e-0bac-4af8-98df-651149fb88a3"],
+  "cd9fedb2-cd31-4324-8989-e3faf0d6ed3a"],
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Builds the companion matrices associated to the ideal's variables by \
 generating a Macaulay system\n",
@@ -327,7 +351,7 @@ generating a Macaulay system\n",
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
-  "9a841ed0-011a-4325-9eb6-6849205801fe"],
+  "758b555c-f2a3-4789-b67c-a148a4463771"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Recursively builds the companion matrices for any rational functions \
@@ -341,7 +365,7 @@ starting from the variable companion matrices\n",
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
-  "d5d6f7bb-9a89-4604-a8aa-42e1a43e7c0e"],
+  "13497268-0ec0-432e-b000-2539fa069d48"],
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Reconstructs the polynomial remainder from the specified companion matrix\n\
 ",
@@ -353,7 +377,7 @@ starting from the variable companion matrices\n",
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
-  "41176a19-4c0e-4ba4-8042-1b107ce5868f"],
+  "19263b6b-c50d-43d2-9290-87f7ef3cf125"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Builds the characteristic polynomial for the specified companion matrices\n\
@@ -367,18 +391,42 @@ starting from the variable companion matrices\n",
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
-  "7cd9f6b4-f46d-4edb-96a9-c618c98250d0"],
+  "df1e13ab-9ab2-4d49-a3aa-c212bcf485bc"],
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Reconstructs the characteristic polynomial coefficients for the specified \
-companion matrices"
+companion matrices\n",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["BuildEliminationSystems"]], 
+    "paclet:SPQR/ref/BuildEliminationSystems", "SPQR Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
+  CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
+  "44141512-34c6-484a-9d18-f50a6c3054d6"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " Builds the required system to eliminate variables via companion matrices\n",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["ReconstructEliminationSystems"]], 
+    "paclet:SPQR/ref/ReconstructEliminationSystems", "SPQR Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
+  CellTags->"c5c6736a-1ff4-4e4e-8fcf-2d9846cbae62",ExpressionUUID->
+  "95bf51b9-ef64-43f1-8435-b8ed74c12379"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " Reconstructs the coefficients of an ideal after variable elimination"
 }], "GuideText",
- CellID->229551098,ExpressionUUID->"f69ac380-2293-43e0-a8ad-3331ff1b7795"]
+ CellID->229551098,ExpressionUUID->"a30cab2d-cbcb-463f-bf0c-ef49947ce64d"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["High Level Wrapper Functions", "GuideFunctionsSection",
- CellID->658340803,ExpressionUUID->"62f5f902-a9ab-4d3b-86f6-efbc60bbefec"],
+ CellID->658340803,ExpressionUUID->"f143c159-16ab-473a-964b-d4e26635f622"],
 
 Cell[TextData[{
  Cell[BoxData[
@@ -388,15 +436,15 @@ Cell[TextData[{
    "PackageLink",
    BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans",
   CellTags->"c40ac8e4-27e1-4161-a8df-4d4f38357a23",ExpressionUUID->
-  "a2d85c55-ba2c-4f17-a5e1-df0f449b0756"],
+  "f9fa198a-3ff5-4ab6-906e-b6bd13f4233f"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " Computes the determinant of a matrix within FiniteFlow"
 }], "GuideText",
- CellID->898126677,ExpressionUUID->"0e732661-e9a6-48be-9897-5e8cbc94b92a"]
+ CellID->898126677,ExpressionUUID->"bf279da5-3516-445d-b8df-318dea43e473"]
 }, Open  ]],
 
-Cell[" ", "FooterCell",ExpressionUUID->"a3f09980-0761-4eaa-a864-ab54874967ed"]
+Cell[" ", "FooterCell",ExpressionUUID->"98c13963-e946-4ae7-8d29-538ae6d0a2d6"]
 },
 Saveable->False,
 ScreenStyleEnvironment->"Working",
@@ -412,7 +460,7 @@ TaggingRules->{
   "NewStyles" -> True, "CitationPopupData" -> {$Failed, ""}, "ShowCitation" -> 
   False, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
   "Metadata" -> {
-   "built" -> "{2025, 9, 17, 16, 32, 31.184806}", 
+   "built" -> "{2025, 11, 7, 15, 15, 3.554213}", 
     "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "S P Q R Guide", "language" -> "en", "paclet" -> "SPQR", 
@@ -429,7 +477,7 @@ errors/think anything is not explained clearly.", "synonyms" -> {},
 CacheGraphics->False,
 FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb"],
-ExpressionUUID->"558ad886-8df6-4e30-831b-80c5a003573d"
+ExpressionUUID->"bedc8d86-2458-4add-8d28-63af754e9891"
 ]
 (* End of Notebook Content *)
 
@@ -442,41 +490,41 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[586, 21, 6667, 161, 70, "AnchorBarGrid",ExpressionUUID->"3b936250-6755-4c9a-a1ca-2f3fd2ffdc68",
+Cell[586, 21, 7272, 173, 70, "AnchorBarGrid",ExpressionUUID->"e7d193c8-f833-4c2c-a5ab-2f893aeb066b",
  CellID->1],
 Cell[CellGroupData[{
-Cell[7278, 186, 116, 1, 70, "GuideTitle",ExpressionUUID->"d0e89e96-31b3-4e08-9a9c-b481f36f160a",
+Cell[7883, 198, 116, 1, 70, "GuideTitle",ExpressionUUID->"1f5b0515-90c1-4c25-a6cc-9877b323325d",
  CellID->2036843978],
-Cell[7397, 189, 586, 10, 70, "GuideAbstract",ExpressionUUID->"d41013ca-2736-4908-adef-8db132855d07",
+Cell[8002, 201, 586, 10, 70, "GuideAbstract",ExpressionUUID->"a5598d3d-2a92-4e9f-a323-6c19b48e4c22",
  CellID->199921419],
-Cell[7986, 201, 93, 0, 70, "GuideDelimiterSubsection",ExpressionUUID->"5eb2d852-8f74-49ad-8104-8dbd06751dcd"]
+Cell[8591, 213, 93, 0, 70, "GuideDelimiterSubsection",ExpressionUUID->"204a3b7a-aefa-4f3c-9650-319eba89d90a"]
 }, Open  ]],
-Cell[8094, 204, 1193, 28, 70, "GuideTutorialsSection",ExpressionUUID->"8651f624-ecc4-4d8d-a7de-9b9fe6dd8a16"],
+Cell[8699, 216, 1193, 28, 70, "GuideTutorialsSection",ExpressionUUID->"2d5ba5e1-809b-47c3-899e-d3118d7fffa2"],
 Cell[CellGroupData[{
-Cell[9312, 236, 141, 1, 70, "GuideFunctionsSection",ExpressionUUID->"c4d954e3-ca29-4d99-ac5b-bc045362e54d",
+Cell[9917, 248, 141, 1, 70, "GuideFunctionsSection",ExpressionUUID->"2a858ce5-e895-4a76-8b85-14c40ff2cbf1",
  CellID->14192995],
-Cell[9456, 239, 964, 26, 70, "GuideText",ExpressionUUID->"399f64f0-7f30-4b27-bbfa-13752d9dce35",
+Cell[10061, 251, 1425, 38, 70, "GuideText",ExpressionUUID->"b04cbca6-a542-4761-b35c-79b7f3144fcc",
  CellID->170982148]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[10457, 270, 146, 1, 70, "GuideFunctionsSection",ExpressionUUID->"627ca3aa-fd56-4361-901a-e4c7bf9a2fec",
+Cell[11523, 294, 146, 1, 70, "GuideFunctionsSection",ExpressionUUID->"47bf5a7c-d17f-4d9e-845f-aba3aef324a2",
  CellID->1414865225],
-Cell[10606, 273, 1060, 27, 70, "GuideText",ExpressionUUID->"edf3e82a-3838-42cd-b35d-6c0ac6f7a764",
+Cell[11672, 297, 1060, 27, 70, "GuideText",ExpressionUUID->"f4a054b9-60ef-477f-8975-e66bf6485c1a",
  CellID->466397451]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11703, 305, 134, 1, 70, "GuideFunctionsSection",ExpressionUUID->"9cee1897-ef0e-41ca-ad64-c07f5f110358",
+Cell[12769, 329, 134, 1, 70, "GuideFunctionsSection",ExpressionUUID->"ef78e14c-056d-45f0-b334-5596bb951638",
  CellID->270331537],
-Cell[11840, 308, 2625, 66, 70, "GuideText",ExpressionUUID->"f69ac380-2293-43e0-a8ad-3331ff1b7795",
+Cell[12906, 332, 3577, 90, 70, "GuideText",ExpressionUUID->"a30cab2d-cbcb-463f-bf0c-ef49947ce64d",
  CellID->229551098]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14502, 379, 136, 1, 70, "GuideFunctionsSection",ExpressionUUID->"62f5f902-a9ab-4d3b-86f6-efbc60bbefec",
+Cell[16520, 427, 136, 1, 70, "GuideFunctionsSection",ExpressionUUID->"f143c159-16ab-473a-964b-d4e26635f622",
  CellID->658340803],
-Cell[14641, 382, 517, 13, 70, "GuideText",ExpressionUUID->"0e732661-e9a6-48be-9897-5e8cbc94b92a",
+Cell[16659, 430, 517, 13, 70, "GuideText",ExpressionUUID->"bf279da5-3516-445d-b8df-318dea43e473",
  CellID->898126677]
 }, Open  ]],
-Cell[15173, 398, 78, 0, 70, "FooterCell",ExpressionUUID->"a3f09980-0761-4eaa-a864-ab54874967ed"]
+Cell[17191, 446, 78, 0, 70, "FooterCell",ExpressionUUID->"98c13963-e946-4ae7-8d29-538ae6d0a2d6"]
 }
 ]
 *)

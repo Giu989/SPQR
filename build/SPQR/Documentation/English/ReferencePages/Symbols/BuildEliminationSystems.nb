@@ -1,0 +1,1341 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     57532,       1332]
+NotebookOptionsPosition[     50455,       1189]
+NotebookOutlinePosition[     52855,       1247]
+CellTagsIndexPosition[     52769,       1242]
+WindowTitle->BuildEliminationSystems
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["S P Q R SYMBOL", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "413dbfa6-e7cf-4b46-94c5-407e93177dab"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "158aa6a3-25c3-4b9e-b725-51ea27dee654"],
+        Background->LightDarkSwitched[
+          RGBColor[0.490196, 0.576471, 0.690196]],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[{
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "See Also",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "d9c1c8f8-bd06-4634-9a5a-0d791d0d1916"]
+         }],ExpressionUUID->"c55c21cc-7e8e-4965-9af4-e6e0b024db6f"],
+         StripOnInput->False],{
+        StyleBox[
+          "\"GroebnerBasis\"", "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:ref/GroebnerBasis"], 
+         StyleBox["\"Eliminate\"", "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:ref/Eliminate"], Delimiter, 
+         StyleBox[
+          "\"Functions\"", "SeeAlsoSection", FontSize -> 14, FontSlant -> 
+           "Italic", StripOnInput -> False] :> 
+         NotebookFind[EvaluationNotebook[], "SeeAlsoSection", All, CellStyle],
+          StyleBox[
+          StyleBox[
+           "\"FindEliminationMonomials\"", "SeeAlsoRelated", StripOnInput -> 
+            False], "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:SPQR/ref/FindEliminationMonomials"],
+          StyleBox[
+          StyleBox[
+           "\"BuildCompanionMatrices\"", "SeeAlsoRelated", StripOnInput -> 
+            False], "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:SPQR/ref/BuildCompanionMatrices"], 
+         StyleBox[
+          StyleBox[
+           "\"ReconstructEliminationSystems\"", "SeeAlsoRelated", 
+            StripOnInput -> False], "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup[
+          "paclet:SPQR/ref/ReconstructEliminationSystems"], 
+         StyleBox[
+          StyleBox[
+           "\"FindIrreducibleMonomials\"", "SeeAlsoRelated", StripOnInput -> 
+            False], "SeeAlsoRelated", StripOnInput -> False] :> 
+         Documentation`HelpLookup["paclet:SPQR/ref/FindIrreducibleMonomials"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"SeeAlso"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "879220ff-19c5-4e46-922a-394dab5c5de2"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Related Guides",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "7e45535f-bca6-409a-8d19-f42dfa82c6a1"]
+         }],ExpressionUUID->"34111f8c-48e0-47db-90e8-14f073468caf"],
+         StripOnInput->False],{
+        "\"SPQR\"" :> Documentation`HelpLookup["paclet:SPQR/guide/SPQR"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"MoreAbout"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "611ff8f0-42de-4d9b-9720-e671c0f86fa4"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Tech Notes",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "474f327a-538b-4bbe-986a-ddf4db2a2de6"]
+         }],ExpressionUUID->"d133ac6c-4c9e-4862-ba06-719bcdfdd25d"],
+         StripOnInput->False],{
+        "\"Introduction to SPQR\"" :> 
+         Documentation`HelpLookup["paclet:SPQR/tutorial/IntroductiontoSPQR"]},
+        
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"Tutorials"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "98dde3d1-d7d6-4fd6-960f-1010640d4ba1"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "URL",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "d4f75bbf-0ed3-4153-8542-8868d141a71d"]
+         }],ExpressionUUID->"60acc4d7-3a01-43e9-9935-ce3949c0c5d1"],
+         StripOnInput->False],{
+        "\"SPQR/ref/BuildEliminationSystems\"" :> None, 
+         "\"Copy Wolfram Documentation Center URL\"" :> 
+         CopyToClipboard["SPQR/ref/BuildEliminationSystems"], Delimiter, 
+         "\"Copy web URL\"" :> 
+         Module[{DocumentationSearch`Private`nb$}, 
+           DocumentationSearch`Private`nb$ = 
+            NotebookPut[
+             Notebook[{
+               Cell[BoxData[
+                 MakeBoxes[
+                  Hyperlink[
+                   "http://reference.wolfram.com/language/SPQR/ref/\
+BuildEliminationSystems.html"], StandardForm]], "Input", TextClipboardType -> 
+                 "PlainText"]}, Visible -> False]]; 
+           SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+           FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+           NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+         "\"Go to web URL\"" :> 
+         FrontEndExecute[{
+           NotebookLocate[{
+             URL[(If[TrueQ[False], 
+                  "http://reference.wolfram.com/system-modeler/", 
+                  "http://reference.wolfram.com/language/"] <> 
+                "SPQR/ref/BuildEliminationSystems") <> ".html"], None}]}]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"URLMenu"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "6dd086c0-4eac-4c0d-939b-e44a0d724b78"]
+    }], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "ec1ed337-1d8a-4324-b5ac-863219ff5eb2"]}
+  }]], "AnchorBarGrid",
+ CellID->1,ExpressionUUID->"c92761fd-8eec-4e0b-a3f5-81621542871f"],
+
+Cell["SPQR`", "ContextNameCell",ExpressionUUID->"ad438255-4f83-4d37-85db-135dee9bb8a4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {Cell[TextData[{
+     Cell[
+     "BuildEliminationSystems", "ObjectName",ExpressionUUID->
+      "757f4764-1ee3-4647-88b8-847ff661f2e3"],
+     Cell[BoxData[
+      TemplateBox[{8},
+       "Spacer1"]],ExpressionUUID->"fb309ec7-1e54-442c-98c6-7288a94a8941"],
+     Cell[BoxData[
+     ""], "ObjectNameTranslation",ExpressionUUID->
+      "c79300f7-c333-483d-b2d1-b17f035d7346"]
+    }],ExpressionUUID->"92dccec0-ab3b-4e41-9875-91c4e21285e2"], 
+    "\[SpanFromLeft]"}
+  }]], "ObjectNameGrid",ExpressionUUID->"43c47f9e-ab19-4635-bced-\
+b1667e73273a"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       TemplateBox[{
+         Cell[
+          TextData["BuildEliminationSystems"]], 
+         "paclet:SPQR/ref/BuildEliminationSystems", "SPQR Package Symbol"},
+        "PackageLink",
+        BaseStyle->"InlineFormula"], "[", 
+       RowBox[{
+        StyleBox["cmatsystem", "TI"], ",", 
+        StyleBox["monomials", "TI"]}], "]"}]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "1922f4fc-97de-4d47-8a14-a680c9a7ce06"],
+     "\[LineSeparator]Builds and loads the equations required to eliminate \
+variables from an ideal. ",
+     Cell[BoxData[
+      StyleBox["cmatsystem", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "eb7fa2ff-ad15-4b63-a20b-4377c391a523"],
+     " and ",
+     Cell[BoxData[
+      StyleBox["monomials", "TI"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "c19de16c-1eb9-42e6-8db2-2997d0a22b38"],
+     " should be the outputs of ",
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["BuildCompanionMatrices"]], 
+        "paclet:SPQR/ref/BuildCompanionMatrices", "SPQR Package Symbol"},
+       "PackageLink",
+       BaseStyle->"InlineFormula"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "81330e67-ba7a-4da1-b550-431916f8bb19"],
+     " and ",
+     Cell[BoxData[
+      TemplateBox[{
+        Cell[
+         TextData["FindEliminationMonomials"]], 
+        "paclet:SPQR/ref/FindEliminationMonomials", "SPQR Package Symbol"},
+       "PackageLink",
+       BaseStyle->"InlineFormula"]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "8a48d2f2-b578-4708-a28b-7cdff0076d9f"],
+     " respectively."
+    }],ExpressionUUID->"189f6559-2e7a-441b-a18c-887451c9beef"]}
+  }]], "Usage",
+ CellID->1061822302,ExpressionUUID->"229e4561-1d43-4bc6-a9b0-ad72134834a2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    DynamicBox[ToBoxes[
+      If[CurrentValue[
+         EvaluationCell[], "CellGroupOpen"] =!= Closed, 
+       Style[
+        Graphics[{
+          Thickness[0.18], 
+          RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+          Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+         PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+        0.68 Inherited], 
+       Rotate[
+        Style[
+         Graphics[{
+           Thickness[0.18], 
+           RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+           Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+          PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+         0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+     ImageSizeCache->{
+      13.600000000000001`, {-0.1685058593749993, 13.768505859375}}]],
+    ExpressionUUID->"3d59b4af-7fe9-44d0-8bcf-99235b89a1db"],
+   Cell[BoxData[
+    TemplateBox[{1},
+     "Spacer1"]],ExpressionUUID->"d4a6492a-d9da-46c9-8ed1-58197f9d7382"],
+   "Details and Options"
+  }], "NotesFrameText",ExpressionUUID->"34db2f2e-8b97-49b1-b09b-bb67429df405"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"14f22937-c44d-4e8f-86a8-4f52f92a9390"]], \
+"NotesSection",
+ ShowGroupOpener->"Thumbnail",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CacheGraphics->False,
+ CellID->1080442695,ExpressionUUID->"fbafd28a-1cce-4131-a1d6-7a640f58b188"],
+
+Cell["\<\
+BuildEliminationSystems prepares inside FiniteFlow all the necessary data to \
+reconstruct an ideal created by eliminating variables from another system.\
+\>", "Notes",
+ CellID->458323144,ExpressionUUID->"d17a47a8-69be-4893-83fd-e5a866267c93"],
+
+Cell[TextData[{
+ "BuildEliminationSystems builds and loads into FiniteFlow an ansatz for the \
+structure of the eliminated ideal, based on the companion matrices given in \
+",
+ StyleBox["cmatsystem", "TI"],
+ " and the ",
+ StyleBox["monomials", "TI"],
+ " that form the new eliminated ideal."
+}], "Notes",
+ CellID->2092365748,ExpressionUUID->"f4a1bb92-90eb-4376-94cd-37036b0f1dd9"],
+
+Cell[TextData[{
+ "The output of BuildEliminationSystems can then be passed to ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["ReconstructEliminationSystems"]], 
+    "paclet:SPQR/ref/ReconstructEliminationSystems", "SPQR Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "f1892cbc-220a-4077-bbec-ce94317624f9"],
+ " for the reconstruction of the output."
+}], "Notes",
+ CellID->359470939,ExpressionUUID->"2cb37849-c40c-47a0-88ea-8042eb221827"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {
+       TaggingRules, "Openers", "PrimaryExamplesSection"}, Open], 
+      Alternatives[True, Open]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{
+    13.600000000000001`, {4.251494140625001, 9.348505859375}}]],
+  ExpressionUUID->"130a93ec-33fd-4f13-9f52-97271a1bf1c5"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"0d4e1a90-bc13-48cc-af29-5d5a867fc1f8"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "01733eec-1311-4a0a-b059-dfc471400bea"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellTags->"PrimaryExamplesSection",
+ CellID->2026139480,ExpressionUUID->"d4d79cb4-2e60-42f0-acff-0f01101cfd09"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<SPQR`\>\"", "]"}]], "Input", "ExampleInitialization",
+ CellLabel->"In[1]:=",
+ CellID->1593572354,ExpressionUUID->"25d3b3b4-9eb4-498d-966a-55fd47b80375"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"},
+        Closed], 
+      Alternatives[Open, True]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{
+    13.600000000000001`, {4.551318359375001, 9.048681640625}}]],
+  ExpressionUUID->"883fd452-e5d4-4dbb-b0f0-859a8b1c2145"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"0f615081-b6a5-44a4-a03b-6dae63a98c30"],
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "acb6af90-b6aa-40e2-bada-e9f4da070fff"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellID->678049881,ExpressionUUID->"ee98a88f-28a2-42ce-8794-9e79ef98d119"],
+
+Cell["An ideal in variables {x,y,z} and a parameter {a}", "Notes",
+ CellID->1502869575,ExpressionUUID->"dc57181d-5124-4989-b55d-015624b41aba"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"vars", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y", ",", "z"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ideal", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "+", "y", "+", "z", "-", 
+      RowBox[{"3", "a"}]}], ",", 
+     RowBox[{
+      RowBox[{"3", "*", 
+       RowBox[{"x", "^", "2"}], "*", "z", "*", "y"}], "-", "5"}], ",", 
+     RowBox[{
+      RowBox[{"x", "*", "y", "*", "z"}], "-", 
+      RowBox[{"3", "z"}], "+", "3"}]}], "}"}]}], ";"}]}], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[1]:=",
+ CellID->1346582604,ExpressionUUID->"286a1cdd-83ff-4f27-b6c6-ed6d72ce5bfe"],
+
+Cell[TextData[{
+ "Computing the irreducible monomials (in DegreeReverseLexicographic) order \
+with ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["FindIrreducibleMonomials"]], 
+    "paclet:SPQR/ref/FindIrreducibleMonomials", "SPQR Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "6d1c5557-a739-4f35-bb42-95cf0eb64aae"]
+}], "Notes",
+ CellID->1862959782,ExpressionUUID->"4f055795-6304-420f-bf57-282b40b5a0d2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"irreds", " ", "=", " ", 
+  RowBox[{"FindIrreducibleMonomials", "[", 
+   RowBox[{"ideal", ",", "vars", ",", 
+    RowBox[{"\"\<MonomialOrder\>\"", "->", "DegreeReverseLexicographic"}]}], 
+   "]"}]}]], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[2]:=",
+ CellID->639320205,ExpressionUUID->"6f17b075-6034-4458-9097-d3c8604c2446"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"y", ",", "z", ",", "1"}], "}"}]], "Output",
+ CellLabel->"Out[2]=",
+ CellID->1174601075,ExpressionUUID->"51cbaa15-e9e8-40d2-80f0-360b00c0954a"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Generating the companion matrices with ",
+ Cell[BoxData[
+  TemplateBox[{
+    Cell[
+     TextData["BuildCompanionMatrices"]], 
+    "paclet:SPQR/ref/BuildCompanionMatrices", "SPQR Package Symbol"},
+   "PackageLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "347eccc2-a295-4e03-8fe9-d46e246b7c8a"]
+}], "Notes",
+ CellID->48987859,ExpressionUUID->"12abb59b-961a-439b-a167-37ab5f18dc76"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"cmats", " ", "=", " ", 
+  RowBox[{"BuildCompanionMatrices", "[", 
+   RowBox[{"ideal", ",", "vars", ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "10"}], "}"}], ",", "irreds", ",", 
+    RowBox[{"\"\<MonomialOrder\>\"", "->", "DegreeReverseLexicographic"}]}], 
+   "]"}]}]], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[3]:=",
+ CellID->1432361911,ExpressionUUID->"3d05e153-8afe-4e05-8561-6d1ee986a667"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"system closed at weight: \"\>", "\[InvisibleSpace]", "3"}],
+  SequenceForm["system closed at weight: ", 3],
+  Editable->False]], "Print",
+ CellLabel->"During evaluation of In[64]:=",
+ CellID->1394697355,ExpressionUUID->"d55e3df5-4775-4913-9de5-b5bb2637a29f"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"SPQRGraph$33518\"\>", ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "extraparam"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"j", "[", 
+      RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", 
+     RowBox[{"j", "[", 
+      RowBox[{"0", ",", "0", ",", "1"}], "]"}], ",", 
+     RowBox[{"j", "[", 
+      RowBox[{"0", ",", "0", ",", "0"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"SPQR`Private`m", "[", "x$43", "]"}], ",", 
+     RowBox[{"SPQR`Private`m", "[", "y$44", "]"}], ",", 
+     RowBox[{"SPQR`Private`m", "[", "z$45", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y", ",", "z"}], "}"}]}], "}"}]], "Output",
+ CellLabel->"Out[3]=",
+ CellID->894438480,ExpressionUUID->"5e48a1f9-6d39-4095-846b-b668864f0f6c"]
+}, Open  ]],
+
+Cell["This loads data into FiniteFlow", "Notes",
+ CellID->1696186316,ExpressionUUID->"4e57edd0-aa21-4268-a3a3-a60a1ddaa294"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cmats", " ", "//", " ", "First"}], " ", "//", " ", 
+  "FFGraphDraw"}]], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[4]:=",
+ CellID->2140002068,ExpressionUUID->"c375a037-9d41-4c14-8ca7-a279e342baaf"],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[Medium], 
+    ArrowBox[{{0., 4.}, {0., 3.}}, 0.03700564971751412], 
+    ArrowBox[{{0., 3.}, {0., 2.}}, 0.03700564971751412], 
+    ArrowBox[{{0., 2.}, {0., 1.}}, 0.03700564971751412], 
+    ArrowBox[{{0., 1.}, {-1., 0.}}, 0.03700564971751412], 
+    ArrowBox[{{0., 1.}, {0., 0.}}, 0.03700564971751412], 
+    ArrowBox[{{0., 1.}, {1., 0.}}, 0.03700564971751412]}, 
+   {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[
+    0.7]}], {DiskBox[{0., 4.}, 0.03700564971751412], 
+     InsetBox["\<\"in\"\>", 
+      Offset[{2, 2}, {0.03700564971751412, 4.037005649717514}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {DiskBox[{0., 3.}, 0.03700564971751412], 
+     InsetBox["\<\"uniqueNonZeroes\"\>", 
+      Offset[{2, 2}, {0.03700564971751412, 3.037005649717514}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {DiskBox[{0., 2.}, 0.03700564971751412], 
+     InsetBox["\<\"take\"\>", 
+      Offset[{2, 2}, {0.03700564971751412, 2.037005649717514}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {DiskBox[{0., 1.}, 0.03700564971751412], 
+     InsetBox["\<\"solvedSystem\"\>", 
+      Offset[{2, 2}, {0.03700564971751412, 1.0370056497175142}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {DiskBox[{-1., 0.}, 0.03700564971751412], 
+     InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "x$43", ")"}], 
+      Offset[{2, 2}, {-0.9629943502824859, 0.03700564971751412}], 
+      ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {DiskBox[{0., 0.}, 0.03700564971751412], 
+     InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "y$44", ")"}], 
+      Offset[{2, 2}, {0.03700564971751412, 0.03700564971751412}], 
+      ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {DiskBox[{1., 0.}, 0.03700564971751412], 
+     InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "z$45", ")"}], 
+      Offset[{2, 2}, {1.0370056497175142, 0.03700564971751412}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}}},
+  FormatType->TraditionalForm,
+  FrameTicks->None,
+  ImageSize->{240.41682496059082`, Automatic}]], "Output",
+ CellLabel->"Out[4]=",
+ CellID->1699402623,ExpressionUUID->"7623750a-f620-4741-bf6e-47a29ae576f0"]
+}, Open  ]],
+
+Cell["Computing the monomials of the ideal with {z} eliminated", "Notes",
+ CellID->1855502715,ExpressionUUID->"1ece0cf9-c472-4798-a07b-197248271c24"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"elimMonomials", " ", "=", " ", 
+  RowBox[{"FindEliminationMonomials", "[", 
+   RowBox[{"ideal", ",", 
+    RowBox[{"{", "z", "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}]], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[5]:=",
+ CellID->1075413424,ExpressionUUID->"a8398577-8adf-4ebf-8b8d-1167573d94b6"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     SuperscriptBox["y", "3"], ",", 
+     SuperscriptBox["y", "2"], ",", "y", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     SuperscriptBox["y", "2"], ",", "y", ",", "1"}], "}"}]}], "}"}]], "Output",\
+
+ CellLabel->"Out[5]=",
+ CellID->485380129,ExpressionUUID->"df5544db-bf17-4a21-b43d-ed9128649eb8"]
+}, Open  ]],
+
+Cell["Building the ansatz to eliminate {z}", "Notes",
+ CellID->906436360,ExpressionUUID->"366a1d4d-ad02-4e85-bcb9-5094f34f432b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"elimSystem", " ", "=", " ", 
+  RowBox[{"BuildEliminationSystems", "[", 
+   RowBox[{"cmats", ",", "elimMonomials"}], "]"}]}]], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[6]:=",
+ CellID->293189346,ExpressionUUID->"86ff683a-97e7-4722-8cb0-54dd358d3c9f"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"SPQRGraph$33518\"\>", ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "extraparam"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"coefficients$52\"\>", ",", "\<\"coefficients$59\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       SuperscriptBox["y", "3"], ",", 
+       SuperscriptBox["y", "2"], ",", "y", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       SuperscriptBox["y", "2"], ",", "y", ",", "1"}], "}"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellLabel->"Out[6]=",
+ CellID->1415745813,ExpressionUUID->"775d0c8a-438d-411e-861e-480c24b8752a"]
+}, Open  ]],
+
+Cell["\<\
+The ansatz is now loaded into FiniteFlow and is ready for reconstruction\
+\>", "Notes",
+ CellID->997658329,ExpressionUUID->"98e14965-d347-44ea-bf25-d5f340a95d54"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"elimSystem", " ", "//", " ", "First"}], " ", "//", " ", 
+  "FFGraphDraw"}]], "Input",
+ CellProlog:>Needs["SPQR`"],
+ CellLabel->"In[7]:=",
+ CellID->1750131853,ExpressionUUID->"73dd8dfb-6c5e-4fc7-939d-fae03621108b"],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], Arrowheads[
+    0.015463941636826186`], 
+    ArrowBox[{{0., 10.}, {3.65857151346907, 9.}}, 0.07011006590104661], 
+    ArrowBox[{{0., 10.}, {-3.489297890860769, 9.}}, 0.07011006590104661], 
+    ArrowBox[{{0., 10.}, {-2.4892978892087285`, 9.}}, 0.07011006590104661], 
+    ArrowBox[{{0., 10.}, {-1.489297888235626, 9.}}, 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[CompressedData["
+1:eJxVk31Qk3UAx589g+qGR2DbM2gD9oIsC4kUJObF75sUJCMpFDUidrwJjiZg
+EmZwoDB8GRaBQkSLmoYV7qCxZtLMxtFh3pWCzEFpvKmxIL15eE5re7L6q8/d
+9z7/ff/7SPPLMotoiqIS7u8f/59IaIazdeMPf0fSxwTCbdflCF11d0eCc4QE
+jDXEKYbliNk+2zytvUIS2fQtSqMcu3ir198uukYmsrbvNVbJ0d/6Q9rnngXi
+cs6Z1aly5C1n1I0nb5FSnc1VESzHJfmTY+8W3iG5ua6oCYcMq0/1+lXU/0UG
+88s0Rw7LYF9Uefg8Dtpa1lu6X5QhgMlsrenh4HzxvpyLShnOr5PlR8TT8NSw
+GZcjZVjSbCu8100jyGF9xx4gw+CcpDOQwwWjNYXU35TCvSHDPyeZC17K7B+S
+C1J0jKQendFycVO9JbDTJMVAHq/SWMeFfWDJbvc+KTb6te/ufJuL+k3UU5Fq
+Kb6MfmGg+v6fpoORO85JoGKmYk0TNGa2uthvDBKckew4O26msVbHaNvKJQhI
+99WxTTT0iwZNYbIEse83ZEtLaJyy1HqWMRJE+/tnJT1Ho0tftcI6EgFua235
+JimNDzKOHXywKgLmZxdPbGM5KPpK9xDEEVAGF/B2/coBaxMdV9vD4X3pCp35
+JgdTv+tVnxwJg9YTkzS5mYPkxK7fyteEYWn0a8cuKzkYbfq0VDEtxvx8cXxa
+BAdN1z5yDjWK4UnIcCv8OShL1j+xLloMZdAj45ULFGq7NcWWERH6dva7Vjko
+fB34jP6BKhFeLYqNyj9DIayabidiEZQzBw5RPRRMNwYOqu2P4g2DOySwjELH
+v4Sio/AxROVQKFa1He1KCoVF1LB1OpVC3OtrZadnQzA46NdEVlLw/WkQ3Nof
+AvsrX/RBROH7e5/VJMWEwDK1c+wqTWF/SUG28aIQ8b1nb2weZUna8z/2hL0l
+xFy1e2X0hyzhvXe9oi9ciLrHCytTClgyrOo9kT3EwHdSYu1WsGRPpSJHrGHQ
+GG8ITpv3kdmsyeZLQQzu7lW2l5h9BBeWDlltAmz42JNC1/hI21X7bZtWgMOH
+nBKhykdmWhaWueQCfJvmjDwu9pHlv7RsXDPJx6jzTqbZ7SWa05Y9/V18/BSX
+2PP0OS8xJmaaXi7ioz+vc4Wy20scGaVOQSwfdbnhP1t1XvJfX3z8DdEWc0A=
+
+      "]], 0.07011006590104661], 
+    ArrowBox[{{0., 10.}, {-0.4892978881320573, 9.}}, 0.07011006590104661], 
+    ArrowBox[{{0., 10.}, {0.5107021124243545, 9.}}, 0.07011006590104661], 
+    ArrowBox[{{0., 10.}, {1.5107021125117512`, 9.}}, 0.07011006590104661], 
+    ArrowBox[{{3.65857151346907, 9.}, {4.04576441643033, 8.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{4.04576441643033, 8.}, {4.368453983980231, 7.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{4.368453983980231, 7.}, {6.618708012133055, 6.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{4.368453983980231, 7.}, {4.599747607634697, 6.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{4.368453983980231, 7.}, {3.599747606183314, 6.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{6.618708012133055, 6.}, {7.8451450906887885`, 5.}}, 
+     0.07011006590104661], ArrowBox[BezierCurveBox[CompressedData["
+1:eJxTTMoPSmViYGCQAWIQfWDKIhuVNCEHBjCQcPh2Pl1zzWJBh2Ynx1aTM+IO
+VeL6LSybBBwO8Sccvd4t7jDt2oeZUUr8DjvTYw68tBN3uDCtnd23icch3cus
+LOupmMOyfKXAB82cDue3v30WWS/mIJ54sExEnc3hw/omoR08Yg4K2SkVL7OZ
+HE4Zff3R0ivq0Cstvmbfkj/2sQ6usw4wijpwTcqVf7Pls/2KG0XfsjJFHI60
+1D9ZkvHJvtKrtM7GT8TB5OZjyVLnj/YMRYre3doiDhH9s/bHuH6wt/Ivjwln
+FHGI9nNfvf3OO3vNR2WbFpwXdsh3/Lf9Sc1b+zNaCr7p04Qd3nyPXOqQ/cZe
+RbNYZ3WosMP5wqji08tf2xvczQ/I4RV2kFr/X7HV6LX9Rzexnav2CjmcXe+5
+MZf7tX0aGAg5TL72YgOIb1z28ddzXiEH2bZeMP/vBg/Jil2CDhn7zMH8Q2I5
+B8VyBB2K6p+vB/Gblkd/Pqwk6GB/cg6Yb5ssvr7+noDD2dnhYP5Xz/lfPOcL
+OMh+FwfzV4CUpwo46N2+uw7ED5shLMtlIODA4LESzIfEl4ADAK5MwCo=
+      "]], 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[{{4.599747607634697, 6.}, {3.886887093307304, 
+      5.21147185010503}, {2.845145084613762, 5.}}], 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[{{4.599747607634697, 6.}, {3.5580055989411177`, 
+      5.788528149894958}, {2.845145084613762, 5.}}], 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[{{4.599747607634697, 6.}, {4.38688709364499, 
+      5.375912597399246}, {3.8451450852891185`, 5.}}], 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[{{4.599747607634697, 6.}, {4.058005599278762, 
+      5.624087402600722}, {3.8451450852891185`, 5.}}], 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[CompressedData["
+1:eJxTTMoPSmViYGCQAWIQfWDKIhuVNCEHBjCQcIgJbBENXiLkkKW66bbgOXEH
+m1WXDjW/FXKIma0s7ztZ3CFhfq/LNkdhh6uJIac2+os7nDDYOuvVAmGHSxUu
+d+2ZxR2K4jyPKnCLOIQ9+Bz+fa2YQ5KG15GIBhGHxBlJVjf8xRym9m2fPolB
+1OHTggktj16IOvBMnGh/rlvUgfNXrZlYpajDMf0bu7mVxByWLdYKKAaqM5x6
+ZrlwqpiDKss6qUlHRRyitT0OWywQc1B/sOfaizYRB6dPXnzVl8UcVpuHt5S7
+iDg8e3ml49Y/MYcNXLXKdv+EHdyEnhmFK4k7mEXqbbHZIuyQll3H89FW3MFB
+OdusOE3YwenrXNEVgeIOpzKMVz0UEXa4s97FryZW3OGGZjt/x34hB+PZRdty
+E8Ud0sBAyOF1awqYb1z28ddzXiGHFXbhYP7fDR6SFbsEHTKOeoH5h8RyDorl
+CDroSNmD+U3Loz8fVhJ0+GJjAubbJouvr78n4HBQVwvM/+o5/4vnfAGHSW8U
+wPwVIOWpAg4ZlRJgftgMYVkuAwEHhysCYD4kvgQcAGYFric=
+      "]], 0.07011006590104661], ArrowBox[BezierCurveBox[CompressedData["
+1:eJxTTMoPSmViYGCQAWIQfWDKIhuVNCEHBjCQcCjSEA38XijkwHNu3tQL58Ud
+YgWLEqXqhRye2F5j85gl7tDovzO3t1fIodV/WXBavLjD7UevSgPmCjl8YOKv
+0ZYXd8g9zVaVvE7IQSVCoGH6TTEHC07eqmMHhByU/VfFr+oTc7Ce87e08oqQ
+w5vnd6RS7MQcylpu5Na8FHJoUFqx8cgLUYcXB+cmnv8v5HDnH7fKmV5Rh6CL
+vC4+IsIOc3RuTHUwFXX43fZcKkFN2EFJnTM3646Iw/1HWs+4zIQd8t7NW+nZ
+LOLA8PT6Uh9nYYe6ppne9zRFHGJ730Wq+gk7hDz+EaRxQdjhx+08pqlhwg4f
+BPbuVy8Tdjh/IWL+7BhhhyDuZxPvSAs7PM5eY2CZIOxQdan4pNtBIQfjtZnb
+chOFHdLAQMhhnkoMmG9c9vHXc14hB9YkfzD/7wYPyYpdgg4pqc5g/iGxnINi
+OYIOe/UswPym5dGfDysJOgju0wXzbZPF19ffE3CIE1YB8796zv/iOV/AYame
+NJi/AqQ8VcDhGb8wmB82Q1iWy0DAQWE7N5gPiS8BBwA5Aa9P
+      "]], 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[{{4.599747607634697, 6.}, {5.886887094908153, 
+      5.86923483936402}, {6.845145087815496, 5.}}], 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[{{4.599747607634697, 6.}, {5.558005600542021, 
+      5.130765160635963}, {6.845145087815496, 5.}}], 0.07011006590104661], 
+    ArrowBox[BezierCurveBox[CompressedData["
+1:eJxTTMoPSmViYGCQAWIQ3RAnd2tb6197BjAQcdh6iQnMX5X+5tHX88IO8xOe
+3ATxI5fw2NydJezgwHEYzOfZlsC9LUHYYdLJeWD+4TkvAhoUhR3mLCkH8+si
+QBqEHCJn+oL59i8n272cLORwarkCmM/sv/1Zu6uQw8fzH26A+Gc7+VglPgk6
+nBXcB+bPmgkCgg5pVT1gPli7naDDcbEEMN+y77FF32MBhw/PLMD8zg4QEHC4
+90oMzL/RpAtEAg5TlH5dB/EDfi3x/7WE30Go7xGY//4dCPA5hOleAPP7QcZZ
+8DkkMhwG8/XBBvA6GLPvBvPPngEBHgeZc1vBfHDwSPM45D3cAOb/Spxo9KGE
+20HDcQ2Y3wyy/gaXg+fb5WA+C9i/XA4Xny4G86uP6cX938PpcEhrAZj/Cuw/
+TgepPXPAfLDyUxwON2fOBPPXGKhbiSRwODAcmXYdEV8cDgCnTuqg
+      "]], 0.07011006590104661], 
+    ArrowBox[{{1.8451450844058002`, 5.}, {0.8451450740196833, 4.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{1.8451450844058002`, 5.}, {3.845145076946835, 4.}}, 
+     0.07011006590104661], ArrowBox[BezierCurveBox[CompressedData["
+1:eJxTTMoPSmViYGCQAWIQ3RAnd2tb6197BjAQcQh4vPrzae9/9icvTN1ZdU7Y
+YW+SVP0Xw//2Vz02TfswRdgh+Z2JnYQMg4NKRuj0xGBhhy0aZ7/ar2dw2KJX
+v/ssp7BDyIPQtMIgRoeOOfrMpjuEHBxFz/evYWVymLcxLW96nJBD7XGLoo8n
+mBy+5ar8/fJH0IHt+yRehznMDpMuZqz3nSzocHfx3cQZ9SwOBXeMWxcqCjpY
+T88y1P7J4rDu9ozJJ+8LOLhpKdcXpLA66K4N8P89S8DhXwy7d8ZBVoeXAdE7
+zIIFHBL1xacKCbA5PDq241w1h4BD0cKg2PwANgdjuUsqU0v5HfQ371xc18Tm
+IB98g83tCp/DzBSfDIdlbA7tOi3OXLp8Dhu3cq3espvNIXfV1VsP63kdipd9
+yb59iM3h7BkQ4HE4nwHhp7959PW8NI/DJj0I/1fiRKMPJdwOUj8+g/nNujea
+dG9wObAfhfBZ/Lc/a3flcqiaCuFXH9OL+7+H06EkE8J/Ndnu5WQ7TodPDhA+
+WPkpDofv0hD+GgN1K5EEDoeGX5/AfEh8cTgAADz3xDs=
+      "]], 0.07011006590104661], 
+    ArrowBox[{{1.8451450844058002`, 5.}, {4.8451450771952125`, 4.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{1.8451450844058002`, 5.}, {6.845145078104082, 4.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{1.8451450749819287`, 3.}, {2.5524668256956886`, 2.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{0.8451450740196833, 4.}, {0.8451450741977169, 3.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{0.8451450741977169, 3.}, {2.5524668256956886`, 2.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{2.845145084613762, 5.}, {3.845145076946835, 4.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{3.845145076946835, 4.}, {3.8451450766412734`, 3.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{3.8451450766412734`, 3.}, {2.5524668256956886`, 2.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{3.8451450852891185`, 5.}, {5.845145077492873, 4.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{5.845145077492873, 4.}, {5.8451450778517255`, 3.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{5.8451450778517255`, 3.}, {2.5524668256956886`, 2.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{2.5524668256956886`, 2.}, {2.552466825498243, 1.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{2.552466825498243, 1.}, {2.552466825312166, 0.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{2.8451450761343153`, 3.}, {5.934714990977568, 2.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{4.8451450771952125`, 4.}, {4.845145077267517, 3.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{4.845145077267517, 3.}, {5.934714990977568, 2.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{6.845145087815496, 5.}, {6.845145078104082, 4.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{6.845145078104082, 4.}, {6.845145078196879, 3.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{6.845145078196879, 3.}, {5.934714990977568, 2.}}, 
+     0.07011006590104661], ArrowBox[BezierCurveBox[CompressedData["
+1:eJxTTMoPSmViYGBQBWIQ3dDxeVtuorwDAxiIOMhWfADzV6W/efT1vLCDtuhb
+MD9yCY/N3VnCDsvjX4L5PNsSuLclCDtMDH8K5h+e8yKgQVHY4dWfB2B+XQRI
+g5DDZv87YL79y8l2LycLObz2vw7mM/tvf9buKuQw6e9FMP9sJx+rxCdBh+UR
+Z8D8WTNBQNCh0f4YmA/WbifoUD9hP5hv2ffYou+xgMMs7x1gfmcHCAg4XCnY
+AObfaNIFIgEHPYYVYH7AryX+v5bwOyz/OQ/Mf/8OBPgc7GOngvn9IOMs+By+
+a3WD+fpgA3gdLpeng/nGYMDtsDno2elPMfIOC8JOmk5p4nLo4qzkafKXd1h9
+/fu/s3c4HULnyFdIW8o7BG3b1/fAkdNBmPsW335JeYcpn2Sfnt7I4XAsdMWF
+nI9yDsU9okwTdDgcCmq69qockHN437z0qc4mdgfe+oarz1rlHNhvnu1f5MTu
+MD+2S2Kzk5zD3u4+ho932RxUJVa0dX6TdeCd89xcooXNQYtht2fGVxmHr/Pf
+nXhRxurA+O/odB8OGYficDWT9XUsDksFTxaY6Us7tBzqq8yezewgaX3kimqW
+lIP6Q/WZsmeZHKKrth+W2inpELf546SjwkwOuecX2YrKSDpoWb5JS85ndPC3
+anMSnSzh0FEkLvr9PoMD4+7ES1JyEg5V8cVzG1IZHBoCTd+q7hWHph8GBwAf
+2vmY
+      "]], 0.07011006590104661], 
+    ArrowBox[{{5.934714990977568, 2.}, {5.934714990977739, 1.}}, 
+     0.07011006590104661], 
+    ArrowBox[{{5.934714990977739, 1.}, {5.934714991042313, 0.}}, 
+     0.07011006590104661]}, 
+   {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[
+    0.7]}], {DiskBox[{0., 10.}, 0.07011006590104661], 
+     InsetBox["\<\"in\"\>", 
+      Offset[{2, 2}, {0.07011006590104661, 10.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{3.65857151346907, 9.}, 0.07011006590104661], 
+     InsetBox["\<\"uniqueNonZeroes\"\>", 
+      Offset[{2, 2}, {3.7286815793701167, 9.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{4.04576441643033, 8.}, 0.07011006590104661], 
+     InsetBox["\<\"take\"\>", 
+      Offset[{2, 2}, {4.115874482331377, 8.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{4.368453983980231, 7.}, 0.07011006590104661], 
+     InsetBox["\<\"solvedSystem\"\>", 
+      Offset[{2, 2}, {4.438564049881278, 7.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{6.618708012133055, 6.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "x$43", ")"}], 
+      Offset[{2, 2}, {6.688818078034102, 6.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{4.599747607634697, 6.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "y$44", ")"}], 
+      Offset[{2, 2}, {4.669857673535744, 6.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{3.599747606183314, 6.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "z$45", ")"}], 
+      Offset[{2, 2}, {3.6698576720843605, 6.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{-3.489297890860769, 9.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", 
+       RowBox[{"SPQR`Private`placeHolder", "(", "1", ")"}], ")"}], 
+      Offset[{2, 2}, {-3.4191878249597223, 9.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{-2.4892978892087285`, 9.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", 
+       RowBox[{"SPQR`Private`placeHolder", "(", "2", ")"}], ")"}], 
+      Offset[{2, 2}, {-2.419187823307682, 9.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{-1.489297888235626, 9.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", 
+       RowBox[{"SPQR`Private`placeHolder", "(", "3", ")"}], ")"}], 
+      Offset[{2, 2}, {-1.4191878223345795, 9.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{1.8451450844058002`, 5.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", 
+       RowBox[{"-", "1"}], ")"}], 
+      Offset[{2, 2}, {1.9152551503068467, 5.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{-0.4892978881320573, 9.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "a", ")"}], 
+      Offset[{2, 2}, {-0.4191878222310107, 9.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{0.5107021124243545, 9.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "extraparam", ")"}], 
+      Offset[{2, 2}, {0.5808121783254011, 9.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{1.5107021125117512`, 9.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "0", ")"}], 
+      Offset[{2, 2}, {1.5808121784127978, 9.070110065901046}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{1.8451450749819287`, 3.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "\<\"o$46\"\>", ")"}], 
+      Offset[{2, 2}, {1.9152551408829752, 3.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{0.8451450740196833, 4.}, 0.07011006590104661], InsetBox[
+      RowBox[{"\<\"o$47\"\>", "(", "11", ")"}], 
+      Offset[{2, 2}, {0.9152551399207299, 4.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{0.8451450741977169, 3.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "\<\"o$47\"\>", ")"}], 
+      Offset[{2, 2}, {0.9152551400987635, 3.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{2.845145084613762, 5.}, 0.07011006590104661], InsetBox[
+      RowBox[{"\<\"o$48\"\>", "(", "11", ")"}], 
+      Offset[{2, 2}, {2.9152551505148083, 5.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{3.845145076946835, 4.}, 0.07011006590104661], InsetBox[
+      RowBox[{"\<\"o$48\"\>", "(", "12", ")"}], 
+      Offset[{2, 2}, {3.9152551428478817, 4.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{3.8451450766412734`, 3.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "\<\"o$48\"\>", ")"}], 
+      Offset[{2, 2}, {3.91525514254232, 3.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{3.8451450852891185`, 5.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`t", "(", 
+       RowBox[{
+        RowBox[{"\<\"o$49\"\>", "(", 
+         RowBox[{"SPQR`Private`m", "(", "y$44", ")"}], ")"}], ",", 
+        RowBox[{"\<\"o$49\"\>", "(", 
+         RowBox[{"SPQR`Private`m", "(", "y$44", ")"}], ")"}]}], ")"}], 
+      Offset[{2, 2}, {3.915255151190165, 5.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{5.845145077492873, 4.}, 0.07011006590104661], InsetBox[
+      RowBox[{"\<\"o$49\"\>", "(", "11", ")"}], 
+      Offset[{2, 2}, {5.91525514339392, 4.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{5.8451450778517255`, 3.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "\<\"o$49\"\>", ")"}], 
+      Offset[{2, 2}, {5.9152551437527725, 3.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{2.5524668256956886`, 2.}, 0.07011006590104661], 
+     InsetBox["\<\"cmatRemainders$50\"\>", 
+      Offset[{2, 2}, {2.622576891596735, 2.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{2.552466825498243, 1.}, 0.07011006590104661], 
+     InsetBox["\<\"cmatRemaindersTransposed$51\"\>", 
+      Offset[{2, 2}, {2.6225768913992895, 1.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{2.552466825312166, 0.}, 0.07011006590104661], 
+     InsetBox["\<\"coefficients$52\"\>", 
+      Offset[{2, 2}, {2.6225768912132126, 0.07011006590104661}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{2.8451450761343153`, 3.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "\<\"o$53\"\>", ")"}], 
+      Offset[{2, 2}, {2.915255142035362, 3.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{4.8451450771952125`, 4.}, 0.07011006590104661], InsetBox[
+      RowBox[{"\<\"o$54\"\>", "(", "11", ")"}], 
+      Offset[{2, 2}, {4.915255143096259, 4.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{4.845145077267517, 3.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "\<\"o$54\"\>", ")"}], 
+      Offset[{2, 2}, {4.915255143168564, 3.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{6.845145087815496, 5.}, 0.07011006590104661], InsetBox[
+      RowBox[{"\<\"o$55\"\>", "(", "11", ")"}], 
+      Offset[{2, 2}, {6.915255153716543, 5.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{6.845145078104082, 4.}, 0.07011006590104661], InsetBox[
+      RowBox[{"\<\"o$55\"\>", "(", "12", ")"}], 
+      Offset[{2, 2}, {6.915255144005129, 4.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{6.845145078196879, 3.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "\<\"o$55\"\>", ")"}], 
+      Offset[{2, 2}, {6.915255144097926, 3.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{7.8451450906887885`, 5.}, 0.07011006590104661], InsetBox[
+      RowBox[{"SPQR`Private`m", "(", "\<\"o$56\"\>", ")"}], 
+      Offset[{2, 2}, {7.9152551565898355, 5.070110065901047}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{5.934714990977568, 2.}, 0.07011006590104661], 
+     InsetBox["\<\"cmatRemainders$57\"\>", 
+      Offset[{2, 2}, {6.004825056878615, 2.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{5.934714990977739, 1.}, 0.07011006590104661], 
+     InsetBox["\<\"cmatRemaindersTransposed$58\"\>", 
+      Offset[{2, 2}, {6.0048250568787855, 1.0701100659010465}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}, {
+     DiskBox[{5.934714991042313, 0.}, 0.07011006590104661], 
+     InsetBox["\<\"coefficients$59\"\>", 
+      Offset[{2, 2}, {6.00482505694336, 0.07011006590104661}], ImageScaled[{0, 0}],
+      BaseStyle->"Graphics"]}}},
+  FormatType->TraditionalForm,
+  FrameTicks->None,
+  ImageSize->{510.4259526663758, Automatic}]], "Output",
+ CellLabel->"Out[7]=",
+ CellID->963728787,ExpressionUUID->"c013a75f-246f-4f09-99fb-9bfd1be79781"]
+}, Open  ]]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"}, 
+  Closed]]]]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, 
+  Closed]]]],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, 
+       "RelatedFunction.png"]],
+     ImageSizeCache->{50., {26.47265625, 33.52734375}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"See", " ", "Also"}], "SeeAlsoSection"]},
+      {Cell[TextData[{
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["FindEliminationMonomials"]], 
+           "paclet:SPQR/ref/FindEliminationMonomials", "SPQR Package Symbol"},
+          
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "94bf5277-1584-4c74-9f3e-fadac3274485"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["BuildCompanionMatrices"]], 
+           "paclet:SPQR/ref/BuildCompanionMatrices", "SPQR Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",
+         CellTags->"35bfabf2-d73e-4901-b065-5ca86c64ed9e",ExpressionUUID->
+         "5c6d9e1e-1f05-4f53-b3a1-e2fcc41aa498"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["ReconstructEliminationSystems"]], 
+           "paclet:SPQR/ref/ReconstructEliminationSystems", 
+           "SPQR Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",
+         CellTags->"1a59980e-a1ce-497d-948f-e77ff933c3e2",ExpressionUUID->
+         "0c0c16f0-9236-4859-971f-7ffabea3b4ff"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["FindIrreducibleMonomials"]], 
+           "paclet:SPQR/ref/FindIrreducibleMonomials", "SPQR Package Symbol"},
+          
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",
+         CellTags->"14e7dc09-24b8-4998-b1d4-bb01daee8e48",ExpressionUUID->
+         "242e2f1a-7ea2-4086-bdb8-8754db6983fc"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["GroebnerBasis"]], "paclet:ref/GroebnerBasis"},
+          "RefLink",
+          BaseStyle->{"InlineFormula"}]], "InlineFormula",
+         FontFamily->"Source Sans Pro",
+         CellTags->"4bfcb7c1-c261-42c1-9484-5ebd67934a21",ExpressionUUID->
+         "99cf1fca-c66d-447d-aea4-67aa4a270fec"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Eliminate"]], "paclet:ref/Eliminate"},
+          "RefLink",
+          BaseStyle->{"InlineFormula"}]], "InlineFormula",
+         FontFamily->"Source Sans Pro",
+         CellTags->"84ea7729-cfb1-4a01-9940-2457084fdb9e",ExpressionUUID->
+         "62e9b6f1-aeed-4407-a160-b0c0f0ef86a1"]
+       }], "SeeAlso",ExpressionUUID->"fb5e8130-f815-4fa2-aff9-08dcee188d08"]}
+     }]}
+  }]], "SeeAlsoSection",ExpressionUUID->"bd525a5d-c574-42ff-a607-\
+8bf9751549a1"],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, 
+       "RelatedTechNote.png"]],
+     ImageSizeCache->{50., {26.47265625, 33.52734375}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Tech", " ", "Notes"}], "TechNotesSection"]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Introduction to SPQR"]], 
+           "paclet:SPQR/tutorial/IntroductiontoSPQR"},
+          "RefLinkPlain",
+          BaseStyle->{"Tutorials"}]], "Tutorials",ExpressionUUID->
+         "b4558943-3abf-4e1b-a36f-a18bbae513b0"]}]}
+     }]}
+  }]], "TechNotesSection",ExpressionUUID->"79578643-cf63-43ac-879d-\
+05c2fb1e3dc9"],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, "RelatedGuide.png"]],
+     ImageSizeCache->{50., {26.47265625, 33.52734375}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Related", " ", "Guides"}], "MoreAboutSection"]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["SPQR"]], "paclet:SPQR/guide/SPQR"},
+          "RefLinkPlain",
+          BaseStyle->{"MoreAbout"}]], "MoreAbout",ExpressionUUID->
+         "58a4aec3-c3fd-4e3d-a671-4962e94c0dde"]}]}
+     }]}
+  }]], "MoreAboutSection",ExpressionUUID->"2f1be981-70ec-4d03-9c46-\
+c3e0396e028a"],
+
+Cell[" ", "FooterCell",ExpressionUUID->"c025612c-cf9e-4dc2-bb85-3303098a791e"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900, 830},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"BuildEliminationSystems",
+Visible->True,
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}, 
+    "AllOptsTable" -> Closed, "NotesSection" -> Closed}, "NewStyles" -> True, 
+  "CitationPopupData" -> $Failed, "ShowCitation" -> False, "HasOptions" -> 
+  True, "RootCaptions" -> "", "HeaderCoreAreaLink" -> {}, 
+  "Metadata" -> {
+   "built" -> "{2025, 11, 7, 15, 7, 41.698571}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "SPQR`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "S P Q R Symbol", "language" -> "en", "paclet" -> "SPQR", 
+    "status" -> "None", "summary" -> 
+    "BuildEliminationSystems[cmatsystem, monomials] Builds and loads the \
+equations required to eliminate variables from an ideal. cmatsystem and \
+monomials should be the outputs of BuildCompanionMatrices and \
+FindEliminationMonomials respectively.", "synonyms" -> {}, "tabletags" -> {}, 
+    "title" -> "BuildEliminationSystems", "titlemodifier" -> "", 
+    "metadescription" -> "", "windowtitle" -> "BuildEliminationSystems", 
+    "type" -> "Symbol", "uri" -> "SPQR/ref/BuildEliminationSystems"}},
+CellContext->"Global`",
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "14.3 for Mac OS X ARM (64-bit) (July 8, 2025)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"81d50c65-5acd-4a5e-99e8-d4fba44c10aa"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[13685, 356, 1438, 38, 70, "PrimaryExamplesSection",ExpressionUUID->"d4d79cb4-2e60-42f0-acff-0f01101cfd09",
+   CellTags->"PrimaryExamplesSection",
+   CellID->2026139480]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 52568, 1235}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[591, 21, 7290, 176, 70, "AnchorBarGrid",ExpressionUUID->"c92761fd-8eec-4e0b-a3f5-81621542871f",
+ CellID->1],
+Cell[7884, 199, 87, 0, 70, "ContextNameCell",ExpressionUUID->"ad438255-4f83-4d37-85db-135dee9bb8a4"],
+Cell[CellGroupData[{
+Cell[7996, 203, 566, 14, 70, "ObjectNameGrid",ExpressionUUID->"43c47f9e-ab19-4635-bced-b1667e73273a"],
+Cell[8565, 219, 1926, 49, 70, "Usage",ExpressionUUID->"229e4561-1d43-4bc6-a9b0-ad72134834a2",
+ CellID->1061822302]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10528, 273, 1851, 45, 70, "NotesSection",ExpressionUUID->"fbafd28a-1cce-4131-a1d6-7a640f58b188",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1080442695],
+Cell[12382, 320, 253, 4, 70, "Notes",ExpressionUUID->"d17a47a8-69be-4893-83fd-e5a866267c93",
+ CellID->458323144],
+Cell[12638, 326, 379, 9, 70, "Notes",ExpressionUUID->"f4a1bb92-90eb-4376-94cd-37036b0f1dd9",
+ CellID->2092365748],
+Cell[13020, 337, 538, 13, 70, "Notes",ExpressionUUID->"2cb37849-c40c-47a0-88ea-8042eb221827",
+ CellID->359470939]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+Cell[CellGroupData[{
+Cell[13685, 356, 1438, 38, 70, "PrimaryExamplesSection",ExpressionUUID->"d4d79cb4-2e60-42f0-acff-0f01101cfd09",
+ CellTags->"PrimaryExamplesSection",
+ CellID->2026139480],
+Cell[15126, 396, 194, 3, 70, "Input",ExpressionUUID->"25d3b3b4-9eb4-498d-966a-55fd47b80375",
+ CellID->1593572354],
+Cell[CellGroupData[{
+Cell[15345, 403, 1415, 37, 70, "ExampleSection",ExpressionUUID->"ee98a88f-28a2-42ce-8794-9e79ef98d119",
+ CellID->678049881],
+Cell[16763, 442, 142, 1, 70, "Notes",ExpressionUUID->"dc57181d-5124-4989-b55d-015624b41aba",
+ CellID->1502869575],
+Cell[16908, 445, 677, 20, 70, "Input",ExpressionUUID->"286a1cdd-83ff-4f27-b6c6-ed6d72ce5bfe",
+ CellID->1346582604],
+Cell[17588, 467, 507, 13, 70, "Notes",ExpressionUUID->"4f055795-6304-420f-bf57-282b40b5a0d2",
+ CellID->1862959782],
+Cell[CellGroupData[{
+Cell[18120, 484, 358, 8, 70, "Input",ExpressionUUID->"6f17b075-6034-4458-9097-d3c8604c2446",
+ CellID->639320205],
+Cell[18481, 494, 182, 4, 70, "Output",ExpressionUUID->"51cbaa15-e9e8-40d2-80f0-360b00c0954a",
+ CellID->1174601075]
+}, Open  ]],
+Cell[18678, 501, 459, 12, 70, "Notes",ExpressionUUID->"12abb59b-961a-439b-a167-37ab5f18dc76",
+ CellID->48987859],
+Cell[CellGroupData[{
+Cell[19162, 517, 433, 10, 70, "Input",ExpressionUUID->"3d05e153-8afe-4e05-8561-6d1ee986a667",
+ CellID->1432361911],
+Cell[19598, 529, 307, 6, 70, "Print",ExpressionUUID->"d55e3df5-4775-4913-9de5-b5bb2637a29f",
+ CellID->1394697355],
+Cell[19908, 537, 803, 21, 70, "Output",ExpressionUUID->"5e48a1f9-6d39-4095-846b-b668864f0f6c",
+ CellID->894438480]
+}, Open  ]],
+Cell[20726, 561, 124, 1, 70, "Notes",ExpressionUUID->"4e57edd0-aa21-4268-a3a3-a60a1ddaa294",
+ CellID->1696186316],
+Cell[CellGroupData[{
+Cell[20875, 566, 243, 6, 70, "Input",ExpressionUUID->"c375a037-9d41-4c14-8ca7-a279e342baaf",
+ CellID->2140002068],
+Cell[21121, 574, 2206, 41, 70, "Output",ExpressionUUID->"7623750a-f620-4741-bf6e-47a29ae576f0",
+ CellID->1699402623]
+}, Open  ]],
+Cell[23342, 618, 149, 1, 70, "Notes",ExpressionUUID->"1ece0cf9-c472-4798-a07b-197248271c24",
+ CellID->1855502715],
+Cell[CellGroupData[{
+Cell[23516, 623, 364, 9, 70, "Input",ExpressionUUID->"a8398577-8adf-4ebf-8b8d-1167573d94b6",
+ CellID->1075413424],
+Cell[23883, 634, 392, 12, 70, "Output",ExpressionUUID->"df5544db-bf17-4a21-b43d-ed9128649eb8",
+ CellID->485380129]
+}, Open  ]],
+Cell[24290, 649, 128, 1, 70, "Notes",ExpressionUUID->"366a1d4d-ad02-4e85-bcb9-5094f34f432b",
+ CellID->906436360],
+Cell[CellGroupData[{
+Cell[24443, 654, 285, 6, 70, "Input",ExpressionUUID->"86ff683a-97e7-4722-8cb0-54dd358d3c9f",
+ CellID->293189346],
+Cell[24731, 662, 840, 25, 70, "Output",ExpressionUUID->"775d0c8a-438d-411e-861e-480c24b8752a",
+ CellID->1415745813]
+}, Open  ]],
+Cell[25586, 690, 172, 3, 70, "Notes",ExpressionUUID->"98e14965-d347-44ea-bf25-d5f340a95d54",
+ CellID->997658329],
+Cell[CellGroupData[{
+Cell[25783, 697, 248, 6, 70, "Input",ExpressionUUID->"73dd8dfb-6c5e-4fc7-939d-fae03621108b",
+ CellID->1750131853],
+Cell[26034, 705, 18866, 331, 70, "Output",ExpressionUUID->"c013a75f-246f-4f09-99fb-9bfd1be79781",
+ CellID->963728787]
+}, Open  ]]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"}, Closed]]]]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, Closed]]]],
+Cell[45142, 1045, 3762, 98, 70, "SeeAlsoSection",ExpressionUUID->"bd525a5d-c574-42ff-a607-8bf9751549a1"],
+Cell[48907, 1145, 756, 20, 70, "TechNotesSection",ExpressionUUID->"79578643-cf63-43ac-879d-05c2fb1e3dc9"],
+Cell[49666, 1167, 704, 18, 70, "MoreAboutSection",ExpressionUUID->"2f1be981-70ec-4d03-9c46-c3e0396e028a"],
+Cell[50373, 1187, 78, 0, 70, "FooterCell",ExpressionUUID->"c025612c-cf9e-4dc2-bb85-3303098a791e"]
+}
+]
+*)
+
+(* End of internal cache information *)
