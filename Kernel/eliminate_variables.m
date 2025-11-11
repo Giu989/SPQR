@@ -158,7 +158,8 @@ BuildEliminationSystems[cmatData_,monomialLists_] := Module[
 Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0};
 ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	{
-		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars,Nothing
+		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars,
+		Nothing
 	},
 	
 	takePattern = elimData[[3]]//Map[Length]// Map[Range]//Table[{i,#[[i]]}//Thread,{i,1,#//Length}]&//Flatten[#,1]&;
@@ -178,14 +179,14 @@ ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 			elimData[[1]],elimData[[2]],"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]
 		];
 	];
-	
+	If[reconstructed == $Failed, Return[$Failed]];
 	reconstructedProcessed = reconstructed // TakeList[#,elimData[[3]]//Map[Length]]& // Map[Reverse] // Map[Join[{1},#]&];
 	
 	If[OptionValue["DeleteGraph"],FFDeleteGraph[elimData[[1]]//Evaluate]];
 	If[OptionValue["Vector"],
 		Return[reconstructedProcessed];
 	,
-		nonZeroVars = Table[Join[elimData[[5]][[i]][[elimData[[3]][[i]]]],{1}],{i,1,elimData[[3]]//Length}];
+		nonZeroVars = Table[Join[elimData[[5]][[i]][[elimData[[3]][[i]]]],{elimData[[5]][[i]][[-1]]}],{i,1,elimData[[3]]//Length}];
 		Return[nonZeroVars*reconstructedProcessed // MapApply[Plus]];
 	];
 ];
