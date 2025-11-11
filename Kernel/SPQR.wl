@@ -75,7 +75,7 @@ SetAttributes[
 		SortVariables,FindEliminationMonomials,BuildEliminationSystems,ReconstructEliminationSystems
 		,Nothing
 	}
-	, {Protected,ReadProtected}
+	, {(*Protected,*)ReadProtected}
 ];
 (*Protect[{}];*)
 
