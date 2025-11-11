@@ -56,6 +56,45 @@ If[TrueQ@$Notebooks,
 ];
 
 
+(*check for updates*)
+latestGitHubVersion[]:=Module[{res,json,tag},
+	TimeConstrained[
+		Quiet@Check[res=URLRead["https://api.github.com/repos/giu989/SPQR/releases/latest","Body"];
+			json=ImportString[res,"RawJSON"];
+			tag=Lookup[json,"tag_name",Missing["tag"]];
+			Which[StringQ[tag],StringTrim[tag,"v"],True,Missing["NoTag"]],Missing["NetworkError"]
+		]
+	,5,Missing["NetworkError"]
+	]
+];
+newVersionCheck[currentVersion_,testVersion_]:=Module[{currentVersionList,testVersionList},
+	If[testVersion == Missing["NetworkError"], Return[False]];
+	currentVersionList = StringSplit[currentVersion,"."];
+	testVersionList = StringSplit[testVersion,"."];
+	Return[If[Sort[{testVersionList,currentVersionList}]!={testVersionList,currentVersionList},True,False]];
+];
+
+installDirectory = "Location"//ReplaceAll[PacletFind["SPQR"][[1]][[1]]];
+fileDirectory = StringJoin[installDirectory,"/noupdate"];
+(*Print[FileExistsQ[fileDirectory]];*)
+If[!FileExistsQ[fileDirectory],gitVersion = latestGitHubVersion[]];
+installDirectory = "Location"//ReplaceAll[PacletFind["SPQR"][[1]][[1]]];
+fileDirectory = StringJoin[installDirectory,"/noupdate"];
+
+If[!FileExistsQ[fileDirectory],
+	If[newVersionCheck[version,gitVersion],
+		Print["A new version is avaiable: ","v",gitVersion];
+		updateString = StringJoin["Update to ", "v", ToString[gitVersion]];
+		If[TrueQ@$Notebooks, 
+			Print @ Button[updateString,ResourceFunction["GitHubInstall"]["giu989","SPQR"]; Print["Updated!"],Method -> "Queued"];
+			Print @ Button["Do not ask again",If[!FileExistsQ[fileDirectory],CreateFile[fileDirectory]]; Print["Checking for updates disabled. To re-enable, delete the 'noupdate' file generated in the install directory."],Method -> "Queued"];
+		,
+			Print["Update SPQR with: ", ResourceFunction["GitHubInstall"]["giu989","SPQR"]];
+		];
+	];
+];
+
+
 (*load in source code*)
 Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
 Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
