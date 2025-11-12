@@ -41,34 +41,25 @@ With[{pac = PacletFind["SPQR"]},
 ];
 
 
-(*welcome message*)
-If[TrueQ@$Notebooks,
-	Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R v" <> version <> ": Vsevolod Chestnov and Giulio Crisanti (2025)"]
-,
-	Print["SPQR v" <> version <> ": Vsevolod Chestnov and Giulio Crisanti (2025)"]
-];
-(*documentation button*)
-If[TrueQ@$Notebooks,
-  Print @ Button["Open documentation",
-    Documentation`HelpLookup["paclet:SPQR/guide/SPQR"],
-    Method -> "Queued"
-  ];
-];
+(*load in source code*)
+Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
+Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
+Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_cmat.m"}]];
+Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_target_cmat.m"}]];
+Get[FileNameJoin[{DirectoryName[$InputFileName], "eliminate_variables.m"}]];
 
 
-(*check for updates*)
-latestGitHubVersion[]:=Module[{res,json,tag},
-	TimeConstrained[
-		Quiet@Check[res=URLRead["https://api.github.com/repos/giu989/SPQR/releases/latest","Body"];
-			json=ImportString[res,"RawJSON"];
-			tag=Lookup[json,"tag_name",Missing["tag"]];
-			Which[StringQ[tag],StringTrim[tag,"v"],True,Missing["NoTag"]],Missing["NetworkError"]
-		]
-	,5,Missing["NetworkError"]
-	]
+(*check for updates, adapted from https://resources.wolframcloud.com/FunctionRepository/resources/GitHubInstall/*)
+latestGitHubVersion[time_]:= Module[{ghAPI,imported,tag},
+	ghAPI = StringTemplate @ "https://api.github.com/repos/`1`/`2`/releases/<* If[#3 =!= \"latest\", \"tags/\", \"\"] *>`3`";
+	imported = CheckAbort[TimeConstrained[Import[ghAPI["giu989","SPQR","latest"], "RawJSON"],time,Return[$Failed]],Return[$Failed]]//Quiet;
+	If[imported==$Failed,Return[$Failed];];
+	tag = "tag_name"//ReplaceAll[imported];
+	If[tag == "tag_name",Return[$Failed]];
+	Return[StringTrim[tag,"v"]];
 ];
 newVersionCheck[currentVersion_,testVersion_]:=Module[{currentVersionList,testVersionList},
-	If[testVersion == Missing["NetworkError"], Return[False]];
+	If[!StringQ[testVersion], Return[False]];
 	currentVersionList = StringSplit[currentVersion,"."];
 	testVersionList = StringSplit[testVersion,"."];
 	Return[If[Sort[{testVersionList,currentVersionList}]!={testVersionList,currentVersionList},True,False]];
@@ -76,10 +67,9 @@ newVersionCheck[currentVersion_,testVersion_]:=Module[{currentVersionList,testVe
 
 installDirectory = "Location"//ReplaceAll[PacletFind["SPQR"][[1]][[1]]];
 fileDirectory = StringJoin[installDirectory,"/noupdate"];
-(*Print[FileExistsQ[fileDirectory]];*)
-If[!FileExistsQ[fileDirectory],gitVersion = latestGitHubVersion[]];
-installDirectory = "Location"//ReplaceAll[PacletFind["SPQR"][[1]][[1]]];
-fileDirectory = StringJoin[installDirectory,"/noupdate"];
+
+
+If[!FileExistsQ[fileDirectory],gitVersion = CheckAbort[latestGitHubVersion[5],$Failed];];
 
 If[!FileExistsQ[fileDirectory],
 	If[newVersionCheck[version,gitVersion],
@@ -87,20 +77,34 @@ If[!FileExistsQ[fileDirectory],
 		updateString = StringJoin["Update to ", "v", ToString[gitVersion]];
 		If[TrueQ@$Notebooks, 
 			Print @ Button[updateString,ResourceFunction["GitHubInstall"]["giu989","SPQR"]; Print["Updated!"],Method -> "Queued"];
-			Print @ Button["Do not ask again",If[!FileExistsQ[fileDirectory],CreateFile[fileDirectory]]; Print["Checking for updates disabled. To re-enable, delete the 'noupdate' file generated in the install directory."],Method -> "Queued"];
+			Print @ Button["Do not ask again",If[!FileExistsQ[fileDirectory],CreateFile[fileDirectory]]; Print["Checking for updates disabled. To re-enable, delete the 'noupdate' file generated in the install directory: ", installDirectory],Method -> "Queued"];
 		,
 			Print["Update SPQR with: ", ResourceFunction["GitHubInstall"]["giu989","SPQR"]];
+			Print["To disable autoupdate checking, add a file called \"noupdate\" to the install directory: ", installDirectory];
 		];
 	];
 ];
 
 
-(*load in source code*)
-Get[FileNameJoin[{DirectoryName[$InputFileName], "various_functions.m"}]];
-Get[FileNameJoin[{DirectoryName[$InputFileName], "build_system.m"}]];
-Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_cmat.m"}]];
-Get[FileNameJoin[{DirectoryName[$InputFileName], "construct_target_cmat.m"}]];
-Get[FileNameJoin[{DirectoryName[$InputFileName], "eliminate_variables.m"}]];
+(*welcome message*)
+If[TrueQ@$Notebooks,
+	Print["SP\!\(\*TemplateBox[{},\n\"Rationals\"]\)R v" <> version <> ": Vsevolod Chestnov and Giulio Crisanti (2025)"]
+,
+	Print["SPQR v" <> version <> ": Vsevolod Chestnov and Giulio Crisanti (2025)"]
+];
+(*catch if Mathematica bugs and cannot find the documentation files*)
+safeHelpLookup[p_]:=Module[{res},
+	res=Quiet@Check[Documentation`ResolveLink[p],$Failed];
+	If[res===$Failed||!StringQ[res],Print["Mathematica failed to link to the documentation. This is a Mathematica bug. Quitting the kernel and restarting the Mathematica application should fix this."];
+	$Failed,Documentation`HelpLookup[p]]
+];
+(*documentation button*)
+If[TrueQ@$Notebooks,
+  Print @ Button["Open documentation",
+    safeHelpLookup["paclet:SPQR/guide/SPQR"](*Documentation`HelpLookup["paclet:SPQR/guide/SPQR"]*),
+    Method -> "Queued"
+  ];
+];
 
 
 End[]
@@ -120,3 +124,9 @@ SetAttributes[
 
 
 EndPackage[]
+
+
+
+
+
+
