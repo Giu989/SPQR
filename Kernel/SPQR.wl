@@ -19,7 +19,7 @@ BuildTargetCompanionMatrices::usage = "BuildTargetCompanionMatrices[targets,cmat
 ReconstructTargetCompanionMatrices::usage = "ReconstructTargetCompanionMatrices[targetcmatsystem] Reconstructs the remainder of rational functions encoded in the companion matrices. targetcmatsystem should be the output of BuildTargetCompanionMatrices or BuildCompanionMatrices";
 BuildCharacteristicPolynomials::usage = "BuildCharacteristicPolynomials[targetcmatsystem] Builds the characteristic polynomials for each companion matrix in targetcmatsystem\n" <> "BuildCharacteristicPolynomials[targetcmatsystem,indexlist] builds the characteristic polynomials of the matrices indexed in indexlist";
 ReconstructCharacteristicPolynomials::usage = "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem] reconstructs each coefficient of the characteristic polynomials produced by BuildCharacteristicPolynomials\n" <> "ReconstructCharacteristicPolynomials[characteristicpolynomialsystem,coefficientlist] reconstructs only the terms given in coefficientlist";
-FFDet::usage = "FFDet[matrix] computes the determinant of a matrix using the Faddeev\[Dash]LeVerrier algorithm";
+SPQRDet::usage = "SPQRDet[matrix] computes the determinant of a matrix using the Faddeev\[Dash]LeVerrier algorithm";
 SortVariables::usage = "SortVariables[ideal,vars] Sorts variables in the list to try make Groebner Basis computations faster";
 FindEliminationMonomials::usage = "FindEliminationMonomials[ideal,{x1,x2,...},{y1,y2,...}] computes the monomials appearing in the ideal where {x1,x2,..} have been eliminated using a numerical Groebner Basis.";
 BuildEliminationSystems::usage = "BuildEliminationSystems[cmatsystem,monomials] Builds and loads the equations required to eliminate variables from an ideal. cmatsystem and monomials should be the outputs of BuildCompanionMatrices and FindEliminationMonomials respectively.";
@@ -69,7 +69,9 @@ installDirectory = "Location"//ReplaceAll[PacletFind["SPQR"][[1]][[1]]];
 fileDirectory = StringJoin[installDirectory,"/noupdate"];
 
 
-If[!FileExistsQ[fileDirectory],gitVersion = CheckAbort[latestGitHubVersion[5],$Failed];];
+If[!FileExistsQ[fileDirectory],
+	gitVersion = CheckAbort[latestGitHubVersion[5],$Failed];
+];
 
 If[!FileExistsQ[fileDirectory],
 	If[newVersionCheck[version,gitVersion],
@@ -95,7 +97,7 @@ If[TrueQ@$Notebooks,
 (*catch if Mathematica bugs and cannot find the documentation files*)
 safeHelpLookup[p_]:=Module[{res},
 	res=Quiet@Check[Documentation`ResolveLink[p],$Failed];
-	If[res===$Failed||!StringQ[res],Print["Mathematica failed to link to the documentation. This is a Mathematica bug. Quitting the kernel and restarting the Mathematica application should fix this."];
+	If[res===$Failed||!StringQ[res],Print["Mathematica failed to link to the documentation. This is a Mathematica bug. Quitting the kernel and restarting the Mathematica application should fix this. Try also loading SPQR on the default kernel."];
 	$Failed,Documentation`HelpLookup[p]]
 ];
 (*documentation button*)
@@ -114,7 +116,7 @@ SetAttributes[
 	{
 		FindIrreducibleMonomials,BuildPolynomialSystem,ReconstructPolynomialRemainder,
 		BuildCompanionMatrices,BuildTargetCompanionMatrices,ReconstructTargetCompanionMatrices,
-		j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials,FFDet,
+		j,extraparam,targ,BuildCharacteristicPolynomials,ReconstructCharacteristicPolynomials,SPQRDet,
 		SortVariables,FindEliminationMonomials,BuildEliminationSystems,ReconstructEliminationSystems
 		,Nothing
 	}
@@ -124,8 +126,6 @@ SetAttributes[
 
 
 EndPackage[]
-
-
 
 
 
