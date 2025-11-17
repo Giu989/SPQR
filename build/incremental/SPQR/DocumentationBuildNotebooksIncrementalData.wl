@@ -1,7 +1,7 @@
 <|"English/Guides/SPQR.nb" -> 
   <|"Result" -> Success["ProcessedNotebook", <|"Action" -> "Build", 
-      "Time" -> Quantity[6.586108, "Seconds"]|>], 
-   "FileHash" -> "tWWkgvKPWYXdYArgHyNMl+spUQZwIx/QOKvpCpjIZV4="|>, 
+      "Time" -> Quantity[9.790795, "Seconds"]|>], 
+   "FileHash" -> "kAFDEJ5Z9gkqaO44hvpx6MIm+8bIT5TvhOnr15IzGy0="|>, 
  "English/ReferencePages/Symbols/BuildCharacteristicPolynomials.nb" -> 
   <|"Result" -> Success["ProcessedNotebook", <|"Action" -> "Build", 
       "Time" -> Quantity[1.544148, "Seconds"]|>], 
@@ -56,9 +56,13 @@
    "FileHash" -> "iTOFgs8R7f9vDSiobPvlqXbHyqj/V+Iwzu4oXHgzRTw="|>, 
  "English/ReferencePages/Symbols/FindEliminationMonomials.nb" -> 
   <|"Result" -> Success["ProcessedNotebook", <|"Action" -> "Build", 
-      "Time" -> Quantity[0.754598, "Seconds"]|>], 
-   "FileHash" -> "4QpTLHdFSmxaO9wEZv1QKDnUB8vXCRwEJNJmEQSa2IU="|>, 
+      "Time" -> Quantity[0.819167, "Seconds"]|>], 
+   "FileHash" -> "ju0ldjjFEGoVOXp4kHDHW8RWXEMKIbgztAuhh06QhSY="|>, 
  "English/ReferencePages/Symbols/ReconstructEliminationSystems.nb" -> 
   <|"Result" -> Success["ProcessedNotebook", <|"Action" -> "Build", 
       "Time" -> Quantity[1.447902, "Seconds"]|>], 
-   "FileHash" -> "mcPFjBd+05srnYdW4wbtHoXQTXEEqz968EKv0XhfWj8="|>|>
+   "FileHash" -> "mcPFjBd+05srnYdW4wbtHoXQTXEEqz968EKv0XhfWj8="|>, 
+ "English/ReferencePages/Symbols/SPQRDet.nb" -> 
+  <|"Result" -> Success["ProcessedNotebook", <|"Action" -> "Build", 
+      "Time" -> Quantity[4.203345, "Seconds"]|>], 
+   "FileHash" -> "tRhUcK8DJDzv/dPnhzsuXO8nUkp2chjGTm31ZyoVqDs="|>|>

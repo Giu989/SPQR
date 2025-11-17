@@ -63,7 +63,7 @@
             ,
             "Hash"
             ->
-            "c27ee0c722486cf52b716a3dd162c1ac013c9091875f2375aed6ad03e40062bd"
+            "1838597677b24f11e6986ce6bedbf41db8376a7c54bf493140816732cda33e3a"
                 
         |>
         ,
@@ -76,7 +76,7 @@
             ,
             "Hash"
             ->
-            "36bd9e2aaba066366da0297764d531f378f7b87907e06e8d63359abb95ca6a96"
+            "22ef52f68c14b390d842a02c36c136c606408cbdfe7ef2ea7dd07b295704fcec"
                 
         |>
         ,
@@ -102,7 +102,7 @@
             ,
             "Hash"
             ->
-            "6371cec403e8e5f608325d4f48bd1b53a5d5dea508cf5b9705dd32e3bac43fce"
+            "fa71a65ba2431bebcec748bafad1822fa91495e70cca241f712f75b2fc915832"
                 
         |>
         ,
@@ -200,7 +200,7 @@
             ,
             "Hash"
             ->
-            "3def0c215c911dcd906cbeccfe6690bc3731416657de0b4e8f2373a2644462f8"
+            "0a3e7151156564f1f1b6016b2097c70c9c5929dcd433efae87b302cf82ac9956"
                 
         |>
         ,
@@ -285,6 +285,20 @@
             "Hash"
             ->
             "172b37b5f1ec5287cd207d75a39df4fcc9c84ee2087eb1a4063b700639edff00"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/SPQRDet.nb"
+                    
+            ]
+            ,
+            "Hash"
+            ->
+            "338bdf5fe26fe5a52f3e00d2e43a19f492fc74bd96209072a45ce1093584f0e8"
                 
         |>
         ,

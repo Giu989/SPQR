@@ -3,7 +3,9 @@
 BuildCharacteristicPolynomial[cmatData_,index_]:=Module[
 	{
 	params,n,traceTakePattern,diagMat,sumPatternVars,sumPattern,
-	dvar,dvars,c,J,AM,M,cptsAM,trAM,numprefactor,sgnchar,char
+	dvar,dvars,c,J,AM,M,cptsAM,trAM,numprefactor,sgnchar,charps
+	,
+	Nothing
 	},
 	
 	params = cmatData[[2]];
@@ -22,6 +24,7 @@ BuildCharacteristicPolynomial[cmatData_,index_]:=Module[
 	FFAlgRatFunEval[cmatData[[1]],AM[0]//ToString,{c[n+1]//ToString},{dvar},diagMat];
 	
 	Do[
+		(*Print[k];*)
 		FFAlgAdd[cmatData[[1]],M[k]//ToString,{AM[k-1]//ToString,J[n-k+1]//ToString}];
 		FFAlgMatMul[cmatData[[1]],AM[k]//ToString,{cmatData[[4]][[index]],M[k]//ToString},n,n,n];
 
@@ -57,14 +60,23 @@ BuildCharacteristicPolynomials[cmatData_,input_Integer]:=BuildCharacteristicPoly
 
 
 Options[ReconstructCharacteristicPolynomials] = {"PrintDebugInfo"->1,"DeleteGraph"->True,"Mod"->False,"FFPrimeNo"->0};
-ReconstructCharacteristicPolynomials[characteristicPolynomialData_,elements_List,opts : OptionsPattern[]]:=Module[
-	{chain,reconstructed,nmats,n,takePattern},
+ReconstructCharacteristicPolynomials[characteristicPolynomialData_,elements1_List,opts : OptionsPattern[]]:=Module[
+	{
+		chain,reconstructed,nmats,n,takePattern,elements
+	},
+	
 	nmats = characteristicPolynomialData // Last // Length;
 	n = characteristicPolynomialData[[3]] // Length;
-	takePattern = {nmats//Range,elements} // Tuples;
 	
-	FFAlgTake[characteristicPolynomialData[[1]],chain//ToString,characteristicPolynomialData[[4]],takePattern];
-	FFGraphOutput[characteristicPolynomialData[[1]],chain//ToString];
+	elements = Check[n+1 // Range // Part[#, elements1]&,
+		Print["Warning: Index out of range"];
+		Abort[];
+	] // Quiet;
+	
+	takePattern = {nmats // Range, elements} // Tuples;
+	
+	FFAlgTake[characteristicPolynomialData[[1]], chain // ToString, characteristicPolynomialData[[4]], takePattern];
+	FFGraphOutput[characteristicPolynomialData[[1]], chain // ToString];
 	
 	If[OptionValue["Mod"],
 		reconstructed = FFReconstructFunctionMod[
@@ -84,9 +96,9 @@ ReconstructCharacteristicPolynomials[characteristicPolynomialData_,elements_List
 ReconstructCharacteristicPolynomials[characteristicPolynomialData_,opts : OptionsPattern[]]:=ReconstructCharacteristicPolynomials[characteristicPolynomialData,1+(characteristicPolynomialData[[3]]//Length)//Range,opts];
 
 
-(*high level determinant calculator using FiniteFlow*)
-Options[FFDet] = {"PrintDebugInfo"->1,"Mod"->False,"FFPrimeNo"->0};
-FFDet[matrix_,opts : OptionsPattern[]]:=Module[
+(*high level determinant calculator*)
+Options[SPQRDet] = {"PrintDebugInfo"->1,"Mod"->False,"FFPrimeNo"->0};
+SPQRDet[matrix_,opts : OptionsPattern[]]:=Module[
 	{
 		graphname,matname,params,irredsPlaceholder,data,output,rec
 	},
@@ -158,11 +170,12 @@ BuildEliminationSystems[cmatData_,monomialLists_] := Module[
 Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0};
 ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	{
-		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars,
+		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars
+		,
 		Nothing
 	},
 	
-	takePattern = elimData[[3]]//Map[Length]// Map[Range]//Table[{i,#[[i]]}//Thread,{i,1,#//Length}]&//Flatten[#,1]&;
+	takePattern = elimData[[3]] // Map[Length] // Map[Range] // Table[{i,#[[i]]}//Thread,{i,1,#//Length}]& // Flatten[#,1]&;
 	
 	nodeName = "elimOutput$" // Unique // ToString;
 	FFAlgTake[elimData[[1]],nodeName,elimData[[4]],takePattern];
