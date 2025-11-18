@@ -1,5 +1,9 @@
 (* ::Package:: *)
 
+(* ::Title:: *)
+(*Miscellaneous and Helper Functions*)
+
+
 (*finding irreducible monomials for a system of equations*)
 (*code adapted from "Genealogical Constraints from Master Integral Counting" by G. Crisanti, L. Lippstreu, A. J. McLeod and M. Polackova, to appear soon*)
 

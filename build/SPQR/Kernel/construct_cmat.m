@@ -1,5 +1,9 @@
 (* ::Package:: *)
 
+(* ::Title:: *)
+(*Companion Matrix Generation*)
+
+
 Options[BuildCompanionMatrices] = {"MonomialOrder" -> Lexicographic,"PrintDebugInfo"->0, "ExtraParams"->{}};
 BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,OptionsPattern[]]:=Module[
 	{
@@ -7,7 +11,7 @@ BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,Option
 		Nothing
 	},
 	
-	cmatsMonomials = Outer[#*irreducibleMonomials&,variables]//Flatten;
+	cmatsMonomials = Outer[#*irreducibleMonomials&,variables] // Flatten;
 	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,
 											"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],
 											"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"ExtraParams"->OptionValue["ExtraParams"]

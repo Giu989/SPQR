@@ -3,14 +3,6 @@
 BeginPackage["SPQR`",{"FiniteFlow`","GeneralUtilities`"}];
 
 
-(*SetUsage["FindIrreducibleMonomials[ideal$,vars$] finds the irreducible monomials of an ideal$ in the variables vars$ using a numerical Groebner Basis"]
-(*needs a better description*)
-SetUsage["BuildPolynomialSystem[targets$,ideal$,vars$,w$] builds and loads a system of linear equations to weight w$ into FiniteFlow to polynomially reduce the targets$ with respect to the ideal$"]*)
-
-
-(*SetUsage["FindIrreducibleMonomials[ideal$,vars$] finds the irreducible monomials of an ideal$ in the variables vars$ using a numerical Groebner Basis"]*)
-
-
 FindIrreducibleMonomials::usage = "FindIrreducibleMonomials[ideal,vars] Finds the irreducible monomials of an ideal in the variables vars using a numerical Groebner Basis.";
 BuildPolynomialSystem::usage = "BuildPolynomialSystem[targets,ideal,vars,w] Builds and loads a system of linear equations to weight w into FiniteFlow to polynomially reduce the targets with respect to the ideal\n" <> "BuildPolynomialSystem[targets,ideal,vars,{wmin,wmax}] Increases the seed iteratively from wmin until the system closes or wmax is reached";
 ReconstructPolynomialRemainder::usage = "ReconstructPolynomialRemainder[system] Reconstructs the remainder of a set of polynomials. system should be the output of BuildPolynomialSystem";
@@ -56,7 +48,7 @@ latestGitHubVersion[time_]:= Module[{ghAPI,imported,tag},
 	If[imported==$Failed,Return[$Failed];];
 	tag = "tag_name"//ReplaceAll[imported];
 	If[tag == "tag_name",Return[$Failed]];
-	Return[StringTrim[tag,"v"]];
+	Return[{StringTrim[tag,"v"],"body" // ReplaceAll[imported] // StringDelete[#,"\n"]&}];
 ];
 newVersionCheck[currentVersion_,testVersion_]:=Module[{currentVersionList,testVersionList},
 	If[!StringQ[testVersion], Return[False]];
@@ -70,15 +62,17 @@ fileDirectory = StringJoin[installDirectory,"/noupdate"];
 
 
 If[!FileExistsQ[fileDirectory],
-	gitVersion = CheckAbort[latestGitHubVersion[5],$Failed];
+	{gitVersion,updateLog} = CheckAbort[latestGitHubVersion[5],$Failed];
 ];
 
 If[!FileExistsQ[fileDirectory],
 	If[newVersionCheck[version,gitVersion],
 		Print["A new version is avaiable: ","v",gitVersion];
+		Print["What's new: "];
+		Print[updateLog];
 		updateString = StringJoin["Update to ", "v", ToString[gitVersion]];
 		If[TrueQ@$Notebooks, 
-			Print @ Button[updateString,ResourceFunction["GitHubInstall"]["giu989","SPQR"]; Print["Updated!"],Method -> "Queued"];
+			Print @ Button[updateString,ResourceFunction["GitHubInstall"]["giu989","SPQR"]; Print["Updated! Restart the kernel for changes to take effect."],Method -> "Queued"];
 			Print @ Button["Do not ask again",If[!FileExistsQ[fileDirectory],CreateFile[fileDirectory]]; Print["Checking for updates disabled. To re-enable, delete the 'noupdate' file generated in the install directory: ", installDirectory],Method -> "Queued"];
 		,
 			Print["Update SPQR with: ", ResourceFunction["GitHubInstall"]["giu989","SPQR"]];
@@ -103,7 +97,7 @@ safeHelpLookup[p_]:=Module[{res},
 (*documentation button*)
 If[TrueQ@$Notebooks,
   Print @ Button["Open documentation",
-    safeHelpLookup["paclet:SPQR/guide/SPQR"](*Documentation`HelpLookup["paclet:SPQR/guide/SPQR"]*),
+    safeHelpLookup["paclet:SPQR/guide/SPQR"],
     Method -> "Queued"
   ];
 ];
@@ -122,11 +116,6 @@ SetAttributes[
 	}
 	, {(*Protected,*)ReadProtected}
 ];
-(*Protect[{}];*)
 
 
 EndPackage[]
-
-
-
-

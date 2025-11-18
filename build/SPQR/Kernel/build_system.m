@@ -26,7 +26,7 @@ generateWeightMatrix[variables_,ordering_] := Module[{},
 	];
 	(*failsafe*)
 	Print["Error: No valid ordering specified"];
-	Return[$Failed];
+	Abort[];
 ];
 generateWeightMatrix[variables1_,variables2_,ordering_] := BlockDiagonalMatrix[{generateWeightMatrix[variables2,ordering],generateWeightMatrix[variables1,ordering]}] // Normal;
 
@@ -44,7 +44,8 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	weightMatrix,varsToTrim,varsNotToTrim,trimDegree,positions,monomialsInIdeal,jseedMonomialsOuter,
 	idealCoefficientMatrix,coefficients,tmp1,tmp2,tmp3,associationRules,systemAssociation,targetAssociation,
 	valuesUniqueToPositions,numberOfRows,numberOfCols,valuesUnique,indexUniqueToPosition,triples,byI,pivots,
-	adjLists,reverseIndex,takePattern,monomialsInTarget,printDebug1,tm,
+	adjLists,reverseIndex,takePattern,monomialsInTarget,printDebug1,tm
+	,
 	Nothing
 	},
 	(*only prints the statement if the level set in the option value is equal to or higher than the second option here*)
@@ -65,7 +66,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 		jseeds = createAllSeeds[variables//Length,maxWeight] (*// Map[Apply[j]]*)//MapApply[j];
 		positions = Position[jseeds,j[a___]/;Plus@@({a}[[1;;(varsToTrim // Length)]])<=(maxWeight)-trimDegree] // Flatten;
 		jseeds = jseeds[[positions]];
-	]//First;
+	] // First;
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	
 	(*building the weight matrix for monomial sorting*)
@@ -84,7 +85,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	tm = AbsoluteTiming[
 		jseedMonomialsOuter = Outer[Times,jseeds,monomialsInIdeal];
 		monomials = Join[(Range[1,targetsj//Length]//Map[targ]//Reverse),(Join[jseeds,jseedMonomialsOuter,monomialsInTarget] // Flatten // DeleteDuplicates) // MapApply[List]//SortBy[weightMatrix . #&]//Reverse // MapApply[j]];
-	]//First;
+	] // First;
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	
 	(*extracting all unique coefficients (functions) of the parameters*)
@@ -161,6 +162,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	FFSolverOnlyHomogeneous[graphName, "solvedSystem"];
 	learn = FFSparseSolverLearn[graphName, monomials];
 	] // First;
+	
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	newEqnNumb=FFSparseSolverMarkAndSweepEqs[graphName, "solvedSystem"];
 	irreducibleMonomials = "IndepVars"//ReplaceAll[learn] // ReplaceAll[j[x__]:>Times@@(variables^{x})];
@@ -235,7 +237,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,minMaxWeight_List,opts : Option
 
 
 Options[ReconstructPolynomialRemainder] = {"Vector" -> False,"PrintDebugInfo"->1,"DeleteGraph"->True};
-ReconstructPolynomialRemainder[output_List,OptionsPattern[]]:=Module[{reconstructed,ans},
+ReconstructPolynomialRemainder[output_List,OptionsPattern[]] := Module[{reconstructed,ans},
 	reconstructed = FFReconstructFunction[output[[1]],output[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"MaxPrimes"->200,"MaxDegree"->1000];
 	If[OptionValue["Vector"],
 		ans=ArrayReshape[reconstructed,{"DepVars","IndepVars"}//ReplaceAll[output[[3]]]//Map[Length]];

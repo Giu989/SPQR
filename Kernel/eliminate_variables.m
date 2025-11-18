@@ -1,5 +1,9 @@
 (* ::Package:: *)
 
+(* ::Title:: *)
+(*Characteristic Polynomial and Variable Elimination Routines*)
+
+
 BuildCharacteristicPolynomial[cmatData_,index_]:=Module[
 	{
 	params,n,traceTakePattern,diagMat,sumPatternVars,sumPattern,

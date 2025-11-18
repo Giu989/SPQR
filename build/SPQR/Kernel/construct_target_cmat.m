@@ -1,5 +1,9 @@
 (* ::Package:: *)
 
+(* ::Title:: *)
+(*Recursive Parser for Target Companion Matrix Generation and Reconstruction*)
+
+
 createIndexes[length_]:= Module[{mat1, list2},
 	mat1 = Partition[Table[{1, b}, {b, 1, length^2}], length];
 	list2 = Table[{2, i}, {i, 1,length}];
@@ -112,8 +116,8 @@ ffPolyReduce[expression_, parameters_, matricesSymbolic_, matricesSubstituted_,e
 	matSize = matricesSubstituted // First // Length;
 	
 	rationalFunctionSub = ((expression//timesToDotRep//powerToDotRep)//.{dot[x_]:>x,times[x_]:>x})//.Plus->plus;
+	
 	(*find all numbers and variables appearing in the expression*)
-	(*horrendous spaghetti code to fix at some point...*)
 	variablesList=(((If[rationalFunctionSub//NumberQ,{rationalFunctionSub},{}])~Join~(rationalFunctionSub//Cases[#,dot[x___]:>{x},{0,\[Infinity]}]&)~Join~(rationalFunctionSub//Cases[#,plus[x___]:>{x},{0,\[Infinity]}]&)~Join~(rationalFunctionSub//Cases[#,inv[x___]:>{x},{0,\[Infinity]}]&)~Join~parameters~Join~matricesSymbolic)//Flatten//DeleteDuplicates//DeleteCases[#,_inv,\[Infinity]]&//DeleteCases[#,_dot,\[Infinity]]&)/.Plus->List/.plus->List//Flatten//DeleteDuplicates // Complement[#,extraNodes]&;
 	constants = Complement[variablesList,matricesSymbolic]~Join~{-1} // DeleteDuplicates // Complement[#,extraNodes]&;
 	
@@ -161,7 +165,7 @@ BuildTargetCompanionMatrices[target_List,cmatOutput_]:=Module[
 	vars = cmatOutput[[5]];
 	varsSub = vars -> cmatOutput[[4]] // Thread;
 	targetSub = target // ReplaceAll[varsSub];
-	graphName = cmatOutput[[1]]; (*this should really be an option for all the functions in the parser*)
+	graphName = cmatOutput[[1]];
 	params = cmatOutput[[2]];
 	
 	(*check and process if the target functions introduce any new parameters*)
@@ -174,7 +178,7 @@ BuildTargetCompanionMatrices[target_List,cmatOutput_]:=Module[
 	];
 	
 	placeHolders = vars // Length // Range // Map[placeHolder];
-	irredMons = (*"IndepVars"//ReplaceAll[cmatOutput[[3]]]*)cmatOutput[[3]];
+	irredMons = cmatOutput[[3]];
 	cmatSize = irredMons // Length;
 	placeHolderMatrices = Table[ConstantArray[0,{cmatSize,cmatSize}],{i,1,vars // Length}];
 	cmatNames = varsSub[[;;,2]];
@@ -185,7 +189,7 @@ BuildTargetCompanionMatrices[target_List,cmatOutput_]:=Module[
 
 
 Options[ReconstructTargetCompanionMatrices] = {"cmat"->False,"DeleteGraph"->True,"Vector"->False,"PrintDebugInfo"->1,"MaxPrimes"->200,"MaxDegree"->1000};
-ReconstructTargetCompanionMatrices[targetOutput_,(*irredMons_,*)OptionsPattern[]]:=Module[
+ReconstructTargetCompanionMatrices[targetOutput_,OptionsPattern[]]:=Module[
 	{reconstructed,cmat,polyRed,takePattern,cmatSize,irredMons,ncmats}
 	,
 	irredMons = targetOutput[[3]];
