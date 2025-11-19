@@ -8,7 +8,7 @@ Condition[j[a___]*j[b___],Length[{a}] === Length[{b}]]^:=Apply[j,List[a]+List[b]
 j[a___]^n_^:=Apply[j,n*List[a]];
 
 
-complementUnsorted[l1_,l2_]:=Delete[l1,l2//ReplaceAll[PositionIndex[l1]]//DeleteCases[x_/;!ListQ[x]]];
+complementUnsorted[l1_,l2_] := Delete[l1,l2//ReplaceAll[PositionIndex[l1]]//DeleteCases[x_/;!ListQ[x]]];
 
 
 generateWeightMatrix[variables_,ordering_] := Module[{},
@@ -24,8 +24,13 @@ generateWeightMatrix[variables_,ordering_] := Module[{},
 	If[ordering === DegreeReverseLexicographic,
 		Join[ConstantArray[1,variables // Length] // List,-IdentityMatrix[(variables // Length)-1] // Reverse] // PadLeft // Return;
 	];
+	If[(Length[variables] == Length[ordering]) && (ordering // SquareMatrixQ) && (ordering // Flatten // Map[rationalQ] // Apply[And]) && (ordering // Transpose // Map[Max] // Thread[#>0]& // Apply[And]),
+		Return[ordering]
+	,
+		Print["Warning: provided matrix is not a valid ordering"];
+	];
 	(*failsafe*)
-	Print["Error: No valid ordering specified"];
+	Print["Warning: No valid ordering specified"];
 	Abort[];
 ];
 generateWeightMatrix[variables1_,variables2_,ordering_] := BlockDiagonalMatrix[{generateWeightMatrix[variables2,ordering],generateWeightMatrix[variables1,ordering]}] // Normal;

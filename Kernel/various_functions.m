@@ -32,7 +32,12 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 		vars = vars1;
 	];
 	
-	gb = GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->prime];
+	gb = Check[
+		GroebnerBasis[polySystem // ReplaceAll[paramsNsub],vars,MonomialOrder->OptionValue["MonomialOrder"],CoefficientDomain->RationalFunctions,Modulus->prime]
+	,
+		Print["Warning: provided matrix is not a valid ordering"];
+		Abort[]
+	];
 	
 	lt = MonomialList[gb, vars, ord][[;;, 1]] // Map[Exponent[#, vars]&];
 	n = Length[vars];
@@ -114,3 +119,7 @@ SortVariables[polySystem_,vars1_,OptionsPattern[]]:=Module[
 
 
 printDebug[string_,debugWeight_,debugWeightThreshold_]:= If[debugWeight>=debugWeightThreshold,WriteString[$Output,string]];
+
+
+rationalQ[x_Rational]:=True
+rationalQ[x_]:=IntegerQ[x]
