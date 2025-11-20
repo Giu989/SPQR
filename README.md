@@ -1,6 +1,6 @@
 # SP$`\mathbb{Q}`$R
 A package for polynomial reduction and elimination theory over finite fields. It is based on the publication
-- Vsevolod Chestnov and Giulio Crisanti, *Sampling Polynomial Rational Remainders with SPQR: A new Package for Polynomial Division and Elimination*,
+- Vsevolod Chestnov and Giulio Crisanti, [Sampling Polynomial Rational Remainders with SPQR: A new Package for Polynomial Division and Elimination](https://arxiv.org/pdf/2511.14875),
 
 ## Setting up SP$`\mathbb{Q}`$R
 ### Dependencies
