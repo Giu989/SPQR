@@ -3,7 +3,7 @@
 PacletObject[
     <|
         "Name" -> "SPQR",
-        "Version" -> "1.0.1",
+        "Version" -> "1.0.2",
         "WolframVersion" -> "13.1+",
         "Extensions" ->
             {
