@@ -63,12 +63,13 @@ fileDirectory = StringJoin[installDirectory,"/noupdate"];
 
 If[!FileExistsQ[fileDirectory],
 	gitData = CheckAbort[latestGitHubVersion[5],$Failed];
-	If[gitData==$Failed,
+	If[gitData===$Failed,
 		{gitVersion,updateLog}={$Failed,$Failed}
 	,
 		{gitVersion,updateLog}=gitData
 	];
 ];
+(*Print[gitData];*)
 
 If[!FileExistsQ[fileDirectory],
 	If[newVersionCheck[version,gitVersion],
