@@ -11,6 +11,18 @@ BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,Option
 		Nothing
 	},
 	
+	(*check for variables with subscripts or indices which currently cannot be handeled further down the pipeline*)
+	If[(variables//Depth)>2,
+		Print["Warning: Variables with indices are currently not supported. This is a known issue. Please rename your variables"];
+		Return[$Failed];
+	];
+	
+	(*catch if infinite irreducible monomials are accidentally passed*)
+	If[irreducibleMonomials === \[Infinity],
+		Print["Warning: Infinite irreducible monomials. Companion matrices cannot be generated"];
+		Return[$Failed];
+	];
+	
 	cmatsMonomials = Outer[#*irreducibleMonomials&,variables] // Flatten;
 	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,
 											"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],

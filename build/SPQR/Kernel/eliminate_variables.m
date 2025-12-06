@@ -171,19 +171,29 @@ BuildEliminationSystems[cmatData_,monomialLists_] := Module[
 ];
 
 
-Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0};
+Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0,"TakeTerms"->All};
 ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	{
-		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars
+		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars,takeOutput,reconstructedList,onePositions,ranges,terms
 		,
 		Nothing
 	},
 	
-	takePattern = elimData[[3]] // Map[Length] // Map[Range] // Table[{i,#[[i]]}//Thread,{i,1,#//Length}]& // Flatten[#,1]&;
-	
+	If[OptionValue["TakeTerms"]===All,
+		terms = elimData[[3]];
+	,
+		If[OptionValue["TakeTerms"]//Flatten//Map[Negative]//Apply[Or],Print["Warning: Negative list index not yet supported"]; Return[$Failed];];
+		terms = Table[-OptionValue["TakeTerms"] // Map[DeleteCases[-1]]//Part[#,i]&//Mod[#,((elimData[[3]]//Map[Length])+1)[[i]]]&,{i,1,elimData[[3]]//Length}] // Plus[#,1]&
+	];
+	takePattern = terms // Table[#[[i]] // Map[{i, #} &], {i, 1, # // Length}]& // Flatten[#,1]&;
 	nodeName = "elimOutput$" // Unique // ToString;
-	FFAlgTake[elimData[[1]],nodeName,elimData[[4]],takePattern];
+	takeOutput = FFAlgTake[elimData[[1]],nodeName,elimData[[4]],takePattern];
 	FFGraphOutput[elimData[[1]],nodeName];
+	
+	If[takeOutput == $Failed,
+		Print["Warning: Incorrect term pattern specified"];
+		Return[$Failed];
+	];
 	
 	If[OptionValue["Mod"],
 		reconstructed = FFReconstructFunctionMod[
@@ -197,13 +207,25 @@ ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 		];
 	];
 	If[reconstructed == $Failed, Return[$Failed]];
-	reconstructedProcessed = reconstructed // TakeList[#,elimData[[3]]//Map[Length]]& // Map[Reverse] // Map[Join[{1},#]&];
+	
+	If[OptionValue["TakeTerms"]=!=All,
+		reconstructedList = TakeList[reconstructed,OptionValue["TakeTerms"] // Map[DeleteCases[1]] //Map[Length]];
+		onePositions = OptionValue["TakeTerms"] // Map[Position[#,1]&/*Flatten];
+		ranges = OptionValue["TakeTerms"] // Map[Length] // Map[Range];
+		reconstructedProcessed = Table[
+			ranges[[i]] // ReplaceAll[Join[onePositions[[i]]->1//Thread,Complement[ranges[[i]],onePositions[[i]]]->reconstructedList[[i]]//Thread]]
+		,
+			{i,1,ranges//Length}
+		];
+		Return[reconstructedProcessed];
+	];
+	reconstructedProcessed = reconstructed // TakeList[#,terms//Map[Length]]& // Map[Reverse] // Map[Join[{1},#]&];
 	
 	If[OptionValue["DeleteGraph"],FFDeleteGraph[elimData[[1]]//Evaluate]];
 	If[OptionValue["Vector"],
 		Return[reconstructedProcessed];
 	,
-		nonZeroVars = Table[Join[elimData[[5]][[i]][[elimData[[3]][[i]]]],{elimData[[5]][[i]][[-1]]}],{i,1,elimData[[3]]//Length}];
+		nonZeroVars = Table[Join[elimData[[5]][[i]][[elimData[[3]][[i]]]],{elimData[[5]][[i]][[-1]]}],{i,1,terms//Length}];
 		Return[nonZeroVars*reconstructedProcessed // MapApply[Plus]];
 	];
 ];
