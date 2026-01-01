@@ -171,10 +171,11 @@ BuildEliminationSystems[cmatData_,monomialLists_] := Module[
 ];
 
 
-Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0,"TakeTerms"->All};
+Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0,"TakeTerms"->All,"MultiplyOutputBy"->1};
 ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	{
-		cmatSize,takePattern,nodeName,reconstructed,reconstructedProcessed,nonZeroVars,takeOutput,reconstructedList,onePositions,ranges,terms
+		cmatSize,takePattern,outputNodeName,reconstructed,reconstructedProcessed,nonZeroVars,mptTerm,
+		takeOutput,reconstructedList,onePositions,ranges,terms,outputLength,factorNodeName,takeNodeName
 		,
 		Nothing
 	},
@@ -186,9 +187,20 @@ ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 		terms = Table[-OptionValue["TakeTerms"] // Map[DeleteCases[-1]]//Part[#,i]&//Mod[#,((elimData[[3]]//Map[Length])+1)[[i]]]&,{i,1,elimData[[3]]//Length}] // Plus[#,1]&
 	];
 	takePattern = terms // Table[#[[i]] // Map[{i, #} &], {i, 1, # // Length}]& // Flatten[#,1]&;
-	nodeName = "elimOutput$" // Unique // ToString;
-	takeOutput = FFAlgTake[elimData[[1]],nodeName,elimData[[4]],takePattern];
-	FFGraphOutput[elimData[[1]],nodeName];
+	outputLength = takePattern // Length;
+	
+	mptTerm = OptionValue["MultiplyOutputBy"];
+	If[!SubsetQ[elimData[[2]],mptTerm//Variables],Print["Warning: Multiplying term must be a rational function of the parameters only"];Return[$Failed]];
+	factorNodeName = "mtpby$" // Unique // ToString;
+	FFAlgRatExprEval[elimData[[1]],factorNodeName,{"in"},elimData[[2]],ConstantArray[mptTerm,outputLength]];
+	
+	takeNodeName = "takeOutput$" // Unique // ToString;
+	takeOutput = FFAlgTake[elimData[[1]],takeNodeName,elimData[[4]],takePattern];
+	(*FFGraphOutput[elimData[[1]],takeNodeName];*)
+	
+	outputNodeName = "mtpOutput$" // Unique // ToString;
+	FFAlgMul[elimData[[1]],outputNodeName,{factorNodeName,takeNodeName}];
+	FFGraphOutput[elimData[[1]],outputNodeName];
 	
 	If[takeOutput == $Failed,
 		Print["Warning: Incorrect term pattern specified"];
@@ -209,19 +221,20 @@ ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	If[reconstructed == $Failed, Return[$Failed]];
 	
 	If[OptionValue["TakeTerms"]=!=All,
-		reconstructedList = TakeList[reconstructed,OptionValue["TakeTerms"] // Map[DeleteCases[1]] //Map[Length]];
+		reconstructedList = TakeList[reconstructed,OptionValue["TakeTerms"] // Map[DeleteCases[1]] // Map[Length]];
 		onePositions = OptionValue["TakeTerms"] // Map[Position[#,1]&/*Flatten];
 		ranges = OptionValue["TakeTerms"] // Map[Length] // Map[Range];
 		reconstructedProcessed = Table[
-			ranges[[i]] // ReplaceAll[Join[onePositions[[i]]->1//Thread,Complement[ranges[[i]],onePositions[[i]]]->reconstructedList[[i]]//Thread]]
+			ranges[[i]] // ReplaceAll[Join[onePositions[[i]]->mptTerm//Thread,Complement[ranges[[i]],onePositions[[i]]]->reconstructedList[[i]]//Thread]]
 		,
 			{i,1,ranges//Length}
 		];
 		Return[reconstructedProcessed];
 	];
-	reconstructedProcessed = reconstructed // TakeList[#,terms//Map[Length]]& // Map[Reverse] // Map[Join[{1},#]&];
+	reconstructedProcessed = reconstructed // TakeList[#,terms//Map[Length]]& // Map[Reverse] // Map[Join[{mptTerm},#]&];
 	
 	If[OptionValue["DeleteGraph"],FFDeleteGraph[elimData[[1]]//Evaluate]];
+	
 	If[OptionValue["Vector"],
 		Return[reconstructedProcessed];
 	,
