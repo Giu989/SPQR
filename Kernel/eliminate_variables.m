@@ -63,7 +63,7 @@ BuildCharacteristicPolynomials[cmatData_]:=BuildCharacteristicPolynomials[cmatDa
 BuildCharacteristicPolynomials[cmatData_,input_Integer]:=BuildCharacteristicPolynomials[cmatData,{input}];
 
 
-Options[ReconstructCharacteristicPolynomials] = {"PrintDebugInfo"->1,"DeleteGraph"->True,"Mod"->False,"FFPrimeNo"->0};
+Options[ReconstructCharacteristicPolynomials] = {"PrintDebugInfo"->1,"DeleteGraph"->True,"Mod"->False,"FFPrimeNo"->0,"NThreads"->FFNThreads};
 ReconstructCharacteristicPolynomials[characteristicPolynomialData_,elements1_List,opts : OptionsPattern[]]:=Module[
 	{
 		chain,reconstructed,nmats,n,takePattern,elements
@@ -85,13 +85,13 @@ ReconstructCharacteristicPolynomials[characteristicPolynomialData_,elements1_Lis
 	If[OptionValue["Mod"],
 		reconstructed = FFReconstructFunctionMod[
 			characteristicPolynomialData[[1]],characteristicPolynomialData[[2]],
-			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"StartingPrimeNo"->OptionValue["FFPrimeNo"]
+			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"StartingPrimeNo"->OptionValue["FFPrimeNo"],"NThreads"->OptionValue["NThreads"]
 		];
 	,
 		If[OptionValue["FFPrimeNo"]!=0,Print["Note: FFPrimeNo value will be ignored"]];
 		reconstructed = FFReconstructFunction[
 			characteristicPolynomialData[[1]],characteristicPolynomialData[[2]],
-			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]
+			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"NThreads"->OptionValue["NThreads"]
 		];
 	];
 	If[OptionValue["DeleteGraph"],FFDeleteGraph[characteristicPolynomialData[[1]]//Evaluate]];
@@ -171,7 +171,7 @@ BuildEliminationSystems[cmatData_,monomialLists_] := Module[
 ];
 
 
-Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0,"TakeTerms"->All,"MultiplyOutputBy"->1};
+Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0,"TakeTerms"->All,"MultiplyOutputBy"->1,"NThreads"->FFNThreads};
 ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	{
 		cmatSize,takePattern,outputNodeName,reconstructed,reconstructedProcessed,nonZeroVars,mptTerm,
@@ -210,12 +210,12 @@ ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	If[OptionValue["Mod"],
 		reconstructed = FFReconstructFunctionMod[
 			elimData[[1]],elimData[[2]],
-			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"StartingPrimeNo"->OptionValue["FFPrimeNo"]
+			"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"StartingPrimeNo"->OptionValue["FFPrimeNo"],"NThreads"->OptionValue["NThreads"]
 		];
 	,
 		If[OptionValue["FFPrimeNo"]!=0,Print["Note: FFPrimeNo value will be ignored"]];
 		reconstructed = FFReconstructFunction[
-			elimData[[1]],elimData[[2]],"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"]
+			elimData[[1]],elimData[[2]],"MaxDegree"->1000,"MaxPrimes"->200,"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"NThreads"->OptionValue["NThreads"]
 		];
 	];
 	If[reconstructed == $Failed, Return[$Failed]];

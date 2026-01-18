@@ -241,9 +241,9 @@ BuildPolynomialSystem[targets_,ideal_,variables_,minMaxWeight_List,opts : Option
 ];
 
 
-Options[ReconstructPolynomialRemainder] = {"Vector" -> False,"PrintDebugInfo"->1,"DeleteGraph"->True};
+Options[ReconstructPolynomialRemainder] = {"Vector" -> False,"PrintDebugInfo"->1,"DeleteGraph"->True,"NThreads"->FFNThreads};
 ReconstructPolynomialRemainder[output_List,OptionsPattern[]] := Module[{reconstructed,ans},
-	reconstructed = FFReconstructFunction[output[[1]],output[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"MaxPrimes"->200,"MaxDegree"->1000];
+	reconstructed = FFReconstructFunction[output[[1]],output[[2]],"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"MaxPrimes"->200,"MaxDegree"->1000,"NThreads"->OptionValue["NThreads"]];
 	If[OptionValue["Vector"],
 		ans=ArrayReshape[reconstructed,{"DepVars","IndepVars"}//ReplaceAll[output[[3]]]//Map[Length]];
 	,
