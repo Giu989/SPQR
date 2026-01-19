@@ -149,7 +149,7 @@ BuildEliminationSystem[cmatData_,monomialList_] := Module[
 	vars = Array[f,(processedMonomials // Length)-1];
 	outputNode = "coefficients$" // Unique // ToString;
 	FFAlgNodeDenseSolver[monomialCmats[[1]],outputNode,{intermediatenode2},cmatSize,vars];
-	If[learn==$Failed,Print["WARNING: Failed to fit ansatz. Are the given monomials corret?"]; Abort[];];
+	If[learn==$Failed,Print["WARNING: Failed to fit ansatz. Are the given monomials correct?"]; Abort[];];
 	
 	FFGraphOutput[monomialCmats[[1]],outputNode];
 	learn = FFDenseSolverLearn[monomialCmats[[1]],vars];
