@@ -155,13 +155,15 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	
 	(*building the full matrix in FiniteFLow using take patterns*)
 	printDebug1["loading system data into FiniteFlow Graph...",1];
+	takeName = "take" // Unique;
+	solvedSystemName = "solvedSystem" // Unique;
 	tm = AbsoluteTiming[
-		FFAlgTake[graphName, "take", {"uniqueNonZeroes"}, takePattern];
-		FFGraphOutput[graphName, "take"];
+		FFAlgTake[graphName, takeName, {"uniqueNonZeroes"}, takePattern];
+		FFGraphOutput[graphName, takeName];
 		FFAlgNodeSparseSolver[
 			graphName,
-			"solvedSystem",
-			{"take"},
+			solvedSystemName,
+			{takeName},
 			adjLists,
 			monomials,
 			"NeededVars"->(Range[1,targetsj//Length]//Map[targ]//Reverse)
@@ -172,13 +174,14 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	(*learning the graph*)
 	printDebug1["learning irreducible monomials...",1];
 	tm = AbsoluteTiming[
-	FFGraphOutput[graphName, "solvedSystem"];
-	FFSolverOnlyHomogeneous[graphName, "solvedSystem"];
+	FFGraphOutput[graphName, solvedSystemName];
+	FFSolverOnlyHomogeneous[graphName, solvedSystemName];
 	learn = FFSparseSolverLearn[graphName, monomials];
 	] // First;
+	Print["learn: ", learn];
 	
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
-	newEqnNumb=FFSparseSolverMarkAndSweepEqs[graphName, "solvedSystem"];
+	newEqnNumb=FFSparseSolverMarkAndSweepEqs[graphName, solvedSystemName];
 	irreducibleMonomials = "IndepVars"//ReplaceAll[learn] // ReplaceAll[j[x__]:>Times@@(variables^{x})];
 
 	Sow[Association[{
