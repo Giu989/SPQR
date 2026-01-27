@@ -211,9 +211,10 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	tm = AbsoluteTiming[
 	FFGraphOutput[graphName, solvedSystemName];
 	FFSolverOnlyHomogeneous[graphName, solvedSystemName];
+	FFSetLearningOptions[graphName, solvedSystemName, "MaxSingularPoints"->10^4];
 	learn = FFSparseSolverLearn[graphName, monomials];
 	] // First;
-	Print["learn: ", learn];
+	printDebug1["learn: " <> ToString[learn],1];
 	
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	newEqnNumb=FFSparseSolverMarkAndSweepEqs[graphName, solvedSystemName];
