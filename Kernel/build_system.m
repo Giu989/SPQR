@@ -132,32 +132,23 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	
 	(*generating the FiniteFlow graph and loading in the unique non zero values*)
-	Print["Hello"];
 	printDebug1["building FiniteFlow Graph...",1];
 	tm = AbsoluteTiming[
 	    If[SameQ[OptionValue["LinkGraph"], <||>],
-	        Print["first"];
+	        printDebug1["Default branch (no link graph)",1];
             graphName = Unique[SPQRGraph]//ToString;
             FFDeleteGraph[graphName];
             FFNewGraph[graphName,"in",params];
             FFAlgRatFunEval[graphName, "uniqueNonZeroes", {"in"}, params, valuesUnique];
         ,
-            Print["second"];
+            printDebug1["Link graph branch",1];
             graphName = OptionValue["LinkGraph"]["graphName"];
             params = OptionValue["LinkGraph"]["params"];
-            valuesUnique = valuesUnique // DeleteCases[a_.*x_ /; MemberQ[OptionValue["LinkGraph"]["symbolsToLink"], x]];
-            FFAlgRatFunEval[graphName, "newUniqueNonZeroes", {"in"}, params,
+            FFAlgRatFunEval[graphName, "uniqueNonZeroes",
+                {OptionValue["LinkGraph"]["graphNode"]},
+                OptionValue["LinkGraph"]["symbolsToLink"],
                 valuesUnique
-            ] // Print;
-            FFAlgTake[graphName, "uniqueNonZeroes",
-                {"newUniqueNonZeroes", OptionValue["LinkGraph"]["graphNode"]},
-                Join[
-                    {1, valuesUnique // Length // Range} // Thread, 
-                    {2, OptionValue["LinkGraph"]["symbolsToLink"] // Length // Range} // Thread
-                ]
-            ] // Print;
-            (* work in progress *)
-            (*Throw[$Failed];*)
+            ];
         ];
 	]//First;
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
