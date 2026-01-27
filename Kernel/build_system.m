@@ -35,6 +35,32 @@ generateWeightMatrix[variables_,ordering_] := Module[{},
 ];
 generateWeightMatrix[variables1_,variables2_,ordering_] := BlockDiagonalMatrix[{generateWeightMatrix[variables2,ordering],generateWeightMatrix[variables1,ordering]}] // Normal;
 
+ClearAll @ uniqueName;
+uniqueName[{}, head_String] := head <> "1";
+Condition[
+    uniqueName[names_List, head_String],
+    And[
+        Length[names] > 0,
+        names // AllTrue[StringQ],
+        True
+    ]
+] := Module[{ids},
+    ids = names // Map[StringDelete[head]] // ToExpression // Quiet; 
+    If[ids // AllTrue[IntegerQ],
+        Return[
+            ids // Sort // Last // # + 1& // ToString // head <> #&
+        ]
+    ,
+        Print["Error! Wrong names in unqueName: ", names];
+        Throw[$Failed];
+    ];
+    (* names // Sort // Last // # + 1& // ToString // head <> #&; *)
+];
+uniqueName[xs__] := (
+    Print["Error! Wrong arguments in uniqueName: ", {xs}];
+    Throw[$Failed];
+);
+
 
 createSeeds[length_,weight_]:=Join @@ Permutations /@ IntegerPartitions[weight, {length}, Range[0, weight]];
 createAllSeeds[length_,maxweight_]:=createSeeds[length,#]&/@Range[0,maxweight]//Flatten[#,1]&;
@@ -155,11 +181,16 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
 	
 	(*building the full matrix in FiniteFLow using take patterns*)
-	printDebug1["loading system data into FiniteFlow Graph...",1];
+	printDebug1["loading system data into FiniteFlow Graph...\n\n",1];
 	takeName = "take" // Unique;
-	solvedSystemNames = Cases[FiniteFlow`Private`FFGraphNodes[graphName],x_ /; StringMatchQ[ToString[x],"solvedSystem" ~~ ___]];
+	solvedSystemNames = Cases[
+	    FiniteFlow`Private`FFGraphNodes[graphName],
+	    x_ /; StringMatchQ[ToString[x],"solvedSystem" ~~ ___]
+    ];
 	solvedSystemNames // Map[FFDeleteNode[graphName,#]&];
-	solvedSystemName = "solvedSystem" // Unique;
+	(* solvedSystemName = "solvedSystem" // Unique; *)
+	solvedSystemName = uniqueName[solvedSystemNames, "solvedSystem"];
+	printDebug1["Introduced solvedSystemName = " <> ToString[solvedSystemName] <> "\n\n", 1];
 	FFDeleteNode[graphName,solvedSystemName];
 	tm = AbsoluteTiming[
 		FFAlgTake[graphName, takeName, {uniqueNonZeroesName}, takePattern];
