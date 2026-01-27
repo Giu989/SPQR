@@ -4,7 +4,7 @@
 (*Companion Matrix Generation*)
 
 
-Options[BuildCompanionMatrices] = {"MonomialOrder" -> Lexicographic,"PrintDebugInfo"->0, "ExtraParams"->{}};
+Options[BuildCompanionMatrices] = {"MonomialOrder" -> Lexicographic,"PrintDebugInfo"->0, "ExtraParams"->{}, "LinkGraph" -> <||>};
 BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,OptionsPattern[]]:=Module[
 	{
 		cmatsMonomials,solverOutput,cpmatrixNames,takePatternLists,uniqueparam,
@@ -24,9 +24,13 @@ BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,Option
 	];
 	
 	cmatsMonomials = Outer[#*irreducibleMonomials&,variables] // Flatten;
+	Print["BuildPolynomialSystem: ", 
+	    cmatsMonomials, " ", ideal, " ", variables, " ", maxWeight
+    ];
 	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,
 											"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],
-											"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"ExtraParams"->OptionValue["ExtraParams"]
+											"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"ExtraParams"->OptionValue["ExtraParams"],
+											"LinkGraph"->OptionValue["LinkGraph"]
 										];
 	
 	If[Head[solverOutput]===$Failed,Return[$Failed]];
