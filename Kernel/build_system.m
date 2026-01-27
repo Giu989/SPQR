@@ -133,18 +133,19 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	
 	(*generating the FiniteFlow graph and loading in the unique non zero values*)
 	printDebug1["building FiniteFlow Graph...",1];
+	uniqueNonZeroesName = "uniqueNonZeroes" // Unique;
 	tm = AbsoluteTiming[
 	    If[SameQ[OptionValue["LinkGraph"], <||>],
 	        printDebug1["Default branch (no link graph)",1];
             graphName = Unique[SPQRGraph]//ToString;
             FFDeleteGraph[graphName];
             FFNewGraph[graphName,"in",params];
-            FFAlgRatFunEval[graphName, "uniqueNonZeroes", {"in"}, params, valuesUnique];
+            FFAlgRatFunEval[graphName, uniqueNonZeroesName, {"in"}, params, valuesUnique];
         ,
             printDebug1["Link graph branch",1];
             graphName = OptionValue["LinkGraph"]["graphName"];
             params = OptionValue["LinkGraph"]["params"];
-            FFAlgRatFunEval[graphName, "uniqueNonZeroes",
+            FFAlgRatFunEval[graphName, uniqueNonZeroesName,
                 {OptionValue["LinkGraph"]["graphNode"]},
                 OptionValue["LinkGraph"]["symbolsToLink"],
                 valuesUnique
@@ -156,10 +157,12 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	(*building the full matrix in FiniteFLow using take patterns*)
 	printDebug1["loading system data into FiniteFlow Graph...",1];
 	takeName = "take" // Unique;
-	solvedSystemName = "solvedSystem"(* // Unique*);
+	solvedSystemNames = Cases[FiniteFlow`Private`FFGraphNodes[graphName],x_ /; StringMatchQ[ToString[x],"solvedSystem" ~~ ___]];
+	solvedSystemNames // Map[FFDeleteNode[graphName,#]&];
+	solvedSystemName = "solvedSystem" // Unique;
 	FFDeleteNode[graphName,solvedSystemName];
 	tm = AbsoluteTiming[
-		FFAlgTake[graphName, takeName, {"uniqueNonZeroes"}, takePattern];
+		FFAlgTake[graphName, takeName, {uniqueNonZeroesName}, takePattern];
 		FFGraphOutput[graphName, takeName];
 		FFAlgNodeSparseSolver[
 			graphName,
