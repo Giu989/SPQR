@@ -171,7 +171,7 @@ BuildEliminationSystems[cmatData_,monomialLists_] := Module[
 ];
 
 
-Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0,"TakeTerms"->All,"MultiplyOutputBy"->1,"NThreads"->FFNThreads};
+Options[ReconstructEliminationSystems] = {"DeleteGraph"->True,"PrintDebugInfo"->1,"Vector"->False,"Mod"->False,"FFPrimeNo"->0,"TakeTerms"->All,"MultiplyOutputBy"->1,"NThreads"->FFNThreads,"Reconstruct"->True};
 ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	{
 		cmatSize,takePattern,outputNodeName,reconstructed,reconstructedProcessed,nonZeroVars,mptTerm,
@@ -201,6 +201,11 @@ ReconstructEliminationSystems[elimData_, opts : OptionsPattern[]] := Module[
 	outputNodeName = "mtpOutput$" // Unique // ToString;
 	FFAlgMul[elimData[[1]],outputNodeName,{factorNodeName,takeNodeName}];
 	FFGraphOutput[elimData[[1]],outputNodeName];
+	
+	(*do not reconstruct and just return the graph for further processing*)
+	If[!OptionValue["Reconstruct"],
+		Return[{elimData[[1]],elimData[[2]],elimData[[3]],{outputNodeName},elimData[[5]]}]
+	];
 	
 	If[takeOutput == $Failed,
 		Print["Warning: Incorrect term pattern specified"];

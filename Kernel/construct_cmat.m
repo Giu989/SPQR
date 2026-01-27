@@ -24,9 +24,9 @@ BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,Option
 	];
 	
 	cmatsMonomials = Outer[#*irreducibleMonomials&,variables] // Flatten;
-	Print["BuildPolynomialSystem: ", 
+	(*Print["BuildPolynomialSystem: ", 
 	    cmatsMonomials, " ", ideal, " ", variables, " ", maxWeight
-    ];
+    ];*)
 	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,
 											"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],
 											"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"ExtraParams"->OptionValue["ExtraParams"],

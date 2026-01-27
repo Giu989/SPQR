@@ -12,7 +12,7 @@ primeList = Range[201]-1//Map[FFPrimeNo];
 (*coordinate wise divisibility test for exponent vectors*)
 dividesQ[e_,m_]:=And@@Thread[m>=e];
 
-Options[FindIrreducibleMonomials] = {"MonomialOrder" -> Lexicographic,"Sort"->False};
+Options[FindIrreducibleMonomials] = {"MonomialOrder" -> Lexicographic,"Sort"->False,"Modulus"->Automatic};
 FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	{
 		ord,params,paramsNsub,gb,leadingexps,lt,n,pure,bounds,todo,seen=<||>,res={},v,vv,i,prime,vars
@@ -20,6 +20,7 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 
 	ord = OptionValue["MonomialOrder"];
 	prime = RandomSample[primeList,1][[1]];
+	If[OptionValue["Modulus"]=!=Automatic,prime = OptionValue["Modulus"]];
 	
 	(*numerical substitution of the parameters*)
 	params = Complement[polySystem // Variables,vars1];
@@ -78,13 +79,15 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 
 
 (*finds the monomials appearing inside each polynomial of an eliminated Groebner Basis*)
-FindEliminationMonomials[polySystem_,varsToElim_,varsToKeep_] := Module[
+Options[FindEliminationMonomials] = {"Modulus"->Automatic};
+FindEliminationMonomials[polySystem_,varsToElim_,varsToKeep_,OptionsPattern[]] := Module[
 	{
 		prime,params,paramsNsub,gb,monomialCoordinates,monomials,
 		Nothing
 	},
 
 	prime = RandomSample[primeList,1][[1]];
+	If[OptionValue["Modulus"]=!=Automatic,prime = OptionValue["Modulus"]];
 
 	(*numerical substitution of the parameters*)
 	params = Complement[polySystem // Variables,Union[varsToElim,varsToKeep]];
