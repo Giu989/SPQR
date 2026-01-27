@@ -145,7 +145,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
             Print["second"];
             graphName = OptionValue["LinkGraph"]["graphName"];
             params = OptionValue["LinkGraph"]["params"];
-            valuesUnique = valuesUnique // DeleteCases[x_ /; MemberQ[OptionValue["LinkGraph"]["symbolsToLink"], x]];
+            valuesUnique = valuesUnique // DeleteCases[a_.*x_ /; MemberQ[OptionValue["LinkGraph"]["symbolsToLink"], x]];
             FFAlgRatFunEval[graphName, "newUniqueNonZeroes", {"in"}, params,
                 valuesUnique
             ] // Print;
@@ -157,7 +157,7 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
                 ]
             ] // Print;
             (* work in progress *)
-            Throw[$Failed];
+            (*Throw[$Failed];*)
         ];
 	]//First;
 	printDebug1[StringJoin["done: ",ToString[tm],"s\n\n"],1];
