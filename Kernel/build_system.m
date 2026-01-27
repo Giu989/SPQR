@@ -185,6 +185,10 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	irreducibleMonomials = "IndepVars"//ReplaceAll[learn] // ReplaceAll[j[x__]:>Times@@(variables^{x})];
 
 	Sow[Association[{
+	    "targets" -> targets,
+	    "ideal" -> ideal,
+	    "variables" -> variables,
+	    "maxWeight" -> maxWeight,
 	    "indepEqs" -> indepEqs,
 	    "takePattern" -> takePattern,
 	    "adjLists" -> adjLists,
