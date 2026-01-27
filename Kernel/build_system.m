@@ -156,7 +156,8 @@ BuildPolynomialSystem[targets_,ideal_,variables_,maxWeight_Integer,opts : Option
 	(*building the full matrix in FiniteFLow using take patterns*)
 	printDebug1["loading system data into FiniteFlow Graph...",1];
 	takeName = "take" // Unique;
-	solvedSystemName = "solvedSystem" // Unique;
+	solvedSystemName = "solvedSystem"(* // Unique*);
+	FFDeleteNode[graphName,solvedSystemName];
 	tm = AbsoluteTiming[
 		FFAlgTake[graphName, takeName, {"uniqueNonZeroes"}, takePattern];
 		FFGraphOutput[graphName, takeName];
