@@ -45,8 +45,10 @@ FindIrreducibleMonomials[polySystem_,vars1_,OptionsPattern[]]:=Module[
 	
 	pure=Table[Select[lt,#[[i]]>0&&Total[Drop[#,{i}]]==0&],{i,n}];
 	
+	(*check if unit ideal*)
+	If[MemberQ[lt,ConstantArray[0,n]],Return[If[OptionValue["Sort"],{{},vars},{}]]];
 	(*check if non zero dimensional ideal*)
-	If[Select[lt,(Length[DeleteCases[#,0]]==1)&] // Apply[Plus] // MemberQ[#,0]&, Return[\[Infinity]]];
+	If[!And@@Table[AnyTrue[lt,#[[i]]>0&&Total[Drop[#,{i}]]==0&],{i,n}],Return[If[OptionValue["Sort"],{\[Infinity],vars},\[Infinity]]]];
 	
 	(*coordinate bounds on dimensions: minimal pure powers - 1*)
 	bounds=(Min/@MapThread[#1[[All,#2]]&,{pure,Range[n]}])-1;

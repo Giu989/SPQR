@@ -81,6 +81,7 @@ ReconstructCharacteristicPolynomials[characteristicPolynomialData_,elements1_Lis
 	
 	FFAlgTake[characteristicPolynomialData[[1]], chain // ToString, characteristicPolynomialData[[4]], takePattern];
 	FFGraphOutput[characteristicPolynomialData[[1]], chain // ToString];
+	Print[FFNSamplePoints[characteristicPolynomialData[[1]]]];
 	
 	If[OptionValue["Mod"],
 		reconstructed = FFReconstructFunctionMod[
