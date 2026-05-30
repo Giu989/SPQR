@@ -26,6 +26,9 @@ SPQRGraph::usage = "SPQRGraph is the prefix used by all FiniteFlow graphs genera
 Begin["`Private`"]
 
 
+Off[FF::logerr]
+
+
 With[{pac = PacletFind["SPQR"]},
   If[Length[pac] > 0,
     version = ("Version" //ReplaceAll[pac[[1]][[1]]]);

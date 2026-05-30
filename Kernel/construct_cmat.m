@@ -4,11 +4,10 @@
 (*Companion Matrix Generation*)
 
 
-Options[BuildCompanionMatrices] = {"MonomialOrder" -> Lexicographic,"PrintDebugInfo"->0, "ExtraParams"->{}, "LinkGraph" -> <||>};
-BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,OptionsPattern[]]:=Module[
+Options[BuildCompanionMatrices] = {"MonomialOrder" -> DegreeReverseLexicographic,"PrintDebugInfo"->0, "ExtraParams"->{}, "LinkGraph" -> <||>};
+BuildCompanionMatrices[ideal_,variables_,irreducibleMonomials_,OptionsPattern[]]:=Module[
 	{
-		cmatsMonomials,solverOutput,cpmatrixNames,takePatternLists,uniqueparam,
-		Nothing
+		cmatsMonomials,solverOutput,cpmatrixNames,takePatternLists,uniqueparam
 	},
 	
 	(*check for variables with subscripts or indices which currently cannot be handeled further down the pipeline*)
@@ -27,9 +26,9 @@ BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,Option
 	(*Print["BuildPolynomialSystem: ", 
 	    cmatsMonomials, " ", ideal, " ", variables, " ", maxWeight
     ];*)
-	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,maxWeight,
-											"IrreducibleMonomials"->irreducibleMonomials,"MonomialOrder"->OptionValue["MonomialOrder"],
-											"PrintDebugInfo"->OptionValue["PrintDebugInfo"],"ExtraParams"->OptionValue["ExtraParams"],
+	solverOutput = BuildPolynomialSystem[cmatsMonomials,ideal,variables,
+											"MonomialOrder"->OptionValue["MonomialOrder"],
+											"ExtraParams"->OptionValue["ExtraParams"],
 											"LinkGraph"->OptionValue["LinkGraph"]
 										];
 	
@@ -42,7 +41,7 @@ BuildCompanionMatrices[ideal_,variables_,maxWeight_,irreducibleMonomials_,Option
 		Print["Check also if each entry in the ideal factorises"];
 		Return[$Failed];
 	];
-	solvedSystemNames = Cases[FiniteFlow`Private`FFGraphNodes[solverOutput[[1]]],x_ /; StringMatchQ[ToString[x],"solvedSystem" ~~ ___]];
+	solvedSystemNames = Cases[FiniteFlow32`Private`FFGraphNodes[solverOutput[[1]]],x_ /; StringMatchQ[ToString[x],"solvedSystem" ~~ ___]];
 	(*If[Length[solvedSystemNames]=!=1,Print["Warning: graph parsing failed. Found ", solveSystemNames, " solvedSystems"]; Return[$Failed]];*)
 	solvedSystemName = solvedSystemNames // Last;
 	(*Print["found graph node with name: ",solvedSystemName];*)
