@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-BeginPackage["SPQR`",{"FiniteFlow`","GeneralUtilities`"}];
+BeginPackage["SPQR`",{"FiniteFlow32`","GeneralUtilities`"}];
 
 
 FindIrreducibleMonomials::usage = "FindIrreducibleMonomials[ideal,vars] Finds the irreducible monomials of an ideal in the variables vars using a numerical Groebner Basis.";
